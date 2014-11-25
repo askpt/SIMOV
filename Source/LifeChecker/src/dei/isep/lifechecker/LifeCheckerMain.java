@@ -11,6 +11,6 @@ public class LifeCheckerMain extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.menu_paciente);
+		setContentView(R.layout.teste);
 	}
 }
