@@ -3,5 +3,9 @@
 
     <string name="app_name">LifeChecker</string>
     <string name="hello_world">Hello world!</string>
+    <string name="configuracao">Configuração</string>
+    <string name="responsavel">Responsável</string>
+    <string name="paciente">Paciente</string>
+    <string name="recuperacao">Recuperação</string>
 
 </resources>
