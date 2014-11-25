@@ -3,36 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/text_configuracao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/configuracao"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/text_configuracao"
-        android:layout_marginTop="22dp" />
-
-    <Button
-        android:id="@+id/bt_responsavel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progressBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:text="@string/responsavel" />
-
     <Button
         android:id="@+id/bt_paciente"
         android:layout_width="wrap_content"
@@ -40,7 +10,7 @@
         android:layout_alignLeft="@+id/bt_responsavel"
         android:layout_alignRight="@+id/bt_responsavel"
         android:layout_below="@+id/bt_responsavel"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="25dp"
         android:text="@string/paciente" />
 
     <Button
@@ -49,7 +19,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/bt_paciente"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="25dp"
         android:text="@string/recuperacao" />
+
+    <TextView
+        android:id="@+id/text_configuracao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/configuracao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_configuracao"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/barra_azul" />
+
+    <Button
+        android:id="@+id/bt_responsavel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/bt_recuperacao"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="25dp"
+        android:text="@string/responsavel" />
 
 </RelativeLayout>
