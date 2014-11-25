@@ -11,6 +11,7 @@ public class LifeCheckerMain extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		
 		setContentView(R.layout.teste);
 		
 		ResponsavelBDD respBDD = new ResponsavelBDD(getApplicationContext());
