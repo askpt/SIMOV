@@ -1,5 +1,6 @@
 package dei.isep.lifechecker;
 
+import dei.isep.lifechecker.adapter.FragmentAdapter;
 import dei.isep.lifechecker.database.PacienteBDD;
 import dei.isep.lifechecker.database.ResponsavelBDD;
 import dei.isep.lifechecker.model.Paciente;
@@ -8,6 +9,8 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class LifeCheckerMain extends Activity {
+	
+	private FragmentAdapter fragmentAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
