@@ -32,6 +32,7 @@ proguard/
 ### Eclipse ###
 *.pydevproject
 .metadata
+.classpath
 .gradle
 bin/
 tmp/
