@@ -22,6 +22,6 @@
     <string name="noturno">Noturno</string>
     <string name="minutos">Minutos</string>
     <string name="diurno">Diurno</string>
-    <string name="avisoPeriodicidade">'0' (zero) é considerado desativado</string>
+    <string name="avisoPeriodicidade">&#44;0&#44; &#40;zero&#41; é considerado desativado</string>
 
 </resources>
