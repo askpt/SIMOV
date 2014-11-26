@@ -7,5 +7,9 @@
     <string name="responsavel">Responsável</string>
     <string name="paciente">Paciente</string>
     <string name="recuperacao">Recuperação</string>
+    <string name="dadosPessoais">Dados Pessoais</string>
+    <string name="nome">Nome</string>
+    <string name="apelido">Apelido</string>
+    <string name="telefone">Telefone</string>
 
 </resources>
