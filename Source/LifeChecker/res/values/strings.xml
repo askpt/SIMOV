@@ -11,5 +11,17 @@
     <string name="nome">Nome</string>
     <string name="apelido">Apelido</string>
     <string name="telefone">Telefone</string>
+    <string name="criarConta">Criar Conta</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="confirmarPassword">Confirmar Password</string>
+    <string name="alertas">Alertas</string>
+    <string name="enviarMail">Enviar Mail</string>
+    <string name="enviarSMS">Enviar SMS</string>
+    <string name="periodicidade">Periodicidade</string>
+    <string name="noturno">Noturno</string>
+    <string name="minutos">Minutos</string>
+    <string name="diurno">Diurno</string>
+    <string name="avisoPeriodicidade">'0' (zero) é considerado desativado</string>
 
 </resources>

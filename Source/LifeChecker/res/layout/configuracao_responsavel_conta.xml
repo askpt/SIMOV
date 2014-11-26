@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
-        android:text="@string/dadosPessoais"
+        android:text="@string/criarConta"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
@@ -24,39 +24,39 @@
         android:src="@drawable/barra_azul" />
 
     <EditText
-        android:id="@+id/tb_nome"
+        android:id="@+id/tb_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="@string/nome"
-        android:inputType="textPersonName" >
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" >
 
         <requestFocus />
     </EditText>
 
     <EditText
-        android:id="@+id/tb_apelido"
+        android:id="@+id/tb_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_nome"
+        android:layout_below="@+id/tb_email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="@string/apelido"
-        android:inputType="textPersonName" />
+        android:hint="@string/password"
+        android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/tb_telefone"
+        android:id="@+id/tb_confirmarPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_apelido"
+        android:layout_below="@+id/tb_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="@string/telefone"
-        android:inputType="phone" />
+        android:hint="@string/confirmarPassword"
+        android:inputType="textPassword" />
 
 </RelativeLayout>

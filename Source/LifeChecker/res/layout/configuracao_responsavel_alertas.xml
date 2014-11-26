@@ -4,14 +4,14 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_criarConta"
+        android:id="@+id/text_periodicidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
-        android:text="@string/dadosPessoais"
+        android:text="@string/alertas"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
@@ -19,44 +19,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_criarConta"
+        android:layout_below="@+id/text_periodicidade"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
-    <EditText
-        android:id="@+id/tb_nome"
+    <CheckBox
+        android:id="@+id/cb_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="@string/nome"
-        android:inputType="textPersonName" >
+        android:text="@string/enviarMail" />
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/tb_apelido"
+    <CheckBox
+        android:id="@+id/cb_sms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_nome"
+        android:layout_below="@+id/cb_mail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/apelido"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/tb_telefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_apelido"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/telefone"
-        android:inputType="phone" />
+        android:text="@string/enviarSMS" />
 
 </RelativeLayout>
