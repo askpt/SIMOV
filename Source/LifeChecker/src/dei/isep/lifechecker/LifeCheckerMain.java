@@ -17,6 +17,8 @@ public class LifeCheckerMain extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		
+		
+		
 		setContentView(R.layout.configuracao_menu);
 		
 		ResponsavelBDD respBDD = new ResponsavelBDD(getApplicationContext());
