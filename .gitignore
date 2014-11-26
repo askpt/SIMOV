@@ -331,3 +331,6 @@ hs_err_pid*
 sftp-config.json
 Source/LifeChecker/.classpath
 Source/LifeChecker/.classpath
+Source/LifeChecker/.classpath
+Source/LifeChecker/.classpath
+*.classpath
