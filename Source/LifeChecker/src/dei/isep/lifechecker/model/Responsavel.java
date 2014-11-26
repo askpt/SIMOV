@@ -13,7 +13,7 @@ public class Responsavel {
 	
 	String mailResponsavel;
 	String passResponsavel;
-	boolean estaOnline;
+	boolean estaOnlineResponsavel;
 	
 	public Responsavel(){}
 
@@ -26,7 +26,7 @@ public class Responsavel {
 			boolean notificacaoMail, boolean notificacaoSMS,
 			int periodicidadeDiurna, int periodicidadeNoturna,
 			String mailResponsavel, String passResponsavel,
-			boolean estaOnline) {
+			boolean estaOnlineResponsavel) {
 		this.idResponsavel = idResponsavel;
 		this.nomeResposnavel = nomeResposnavel;
 		this.apelidoResposnavel = apelidoResposnavel;
@@ -37,7 +37,7 @@ public class Responsavel {
 		this.periodicidadeNoturna = periodicidadeNoturna;
 		this.mailResponsavel = mailResponsavel;
 		this.passResponsavel = passResponsavel;
-		this.estaOnline = estaOnline;
+		this.estaOnlineResponsavel = estaOnlineResponsavel;
 	}
 
 	/*
@@ -47,7 +47,7 @@ public class Responsavel {
 			String contactoResponsavel, boolean notificacaoMail,
 			boolean notificacaoSMS, int periodicidadeDiurna,
 			int periodicidadeNoturna, String mailResponsavel,
-			String passResponsavel, boolean estaOnline) {
+			String passResponsavel, boolean estaOnlineResponsavel) {
 		super();
 		this.nomeResposnavel = nomeResposnavel;
 		this.apelidoResposnavel = apelidoResposnavel;
@@ -58,7 +58,7 @@ public class Responsavel {
 		this.periodicidadeNoturna = periodicidadeNoturna;
 		this.mailResponsavel = mailResponsavel;
 		this.passResponsavel = passResponsavel;
-		this.estaOnline = estaOnline;
+		this.estaOnlineResponsavel = estaOnlineResponsavel;
 	}
 
 
@@ -98,7 +98,7 @@ public class Responsavel {
 	
 	
 	public boolean getEstaOnline() {
-		return estaOnline;
+		return estaOnlineResponsavel;
 	}
 
 
@@ -168,14 +168,8 @@ public class Responsavel {
 	
 
 	public void setEstaOnline(boolean estaOnline) {
-		this.estaOnline = estaOnline;
+		this.estaOnlineResponsavel = estaOnline;
 	}
-	
-	
-	
-	
-	
-	
 	
 
 }
