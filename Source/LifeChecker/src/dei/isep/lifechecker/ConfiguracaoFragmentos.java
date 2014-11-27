@@ -30,13 +30,14 @@ public class ConfiguracaoFragmentos extends FragmentActivity{
 			fragments.add(Fragment.instantiate(this, ConfiguracaoRespDados.class.getName()));
 			fragments.add(Fragment.instantiate(this, ConfiguracaoRespAlerta.class.getName()));
 			fragments.add(Fragment.instantiate(this, ConfiguracaoRespPeriodicidade.class.getName()));
+			fragments.add(Fragment.instantiate(this, ConfiguracaoRespPaciente.class.getName()));
 			break;
 		case 2:
-			
+			fragments.add(Fragment.instantiate(this, ConfiguracaoPacConta.class.getName()));
 			break;
 			
 		case 3:
-			
+			fragments.add(Fragment.instantiate(this, ConfiguracaoRecConta.class.getName()));
 			break;
 		}
 

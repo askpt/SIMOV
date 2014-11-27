@@ -4,14 +4,14 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_loginResponsavel"
+        android:id="@+id/text_inserirMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
-        android:text="@string/loginResponsavel"
+        android:text="@string/inserirMail"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_loginResponsavel"
+        android:layout_below="@+id/text_inserirMail"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
@@ -37,24 +37,14 @@
         <requestFocus />
     </EditText>
 
-    <EditText
-        android:id="@+id/tb_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_email"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
-
     <Button
         android:id="@+id/bt_validar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_password"
-        android:layout_alignRight="@+id/tb_password"
-        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/tb_email"
+        android:layout_alignRight="@+id/tb_email"
+        android:layout_below="@+id/tb_email"
+        android:layout_marginTop="70dp"
         android:text="@string/validar" />
 
 </RelativeLayout>

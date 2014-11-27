@@ -24,5 +24,10 @@
     <string name="diurno">Diurno</string>
     <string name="avisoPeriodicidade">\'0\' (zero) é considerado desativado</string>
     <string name="title_activity_zzzzzzz">Zzzzzzz</string>
+    <string name="dadosPaciente">Dados Paciente</string>
+    <string name="validar">Validar</string>
+    <string name="loginResponsavel">Login Responsável</string>
+    <string name="selecionarPaciente">Selecionar Paciente</string>
+    <string name="inserirMail">Inserir Mail</string>
 
 </resources>
