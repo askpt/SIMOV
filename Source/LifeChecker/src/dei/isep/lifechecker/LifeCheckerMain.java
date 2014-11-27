@@ -1,8 +1,10 @@
 package dei.isep.lifechecker;
 
 
+import dei.isep.lifechecker.database.AlertaBDD;
 import dei.isep.lifechecker.database.PacienteBDD;
 import dei.isep.lifechecker.database.ResponsavelBDD;
+import dei.isep.lifechecker.model.Alerta;
 import dei.isep.lifechecker.model.Paciente;
 import dei.isep.lifechecker.model.Responsavel;
 import android.app.Activity;
@@ -39,6 +41,15 @@ public class LifeCheckerMain extends Activity {
 		Paciente pacienteB = new Paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, false);
 		paciBDD.inserirPaciente(pacienteB);
 		
+		AlertaBDD alerBDD = new AlertaBDD(getApplicationContext());
+		Alerta alerta = new Alerta("tetetete");
+		
+		alerBDD.inserirAlerta(alerta);
+		alerBDD.inserirAlerta(alerta);
+		alerBDD.inserirAlerta(alerta);
+		alerBDD.inserirAlerta(alerta);
+		alerBDD.inserirAlerta(alerta);
+		
 		findViewById(R.id.bt_responsavel).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_paciente).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_recuperacao).setOnClickListener(btnCarregado);
@@ -50,6 +61,7 @@ public class LifeCheckerMain extends Activity {
 	{
 		public void onClick(final View v)
 		{
+			
 			int opcao = 0;
 			switch(v.getId())
 			{
