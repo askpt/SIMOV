@@ -1,11 +1,12 @@
 package dei.isep.lifechecker.database;
 
-import dei.isep.lifechecker.model.Paciente;
+import dei.isep.lifechecker.model.paciente;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class PacienteBDD {
+public class pacienteBDD {
 	
 	public static final String TABLE_PACIENTE = "paciente";
 	
@@ -39,7 +40,7 @@ public class PacienteBDD {
 	
 	public static final String CREATE_TABLE_PACIENTE = "CREATE TABLE " + TABLE_PACIENTE + " ("
 			+ COL_ID_PACI + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
-			+ COL_ID_RESP_PACI + " INTEGER NOT NULL REFERENCES " + ResponsavelBDD.TABLE_RESPONSAVEL + " (" + ResponsavelBDD.COL_ID_RESP + "),"  
+			+ COL_ID_RESP_PACI + " INTEGER NOT NULL REFERENCES " + responsavelBDD.TABLE_RESPONSAVEL + " (" + responsavelBDD.COL_ID_RESP + "),"  
 			+ COL_NOME_PACI + " TEXT NOT NULL, "
 			+ COL_APELIDO_PACI + " TEXT NOT NULL, "
 			+ COL_MAIL_PACI + " TEXT NOT NULL, "
@@ -55,14 +56,14 @@ public class PacienteBDD {
 	public static final String DROP_TABLE_PACIENTE =  "DROP TABLE " + TABLE_PACIENTE + ";";
 
 	private SQLiteDatabase bdd;
-	private BaseDeDadosInterna baseDeDados;
+	private baseDeDadosInterna baseDeDados;
 	private Context context;
 	
-	public PacienteBDD(){};
+	public pacienteBDD(){};
 	
-	public PacienteBDD(Context context)
+	public pacienteBDD(Context context)
 	{
-		baseDeDados = new BaseDeDadosInterna(context);
+		baseDeDados = new baseDeDadosInterna(context);
 		this.context = context;
 	}
 	
@@ -85,12 +86,12 @@ public class PacienteBDD {
 	/*
 	 * Inserir paciente Novo
 	 */
-	public long inserirPaciente(Paciente paciente)
+	public long inserirPaciente(paciente paciente)
 	{
 		long valueResult = 0;
-		ResponsavelBDD resposnavel = new ResponsavelBDD(context);
+		responsavelBDD responsavel = new responsavelBDD(context);
 	
-		if(resposnavel.existeResponsavel(paciente.getIdResponsavelPaciente()) == true)
+		if(responsavel.existeResponsavel(paciente.getIdResponsavelPaciente()) == true)
 		{
 			open();
 			ContentValues value = new ContentValues();
@@ -110,6 +111,21 @@ public class PacienteBDD {
 		}
 		return valueResult;
 		
+	}
+	
+	public boolean existePaciente(int id)
+	{
+		String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE + " WHERE " + COL_ID_PACI + " = " + id;
+		open();
+		Cursor cursor = bdd.rawQuery(sqlQuery, null);
+		if(cursor.getCount() == 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	

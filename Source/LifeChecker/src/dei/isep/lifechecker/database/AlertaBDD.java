@@ -1,11 +1,12 @@
 package dei.isep.lifechecker.database;
 
-import dei.isep.lifechecker.model.Alerta;
+import dei.isep.lifechecker.model.alerta;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class AlertaBDD {
+public class alertaBDD {
 	
 	public static final String TABLE_ALERTA = "alerta";
 	
@@ -22,13 +23,13 @@ public class AlertaBDD {
 	public static final String DROP_TABLE_ALERTA = "DROP TABLE " + TABLE_ALERTA + ";";
 	
 	private SQLiteDatabase bdd;
-	private BaseDeDadosInterna baseDeDados;
+	private baseDeDadosInterna baseDeDados;
 	
-	public AlertaBDD(){};
+	public alertaBDD(){};
 	
-	public AlertaBDD(Context context)
+	public alertaBDD(Context context)
 	{
-		baseDeDados = new BaseDeDadosInterna(context);
+		baseDeDados = new baseDeDadosInterna(context);
 	}
 	
 	public void open()
@@ -46,7 +47,7 @@ public class AlertaBDD {
 		return bdd;
 	}
 	
-	public long inserirAlerta(Alerta alerta)
+	public long inserirAlerta(alerta alerta)
 	{
 		long valueResult = 0;
 		open();
@@ -55,6 +56,21 @@ public class AlertaBDD {
 		valueResult = bdd.insert(TABLE_ALERTA, null, values);
 		close();
 		return valueResult;
+	}
+	
+	public boolean existeAlerta(int id)
+	{
+		String sqlQuery = "SELECT * FROM " + TABLE_ALERTA + " WHERE " + COL_ID_ALERT + " = " + id;
+		open();
+		Cursor cursor = bdd.rawQuery(sqlQuery, null);
+		if(cursor.getCount() == 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public String getCreateTableAlert() {

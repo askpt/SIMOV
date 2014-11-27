@@ -1,6 +1,6 @@
 package dei.isep.lifechecker.model;
 
-public class Responsavel {
+public class responsavel {
 	
 	int idResponsavel;
 	String nomeResposnavel;
@@ -15,13 +15,13 @@ public class Responsavel {
 	String passResponsavel;
 	boolean estaOnlineResponsavel;
 	
-	public Responsavel(){}
+	public responsavel(){}
 
 	
 	/*
 	 * Criação de um responsável com todos atributos
 	 */
-	public Responsavel(int idResponsavel, String nomeResposnavel,
+	public responsavel(int idResponsavel, String nomeResposnavel,
 			String apelidoResposnavel, String contactoResponsavel,
 			boolean notificacaoMail, boolean notificacaoSMS,
 			int periodicidadeDiurna, int periodicidadeNoturna,
@@ -43,7 +43,7 @@ public class Responsavel {
 	/*
 	 * Criação de um responsável sem ID
 	 */
-	public Responsavel(String nomeResposnavel, String apelidoResposnavel,
+	public responsavel(String nomeResposnavel, String apelidoResposnavel,
 			String contactoResponsavel, boolean notificacaoMail,
 			boolean notificacaoSMS, int periodicidadeDiurna,
 			int periodicidadeNoturna, String mailResponsavel,

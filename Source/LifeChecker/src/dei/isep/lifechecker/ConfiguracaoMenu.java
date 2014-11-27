@@ -1,11 +1,13 @@
 package dei.isep.lifechecker;
 
-import dei.isep.lifechecker.database.AlertaBDD;
-import dei.isep.lifechecker.database.PacienteBDD;
-import dei.isep.lifechecker.database.ResponsavelBDD;
-import dei.isep.lifechecker.model.Alerta;
-import dei.isep.lifechecker.model.Paciente;
-import dei.isep.lifechecker.model.Responsavel;
+import dei.isep.lifechecker.database.alertaBDD;
+import dei.isep.lifechecker.database.historicoAlertasBDD;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.model.alerta;
+import dei.isep.lifechecker.model.historicoAlertas;
+import dei.isep.lifechecker.model.paciente;
+import dei.isep.lifechecker.model.responsavel;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class ConfiguracaoMenu extends Activity{
+public class configuracaoMenu extends Activity{
 	
 	Button btnResponsavel = null;
 	Button btnPaciente = null;
@@ -28,29 +30,41 @@ public class ConfiguracaoMenu extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.configuracao_menu);
 		
-		ResponsavelBDD respBDD = new ResponsavelBDD(getApplicationContext());
-		Responsavel resp = new Responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", false);
+		responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", false);
 		
 		respBDD.inserirResponsavel(resp);
 		respBDD.inserirResponsavel(resp);
 		respBDD.inserirResponsavel(resp);
 		
-		PacienteBDD paciBDD = new PacienteBDD(getApplicationContext());
-		Paciente paciente = new Paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, false);
+		pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+		paciente paciente = new paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, false);
 
 		paciBDD.inserirPaciente(paciente);
 		paciBDD.inserirPaciente(paciente);
-		Paciente pacienteB = new Paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, false);
+		paciente pacienteB = new paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, false);
 		paciBDD.inserirPaciente(pacienteB);
 		
-		AlertaBDD alerBDD = new AlertaBDD(getApplicationContext());
-		Alerta alerta = new Alerta("tetetete");
+		alertaBDD alerBDD = new alertaBDD(getApplicationContext());
+		alerta alerta = new alerta("tetetete");
 		
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
+		
+		historicoAlertasBDD historicBDD = new historicoAlertasBDD(getApplicationContext());
+		historicoAlertas histo = new historicoAlertas(1, 1, "12:12:12", "24-12-2014", 45875, 47854, "Porto", true);
+		historicBDD.inserirHistoricoAlerta(histo);
+		historicBDD.inserirHistoricoAlerta(histo);
+		historicBDD.inserirHistoricoAlerta(histo);
+		historicoAlertas histoB = new historicoAlertas(155, 1, "12:12:12", "24-12-2014", 45875, 47854, "rrrrrrrr", true);
+		historicBDD.inserirHistoricoAlerta(histoB);
+		historicoAlertas histoC = new historicoAlertas(1, 1333, "12:12:12", "24-12-2014", 45875, 47854, "ttttttttttttttt", true);
+		historicBDD.inserirHistoricoAlerta(histoC);
+		historicoAlertas histoD = new historicoAlertas(1, 3, "12:12:12", "24-12-2014", 45875, 47854, "uuuuuuuuuuu", true);
+		historicBDD.inserirHistoricoAlerta(histoD);
 		
 		findViewById(R.id.bt_responsavel).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_paciente).setOnClickListener(btnCarregado);
@@ -84,7 +98,7 @@ public class ConfiguracaoMenu extends Activity{
 					break;
 			}
 			
-			intent = new Intent(ConfiguracaoMenu.this, ConfiguracaoFragmentos.class);
+			intent = new Intent(configuracaoMenu.this, configuracaoFragmentos.class);
 			intent.putExtra("opcao", opcao);
 			
 			startActivity(intent);

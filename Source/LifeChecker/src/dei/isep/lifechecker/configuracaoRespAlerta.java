@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-public class ConfiguracaoRespAlerta extends Fragment{
+public class configuracaoRespAlerta extends Fragment{
 	
 	private View myFragment;
 	@Override

@@ -3,7 +3,7 @@ package dei.isep.lifechecker;
 import java.util.List;
 import java.util.Vector;
 
-import dei.isep.lifechecker.adapter.FragmentAdapter;
+import dei.isep.lifechecker.adapter.fragmentAdapter;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class ConfiguracaoFragmentos extends FragmentActivity{
+public class configuracaoFragmentos extends FragmentActivity{
 	
-	private FragmentAdapter fAdapter;
+	private fragmentAdapter fAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +32,22 @@ public class ConfiguracaoFragmentos extends FragmentActivity{
 		
 		switch (opcao) {
 		case 1:
-			fragments.add(Fragment.instantiate(this, ConfiguracaoRespConta.class.getName()));
-			fragments.add(Fragment.instantiate(this, ConfiguracaoRespDados.class.getName()));
-			fragments.add(Fragment.instantiate(this, ConfiguracaoRespAlerta.class.getName()));
-			fragments.add(Fragment.instantiate(this, ConfiguracaoRespPeriodicidade.class.getName()));
-			fragments.add(Fragment.instantiate(this, ConfiguracaoRespPaciente.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoRespConta.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoRespDados.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoRespAlerta.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoRespPeriodicidade.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoRespPaciente.class.getName()));
 			break;
 		case 2:
-			fragments.add(Fragment.instantiate(this, ConfiguracaoPacConta.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoPacConta.class.getName()));
 			break;
 			
 		case 3:
-			fragments.add(Fragment.instantiate(this, ConfiguracaoRecConta.class.getName()));
+			fragments.add(Fragment.instantiate(this, configuracaoRecConta.class.getName()));
 			break;
 		}
 
-		this.fAdapter = new FragmentAdapter(super.getSupportFragmentManager(), fragments);
+		this.fAdapter = new fragmentAdapter(super.getSupportFragmentManager(), fragments);
 
 		ViewPager pager = (ViewPager) super.findViewById(R.id.configuracao_fragmento);
 		// Affectation de l'adapter au ViewPager

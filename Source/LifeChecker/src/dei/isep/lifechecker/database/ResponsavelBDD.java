@@ -1,12 +1,12 @@
 package dei.isep.lifechecker.database;
 
-import dei.isep.lifechecker.model.Responsavel;
+import dei.isep.lifechecker.model.responsavel;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class ResponsavelBDD {
+public class responsavelBDD {
 	public static final String TABLE_RESPONSAVEL = "responsavel";
 	
 	public static final String COL_ID_RESP = "idResp";
@@ -49,13 +49,13 @@ public class ResponsavelBDD {
 	public static final String DROP_TABLE_RESPONSAVEL = "DROP TABLE " + TABLE_RESPONSAVEL + ";";
 	
 	private SQLiteDatabase bdd;
-	private BaseDeDadosInterna baseDeDados;
+	private baseDeDadosInterna baseDeDados;
 	
-	public ResponsavelBDD(){};
+	public responsavelBDD(){};
 	
-	public ResponsavelBDD(Context context)
+	public responsavelBDD(Context context)
 	{
-		baseDeDados = new BaseDeDadosInterna(context);
+		baseDeDados = new baseDeDadosInterna(context);
 	}
 	
 	public void open()
@@ -73,7 +73,7 @@ public class ResponsavelBDD {
 		return bdd;
 	}
 	
-	public long inserirResponsavel(Responsavel resp)
+	public long inserirResponsavel(responsavel resp)
 	{
 		long valueResult = 0;
 		open();

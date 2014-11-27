@@ -1,6 +1,6 @@
 package dei.isep.lifechecker.model;
 
-public class Paciente {
+public class paciente {
 	
 	int idPaciente;
 	int idResponsavelPaciente;
@@ -16,13 +16,13 @@ public class Paciente {
 	boolean ativoPaciente;
 	boolean estaOnlinePaciente;
 	
-	public Paciente (){};
+	public paciente (){};
 	
 	/*
 	 * Paciente com todos os atributos
 	 */
 	
-	public Paciente(int idPaciente, int idResponsavelPaciente,
+	public paciente(int idPaciente, int idResponsavelPaciente,
 			String nomePaciente, String apelidoPaciente, String mailPaciente,
 			String contactoPaciente, double latitudePaciente,
 			double longitudePaciente, String nomeLocalPaciente,
@@ -47,7 +47,7 @@ public class Paciente {
 	 * Ciração de um paciente sem ID dele
 	 */
 
-	public Paciente(int idResponsavelPaciente, String nomePaciente,
+	public paciente(int idResponsavelPaciente, String nomePaciente,
 			String apelidoPaciente, String mailPaciente,
 			String contactoPaciente, double latitudePaciente,
 			double longitudePaciente, String nomeLocalPaciente,
@@ -71,7 +71,7 @@ public class Paciente {
 	 * Criação de um paciente
 	 */
 
-	public Paciente(int idResponsavelPaciente,
+	public paciente(int idResponsavelPaciente,
 			String nomePaciente, String apelidoPaciente, String mailPaciente,
 			String contactoPaciente, boolean ativoPaciente,
 			boolean estaOnlinePaciente) {

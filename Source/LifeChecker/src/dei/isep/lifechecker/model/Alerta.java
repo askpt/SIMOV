@@ -1,19 +1,19 @@
 package dei.isep.lifechecker.model;
 
-public class Alerta {
+public class alerta {
 	
 	int idAlerta;
 	String explicacaoAlerta;
 	
-	public Alerta (){}
+	public alerta (){}
 
-	public Alerta(int idAlerta, String explicacaoAlerta) {
+	public alerta(int idAlerta, String explicacaoAlerta) {
 		super();
 		this.idAlerta = idAlerta;
 		this.explicacaoAlerta = explicacaoAlerta;
 	}
 
-	public Alerta(String explicacaoAlerta) {
+	public alerta(String explicacaoAlerta) {
 		super();
 		this.explicacaoAlerta = explicacaoAlerta;
 	}

@@ -1,12 +1,12 @@
 package dei.isep.lifechecker;
 
 
-import dei.isep.lifechecker.database.AlertaBDD;
-import dei.isep.lifechecker.database.PacienteBDD;
-import dei.isep.lifechecker.database.ResponsavelBDD;
-import dei.isep.lifechecker.model.Alerta;
-import dei.isep.lifechecker.model.Paciente;
-import dei.isep.lifechecker.model.Responsavel;
+import dei.isep.lifechecker.database.alertaBDD;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.model.alerta;
+import dei.isep.lifechecker.model.paciente;
+import dei.isep.lifechecker.model.responsavel;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class LifeCheckerMain extends Activity {
+public class lifeCheckerMain extends Activity {
 	
 	Button btnResponsavel = null;
 	Button btnPaciente = null;
@@ -26,23 +26,23 @@ public class LifeCheckerMain extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.configuracao_menu);
 		
-		ResponsavelBDD respBDD = new ResponsavelBDD(getApplicationContext());
-		Responsavel resp = new Responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", false);
+		responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", false);
 		
 		respBDD.inserirResponsavel(resp);
 		respBDD.inserirResponsavel(resp);
 		respBDD.inserirResponsavel(resp);
 		
-		PacienteBDD paciBDD = new PacienteBDD(getApplicationContext());
-		Paciente paciente = new Paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, false);
+		pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+		paciente paciente = new paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, false);
 
 		paciBDD.inserirPaciente(paciente);
 		paciBDD.inserirPaciente(paciente);
-		Paciente pacienteB = new Paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, false);
+		paciente pacienteB = new paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, false);
 		paciBDD.inserirPaciente(pacienteB);
 		
-		AlertaBDD alerBDD = new AlertaBDD(getApplicationContext());
-		Alerta alerta = new Alerta("tetetete");
+		alertaBDD alerBDD = new alertaBDD(getApplicationContext());
+		alerta alerta = new alerta("tetetete");
 		
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
@@ -76,7 +76,7 @@ public class LifeCheckerMain extends Activity {
 					break;
 			}
 			
-			intent = new Intent(LifeCheckerMain.this, ConfiguracaoMenu.class);
+			intent = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
 			intent.putExtra("opcao", opcao);
 			startActivity(intent);
 			finish();
