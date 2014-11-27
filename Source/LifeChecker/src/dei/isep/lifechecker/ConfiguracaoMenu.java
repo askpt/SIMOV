@@ -1,6 +1,5 @@
 package dei.isep.lifechecker;
 
-
 import dei.isep.lifechecker.database.PacienteBDD;
 import dei.isep.lifechecker.database.ResponsavelBDD;
 import dei.isep.lifechecker.model.Paciente;
@@ -12,12 +11,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class LifeCheckerMain extends Activity {
+public class ConfiguracaoMenu extends Activity{
 	
 	Button btnResponsavel = null;
 	Button btnPaciente = null;
 	Intent intent = null;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -64,10 +62,11 @@ public class LifeCheckerMain extends Activity {
 					break;
 			}
 			
-			intent = new Intent(LifeCheckerMain.this, ConfiguracaoMenu.class);
+			intent = new Intent(ConfiguracaoMenu.this, ConfiguracaoFragmentos.class);
 			intent.putExtra("opcao", opcao);
+			
 			startActivity(intent);
-			finish();
+			//finish();
 		}
 	};
 	
