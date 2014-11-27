@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <item name="azul" type="color">#33B5E5</item>
+        <item name="branco" type="color">#FFFFFF</item>
+        <item name="laranja" type="color">#FF8800</item>
+        <item name="vermelho" type="color">#FF0000</item>
+        <item name="verde" type="color">#15CC00</item>
+    
+</resources>
