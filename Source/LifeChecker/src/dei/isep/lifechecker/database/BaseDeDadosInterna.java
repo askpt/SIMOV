@@ -14,6 +14,7 @@ public class baseDeDadosInterna extends SQLiteOpenHelper{
 	pacienteBDD paciente = new pacienteBDD();
 	alertaBDD alerta = new alertaBDD();
 	historicoAlertasBDD historicoAlertas = new historicoAlertasBDD();
+	estadoMarcacaoBDD estadoMarcacao = new estadoMarcacaoBDD();
 	
 	
 	public baseDeDadosInterna(Context context) {
@@ -24,6 +25,7 @@ public class baseDeDadosInterna extends SQLiteOpenHelper{
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(estadoMarcacao.getCreateTableEstamarc());
 		db.execSQL(responsavel.getCreateTable());
 		db.execSQL(paciente.getCreateTable());
 		db.execSQL(alerta.getCreateTableAlert());
@@ -38,6 +40,7 @@ public class baseDeDadosInterna extends SQLiteOpenHelper{
 		db.execSQL(alerta.getDropTableAlerta());
 		db.execSQL(paciente.getDropTable());
 		db.execSQL(responsavel.getDropTable());
+		db.execSQL(estadoMarcacao.getDropTableEstamarc());
 		// TODO Auto-generated method stub
 		
 		onCreate(db);

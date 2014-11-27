@@ -1,10 +1,12 @@
 package dei.isep.lifechecker;
 
 import dei.isep.lifechecker.database.alertaBDD;
+import dei.isep.lifechecker.database.estadoMarcacaoBDD;
 import dei.isep.lifechecker.database.historicoAlertasBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.model.alerta;
+import dei.isep.lifechecker.model.estadoMarcacao;
 import dei.isep.lifechecker.model.historicoAlertas;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
@@ -65,6 +67,16 @@ public class configuracaoMenu extends Activity{
 		historicBDD.inserirHistoricoAlerta(histoC);
 		historicoAlertas histoD = new historicoAlertas(1, 3, "12:12:12", "24-12-2014", 45875, 47854, "uuuuuuuuuuu", true);
 		historicBDD.inserirHistoricoAlerta(histoD);
+		
+		
+		estadoMarcacaoBDD estMarcaBDD = new estadoMarcacaoBDD(getApplicationContext());
+		estadoMarcacao estmarca = new estadoMarcacao("testetetetete");
+		
+		estMarcaBDD.inserirEstadoMarcacao(estmarca);
+		estMarcaBDD.inserirEstadoMarcacao(estmarca);
+		estMarcaBDD.inserirEstadoMarcacao(estmarca);
+		estMarcaBDD.inserirEstadoMarcacao(estmarca);
+		estMarcaBDD.inserirEstadoMarcacao(estmarca);
 		
 		findViewById(R.id.bt_responsavel).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_paciente).setOnClickListener(btnCarregado);
