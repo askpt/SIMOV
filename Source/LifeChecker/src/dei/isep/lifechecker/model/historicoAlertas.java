@@ -10,7 +10,8 @@ public class historicoAlertas {
 	double latitudeHistAlt;
 	double longitudeHistAlt;
 	String localHistAlt;
-	boolean estaOnlineHistAlt;
+	String horaSincroHistAlt;
+	String dataSincroHistAlt;
 	
 	public historicoAlertas(){}
 
@@ -20,7 +21,8 @@ public class historicoAlertas {
 	public historicoAlertas(int idHistAlt, int idPacienteHistAlt,
 			int idAlertaHistAlt, String horaHistAlt, String dataHistAlt,
 			double latitudeHistAlt, double longitudeHistAlt,
-			String localHistAlt, boolean estaOnlineHistAlt) {
+			String localHistAlt,
+			String horaSincroHistAlt, String dataSincroHistAlt) {
 		super();
 		this.idHistAlt = idHistAlt;
 		this.idPacienteHistAlt = idPacienteHistAlt;
@@ -30,7 +32,8 @@ public class historicoAlertas {
 		this.latitudeHistAlt = latitudeHistAlt;
 		this.longitudeHistAlt = longitudeHistAlt;
 		this.localHistAlt = localHistAlt;
-		this.estaOnlineHistAlt = estaOnlineHistAlt;
+		this.horaSincroHistAlt = horaSincroHistAlt;
+		this.dataSincroHistAlt = dataSincroHistAlt;
 	}
 	
 	/*
@@ -40,7 +43,7 @@ public class historicoAlertas {
 	public historicoAlertas(int idPacienteHistAlt, int idAlertaHistAlt,
 			String horaHistAlt, String dataHistAlt, double latitudeHistAlt,
 			double longitudeHistAlt, String localHistAlt,
-			boolean estaOnlineHistAlt) {
+			String horaSincroHistAlt, String dataSincroHistAlt) {
 		super();
 		this.idPacienteHistAlt = idPacienteHistAlt;
 		this.idAlertaHistAlt = idAlertaHistAlt;
@@ -49,7 +52,24 @@ public class historicoAlertas {
 		this.latitudeHistAlt = latitudeHistAlt;
 		this.longitudeHistAlt = longitudeHistAlt;
 		this.localHistAlt = localHistAlt;
-		this.estaOnlineHistAlt = estaOnlineHistAlt;
+		this.horaSincroHistAlt = horaSincroHistAlt;
+		this.dataSincroHistAlt = dataSincroHistAlt;
+	}
+
+	public String getHoraSincroHistAlt() {
+		return horaSincroHistAlt;
+	}
+
+	public void setHoraSincroHistAlt(String horaSincroHistAlt) {
+		this.horaSincroHistAlt = horaSincroHistAlt;
+	}
+
+	public String getDataSincroHistAlt() {
+		return dataSincroHistAlt;
+	}
+
+	public void setDataSincroHistAlt(String dataSincroHistAlt) {
+		this.dataSincroHistAlt = dataSincroHistAlt;
 	}
 
 	public int getIdHistAlt() {
@@ -116,13 +136,6 @@ public class historicoAlertas {
 		this.localHistAlt = localHistAlt;
 	}
 
-	public boolean getEstaOnlineHistAlt() {
-		return estaOnlineHistAlt;
-	}
-
-	public void setEstaOnlineHistAlt(boolean estaOnlineHistAlt) {
-		this.estaOnlineHistAlt = estaOnlineHistAlt;
-	};
 	
 	
 	

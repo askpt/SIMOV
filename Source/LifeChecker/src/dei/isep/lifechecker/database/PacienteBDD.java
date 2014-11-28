@@ -23,6 +23,8 @@ public class pacienteBDD {
 	public static final String COL_DATA_LOCAL_PACI = "dataLocalPaci";
 	public static final String COL_ATIVO_PACI = "ativoPaci";
 	public static final String COL_ESTAON_PACI = "estaOnPaci";
+	public static final String COL_HORA_SINCRO_RESP = "horaSincroPaci";
+	public static final String COL_DATA_SINCRO_RESP = "dataSincroPaci";
 	
 	public static final int NUM_COL_ID_PACI = 0;
 	public static final int NUM_COL_ID_RESP_PACI = 1;
@@ -37,6 +39,8 @@ public class pacienteBDD {
 	public static final int NUM_COL_DATA_LOCAL_PACI = 10;
 	public static final int NUM_COL_ATIVO_PACI = 11;
 	public static final int NUM_COL_ESTAON_PACI = 12;
+	public static final int NUM_HORA_SINCRO_PACI = 13;
+	public static final int NUM_DATA_SINCRO_PACI = 14;
 	
 	public static final String CREATE_TABLE_PACIENTE = "CREATE TABLE " + TABLE_PACIENTE + " ("
 			+ COL_ID_PACI + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
@@ -51,7 +55,8 @@ public class pacienteBDD {
 			+ COL_HORA_LOCAL_PACI + " TEXT, "
 			+ COL_DATA_LOCAL_PACI + " TEXT, "
 			+ COL_ATIVO_PACI + " NUMERIC NOT NULL, "
-			+ COL_ESTAON_PACI + " NUMERIC NOT NULL);";
+			+ COL_HORA_SINCRO_RESP + " TEXT NOT NULL, "
+			+ COL_DATA_SINCRO_RESP + " TEXT NOT NULL); ";
 	
 	public static final String DROP_TABLE_PACIENTE =  "DROP TABLE " + TABLE_PACIENTE + ";";
 
@@ -101,7 +106,8 @@ public class pacienteBDD {
 			value.put(COL_MAIL_PACI, paciente.getMailPaciente());
 			value.put(COL_CONTACTO_PACI, paciente.getContactoPaciente());
 			value.put(COL_ATIVO_PACI, paciente.getApelidoPaciente());
-			value.put(COL_ESTAON_PACI, paciente.GetEstaOnlinePaciente());
+			value.put(COL_HORA_SINCRO_RESP, paciente.getHoraSincroPaciente());
+			value.put(COL_DATA_SINCRO_RESP, paciente.getDataSincroPaciente());
 			valueResult =  bdd.insert(TABLE_PACIENTE, null, value);
 			close();
 		}

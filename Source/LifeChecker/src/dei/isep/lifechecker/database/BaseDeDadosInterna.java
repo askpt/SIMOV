@@ -15,6 +15,7 @@ public class baseDeDadosInterna extends SQLiteOpenHelper{
 	alertaBDD alerta = new alertaBDD();
 	historicoAlertasBDD historicoAlertas = new historicoAlertasBDD();
 	estadoMarcacaoBDD estadoMarcacao = new estadoMarcacaoBDD();
+	marcacaoBDD marcacao = new marcacaoBDD();
 	
 	
 	public baseDeDadosInterna(Context context) {
@@ -30,12 +31,14 @@ public class baseDeDadosInterna extends SQLiteOpenHelper{
 		db.execSQL(paciente.getCreateTable());
 		db.execSQL(alerta.getCreateTableAlert());
 		db.execSQL(historicoAlertas.getCreateTableHitoricoalerta());
+		db.execSQL(marcacao.getCreateTableMarcacao());
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		db.execSQL(marcacao.getDropTableMarcacao());
 		db.execSQL(historicoAlertas.getDropTableHistoricoalertas());
 		db.execSQL(alerta.getDropTableAlerta());
 		db.execSQL(paciente.getDropTable());

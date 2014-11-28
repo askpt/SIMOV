@@ -22,7 +22,8 @@ public class historicoAlertasBDD {
 	public static final String COL_LONG_HISTO = "longAlertaHisto";
 	public static final String COL_LAT_HISTO = "latAlertaHisto";
 	public static final String COL_NOME_LOCAL_HISTO = "nomeLocalHisto";
-	public static final String COL_ESTAON_HISTO = "estaOnHisto";
+	public static final String COL_HORA_SINCRO_HISTO = "horaSincroHisto";
+	public static final String COL_DATA_SINCRO_HISTO = "dataSincroHisto";
 
 	public static final int NUM_COL_ID_HISTO = 0;
 	public static final int NUM_COL_ID_PACIENTE_HISTO = 1;
@@ -32,7 +33,8 @@ public class historicoAlertasBDD {
 	public static final int NUM_COL_LONG_HISTO = 5;
 	public static final int NUM_COL_LAT_HISTO = 6;
 	public static final int NUM_COL_NOME_LOCAL_HISTO = 7;
-	public static final int NUM_COL_ESTAON_HISTO = 8;
+	public static final int NUM_COL_HORA_SINCRO_HISTO = 8;
+	public static final int NUM_COL_DATA_SINCRO_HISTO = 9;
 
 	public static final String CREATE_TABLE_HITORICOALERTA = "CREATE TABLE "
 			+ TABLE_HISTORICO_ALERTAS + " (" + COL_ID_HISTO + " INTEGER PRIMARY KEY AUTOINCREMENT, " 
@@ -43,7 +45,8 @@ public class historicoAlertasBDD {
 			+ COL_LONG_HISTO + " REAL, " 
 			+ COL_LAT_HISTO + " REAL NOT NULL, "
 			+ COL_NOME_LOCAL_HISTO + " TEXT NOT NULL, " 
-			+ COL_ESTAON_HISTO + " NUMERIC NOT NULL);";
+			+ COL_HORA_SINCRO_HISTO + " TEXT NOT NULL, "
+			+ COL_DATA_SINCRO_HISTO + " TEXT NOT NULL); ";
 
 	public static final String DROP_TABLE_HISTORICOALERTAS = "DROP TABLE "
 			+ TABLE_HISTORICO_ALERTAS + ";";
@@ -100,8 +103,8 @@ public class historicoAlertasBDD {
 				value.put(COL_LAT_HISTO, historicoAlerta.getLatitudeHistAlt());
 				value.put(COL_NOME_LOCAL_HISTO,
 						historicoAlerta.getLocalHistAlt());
-				value.put(COL_ESTAON_HISTO,
-						historicoAlerta.getEstaOnlineHistAlt());
+				value.put(COL_HORA_SINCRO_HISTO, historicoAlerta.getHoraSincroHistAlt());
+				value.put(COL_DATA_SINCRO_HISTO, historicoAlerta.getDataSincroHistAlt());
 				
 				valueResult = bdd.insert(TABLE_HISTORICO_ALERTAS, null, value);
 				close();

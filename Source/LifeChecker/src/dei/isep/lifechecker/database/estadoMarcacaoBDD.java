@@ -11,14 +11,21 @@ public class estadoMarcacaoBDD {
 	public static final String TABLE_ESTMARC = "estado_marcacao";
 	
 	public static final String COL_ID_ESTMARC = "idEstMarc";
-	public static final String COL_EXPLICACAO_ESTMARC = "explicacaoEstMarc";
+	public static final String COL_EXPLICACAO_ESTMARC = "designacaoEstMarc";
+
+	public static final String COL_HORA_SINCRO_ESTMARC = "horaSincroEstMarca";
+	public static final String COL_DATA_SINCRO_ESTMARC = "dataSincroEstMarca";
 	
 	public static final int NUM_COL_ID_ESTMARC = 0;
 	public static final int NUM_COL_EXPLICACAO_ESTMARC = 1;
+	public static final int NUM_COL_HORA_SINCRO_ESTMARC = 2;
+	public static final int NUM_COL_DATA_SINCRO_ESTMARC = 3;
 	
 	public static final String CREATE_TABLE_ESTAMARC = "CREATE TABLE " + TABLE_ESTMARC + " ("
 			+ COL_ID_ESTMARC + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ COL_EXPLICACAO_ESTMARC + " TEXT NOT NULL);";
+			+ COL_EXPLICACAO_ESTMARC + " TEXT NOT NULL, "
+			+ COL_HORA_SINCRO_ESTMARC + " TEXT NOT NULL, "
+			+ COL_DATA_SINCRO_ESTMARC+ " TEXT NOT NULL);";
 	
 	private static final String DROP_TABLE_ESTAMARC = "DROP TABLE " + TABLE_ESTMARC + ";";
 	
@@ -48,6 +55,8 @@ public class estadoMarcacaoBDD {
 		open();
 		ContentValues values = new ContentValues();
 		values.put(COL_EXPLICACAO_ESTMARC, estadoMarca.getExplicacaoEstMarc());
+		values.put(COL_HORA_SINCRO_ESTMARC, estadoMarca.getHoraSincroEstMarc());
+		values.put(COL_DATA_SINCRO_ESTMARC, estadoMarca.getDataSincroEstMarc());
 		valueResult = bdd.insert(TABLE_ESTMARC, null, values);
 		close();
 		return valueResult;

@@ -13,7 +13,9 @@ public class responsavel {
 	
 	String mailResponsavel;
 	String passResponsavel;
-	boolean estaOnlineResponsavel;
+	
+	String horaSincroResponsavel;
+	String dataSincroResponsavel;
 	
 	public responsavel(){}
 
@@ -26,7 +28,7 @@ public class responsavel {
 			boolean notificacaoMail, boolean notificacaoSMS,
 			int periodicidadeDiurna, int periodicidadeNoturna,
 			String mailResponsavel, String passResponsavel,
-			boolean estaOnlineResponsavel) {
+			String horaSincroResponsavel, String dataSincroResponsavel) {
 		this.idResponsavel = idResponsavel;
 		this.nomeResposnavel = nomeResposnavel;
 		this.apelidoResposnavel = apelidoResposnavel;
@@ -37,7 +39,8 @@ public class responsavel {
 		this.periodicidadeNoturna = periodicidadeNoturna;
 		this.mailResponsavel = mailResponsavel;
 		this.passResponsavel = passResponsavel;
-		this.estaOnlineResponsavel = estaOnlineResponsavel;
+		this.horaSincroResponsavel = horaSincroResponsavel;
+		this.dataSincroResponsavel = dataSincroResponsavel;
 	}
 
 	/*
@@ -47,7 +50,8 @@ public class responsavel {
 			String contactoResponsavel, boolean notificacaoMail,
 			boolean notificacaoSMS, int periodicidadeDiurna,
 			int periodicidadeNoturna, String mailResponsavel,
-			String passResponsavel, boolean estaOnlineResponsavel) {
+			String passResponsavel,
+			String horaSincroResponsavel, String dataSincroResponsavel) {
 		super();
 		this.nomeResposnavel = nomeResposnavel;
 		this.apelidoResposnavel = apelidoResposnavel;
@@ -58,7 +62,8 @@ public class responsavel {
 		this.periodicidadeNoturna = periodicidadeNoturna;
 		this.mailResponsavel = mailResponsavel;
 		this.passResponsavel = passResponsavel;
-		this.estaOnlineResponsavel = estaOnlineResponsavel;
+		this.horaSincroResponsavel = horaSincroResponsavel;
+		this.dataSincroResponsavel = dataSincroResponsavel;
 	}
 
 
@@ -94,11 +99,6 @@ public class responsavel {
 
 	public String getContactoResponsavel() {
 		return contactoResponsavel;
-	}
-	
-	
-	public boolean getEstaOnline() {
-		return estaOnlineResponsavel;
 	}
 
 
@@ -165,11 +165,28 @@ public class responsavel {
 	public void setPassResponsavel(String passResponsavel) {
 		this.passResponsavel = passResponsavel;
 	}
-	
 
-	public void setEstaOnline(boolean estaOnline) {
-		this.estaOnlineResponsavel = estaOnline;
+
+	public String getHoraSincroResponsavel() {
+		return horaSincroResponsavel;
 	}
+
+
+	public void setHoraSincroResponsavel(String horaSincroResponsavel) {
+		this.horaSincroResponsavel = horaSincroResponsavel;
+	}
+
+
+	public String getDataSincroResponsavel() {
+		return dataSincroResponsavel;
+	}
+
+
+	public void setDataSincroResponsavel(String dataSincroResponsavel) {
+		this.dataSincroResponsavel = dataSincroResponsavel;
+	}
+	
+	
 	
 
 }

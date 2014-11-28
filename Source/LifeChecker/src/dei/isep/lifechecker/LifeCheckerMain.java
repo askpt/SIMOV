@@ -27,22 +27,22 @@ public class lifeCheckerMain extends Activity {
 		setContentView(R.layout.configuracao_menu);
 		
 		responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
-		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", false);
+		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", "13:13:13", "12-12-12");
 		
 		respBDD.inserirResponsavel(resp);
 		respBDD.inserirResponsavel(resp);
 		respBDD.inserirResponsavel(resp);
 		
 		pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
-		paciente paciente = new paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, false);
+		paciente paciente = new paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, "13:13:13", "12-12-12");
 
 		paciBDD.inserirPaciente(paciente);
 		paciBDD.inserirPaciente(paciente);
-		paciente pacienteB = new paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, false);
+		paciente pacienteB = new paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, "13:13:13", "12-12-12");
 		paciBDD.inserirPaciente(pacienteB);
 		
 		alertaBDD alerBDD = new alertaBDD(getApplicationContext());
-		alerta alerta = new alerta("tetetete");
+		alerta alerta = new alerta("tetetete","13:13:13", "12-12-12");
 		
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);

@@ -16,6 +16,9 @@ public class paciente {
 	boolean ativoPaciente;
 	boolean estaOnlinePaciente;
 	
+	String horaSincroPaciente;
+	String dataSincroPaciente;
+	
 	public paciente (){};
 	
 	/*
@@ -27,7 +30,7 @@ public class paciente {
 			String contactoPaciente, double latitudePaciente,
 			double longitudePaciente, String nomeLocalPaciente,
 			String horaLocalPaciente, String dataLocalPaciente, boolean ativoPaciente,
-			boolean estaOnlinePaciente) {
+			String horaSincroPaciente, String dataSincroPaciente) {
 		this.idPaciente = idPaciente;
 		this.idResponsavelPaciente = idResponsavelPaciente;
 		this.nomePaciente = nomePaciente;
@@ -40,7 +43,8 @@ public class paciente {
 		this.horaLocalPaciente = horaLocalPaciente;
 		this.dataLocalPaciente = dataLocalPaciente;
 		this.ativoPaciente = ativoPaciente;
-		this.estaOnlinePaciente = estaOnlinePaciente;
+		this.horaSincroPaciente = horaSincroPaciente;
+		this.dataSincroPaciente = dataSincroPaciente;
 	}
 	
 	/*
@@ -52,7 +56,8 @@ public class paciente {
 			String contactoPaciente, double latitudePaciente,
 			double longitudePaciente, String nomeLocalPaciente,
 			String horaLocalPaciente, String dataLocalPaciente,
-			boolean ativoPaciente, boolean estaOnlinePaciente) {
+			boolean ativoPaciente,
+			String horaSincroPaciente, String dataSincroPaciente) {
 		this.idResponsavelPaciente = idResponsavelPaciente;
 		this.nomePaciente = nomePaciente;
 		this.apelidoPaciente = apelidoPaciente;
@@ -64,7 +69,8 @@ public class paciente {
 		this.horaLocalPaciente = horaLocalPaciente;
 		this.dataLocalPaciente = dataLocalPaciente;
 		this.ativoPaciente = ativoPaciente;
-		this.estaOnlinePaciente = estaOnlinePaciente;
+		this.horaSincroPaciente = horaSincroPaciente;
+		this.dataSincroPaciente = dataSincroPaciente;
 	}
 	
 	/*
@@ -74,7 +80,7 @@ public class paciente {
 	public paciente(int idResponsavelPaciente,
 			String nomePaciente, String apelidoPaciente, String mailPaciente,
 			String contactoPaciente, boolean ativoPaciente,
-			boolean estaOnlinePaciente) {
+			String horaSincroPaciente, String dataSincroPaciente) {
 		super();
 		this.idResponsavelPaciente = idResponsavelPaciente;
 		this.nomePaciente = nomePaciente;
@@ -82,7 +88,8 @@ public class paciente {
 		this.mailPaciente = mailPaciente;
 		this.contactoPaciente = contactoPaciente;
 		this.ativoPaciente = true;
-		this.estaOnlinePaciente = estaOnlinePaciente;
+		this.horaSincroPaciente = horaSincroPaciente;
+		this.dataSincroPaciente = dataSincroPaciente;
 	}
 
 	public int getIdPaciente() {
@@ -179,6 +186,22 @@ public class paciente {
 
 	public void setEstaOnlinePaciente(boolean estaOnlinePaciente) {
 		this.estaOnlinePaciente = estaOnlinePaciente;
+	}
+
+	public String getHoraSincroPaciente() {
+		return horaSincroPaciente;
+	}
+
+	public void setHoraSincroPaciente(String horaSincroPaciente) {
+		this.horaSincroPaciente = horaSincroPaciente;
+	}
+
+	public String getDataSincroPaciente() {
+		return dataSincroPaciente;
+	}
+
+	public void setDataSincroPaciente(String dataSincroPaciente) {
+		this.dataSincroPaciente = dataSincroPaciente;
 	}
 	
 	

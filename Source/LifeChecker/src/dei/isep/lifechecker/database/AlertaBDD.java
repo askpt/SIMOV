@@ -13,12 +13,21 @@ public class alertaBDD {
 	public static final String COL_ID_ALERT = "idAlerta";
 	public static final String COL_EXPLICACAO_ALERT = "explicacaoAlerta";
 	
+
+	public static final String COL_HORA_SINCRO_ALERT = "horaSincroAlerta";
+	public static final String COL_DATA_SINCRO_ALERT = "dataSincroAlerta";
+	
 	public static final int NUM_COL_ID_ALERT = 0;
 	public static final int NUM_COL_EXPLICACAO_ALERT = 1;
+	public static final int NUM_COL_HORA_SINCRO_ALERT = 2;
+	public static final int NUM_COL_DATA_SINCRO_ALERT = 3;
+	
 	
 	public static final String CREATE_TABLE_ALERT = "CREATE TABLE " + TABLE_ALERTA + " ("
 			+ COL_ID_ALERT + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ COL_EXPLICACAO_ALERT + " TEXT NOT NULL);";
+			+ COL_EXPLICACAO_ALERT + " TEXT NOT NULL, "
+			+ COL_HORA_SINCRO_ALERT + " TEXT NOT NULL, "
+			+ COL_DATA_SINCRO_ALERT + " TEXT NOT NULL);";
 	
 	public static final String DROP_TABLE_ALERTA = "DROP TABLE " + TABLE_ALERTA + ";";
 	
@@ -53,6 +62,8 @@ public class alertaBDD {
 		open();
 		ContentValues values = new ContentValues();
 		values.put(COL_EXPLICACAO_ALERT, alerta.getExplicacaoAlerta());
+		values.put(COL_HORA_SINCRO_ALERT, alerta.getHoraSincroAlerta());
+		values.put(COL_DATA_SINCRO_ALERT, alerta.getDataSincroAlerta());
 		valueResult = bdd.insert(TABLE_ALERTA, null, values);
 		close();
 		return valueResult;
