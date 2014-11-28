@@ -77,7 +77,7 @@
         android:layout_alignLeft="@+id/tb_telefone"
         android:layout_alignRight="@+id/tb_telefone"
         android:layout_below="@+id/tb_telefone"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="20dp"
         android:text="@string/validar" />
 
 </RelativeLayout>

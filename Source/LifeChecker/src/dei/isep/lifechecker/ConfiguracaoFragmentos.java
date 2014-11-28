@@ -24,6 +24,7 @@ public class configuracaoFragmentos extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.configuracao_fragmento);
+		inserirActionBar();
 
 		Intent intent = getIntent();
 		int opcao = intent.getIntExtra("opcao", 0);
@@ -53,46 +54,15 @@ public class configuracaoFragmentos extends FragmentActivity{
 		// Affectation de l'adapter au ViewPager
 		pager.setAdapter(this.fAdapter);
 		
-		inserirActionBar();
 	}
 	
 	public void inserirActionBar()
 	{
-		ActionBar mActionBar = getActionBar();
-		mActionBar.setDisplayShowHomeEnabled(false);
-		mActionBar.setDisplayShowTitleEnabled(false);
-		LayoutInflater mInflater = LayoutInflater.from(this);
-
-		View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-		TextView titulo = (TextView) mCustomView.findViewById(R.id.actionBar_Titulo);
-		titulo.setText(R.string.configuracao);
-
-		ImageButton flechaEsquerda = (ImageButton) mCustomView
-				.findViewById(R.id.actionBar_btnFelchaEsquerda);
-		flechaEsquerda.setVisibility(View.VISIBLE);
-		/*imageButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(getApplicationContext(), "Refresh Clicked!",
-						Toast.LENGTH_LONG).show();
-			}
-		});*/
-		
-		ImageButton flechaDireita = (ImageButton) mCustomView
-				.findViewById(R.id.btnFelchaEsquerda_btnFelchaDireita);
-		flechaDireita.setVisibility(View.INVISIBLE);
-		/*imageButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(getApplicationContext(), "Refresh Clicked!",
-						Toast.LENGTH_LONG).show();
-			}
-		});*/
-
-		mActionBar.setCustomView(mCustomView);
-		mActionBar.setDisplayShowCustomEnabled(true);
+		ActionBar actionBar = getActionBar();
+		actionBar.setCustomView(R.layout.action_bar);
+		TextView textView = (TextView) actionBar.getCustomView().findViewById(R.id.actionBar_Titulo);
+		textView.setText(getResources().getString(R.string.configuracao));
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_HOME_AS_UP);
 	}
 	
 

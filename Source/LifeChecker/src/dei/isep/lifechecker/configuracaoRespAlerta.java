@@ -37,9 +37,6 @@ public class configuracaoRespAlerta extends Fragment{
 		Log.i("FRAGMENT", "111onResume Alertas");
 		LayoutInflater mInflater = LayoutInflater.from(getActivity().getApplicationContext());
 		View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-		ImageButton flechaEsquerda = (ImageButton) mCustomView
-				.findViewById(R.id.actionBar_btnFelchaEsquerda);
-		flechaEsquerda.setVisibility(View.VISIBLE);
 	}
 	@Override
 	public void onStart() {
@@ -47,10 +44,6 @@ public class configuracaoRespAlerta extends Fragment{
 		Log.i("FRAGMENT", "111onStart Alertas");
 		LayoutInflater mInflater = LayoutInflater.from(getActivity().getApplicationContext());
 		View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-		ImageButton flechaEsquerda = (ImageButton) mCustomView
-				.findViewById(R.id.actionBar_btnFelchaEsquerda);
-		flechaEsquerda.setVisibility(View.VISIBLE);
-		// TODO Auto-generated method stub
 	}
 	
 	@Override
