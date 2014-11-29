@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201411291503386_AddedResponsavelPaciente.Designer.cs">
       <DependentUpon>201411291503386_AddedResponsavelPaciente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411291818084_AddedEntireModel.cs" />
+    <Compile Include="Migrations\201411291818084_AddedEntireModel.Designer.cs">
+      <DependentUpon>201411291818084_AddedEntireModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Alerta.cs" />
     <Compile Include="Models\EstadoMarcacao.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411291503386_AddedResponsavelPaciente.resx">
       <DependentUpon>201411291503386_AddedResponsavelPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411291818084_AddedEntireModel.resx">
+      <DependentUpon>201411291818084_AddedEntireModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
