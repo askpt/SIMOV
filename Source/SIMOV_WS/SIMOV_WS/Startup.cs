@@ -12,7 +12,7 @@ namespace SIMOV_WS
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            
         }
     }
 }
