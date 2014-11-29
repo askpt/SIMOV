@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -212,7 +213,11 @@
       <DependentUpon>201411291503386_AddedResponsavelPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Alerta.cs" />
+    <Compile Include="Models\EstadoMarcacao.cs" />
+    <Compile Include="Models\HistoricoAlertas.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Marcacao.cs" />
     <Compile Include="Models\Paciente.cs" />
     <Compile Include="Models\Responsavel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -297,6 +302,9 @@
     <EmbeddedResource Include="Migrations\201411291503386_AddedResponsavelPaciente.resx">
       <DependentUpon>201411291503386_AddedResponsavelPaciente.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

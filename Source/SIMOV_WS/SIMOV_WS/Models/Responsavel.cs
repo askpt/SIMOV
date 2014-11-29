@@ -7,6 +7,11 @@ namespace SIMOV_WS.Models
 {
     public class Responsavel
     {
+        public Responsavel()
+        {
+            this.Pacientes = new HashSet<Paciente>();
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Nome { get; set; }
@@ -16,10 +21,10 @@ namespace SIMOV_WS.Models
         public bool NotifSms { get; set; }
         public int PeriodDiurna { get; set; }
         public int PeriodNoturna { get; set; }
-        [EmailAddress]
         public string Email { get; set; }
         public string Password { get; set; }
         public DateTime HoraSincronizacao { get; set; }
-        public List<Paciente> Pacientes { get; set; }
+
+        public virtual ICollection<Paciente> Pacientes { get; set; }
     }
 }

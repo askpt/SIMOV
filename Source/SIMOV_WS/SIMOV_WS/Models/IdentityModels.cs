@@ -15,5 +15,9 @@ namespace SIMOV_WS.Models
 
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Responsavel> Responsaveis { get; set; }
+        public DbSet<Alerta> Alertas { get; set; }
+        public DbSet<EstadoMarcacao> EstadosMarcacao { get; set; }
+        public DbSet<HistoricoAlertas> HistoricoAlertas { get; set; }
+        public DbSet<Marcacao> Marcacoes { get; set; }
     }
 }
