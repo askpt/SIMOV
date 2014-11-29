@@ -196,6 +196,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PacientesController.cs" />
     <Compile Include="Controllers\ResponsaveisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -215,6 +216,18 @@
     <Compile Include="Migrations\201411291818084_AddedEntireModel.cs" />
     <Compile Include="Migrations\201411291818084_AddedEntireModel.Designer.cs">
       <DependentUpon>201411291818084_AddedEntireModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411292013024_RemovedSomeCode.cs" />
+    <Compile Include="Migrations\201411292013024_RemovedSomeCode.Designer.cs">
+      <DependentUpon>201411292013024_RemovedSomeCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411292014414_RemovedSomeCode1.cs" />
+    <Compile Include="Migrations\201411292014414_RemovedSomeCode1.Designer.cs">
+      <DependentUpon>201411292014414_RemovedSomeCode1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411292025298_UpdateNullableDateTime.cs" />
+    <Compile Include="Migrations\201411292025298_UpdateNullableDateTime.Designer.cs">
+      <DependentUpon>201411292025298_UpdateNullableDateTime.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Alerta.cs" />
@@ -308,6 +321,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411291818084_AddedEntireModel.resx">
       <DependentUpon>201411291818084_AddedEntireModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411292013024_RemovedSomeCode.resx">
+      <DependentUpon>201411292013024_RemovedSomeCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411292014414_RemovedSomeCode1.resx">
+      <DependentUpon>201411292014414_RemovedSomeCode1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411292025298_UpdateNullableDateTime.resx">
+      <DependentUpon>201411292025298_UpdateNullableDateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

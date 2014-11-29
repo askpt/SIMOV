@@ -16,7 +16,7 @@ namespace SIMOV_WS.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Designacao { get; set; }
-        public System.DateTime HoraSincronizacao { get; set; }
+        public DateTime HoraSincronizacao { get; set; }
 
         public virtual ICollection<Marcacao> Marcacao { get; set; }
     }

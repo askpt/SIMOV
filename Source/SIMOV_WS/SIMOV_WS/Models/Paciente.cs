@@ -10,7 +10,7 @@ namespace SIMOV_WS.Models
         public Paciente()
         {
             this.HistoricoAlertas = new HashSet<HistoricoAlertas>();
-            this.Marcacao = new HashSet<Marcacao>();
+            this.Marcacoes = new HashSet<Marcacao>();
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,13 +22,12 @@ namespace SIMOV_WS.Models
         public float Longitude { get; set; }
         public float Latitude { get; set; }
         public string NomeLocal { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
         public bool Ativo { get; set; }
         public DateTime HoraSincronizacao { get; set; }
         public int Responsavel_ID { get; set; }
 
-        public virtual Responsavel Responsavels { get; set; }
         public virtual ICollection<HistoricoAlertas> HistoricoAlertas { get; set; }
-        public virtual ICollection<Marcacao> Marcacao { get; set; }
+        public virtual ICollection<Marcacao> Marcacoes { get; set; }
     }
 }
