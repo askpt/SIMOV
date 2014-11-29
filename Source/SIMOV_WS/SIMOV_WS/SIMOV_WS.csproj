@@ -195,7 +195,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ResponsaveisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,9 +207,14 @@
     <Compile Include="Migrations\201411291100341_RemovedAspNetUsers.Designer.cs">
       <DependentUpon>201411291100341_RemovedAspNetUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411291503386_AddedResponsavelPaciente.cs" />
+    <Compile Include="Migrations\201411291503386_AddedResponsavelPaciente.Designer.cs">
+      <DependentUpon>201411291503386_AddedResponsavelPaciente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Paciente.cs" />
+    <Compile Include="Models\Responsavel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -288,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411291100341_RemovedAspNetUsers.resx">
       <DependentUpon>201411291100341_RemovedAspNetUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411291503386_AddedResponsavelPaciente.resx">
+      <DependentUpon>201411291503386_AddedResponsavelPaciente.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

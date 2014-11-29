@@ -13,6 +13,7 @@ namespace SIMOV_WS.Models
         {
         }
 
-        public DbSet<Person> Persons { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Responsavel> Responsaveis { get; set; }
     }
 }
