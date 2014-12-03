@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 public class configuracaoRespAlerta extends Fragment{
 	
@@ -21,36 +20,19 @@ public class configuracaoRespAlerta extends Fragment{
 		*/
 		return myFragment;
 	}
+	
 	@Override
 	public void setUserVisibleHint(boolean isVisibleToUser) {
 		// TODO Auto-generated method stub
 		super.setUserVisibleHint(isVisibleToUser);
 		if(isVisibleToUser)
 		{
-			
+			Log.i("FRAGMENT", "111Visible Alertas");
 		}
-	}
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		Log.i("FRAGMENT", "111onResume Alertas");
-		LayoutInflater mInflater = LayoutInflater.from(getActivity().getApplicationContext());
-		View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-	}
-	@Override
-	public void onStart() {
-		super.onStart();
-		Log.i("FRAGMENT", "111onStart Alertas");
-		LayoutInflater mInflater = LayoutInflater.from(getActivity().getApplicationContext());
-		View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-	}
-	
-	@Override
-	public void onPause()
-	{
-		super.onPause();
-		Log.i("FRAGMENT", "111onPause Alertas");
+		else
+		{
+			Log.i("FRAGMENT", "111NotVisible Alertas");
+		}
 	}
 	
 	
