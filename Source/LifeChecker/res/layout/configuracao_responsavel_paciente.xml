@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_dadosPaciente"
+        android:id="@+id/text_dadosPaciente_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,19 +15,19 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imageView1_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_dadosPaciente"
+        android:layout_below="@+id/text_dadosPaciente_resp"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
     <EditText
-        android:id="@+id/tb_nome"
+        android:id="@+id/tb_nome_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/imageView1_resp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:ems="10"
@@ -38,10 +38,10 @@
     </EditText>
 
     <EditText
-        android:id="@+id/tb_apelido"
+        android:id="@+id/tb_apelido_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_nome"
+        android:layout_below="@+id/tb_nome_resp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
@@ -49,21 +49,21 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/tb_telefone"
+        android:id="@+id/tb_telefone_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_apelido"
-        android:layout_below="@+id/tb_mail"
+        android:layout_alignLeft="@+id/tb_apelido_resp"
+        android:layout_below="@+id/tb_mail_resp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/telefone"
         android:inputType="phone" />
 
     <EditText
-        android:id="@+id/tb_mail"
+        android:id="@+id/tb_mail_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_apelido"
+        android:layout_below="@+id/tb_apelido_resp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
@@ -71,12 +71,12 @@
         android:inputType="textEmailAddress" />
 
     <Button
-        android:id="@+id/bt_validar_paciente"
+        android:id="@+id/bt_validar_paciente_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_telefone"
-        android:layout_alignRight="@+id/tb_telefone"
-        android:layout_below="@+id/tb_telefone"
+        android:layout_alignLeft="@+id/tb_telefone_resp"
+        android:layout_alignRight="@+id/tb_telefone_resp"
+        android:layout_below="@+id/tb_telefone_resp"
         android:layout_marginTop="20dp"
         android:text="@string/validar" />
 

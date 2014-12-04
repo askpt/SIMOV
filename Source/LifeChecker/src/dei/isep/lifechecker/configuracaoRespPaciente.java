@@ -16,7 +16,7 @@ public class configuracaoRespPaciente extends Fragment implements OnClickListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(R.layout.configuracao_responsavel_paciente, container, false);
-		btnValidarResponsavel = (Button) myView.findViewById(R.id.bt_validar_paciente);
+		btnValidarResponsavel = (Button) myView.findViewById(R.id.bt_validar_paciente_resp);
 		btnValidarResponsavel.setOnClickListener(this);
 
 		
@@ -25,15 +25,8 @@ public class configuracaoRespPaciente extends Fragment implements OnClickListene
 
 	@Override
 	public void onClick(View v) {
-		configuracaoRespPaciente confResPac = new configuracaoRespPaciente();
-		Bundle bundle = confResPac.getArguments();
-		if(bundle != null)
-		{
-			String valor = bundle.getString("A");
-			valor += " wwwww";
-			int yyy = bundle.getInt("B");
-		}
-		Toast.makeText(getActivity().getApplicationContext(), "qweqweqwe", Toast.LENGTH_LONG).show();
+		String tttt = lifeCheckerManager.getInstance().getMailResponsavel();
+		Toast.makeText(getActivity().getApplicationContext(), "qweqweqwe " + tttt, Toast.LENGTH_LONG).show();
 		
 		// TODO Auto-generated method stub
 		

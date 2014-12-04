@@ -27,25 +27,23 @@ public class configuracaoFragmentos extends FragmentActivity {
 
 	private fragmentAdapter fAdapter;
 
-	private Button btnVerificarMailResp;
-	private EditText emailNewResp;
-	private EditText passNewResp;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.configuracao_fragmento);
 		inserirActionBar();
-		//verificarEmailExist();
-		Log.i("qqqqqqqqq","ppppppppppppppppp");
+
+		Log.i("qqqqqqqqq", "ppppppppppppppppp");
 
 		Intent intent = getIntent();
 		int opcao = intent.getIntExtra("opcao", 0);
 		// Création de la liste de Fragments que fera défiler le PagerAdapter
 		List<Fragment> fragments = new Vector<Fragment>();
-
+		Log.i("98888888888","9888888888888888");
 		switch (opcao) {
 		case 1:
+
 			fragments.add(Fragment.instantiate(this,
 					configuracaoRespConta.class.getName()));
 			fragments.add(Fragment.instantiate(this,
@@ -75,12 +73,32 @@ public class configuracaoFragmentos extends FragmentActivity {
 				.findViewById(R.id.configuracao_fragmento);
 		// Affectation de l'adapter au ViewPager
 		pager.setAdapter(this.fAdapter);
+
 		
+		
+		//********
+
+		//configuracaoRespConta confRest = new configuracaoRespConta();
+
+		
+//		emailNewResp.setText("aaaaaaaaaaaa");
+		
+		// ***********************
+
+
+		// int ressourceID = getResources().getIdentifier("tb_email_resp", "id",
+		// this.getPackageName());
+
+	
+		// btnVerificarMailResp =
+		// getResources().getIdentifier("bt_validar_mail", "Button",
+		// getPackageName());
+		Log.i("iiiiiiiiiiiiiiiii", "iiiiiiiiiiiiiiiiii");
+		// verificarEmailExist();
 
 	}
 
 	public void inserirActionBar() {
-		Log.i("yyyyyyyyyyyyyyyyy","zzzzzzzzzzzzzzzzz");
 		ActionBar actionBar = getActionBar();
 		actionBar.setCustomView(R.layout.action_bar);
 		TextView textView = (TextView) actionBar.getCustomView().findViewById(
@@ -90,49 +108,6 @@ public class configuracaoFragmentos extends FragmentActivity {
 				| ActionBar.DISPLAY_HOME_AS_UP);
 	}
 
-	public void verificarEmailExist() {
-		LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		ViewGroup v = (ViewGroup)inflater.inflate(R.layout.configuracao_responsavel_conta, null, false);
-		btnVerificarMailResp = (Button)v.findViewById(R.id.bt_validar_mail);
-		
-		
-		Log.i("wwwwwwwwwwwww","eeeeeeeeeeeeee");
-		View inflatedView = getLayoutInflater().inflate(
-				R.layout.configuracao_responsavel_conta, null);
-
-		//btnVerificarMailResp = (Button)findViewById(R.id.bt_validar_mail);
-		
-		//btnVerificarMailResp = (Button) inflatedView.findViewById(R.id.bt_validar);
-		emailNewResp = (EditText) inflatedView.findViewById(R.id.tb_email);
-		passNewResp = (EditText) inflatedView.findViewById(R.id.tb_password);
-
-		emailNewResp.setText("aaaaaaaaaaaa");
-
-		//btnVerificarMailResp = getResources().getIdentifier("bt_validar_mail", "Button", getPackageName());
-		Log.i("iiiiiiiiiiiiiiiii","iiiiiiiiiiiiiiiiii");
-		Log.i("ggggggggggggggggggg",passNewResp.getText().toString());
-
-		btnVerificarMailResp.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.i("TESTE","ccccccccccccccccc");
-				if (emailNewResp.getText().length() != 0
-						|| passNewResp.getText().length() != 0) {
-					Toast.makeText(getApplication().getApplicationContext(), "wewewe",
-							Toast.LENGTH_LONG).show();
-					emailNewResp.setText("aaaaaaaaaaaa");
-				} else {
-					emailNewResp.setText("bbbbbbbbbbbbb");
-				}
-				// TODO Auto-generated method stub
-			}
-		});
-	}
 	
-	public void onValidRespMail()
-	{
-		Log.i("wwwwwwwwwwwww","passssssss");
-	}
-	
-	
+
 }

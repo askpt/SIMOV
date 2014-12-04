@@ -134,6 +134,17 @@ public class pacienteBDD {
 		}
 	}
 	
+	public int getNumPacientes()
+	{
+		int quantidade = 0;
+		String sqlQuery = "SELECT COUNT(*) FROM " + TABLE_PACIENTE;
+		open();
+		Cursor cursor = bdd.rawQuery(sqlQuery, null);
+		cursor.moveToNext();
+		quantidade = cursor.getInt(0);
+		close();
+		return quantidade;
+	}
 	
 	
 	public String getCreateTable()

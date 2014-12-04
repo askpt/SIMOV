@@ -2,46 +2,89 @@ package dei.isep.lifechecker;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-public class configuracaoRespConta extends Fragment implements OnClickListener {
+public class configuracaoRespConta extends Fragment {//implements OnClickListener {
 
-	Button btnValidarMail;
-	EditText txtMail;
-	EditText txtPass;
-	EditText txtPassConfirm;
-	boolean isVisible = false;
-
+	public Button btnValidarMail;
+	public EditText txtMail;
+	public EditText txtPass;
+	public EditText txtPassConfirm;
+	
+	public TextWatcher watcher = new TextWatcher() {
+		
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			Log.i("texto","TEXTAAAAAA");
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			Log.i("texto","TEXTBBBBBB");
+			
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s) {
+			Log.i("texto","TEXTCCCCC");
+			lifeCheckerManager.getInstance().setMailResponsavel(s.toString());
+			
+			Log.i("texto","TEXTDDDDDD " + lifeCheckerManager.getInstance().getMailResponsavel());
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(R.layout.configuracao_responsavel_conta,
 				container, false);
-		btnValidarMail = (Button) myView.findViewById(R.id.bt_validar_mail);
-		txtMail = (EditText) myView.findViewById(R.id.tb_email);
-		txtPass = (EditText) myView.findViewById(R.id.tb_password);
+		btnValidarMail = (Button) myView.findViewById(R.id.bt_validar_mail_resp);
+		txtMail = (EditText) myView.findViewById(R.id.tb_email_resp);
+		//txtMail.addTextChangedListener(tWMail);
+		txtPass = (EditText) myView.findViewById(R.id.tb_password_resp);
 		txtPassConfirm = (EditText) myView
-				.findViewById(R.id.tb_password_confirm);
-		btnValidarMail.setOnClickListener(this);
-
-		isVisible = true;
-
-		// txtMail.setText("wqeqweqweqwe");
-		Log.i("8888888888888888888", "1020202010101010101010201212");
+				.findViewById(R.id.tb_password_confirm_resp);
+		
+        txtMail.setText("Now I can access my EditText!");
+		//btnValidarMail.setOnClickListener(this);
+		txtMail.addTextChangedListener(watcher);
 		return myView;
 	}
+	
+	
+	  @Override
+	    public void onResume() {
+	        super.onResume();
+	        //txtMail.setText("Now I can access my EditText!");
+	    }
 
+
+	
+/*
 	@Override
 	public void onClick(View v) {
+		
+	
+
+		String test = emailNewResp.getText().toString();
+		test += " qweqwe";
+		
 		Log.i("8888888888888888888", "888888888888888");
-		Log.i("999998888899999", txtMail.getText().toString());
+		//Log.i("999998888899999", txtMail.getText().toString());
 		Bundle args = new Bundle();
 		configuracaoRespPaciente newFragment = new configuracaoRespPaciente();
 		args.putString("A", "tetete");
@@ -52,17 +95,7 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 				Toast.LENGTH_LONG).show();
 
 	}
-
-	@Override
-	public void setMenuVisibility(final boolean visible) {
-		super.setMenuVisibility(visible);
-		if (isVisible == true) {
-			if (visible) {
-				Log.i("Visibilidade", "1VISIVEL");
-			} else {
-				Log.i("Visibilidade", "1INNNNNNNVISIVEL");
-			}
-		}
-	}
+*/
+	
 
 }
