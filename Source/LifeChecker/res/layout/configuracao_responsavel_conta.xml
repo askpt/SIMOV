@@ -24,7 +24,7 @@
         android:src="@drawable/barra_azul" />
 
     <EditText
-        android:id="@+id/tb_email"
+        android:id="@+id/tb_email_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
@@ -38,24 +38,37 @@
     </EditText>
 
     <EditText
-        android:id="@+id/tb_password"
+        android:id="@+id/tb_password_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_email"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/tb_email_resp"
+        android:layout_alignRight="@+id/tb_email_resp"
+        android:layout_below="@+id/tb_email_resp"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/bt_validar"
+        android:id="@+id/bt_validar_mail_resp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_password"
-        android:layout_alignRight="@+id/tb_password"
-        android:layout_below="@+id/tb_password"
+        android:layout_alignLeft="@+id/tb_password_confirm_resp"
+        android:layout_alignRight="@+id/tb_password_confirm_resp"
+        android:layout_below="@+id/tb_password_confirm_resp"
         android:layout_marginTop="20dp"
         android:text="@string/validar" />
+
+    <EditText
+        android:id="@+id/tb_password_confirm_resp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tb_email_resp"
+        android:layout_alignRight="@+id/tb_email_resp"
+        android:layout_below="@+id/tb_password_resp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
 
 </RelativeLayout>

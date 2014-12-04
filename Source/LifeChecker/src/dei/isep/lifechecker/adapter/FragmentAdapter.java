@@ -27,6 +27,9 @@ public class fragmentAdapter  extends FragmentPagerAdapter{
 		case 2:
 			Log.i("FRAGMENT", "1112222222222");
 			break;
+		case 3:
+			Log.i("FRAGMENT", "33333333333333333333333333333333");
+			break;
 		}
 		return this.fragments.get(position);
 	}
