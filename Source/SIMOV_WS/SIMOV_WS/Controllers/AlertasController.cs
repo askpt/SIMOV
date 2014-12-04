@@ -19,9 +19,9 @@ namespace SIMOV_WS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Alertas
-        public IQueryable<Alerta> GetAlertas()
+        public List<Alerta> GetAlertas()
         {
-            return db.Alertas;
+            return db.Alertas.ToList();
         }
 
         // GET: api/Alertas/5

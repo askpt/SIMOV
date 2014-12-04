@@ -19,9 +19,14 @@ namespace SIMOV_WS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Responsaveis
-        public IQueryable<Responsavel> GetResponsaveis()
+        /// <summary>
+        /// Obter todos os responsáveis
+        /// </summary>
+        /// <returns>Listagem de todos os responsáveis</returns>
+        [ResponseType(typeof(List<Responsavel>))]
+        public List<Responsavel> GetResponsaveis()
         {
-            return db.Responsaveis;
+            return db.Responsaveis.ToList();
         }
 
         // GET: api/Responsaveis/5
@@ -131,6 +136,21 @@ namespace SIMOV_WS.Controllers
             }
 
             return Ok(true);
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        [ResponseType(typeof(Responsavel))]
+        public async Task<IHttpActionResult> Login(string email, string pass)
+        {
+            Responsavel responsavel = await db.Responsaveis.FirstOrDefaultAsync(r => r.Email == email && r.Password == pass);
+
+            if (responsavel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(responsavel);
         }
 
         protected override void Dispose(bool disposing)

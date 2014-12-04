@@ -19,9 +19,9 @@ namespace SIMOV_WS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/HistoricoAlertas
-        public IQueryable<HistoricoAlertas> GetHistoricoAlertas()
+        public List<HistoricoAlertas> GetHistoricoAlertas()
         {
-            return db.HistoricoAlertas;
+            return db.HistoricoAlertas.ToList();
         }
 
         // GET: api/HistoricoAlertas/5

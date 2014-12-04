@@ -19,9 +19,9 @@ namespace SIMOV_WS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Pacientes
-        public IQueryable<Paciente> GetPacientes()
+        public List<Paciente> GetPacientes()
         {
-            return db.Pacientes;
+            return db.Pacientes.ToList();
         }
 
         // GET: api/Pacientes/5

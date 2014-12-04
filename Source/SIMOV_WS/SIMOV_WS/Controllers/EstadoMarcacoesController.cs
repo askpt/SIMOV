@@ -19,9 +19,9 @@ namespace SIMOV_WS.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/EstadoMarcacoes
-        public IQueryable<EstadoMarcacao> GetEstadosMarcacao()
+        public List<EstadoMarcacao> GetEstadosMarcacao()
         {
-            return db.EstadosMarcacao;
+            return db.EstadosMarcacao.ToList();
         }
 
         // GET: api/EstadoMarcacoes/5
