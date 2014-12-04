@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/text_hoje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/hoje"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_resp_adicionarMarcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_hoje"
+        android:layout_below="@+id/text_hoje"
+        android:layout_marginTop="250dp"
+        android:background="@null"
+        android:src="@drawable/addmarca" />
+
+    <TextView
+        android:id="@+id/text_resp_adicionarMarcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bt_resp_adicionarMarcacao"
+        android:layout_below="@+id/bt_resp_adicionarMarcacao"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/adicionarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_resp_consultar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bt_resp_adicionarMarcacao"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/consultar"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/text_resp_consultar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_resp_adicionarMarcacao"
+        android:layout_alignBottom="@+id/text_resp_adicionarMarcacao"
+        android:layout_alignLeft="@+id/bt_resp_consultar"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/consultarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_resp_validar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_resp_adicionarMarcacao"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:src="@drawable/validar_ico" />
+
+    <TextView
+        android:id="@+id/text_resp_validar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_resp_consultar"
+        android:layout_alignBottom="@+id/text_resp_consultar"
+        android:layout_alignLeft="@+id/bt_resp_validar"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/validarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

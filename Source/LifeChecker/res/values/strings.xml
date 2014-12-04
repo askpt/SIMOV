@@ -29,5 +29,9 @@
     <string name="loginResponsavel">Login Responsável</string>
     <string name="selecionarPaciente">Selecionar Paciente</string>
     <string name="inserirMail">Inserir Mail</string>
+    <string name="hoje">Hoje</string>
+    <string name="adicionarMarcacao">Adicionar\nMarcação</string>
+    <string name="consultarMarcacao">Consultar\nMarcação</string>
+    <string name="validarMarcacao">Validar\nMarcação</string>
 
 </resources>
