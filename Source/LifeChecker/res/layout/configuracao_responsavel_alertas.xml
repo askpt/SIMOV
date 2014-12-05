@@ -24,7 +24,7 @@
         android:src="@drawable/barra_azul" />
 
     <CheckBox
-        android:id="@+id/cb_mail"
+        android:id="@+id/cb_mail_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
@@ -33,10 +33,10 @@
         android:text="@string/enviarMail" />
 
     <CheckBox
-        android:id="@+id/cb_sms"
+        android:id="@+id/cb_sms_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cb_mail"
+        android:layout_below="@+id/cb_mail_responsavel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/enviarSMS" />
