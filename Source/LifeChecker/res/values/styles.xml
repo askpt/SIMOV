@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -25,6 +25,106 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <!-- Wrong Style COLOCAR TUDO O RESTO A CIMA -->
 
+    <style name="AutoCompleteTextViewwrong" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+        <item name="android:dropDownSelector">@drawable/wrong_list_selector_holo_light</item>
+        <item name="android:background">@drawable/wrong_edit_text_holo_light</item>
+    </style>
+
+    <style name="Buttonwrong" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/wrong_btn_default_holo_light</item>
+    </style>
+
+    <style name="ImageButtonwrong" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/wrong_btn_default_holo_light</item>
+    </style>
+
+    <style name="Spinnerwrong" parent="android:Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/wrong_spinner_background_holo_light</item>
+        <item name="android:dropDownSelector">@drawable/wrong_list_selector_holo_light</item>
+    </style>
+
+    <style name="Tabwrong">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+        <item name="android:background">@drawable/wrong_tab_indicator_holo</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">80dip</item>
+    </style>
+
+    <style name="TabTextwrong">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <!-- v14 <item name="android:textAllCaps">true</item> -->
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:maxWidth">180dip</item>
+    </style>
+
+    <style name="ProgressBarwrong" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/wrong_progress_horizontal_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/wrong_progress_indeterminate_horizontal_holo_light</item>
+    </style>
+
+    <style name="SeekBarwrong" parent="android:Widget.Holo.Light.SeekBar">
+        <item name="android:progressDrawable">@drawable/wrong_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/wrong_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:thumb">@drawable/wrong_scrubber_control_selector_holo_light</item>
+    </style>
+
+    <style name="RatingBarwrong" parent="android:Widget.Holo.Light.RatingBar">
+        <item name="android:progressDrawable">@drawable/wrong_ratingbar_full_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/wrong_ratingbar_full_holo_light</item>
+    </style>
+
+    <style name="RatingBarBigwrong" parent="android:Widget.Holo.Light.RatingBar.Indicator">
+        <item name="android:progressDrawable">@drawable/wrong_ratingbar_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/wrong_ratingbar_holo_light</item>
+    </style>
+
+    <style name="RatingBarSmallwrong" parent="android:Widget.Holo.Light.RatingBar.Small">
+        <item name="android:progressDrawable">@drawable/wrong_ratingbar_small_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/wrong_ratingbar_small_holo_light</item>
+    </style>
+
+    <style name="Togglewrong" parent="android:Widget.Holo.Light.Button.Toggle">
+        <item name="android:background">@drawable/wrong_btn_toggle_holo_light</item>
+    </style>
+    
+    
+    
+    
+    
+
+    <!-- ESTILO "ERRADO" COLOCAR O RESTO A CIMA E NÃO MODIFICAR ISTO -->
+
+    <style name="wrong" parent="@style/_wrong" />
+
+    <style name="_wrong" parent="android:Theme.Holo.Light">
+        <item name="android:editTextBackground">@drawable/wrong_edit_text_holo_light</item>
+        <item name="android:textColorHighlight">#99ff0000</item>
+        <item name="android:textSelectHandleLeft">@drawable/wrong_text_select_handle_left</item>
+        <item name="android:textSelectHandleRight">@drawable/wrong_text_select_handle_right</item>
+        <item name="android:textSelectHandle">@drawable/wrong_text_select_handle_middle</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewwrong</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/wrong_btn_check_holo_light</item>
+        <item name="android:listChoiceIndicatorSingle">@drawable/wrong_btn_radio_holo_light</item>
+        <item name="android:buttonStyle">@style/Buttonwrong</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonwrong</item>
+        <item name="android:dropDownSpinnerStyle">@style/Spinnerwrong</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarwrong</item>
+        <item name="android:seekBarStyle">@style/SeekBarwrong</item>
+        <item name="android:ratingBarStyle">@style/RatingBarwrong</item>
+        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigwrong</item>
+        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallwrong</item>
+        <item name="android:buttonStyleToggle">@style/Togglewrong</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/wrong_list_selector_holo_light</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/wrong_activated_background_holo_light</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/wrong_fastscroll_thumb_holo</item>
+    </style>
 
 </resources>
