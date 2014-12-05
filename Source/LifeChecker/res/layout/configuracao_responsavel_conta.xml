@@ -23,70 +23,84 @@
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
-    <EditText
-        android:id="@+id/tb_email_resp"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress" >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView1" >
 
-        <requestFocus />
-    </EditText>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/tb_password_resp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_email_resp"
-        android:layout_alignRight="@+id/tb_email_resp"
-        android:layout_below="@+id/tb_email_resp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/tb_email_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" >
 
-    <Button
-        android:id="@+id/bt_validar_mail_resp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_password_confirm_resp"
-        android:layout_alignRight="@+id/tb_password_confirm_resp"
-        android:layout_below="@+id/tb_password_confirm_resp"
-        android:layout_marginTop="20dp"
-        android:text="@string/validar" />
+                <requestFocus />
+            </EditText>
 
-    <EditText
-        android:id="@+id/tb_password_confirm_resp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_email_resp"
-        android:layout_alignRight="@+id/tb_email_resp"
-        android:layout_below="@+id/tb_password_resp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/tb_password_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tb_email_resp"
+                android:layout_alignRight="@+id/tb_email_resp"
+                android:layout_below="@+id/tb_email_resp"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/tv_estado_vrificacao_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_validar_mail_resp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="TextView" />
+            <Button
+                android:id="@+id/bt_validar_mail_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tb_password_confirm_resp"
+                android:layout_alignRight="@+id/tb_password_confirm_resp"
+                android:layout_below="@+id/tb_password_confirm_resp"
+                android:layout_marginTop="20dp"
+                android:text="@string/validar" />
 
-    <ProgressBar
-        android:id="@+id/CircleLoadingMailVerify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_estado_vrificacao_mail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:visibility="visible" />
+            <EditText
+                android:id="@+id/tb_password_confirm_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tb_email_resp"
+                android:layout_alignRight="@+id/tb_email_resp"
+                android:layout_below="@+id/tb_password_resp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tv_estado_vrificacao_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_validar_mail_resp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="TextView" />
+
+            <ProgressBar
+                android:id="@+id/CircleLoadingMailVerify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_estado_vrificacao_mail"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:visibility="visible" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

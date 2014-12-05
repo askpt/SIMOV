@@ -35,8 +35,7 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View myView = inflater.inflate(R.layout.configuracao_responsavel_conta,
-				container, false);
+		View myView = inflater.inflate(R.layout.configuracao_responsavel_conta,container, false);
 		btnValidarMail = (Button) myView
 				.findViewById(R.id.bt_validar_mail_resp);
 		btnValidarMail.setOnClickListener(this);

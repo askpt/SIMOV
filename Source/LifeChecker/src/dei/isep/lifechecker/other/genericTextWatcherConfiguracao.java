@@ -38,37 +38,34 @@ public class genericTextWatcherConfiguracao implements TextWatcher {
 
 		case R.id.tb_nome_responsavel:
 			lifeCheckerManager.getInstance().setNomeResponsavel(text);
-			Log.i("instancia", "Pass: " + text);
+			Log.i("instancia", "Nome Responsavel: " + text);
 			break;
 		case R.id.tb_apelido_responsavel:
 			lifeCheckerManager.getInstance().setNomeResponsavel(text);
-			Log.i("instancia", "Pass: " + text);
+			Log.i("instancia", "Apelido Responsavel: " + text);
 			break;
 		case R.id.tb_telefone_responsavel:
 			lifeCheckerManager.getInstance().setNomeResponsavel(text);
-			Log.i("instancia", "Pass: " + text);
+			Log.i("instancia", "Telefone Responsavel: " + text);
 			break;
 
-		case R.id.cb_mail_responsavel:
-			lifeCheckerManager.getInstance().setNotificacaoMailResposnavel(
-					converterStringToBoolean(text));
-			Log.i("instancia", "Pass: " + text);
-			break;
-		case R.id.cb_sms_responsavel:
-			lifeCheckerManager.getInstance().setNotificacaoSMSResposnavel(
-					converterStringToBoolean(text));
-			Log.i("instancia", "Pass: " + text);
-			break;
 
 		case R.id.tb_diurno_responsavel:
-			lifeCheckerManager.getInstance().setMinutosDiurno(
-					Integer.valueOf(text));
-			Log.i("instancia", "Pass: " + text);
+			if(text.length() != 0)
+			{
+				lifeCheckerManager.getInstance().setMinutosDiurno(
+						Integer.valueOf(text));
+				Log.i("instancia", "Pass: " + text);
+			}
+
 			break;
 		case R.id.tb_noturno_responsavel:
-			lifeCheckerManager.getInstance().setMinutosNoturo(
-					Integer.valueOf(text));
-			Log.i("instancia", "Pass: " + text);
+			if(text.length() != 0)
+			{
+				lifeCheckerManager.getInstance().setMinutosNoturo(
+						Integer.valueOf(text));
+				Log.i("instancia", "Pass: " + text);
+			}
 			break;
 			
 		case R.id.tb_nome_paciente_resp:

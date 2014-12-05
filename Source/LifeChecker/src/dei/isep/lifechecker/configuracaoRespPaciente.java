@@ -17,7 +17,7 @@ public class configuracaoRespPaciente extends Fragment implements OnClickListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(R.layout.configuracao_responsavel_paciente, container, false);
-		btnValidarResponsavel = (Button) myView.findViewById(R.id.bt_validar_paciente_resp);
+		btnValidarResponsavel = (Button) myView.findViewById(R.id.bt_validar_paciente_responsavel);
 		btnValidarResponsavel.setOnClickListener(this);
 
 		
