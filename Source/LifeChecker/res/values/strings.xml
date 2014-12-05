@@ -39,5 +39,8 @@
     <string name="verificar_mail_formato_errado">Mail inválido</string>
     <string name="verificar_password_formato_errado">Pass inválida, tem de conter: \n 1 &#8211; 0&#8211;9 \n 2 &#8211; a&#8211;z \n 3 &#8211; A&#8211;Z \n 4 &#8211; @; #; $; % \n 5 &#8211; 6&#8211;30 caracteres</string>
     <string name="verificar_password_diferentes">Confirmação de password diferente</string>
-
+    <string name="hoje">Hoje</string>
+    <string name="adicionarMarcacao">Adicionar\nMarcação</string>
+    <string name="consultarMarcacao">Consultar\nMarcação</string>
+    <string name="validarMarcacao">Validar\nMarcação</string>
 </resources>
