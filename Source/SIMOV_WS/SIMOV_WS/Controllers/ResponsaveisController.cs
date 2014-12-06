@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SIMOV_WS.Models;
+using System.Net.Mail;
 
 namespace SIMOV_WS.Controllers
 {
@@ -57,7 +58,7 @@ namespace SIMOV_WS.Controllers
             }
 
             if (!ResponsavelExists(id))
-            { 
+            {
                 return NotFound();
             }
 
@@ -133,6 +134,40 @@ namespace SIMOV_WS.Controllers
             if (responsavel == null && paciente == null)
             {
                 return Ok(false);
+            }
+
+            return Ok(true);
+        }
+
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> ResetPassword(string email)
+        {
+            var responsavel = await db.Responsaveis.FirstOrDefaultAsync(p => p.Email == email);
+
+            if (responsavel == null)
+            {
+                return NotFound();
+            }
+
+            MailMessage mail = new MailMessage("lifechecker@mail.com", responsavel.Email);
+            SmtpClient client = new SmtpClient();
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Port = 587;
+            client.Host = "smtp.mail.com";
+            client.Credentials = new NetworkCredential("lifechecker@mail.com", "1234.abcd");
+            mail.Subject = "Password Reset";
+            mail.Body = string.Format("Your password is {0}", responsavel.Password);
+            try
+            {
+                await client.SendMailAsync(mail);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
             }
 
             return Ok(true);
