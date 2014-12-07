@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/text_listaconsultas_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/paciente"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_listaconsultas_marcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_listaconsultas_paciente"
+        android:layout_below="@+id/text_listaconsultas_paciente"
+        android:text="@string/marcacao"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_listaconsultas_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_listaconsultas_marcacao"
+        android:layout_below="@+id/text_listaconsultas_marcacao"
+        android:text="@string/hora"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_listaconsultas_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_listaconsultas_hora"
+        android:layout_alignBottom="@+id/text_listaconsultas_hora"
+        android:layout_toRightOf="@+id/text_listaconsultas_hora"
+        android:layout_marginLeft="5dp"
+        android:text="@string/data"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_listaconsultas_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_listaconsultas_hora"
+        android:layout_below="@+id/text_listaconsultas_hora"
+        android:text="@string/local"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_listaconsultas_informacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_listaconsultas_local"
+        android:layout_below="@+id/text_listaconsultas_local"
+        android:text="@string/informacao"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+</RelativeLayout>

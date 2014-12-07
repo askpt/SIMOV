@@ -30,8 +30,16 @@
     <string name="selecionarPaciente">Selecionar Paciente</string>
     <string name="inserirMail">Inserir Mail</string>
     <string name="hoje">Hoje</string>
-    <string name="adicionarMarcacao">Adicionar\nMarcação</string>
+    <string name="agendarMarcacao">Agendar\nMarcação</string>
     <string name="consultarMarcacao">Consultar\nMarcação</string>
     <string name="validarMarcacao">Validar\nMarcação</string>
+    <string name="localizar">Localizar</string>
+    <string name="pacientes">Pacientes</string>
+    <string name="marcacao">Marcação</string>
+    <string name="hora">Hora</string>
+    <string name="local">Local</string>
+    <string name="data">Data</string>
+    <string name="agendar">Agendar</string>
+    <string name="informacao">Informação</string>
 
 </resources>
