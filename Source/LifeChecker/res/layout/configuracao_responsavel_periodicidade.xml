@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_periodicidade"
+        android:id="@+id/text_periodicidade_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,26 +19,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_periodicidade"
+        android:layout_below="@+id/text_periodicidade_responsavel"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
     <TextView
-        android:id="@+id/text_noturno"
+        android:id="@+id/text_noturno_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_periodicidade"
+        android:layout_alignLeft="@+id/text_periodicidade_responsavel"
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="25dp"
         android:text="@string/noturno"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
-        android:id="@+id/tb_noturno"
+        android:id="@+id/tb_noturno_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_noturno"
-        android:layout_alignBottom="@+id/text_noturno"
+        android:layout_alignBaseline="@+id/text_noturno_responsavel"
+        android:layout_alignBottom="@+id/text_noturno_responsavel"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/minutos"
@@ -49,21 +49,21 @@
     </EditText>
 
     <TextView
-        android:id="@+id/text_diurno"
+        android:id="@+id/text_diurno_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_noturno"
-        android:layout_below="@+id/tb_noturno"
+        android:layout_alignLeft="@+id/text_noturno_responsavel"
+        android:layout_below="@+id/tb_noturno_responsavel"
         android:layout_marginTop="30dp"
         android:text="@string/diurno"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
-        android:id="@+id/tb_diurno"
+        android:id="@+id/tb_diurno_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_diurno"
-        android:layout_alignBottom="@+id/text_diurno"
+        android:layout_alignBaseline="@+id/text_diurno_responsavel"
+        android:layout_alignBottom="@+id/text_diurno_responsavel"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/minutos"
@@ -71,10 +71,10 @@
         android:width="100dp" />
 
     <TextView
-        android:id="@+id/text_aviso"
+        android:id="@+id/text_aviso_responsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_diurno"
+        android:layout_below="@+id/tb_diurno_responsavel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
         android:text="@string/avisoPeriodicidade"
