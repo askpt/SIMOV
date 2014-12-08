@@ -20,17 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_paciente"
         android:layout_below="@+id/text_responsavel_itemtipopacientes_paciente"
-        android:text="@string/marcacao"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/cinzento" />
-
-    <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_email"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_email"
-        android:text="@string/hora"
+        android:text="@string/rua"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
@@ -38,31 +28,23 @@
         android:id="@+id/text_itemtipolocalizacao_cidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_alignBottom="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_toRightOf="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:layout_alignBaseline="@+id/text_responsavel_itemtipopacientes_email"
+        android:layout_alignBottom="@+id/text_responsavel_itemtipopacientes_email"
+        android:layout_toRightOf="@+id/text_responsavel_itemtipopacientes_email"
+        android:text="@string/cidade"
         android:layout_marginLeft="5dp"
-        android:text="@string/data"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipoalertas_data"
+        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:text="@string/local"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/cinzento" />
-
-    <TextView
-        android:id="@+id/text_responsavel_itemtipoalertas_hora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipoalertas_data"
-        android:layout_below="@+id/text_responsavel_itemtipoalertas_data"
-        android:text="@string/informacao"
+        android:layout_alignBaseline="@+id/text_itemtipolocalizacao_cidade"
+        android:layout_alignBottom="@+id/text_itemtipolocalizacao_cidade"
+        android:layout_toRightOf="@+id/text_itemtipolocalizacao_cidade"
+        android:text="@string/hora"
+        android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_listaconsultas_paciente"
+        android:id="@+id/text_responsavel_itemtipopacientes_paciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -18,8 +18,8 @@
         android:id="@+id/text_hoje_marcacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_listaconsultas_paciente"
-        android:layout_below="@+id/text_listaconsultas_paciente"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_below="@+id/text_responsavel_itemtipopacientes_paciente"
         android:text="@string/marcacao"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -33,7 +33,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/text_hoje_local"
+        android:id="@+id/text_itemtipovalidar_local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_hoje_hora"
@@ -45,13 +45,13 @@
         android:id="@+id/text_hoje_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_hoje_local"
-        android:layout_below="@+id/text_hoje_local"
+        android:layout_alignLeft="@+id/text_itemtipovalidar_local"
+        android:layout_below="@+id/text_itemtipovalidar_local"
         android:text="@string/data"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/text_listaconsultas_marcacao"
+        android:id="@+id/text_responsavel_itemtipopacientes_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/text_hoje_marcacao"
@@ -65,7 +65,7 @@
         android:id="@+id/text_hoje_paciente_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/text_listaconsultas_marcacao"
+        android:layout_above="@+id/text_responsavel_itemtipopacientes_email"
         android:layout_toRightOf="@+id/text_hoje_marcacao"
         android:text="@string/paciente"
         android:layout_marginLeft="5dp"
@@ -73,33 +73,33 @@
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_listaconsultas_hora"
+        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/text_hoje_hora"
         android:layout_alignBottom="@+id/text_hoje_hora"
-        android:layout_alignLeft="@+id/text_listaconsultas_marcacao"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_email"
         android:text="@string/hora"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_listaconsultas_local"
+        android:id="@+id/text_responsavel_itemtipoalertas_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/text_hoje_data"
-        android:layout_alignLeft="@+id/text_listaconsultas_hora"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_telefone"
         android:text="@string/local"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_listaconsultas_data"
+        android:id="@+id/text_itemtipolocalizacao_cidade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/text_hoje_data"
         android:layout_alignBottom="@+id/text_hoje_data"
-        android:layout_alignLeft="@+id/text_listaconsultas_local"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoalertas_data"
         android:text="@string/data"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/cinzento" />

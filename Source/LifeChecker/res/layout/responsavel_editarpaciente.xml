@@ -3,31 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/text_dados_paciente_responsavel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/dadosPaciente"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/imageView1_paciente_resp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_dados_paciente_responsavel"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/barra_azul" />
-
     <EditText
         android:id="@+id/tb_responsavel_editarpaciente_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1_paciente_resp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:ems="10"

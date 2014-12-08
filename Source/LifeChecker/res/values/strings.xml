@@ -31,6 +31,11 @@
     <string name="loginResponsavel">Login Responsável</string>
     <string name="selecionarPaciente">Selecionar Paciente</string>
     <string name="inserirMail">Inserir Mail</string>
+    <string name="rua">Rua</string>
+    <string name="cidade">Cidade</string>
+    <string name="textoLocalizacao">Ultima actualização às:</string>
+    <string name="alerta">Alerta</string>
+    <string name="novo">Novo</string>
     
     <!-- Configuração -->
     <string name="verificar_mail_verificando">A verificar o mail</string>
@@ -43,7 +48,6 @@
     <string name="agendarMarcacao">Agendar\nMarcação</string>
     <string name="consultarMarcacao">Consultar\nMarcação</string>
     <string name="validarMarcacao">Validar\nMarcação</string>
-<<<<<<< HEAD
     <string name="localizar">Localizar</string>
     <string name="pacientes">Pacientes</string>
     <string name="marcacao">Marcação</string>
@@ -52,7 +56,4 @@
     <string name="data">Data</string>
     <string name="agendar">Agendar</string>
     <string name="informacao">Informação</string>
-
-=======
->>>>>>> 88ee7180ccadb5a9c6a7482592e4291fede2737d
 </resources>
