@@ -43,4 +43,19 @@
     <string name="adicionarMarcacao">Adicionar\nMarcação</string>
     <string name="consultarMarcacao">Consultar\nMarcação</string>
     <string name="validarMarcacao">Validar\nMarcação</string>
+    
+    <string name="erro_conta">Erros na conta</string>
+    <string name="erro_dados_responsa">Erros nos dados pessoais</string>
+    <string name="erro_periodicidade">Erros nas periodicidades</string>
+    <string name="erro_paciente">Erros nos dados do paciente</string>
+    
+    <string name="erro_nome">Erro nome</string>
+    <string name="erro_apelido">Erro apelido</string>
+    <string name="erro_contacto">Erro contacto</string>
+    <string name="erro_period_dirurn">Erro periodicidade diurna</string>
+    <string name="erro_period_noturn">Erro periodicidade noturna</string>
+    
+    <string name="mail_livre_paciente">Mail paciente válido</string>
+    <string name="mail_usado_paciente">Mail paciente já usado</string>
+    
 </resources>

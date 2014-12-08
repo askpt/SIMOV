@@ -3,13 +3,11 @@ package dei.isep.lifechecker;
 import dei.isep.lifechecker.database.alertaBDD;
 import dei.isep.lifechecker.database.estadoMarcacaoBDD;
 import dei.isep.lifechecker.database.historicoAlertasBDD;
-import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.model.alerta;
 import dei.isep.lifechecker.model.estadoMarcacao;
 import dei.isep.lifechecker.model.historicoAlertas;
-import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
 import android.app.ActionBar;
@@ -20,8 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class configuracaoMenu extends Activity {
@@ -90,9 +86,6 @@ public class configuracaoMenu extends Activity {
 		findViewById(R.id.bt_responsavel).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_paciente).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_recuperacao).setOnClickListener(btnCarregado);
-		
-		marcacaoBDD marcaBDD = new marcacaoBDD(getApplicationContext());
-		marcacao marca = new marcacao(); 
 		
 		//inserirActionBar();
 		

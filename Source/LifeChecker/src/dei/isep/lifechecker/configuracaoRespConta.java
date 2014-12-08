@@ -1,13 +1,7 @@
 package dei.isep.lifechecker;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.http.NameValuePair;
-
 import dei.isep.lifechecker.databaseonline.httpPost;
+import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,7 +29,8 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View myView = inflater.inflate(R.layout.configuracao_responsavel_conta,container, false);
+		View myView = inflater.inflate(R.layout.configuracao_responsavel_conta,
+				container, false);
 		btnValidarMail = (Button) myView
 				.findViewById(R.id.bt_validar_mail_resp);
 		btnValidarMail.setOnClickListener(this);
@@ -55,17 +50,16 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 
 		tvConfirmarMail.setVisibility(View.INVISIBLE);
 		pbLoadingMail.setVisibility(View.INVISIBLE);
-		
-		txtMail.addTextChangedListener(new genericTextWatcherConfiguracao(txtMail));
-		txtPass.addTextChangedListener(new genericTextWatcherConfiguracao(txtPass));
-		
-		return myView;
-	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		// txtMail.setText("Now I can access my EditText!");
+		txtMail.addTextChangedListener(new genericTextWatcherConfiguracao(
+				txtMail));
+		txtPass.addTextChangedListener(new genericTextWatcherConfiguracao(
+				txtPass));
+		txtPassConfirm
+				.addTextChangedListener(new genericTextWatcherConfiguracao(
+						txtPassConfirm));
+
+		return myView;
 	}
 
 	@Override
@@ -73,39 +67,33 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 		tvConfirmarMail.setVisibility(View.VISIBLE);
 
 		// Validar Mail
+		validarDados validar = new validarDados();
 
-		if (mailValidacaoFormato(txtMail.getText().toString()) == true) {
+		if (validar.mailValidacaoFormato(txtMail.getText().toString()) == true) {
 
-			if(txtPass.getText().toString().compareTo(txtPassConfirm.getText().toString()) == 0)
-			{
-				if (passValidarFormato(txtPass.getText().toString()) == true) {
+			if (txtPass.getText().toString()
+					.compareTo(txtPassConfirm.getText().toString()) == 0) {
+				if (validar.passValidarFormato(txtPass.getText().toString()) == true) {
 					pbLoadingMail.setVisibility(View.VISIBLE);
 					tvConfirmarMail.setTextColor(Color.BLACK);
-					tvConfirmarMail.setText(R.string.verificar_mail_verificando);
+					tvConfirmarMail
+							.setText(R.string.verificar_mail_verificando);
 					String mail = txtMail.getText().toString();
 
-					String url = "http://simovws.azurewebsites.net/api/Responsaveis/VerificarSeExisteEmail?email="
-							+ mail;
-					List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-
-					htPost = new httpPost(url, postParameters);
-					htPost.setOnResultListener(htPostResult);
-					htPost.execute();
+					responsavelHttp respHTTP = new responsavelHttp();
+					respHTTP.verificarMail(mail, htPostResult);
 				} else {
 					tvConfirmarMail.setTextColor(getResources().getColor(
 							R.color.vermelho));
 					tvConfirmarMail
 							.setText(R.string.verificar_password_formato_errado);
 				}
-			}
-			else
-			{
+			} else {
 				tvConfirmarMail.setTextColor(getResources().getColor(
 						R.color.vermelho));
 				tvConfirmarMail.setText(R.string.verificar_password_diferentes);
-				
+
 			}
-			
 
 		} else {
 			tvConfirmarMail.setTextColor(getResources().getColor(
@@ -136,30 +124,8 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 								R.color.verde));
 					}
 					pbLoadingMail.setVisibility(View.INVISIBLE);
-
 				}
 			});
-
 		}
 	};
-
-	public boolean mailValidacaoFormato(String mail) {
-		boolean resultado = false;
-		Pattern patternMail = Pattern.compile(
-				"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-				Pattern.CASE_INSENSITIVE);
-		Matcher matchPatternMail = patternMail.matcher(mail);
-		resultado = matchPatternMail.find();
-		return resultado;
-	}
-
-	public boolean passValidarFormato(String password) {
-		boolean resultado = false;
-		Pattern patternPassword = Pattern
-				.compile("((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,30})");
-		Matcher matchPatternPassword = patternPassword.matcher(password);
-		resultado = matchPatternPassword.find();
-		return resultado;
-	}
-
 }

@@ -11,6 +11,7 @@ public class lifeCheckerManager {
 
 	private String mailResponsavel;
 	private String passResposnavel;
+	private String passConfirmResponsavel;
 	private String nomeResponsavel;
 	private String apelidoResponsavel;
 	private String telefoneResponsavel;
@@ -147,6 +148,16 @@ public class lifeCheckerManager {
 	public void setContactoPacienteResposnavel(String contactoPacienteResposnavel) {
 		this.contactoPacienteResposnavel = contactoPacienteResposnavel;
 	}
+
+	public String getPassConfirmResponsavel() {
+		return passConfirmResponsavel;
+	}
+
+	public void setPassConfirmResponsavel(String passConfirmResponsavel) {
+		this.passConfirmResponsavel = passConfirmResponsavel;
+	}
+	
+	
 	
 	
 	

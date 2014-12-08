@@ -23,61 +23,93 @@
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
-    <EditText
-        android:id="@+id/tb_nome_paciente_resp"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1_paciente_resp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="@string/nome"
-        android:inputType="textPersonName" >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView1_paciente_resp" >
 
-        <requestFocus />
-    </EditText>
+        <RelativeLayout
+            android:id="@+id/relativLayoutConteudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/tb_apelido_paciente_resp"
+            <EditText
+                android:id="@+id/tb_nome_paciente_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:ems="10"
+                android:hint="@string/nome"
+                android:inputType="textPersonName" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/tb_apelido_paciente_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tb_nome_paciente_resp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="@string/apelido"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/tb_telefone_paciente_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tb_apelido_paciente_resp"
+                android:layout_below="@+id/tb_mail_paciente_resp"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="@string/telefone"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/tb_mail_paciente_resp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tb_apelido_paciente_resp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/bt_validar_paciente_responsavel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tb_telefone_paciente_resp"
+                android:layout_alignRight="@+id/tb_telefone_paciente_resp"
+                android:layout_below="@+id/tb_telefone_paciente_resp"
+                android:layout_marginTop="20dp"
+                android:text="@string/validar" />
+
+            <TextView
+                android:id="@+id/tv_comentario_configuracao_resposnavel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bt_validar_paciente_responsavel"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="TextView" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBarLoadingAddConfig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_nome_paciente_resp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/apelido"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/tb_telefone_paciente_resp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_apelido_paciente_resp"
-        android:layout_below="@+id/tb_mail_paciente_resp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/telefone"
-        android:inputType="phone" />
-
-    <EditText
-        android:id="@+id/tb_mail_paciente_resp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_apelido_paciente_resp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress" />
-
-    <Button
-        android:id="@+id/bt_validar_paciente_responsavel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_telefone_paciente_resp"
-        android:layout_alignRight="@+id/tb_telefone_paciente_resp"
-        android:layout_below="@+id/tb_telefone_paciente_resp"
-        android:layout_marginTop="20dp"
-        android:text="@string/validar" />
+        android:layout_alignTop="@+id/text_dados_paciente_responsavel"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/text_dados_paciente_responsavel" />
 
 </RelativeLayout>
