@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/bt_detalhesmarcacaovalidar_not"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_alignParentTop="true"
@@ -15,10 +15,10 @@
         android:src="@drawable/ic_launcher" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/bt_responsavel_novopaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton1"
+        android:layout_below="@+id/bt_detalhesmarcacaovalidar_not"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:text="Button" />
@@ -27,10 +27,10 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/bt_responsavel_novopaciente"
         android:layout_marginRight="19dp"
         android:layout_marginTop="94dp"
-        android:layout_toLeftOf="@+id/button1"
+        android:layout_toLeftOf="@+id/bt_responsavel_novopaciente"
         android:text="Button" />
 
 </RelativeLayout>

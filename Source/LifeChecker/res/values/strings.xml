@@ -31,6 +31,11 @@
     <string name="loginResponsavel">Login Responsável</string>
     <string name="selecionarPaciente">Selecionar Paciente</string>
     <string name="inserirMail">Inserir Mail</string>
+    <string name="rua">Rua</string>
+    <string name="cidade">Cidade</string>
+    <string name="textoLocalizacao">Ultima actualização às:</string>
+    <string name="alerta">Alerta</string>
+    <string name="novo">Novo</string>
     
     <!-- Configuração -->
     <string name="verificar_mail_verificando">A verificar o mail</string>
@@ -40,7 +45,7 @@
     <string name="verificar_password_formato_errado">Pass inválida, tem de conter: \n 1 &#8211; 0&#8211;9 \n 2 &#8211; a&#8211;z \n 3 &#8211; A&#8211;Z \n 4 &#8211; @; #; $; % \n 5 &#8211; 6&#8211;30 caracteres</string>
     <string name="verificar_password_diferentes">Confirmação de password diferente</string>
     <string name="hoje">Hoje</string>
-    <string name="adicionarMarcacao">Adicionar\nMarcação</string>
+    <string name="agendarMarcacao">Agendar\nMarcação</string>
     <string name="consultarMarcacao">Consultar\nMarcação</string>
     <string name="validarMarcacao">Validar\nMarcação</string>
     
@@ -58,4 +63,12 @@
     <string name="mail_livre_paciente">Mail paciente válido</string>
     <string name="mail_usado_paciente">Mail paciente já usado</string>
     
+    <string name="localizar">Localizar</string>
+    <string name="pacientes">Pacientes</string>
+    <string name="marcacao">Marcação</string>
+    <string name="hora">Hora</string>
+    <string name="local">Local</string>
+    <string name="data">Data</string>
+    <string name="agendar">Agendar</string>
+    <string name="informacao">Informação</string>
 </resources>

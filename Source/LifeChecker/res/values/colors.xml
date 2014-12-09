@@ -5,5 +5,6 @@
         <item name="laranja" type="color">#FF8800</item>
         <item name="vermelho" type="color">#FF0000</item>
         <item name="verde" type="color">#15CC00</item>
+        <item name="cinzento" type="color">#B1B1B1</item>
     
 </resources>
