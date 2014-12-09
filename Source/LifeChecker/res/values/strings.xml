@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    
-    
     <string name="app_name">LifeChecker</string>
     <string name="hello_world">Hello world!</string>
     <string name="configuracao">Configuração</string>
@@ -27,7 +25,6 @@
     <string name="avisoPeriodicidade">\'0\' (zero) é considerado desativado</string>
     <string name="title_activity_zzzzzzz">Zzzzzzz</string>
     <string name="dadosPaciente">Dados Paciente</string>
-    <string name="validar">Validar</string>
     <string name="loginResponsavel">Login Responsável</string>
     <string name="selecionarPaciente">Selecionar Paciente</string>
     <string name="inserirMail">Inserir Mail</string>
@@ -36,7 +33,7 @@
     <string name="textoLocalizacao">Ultima actualização às:</string>
     <string name="alerta">Alerta</string>
     <string name="novo">Novo</string>
-    
+
     <!-- Configuração -->
     <string name="verificar_mail_verificando">A verificar o mail</string>
     <string name="verificar_mail_disponivel">Mail disponivel</string>
@@ -48,21 +45,17 @@
     <string name="agendarMarcacao">Agendar\nMarcação</string>
     <string name="consultarMarcacao">Consultar\nMarcação</string>
     <string name="validarMarcacao">Validar\nMarcação</string>
-    
     <string name="erro_conta">Erros na conta</string>
     <string name="erro_dados_responsa">Erros nos dados pessoais</string>
     <string name="erro_periodicidade">Erros nas periodicidades</string>
     <string name="erro_paciente">Erros nos dados do paciente</string>
-    
     <string name="erro_nome">Erro nome</string>
     <string name="erro_apelido">Erro apelido</string>
     <string name="erro_contacto">Erro contacto</string>
     <string name="erro_period_dirurn">Erro periodicidade diurna</string>
     <string name="erro_period_noturn">Erro periodicidade noturna</string>
-    
     <string name="mail_livre_paciente">Mail paciente válido</string>
     <string name="mail_usado_paciente">Mail paciente já usado</string>
-    
     <string name="localizar">Localizar</string>
     <string name="pacientes">Pacientes</string>
     <string name="marcacao">Marcação</string>
@@ -71,4 +64,9 @@
     <string name="data">Data</string>
     <string name="agendar">Agendar</string>
     <string name="informacao">Informação</string>
+
+    <!-- Esta butões -->
+    <string name="esperar">Aguarde&#8230;</string>
+    <string name="validar">Validar</string>
+
 </resources>

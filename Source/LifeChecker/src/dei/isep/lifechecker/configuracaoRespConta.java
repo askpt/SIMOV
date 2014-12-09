@@ -34,6 +34,7 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 		btnValidarMail = (Button) myView
 				.findViewById(R.id.bt_validar_mail_resp);
 		btnValidarMail.setOnClickListener(this);
+		btnValidarMail.setText(R.string.validar);
 		txtMail = (EditText) myView.findViewById(R.id.tb_email_resp);
 		// txtMail.addTextChangedListener(tWMail);
 		txtPass = (EditText) myView.findViewById(R.id.tb_password_resp);
@@ -58,6 +59,8 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 		txtPassConfirm
 				.addTextChangedListener(new genericTextWatcherConfiguracao(
 						txtPassConfirm));
+		
+		
 
 		return myView;
 	}
@@ -74,6 +77,9 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 			if (txtPass.getText().toString()
 					.compareTo(txtPassConfirm.getText().toString()) == 0) {
 				if (validar.passValidarFormato(txtPass.getText().toString()) == true) {
+					btnValidarMail.setText(R.string.esperar);
+					btnValidarMail.setEnabled(false);
+					
 					pbLoadingMail.setVisibility(View.VISIBLE);
 					tvConfirmarMail.setTextColor(Color.BLACK);
 					tvConfirmarMail
@@ -82,6 +88,8 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 
 					responsavelHttp respHTTP = new responsavelHttp();
 					respHTTP.verificarMail(mail, htPostResult);
+					
+					
 				} else {
 					tvConfirmarMail.setTextColor(getResources().getColor(
 							R.color.vermelho));
@@ -110,6 +118,7 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 
 				@Override
 				public void run() {
+					
 					String resultado = conteudo.replaceAll("[\r\n]+", "");
 					boolean resultadobool = Boolean.valueOf(resultado);
 					if (resultadobool == true) {
@@ -124,6 +133,9 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 								R.color.verde));
 					}
 					pbLoadingMail.setVisibility(View.INVISIBLE);
+					btnValidarMail.setText(R.string.validar);
+					btnValidarMail.setEnabled(true);
+
 				}
 			});
 		}
