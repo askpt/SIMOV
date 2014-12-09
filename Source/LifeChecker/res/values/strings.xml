@@ -64,6 +64,7 @@
     <string name="data">Data</string>
     <string name="agendar">Agendar</string>
     <string name="informacao">Informação</string>
+    <string name="sucesso">Sucesso</string>
 
     <!-- Esta butões -->
     <string name="esperar">Aguarde&#8230;</string>

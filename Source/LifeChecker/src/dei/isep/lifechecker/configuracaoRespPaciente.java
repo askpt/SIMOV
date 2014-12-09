@@ -1,10 +1,5 @@
 package dei.isep.lifechecker;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-
 import dei.isep.lifechecker.databaseonline.httpPost;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
@@ -14,7 +9,6 @@ import dei.isep.lifechecker.other.lifeCheckerManager;
 import dei.isep.lifechecker.other.validarDados;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,22 +70,14 @@ public class configuracaoRespPaciente extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
-		// True = contem erros; False = não contem erros
-		boolean erroConta = false;
-		boolean erroDadosResp = false;
-		boolean erroPeriodicidade = false;
-		boolean erroDadosPaciente = false;
+		
+		btnValidarResponsavel.setText(R.string.esperar);
+		btnValidarResponsavel.setEnabled(false);
 		
 		mailExiste = false;
 
-		// Variaveis com informação
-		String mailResponsavel = "";
-		String passeResposnavel = "";
-		String passeConfigrmacaoResposnavel = "";
 		
 		listaErros = "";
-		// ******
-		validarDados validar = new validarDados();
 		validMailPaciente = 0;
 		int valiConta = validarConta();
 		int valiDados = validarDadosNovoResposnavel();
@@ -107,6 +93,8 @@ public class configuracaoRespPaciente extends Fragment implements
 		else
 		{
 			tvComentarios.setText(listaErros);
+			btnValidarResponsavel.setText(R.string.validar);
+			btnValidarResponsavel.setEnabled(true);
 		}
 			
 	}
@@ -201,7 +189,6 @@ public class configuracaoRespPaciente extends Fragment implements
 			listaErros += getResources().getString(R.string.paciente) + " :" +  getResources().getString(R.string.verificar_mail_formato_errado) + "\n";
 			erros++;
 		}
-		String etetertetr = lifeCheckerManager.getInstance().getContactoPacienteResposnavel();
 		if (lifeCheckerManager.getInstance().getContactoPacienteResposnavel() != null
 				&& validar.contactoVerificar(lifeCheckerManager
 						.getInstance().getContactoPacienteResposnavel()) == true) {
@@ -324,11 +311,20 @@ public class configuracaoRespPaciente extends Fragment implements
 	interfaceResultadoAsyncPost addResponsavelListener = new interfaceResultadoAsyncPost() {
 		
 		@Override
-		public void obterResultado(int codigo, String conteudo) {
-			if(codigo == 1)
-			{
-				tvComentarios.setText("inserrriiiiiuuuuu um reponsavel");
-			}
+		public void obterResultado(final int codigo, String conteudo) {
+			getActivity().runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					if(codigo == 1)
+					{
+						btnValidarResponsavel.setText(R.string.validar);
+						btnValidarResponsavel.setEnabled(true);
+						tvComentarios.setText(R.string.sucesso);
+					}
+				}
+			});
+
 		}
 	};
 	
@@ -345,6 +341,9 @@ public class configuracaoRespPaciente extends Fragment implements
 					if (resultadobool == true) {
 						listaErros += getResources().getString(R.string.paciente) + ": " + getResources().getString(R.string.verificar_mail_indisponivel) + "\n";
 						mailExiste = true;
+						
+						btnValidarResponsavel.setText(R.string.validar);
+						btnValidarResponsavel.setEnabled(true);
 					} else {
 						listaErros += getResources().getString(R.string.paciente) + ": " + getResources().getString(R.string.verificar_mail_disponivel) + "\n";
 						inserirResposnavel();
@@ -377,8 +376,13 @@ public class configuracaoRespPaciente extends Fragment implements
 						tvComentarios.setText(listaErros);
 						validarmailOnlinePaciente();
 					}
+					else
+					{
 
 					pbConfiguracao.setVisibility(View.INVISIBLE);
+					btnValidarResponsavel.setText(R.string.validar);
+					btnValidarResponsavel.setEnabled(true);
+					}
 				}
 			});
 
