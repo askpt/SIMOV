@@ -67,8 +67,15 @@
     <string name="informacao">Informação</string>
     <string name="sucesso">Sucesso</string>
 
-    <!-- Esta butões -->
+    <!-- Estado butões -->
     <string name="esperar">Aguarde&#8230;</string>
     <string name="validar">Validar</string>
+    
+    <!-- Estado txtView -->
+    <string name="est_informacao">Estado</string>
+    <string name="est_inserir_paciente">A inserir Paciente</string>
+    <string name="est_inserir_responsavel">A inserir Responsével</string>
+    <string name="est_verificar_mail_resp">A verificar mail Responsável</string>
+    <string name="est_verificar_mail_paci">A verificar mail Paciente</string>
 
 </resources>

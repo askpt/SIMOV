@@ -91,6 +91,18 @@ public class paciente {
 		this.horaSincroPaciente = horaSincroPaciente;
 		this.dataSincroPaciente = dataSincroPaciente;
 	}
+	
+	public paciente(int idResponsavelPaciente,
+			String nomePaciente, String apelidoPaciente, String mailPaciente,
+			String contactoPaciente, boolean ativoPaciente) {
+		super();
+		this.idResponsavelPaciente = idResponsavelPaciente;
+		this.nomePaciente = nomePaciente;
+		this.apelidoPaciente = apelidoPaciente;
+		this.mailPaciente = mailPaciente;
+		this.contactoPaciente = contactoPaciente;
+		this.ativoPaciente = true;
+	}
 
 	public int getIdPaciente() {
 		return idPaciente;

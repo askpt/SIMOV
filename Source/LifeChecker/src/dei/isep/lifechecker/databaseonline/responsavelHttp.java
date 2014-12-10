@@ -21,34 +21,6 @@ public class responsavelHttp {
 
 	public static final String JSON_RESP_ID = "ID";
 
-	public boolean verificarMail(String mail) {
-		String conteudo = "";
-		String url = "http://simovws.azurewebsites.net/api/Responsaveis/VerificarSeExisteEmail?email="
-				+ mail;
-		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-
-		httpPost httpPostStart = new httpPost(url, postParameters);
-		httpPostStart.execute();
-		try {
-			conteudo = httpPostStart.get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		boolean resultado;
-		conteudo = conteudo.replaceAll("[\r\n]+", "");
-		if (conteudo.compareTo("true") == 0) {
-			resultado = true;
-		} else {
-			resultado = false;
-		}
-		return resultado;
-	}
-
 	public void inserirResponsavel(responsavel responsavel,
 			interfaceResultadoAsyncPost interfaceListener) {
 
@@ -84,43 +56,14 @@ public class responsavelHttp {
 
 	}
 
-	public int getIdResposnavel(String mail, String pass, interfaceResultadoAsyncPost interfaceListener) {
+	public void getIdResposnavel(String mail, String pass, interfaceResultadoAsyncPost interfaceListener) {
 		int id = -1;
 		String conteudo = "";
 		String url = "http://simovws.azurewebsites.net/api/Responsaveis/Login?email="
 				+ mail + "&pass=" + pass;
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 
-		httpPost httpPostStart = new httpPost(url, postParameters);
-		httpPostStart.execute();
-		try {
-			conteudo = httpPostStart.get();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JSONObject jsonObj = null;
-		try {
-			jsonObj = new JSONObject(conteudo);
-		} catch (JSONException e) {
-			return -1;
-		}
-
-		int quantidade = jsonObj.length();
-		if (quantidade == 1) {
-			try {
-				id = jsonObj.getInt(JSON_RESP_ID);
-			} catch (JSONException e) {
-				return -1;
-			}
-		} else {
-			id = -1;
-		}
-
-		return id;
+		executarTask(url, postParameters, interfaceListener);
 	}
 
 	public void verificarMail(String mail,
