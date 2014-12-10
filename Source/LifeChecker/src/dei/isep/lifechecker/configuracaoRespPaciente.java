@@ -32,6 +32,8 @@ public class configuracaoRespPaciente extends Fragment implements
 	EditText mailPaciente;
 	EditText contactoPaciente;
 	
+	responsavel rsponsavel;
+	
 	
 	boolean mailExiste = false;
 
@@ -44,19 +46,19 @@ public class configuracaoRespPaciente extends Fragment implements
 		View myView = inflater.inflate(
 				R.layout.configuracao_responsavel_paciente, container, false);
 		btnValidarResponsavel = (Button) myView
-				.findViewById(R.id.bt_validar_paciente_responsavel);
+				.findViewById(R.id.bt_configuracao_resppaciente_validar);
 		btnValidarResponsavel.setOnClickListener(this);
 		pbConfiguracao = (ProgressBar) myView
-				.findViewById(R.id.progressBarLoadingAddConfig);
+				.findViewById(R.id.loading_configuracao_resppaciente_add);
 
 		tvComentarios = (TextView) myView
-				.findViewById(R.id.tv_comentario_configuracao_resposnavel);
+				.findViewById(R.id.text_configuracao_resppaciente_informacao);
 
 		
-		nomePaciente = (EditText) myView.findViewById(R.id.tb_nome_paciente_resp);
-		apelidoPaciente = (EditText) myView.findViewById(R.id.tb_apelido_paciente_resp);
-		mailPaciente = (EditText) myView.findViewById(R.id.tb_mail_paciente_resp);
-		contactoPaciente = (EditText) myView.findViewById(R.id.tb_telefone_paciente_resp);
+		nomePaciente = (EditText) myView.findViewById(R.id.tb_configuracao_resppaciente_nome);
+		apelidoPaciente = (EditText) myView.findViewById(R.id.tb_configuracao_resppaciente_apelido);
+		mailPaciente = (EditText) myView.findViewById(R.id.tb_configuracao_resppaciente_email);
+		contactoPaciente = (EditText) myView.findViewById(R.id.tb_configuracao_resppaciente_telefone);
 		
 		nomePaciente.addTextChangedListener(new genericTextWatcherConfiguracao(nomePaciente));
 		apelidoPaciente.addTextChangedListener(new genericTextWatcherConfiguracao(apelidoPaciente));
@@ -293,7 +295,7 @@ public class configuracaoRespPaciente extends Fragment implements
 	
 	public void inserirResposnavel()
 	{
-		responsavel rsponsavel = new responsavel(
+		rsponsavel = new responsavel(
 				lifeCheckerManager.getInstance().getNomeResponsavel(),
 				lifeCheckerManager.getInstance().getApelidoResponsavel(),
 				lifeCheckerManager.getInstance().getTelefoneResponsavel(),
@@ -308,7 +310,14 @@ public class configuracaoRespPaciente extends Fragment implements
 		addResp.inserirResponsavel(rsponsavel, addResponsavelListener);
 	}
 	
-	interfaceResultadoAsyncPost addResponsavelListener = new interfaceResultadoAsyncPost() {
+	public void obterIdResponsavel(responsavel resp)
+	{
+		responsavelHttp getIdResp = new responsavelHttp();
+		int id = getIdResp.getIdResposnavel(resp.getMailResponsavel(), resp.getPassResponsavel(), getIdRespListener);
+		tvComentarios.setText("id do tipo obtido txt: " + id);
+	}
+	
+interfaceResultadoAsyncPost getIdRespListener = new interfaceResultadoAsyncPost() {
 		
 		@Override
 		public void obterResultado(final int codigo, String conteudo) {
@@ -320,7 +329,31 @@ public class configuracaoRespPaciente extends Fragment implements
 					{
 						btnValidarResponsavel.setText(R.string.validar);
 						btnValidarResponsavel.setEnabled(true);
+						tvComentarios.setText("id do tipo obtido");
+					}
+				}
+			});
+
+		}
+	};
+	
+	interfaceResultadoAsyncPost addResponsavelListener = new interfaceResultadoAsyncPost() {
+		
+		@Override
+		public void obterResultado(final int codigo, String conteudo) {
+			getActivity().runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					if(codigo == 1)
+					{
 						tvComentarios.setText(R.string.sucesso);
+						obterIdResponsavel(rsponsavel);
+					}
+					else
+					{
+						btnValidarResponsavel.setText(R.string.validar);
+						btnValidarResponsavel.setEnabled(true);
 					}
 				}
 			});

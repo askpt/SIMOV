@@ -27,35 +27,35 @@ public class genericTextWatcherConfiguracao implements TextWatcher {
 	public void afterTextChanged(Editable editable) {
 		String text = editable.toString();
 		switch (view.getId()) {
-		case R.id.tb_email_resp:
+		case R.id.tb_configuracao_respconta_email:
 			lifeCheckerManager.getInstance().setMailResponsavel(text);
 			Log.i("instancia", "Mail: " + text);
 			break;
-		case R.id.tb_password_resp:
+		case R.id.tb_configuracao_respconta_password:
 			lifeCheckerManager.getInstance().setPassResposnavel(text);
 			Log.i("instancia", "Pass: " + text);
 			break;
 			
-		case R.id.tb_password_confirm_resp:
+		case R.id.tb_configuracao_respconta_confirmarpass:
 			lifeCheckerManager.getInstance().setPassConfirmResponsavel(text);
 			Log.i("instancia", "Pass confirm : " + text);
 			break;
 
-		case R.id.tb_nome_responsavel:
+		case R.id.tb_configuracao_respdados_nome:
 			lifeCheckerManager.getInstance().setNomeResponsavel(text);
 			Log.i("instancia", "Nome Responsavel: " + text);
 			break;
-		case R.id.tb_apelido_responsavel:
+		case R.id.tb_configuracao_respdados_apelido:
 			lifeCheckerManager.getInstance().setApelidoResponsavel(text);
 			Log.i("instancia", "Apelido Responsavel: " + text);
 			break;
-		case R.id.tb_telefone_responsavel:
+		case R.id.tb_configuracao_respdados_telefone:
 			lifeCheckerManager.getInstance().setTelefoneResponsavel(text);
 			Log.i("instancia", "Telefone Responsavel: " + text);
 			break;
 
 
-		case R.id.tb_diurno_responsavel:
+		case R.id.tb_configuracao_respperiodicidade_diurno:
 			//**
 			try{
 				lifeCheckerManager.getInstance().setMinutosDiurno(
@@ -66,7 +66,7 @@ public class genericTextWatcherConfiguracao implements TextWatcher {
 				lifeCheckerManager.getInstance().setMinutosDiurno(-1);
 			}
 			break;
-		case R.id.tb_noturno_responsavel:
+		case R.id.tb_configuracao_respperiodicidade_noturno:
 			try{
 				lifeCheckerManager.getInstance().setMinutosNoturo(
 						Integer.valueOf(text));
@@ -77,19 +77,19 @@ public class genericTextWatcherConfiguracao implements TextWatcher {
 			}
 			break;
 			
-		case R.id.tb_nome_paciente_resp:
+		case R.id.tb_configuracao_resppaciente_nome:
 			lifeCheckerManager.getInstance().setNomePacienteResposnavel(text);
 			Log.i("instancia", "Mail: " + text);
 			break;
-		case R.id.tb_apelido_paciente_resp:
+		case R.id.tb_configuracao_resppaciente_apelido:
 			lifeCheckerManager.getInstance().setApelidoPacienteResposnavel(text);
 			Log.i("instancia", "Mail: " + text);
 			break;
-		case R.id.tb_mail_paciente_resp:
+		case R.id.tb_configuracao_resppaciente_email:
 			lifeCheckerManager.getInstance().setMailPacienteResposnavel(text);
 			Log.i("instancia", "Mail: " + text);
 			break;
-		case R.id.tb_telefone_paciente_resp:
+		case R.id.tb_configuracao_resppaciente_telefone:
 			lifeCheckerManager.getInstance().setContactoPacienteResposnavel(text);
 			Log.i("instancia", "Mail: " + text);
 			break;

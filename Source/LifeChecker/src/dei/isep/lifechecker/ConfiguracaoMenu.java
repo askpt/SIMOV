@@ -83,9 +83,9 @@ public class configuracaoMenu extends Activity {
 		estMarcaBDD.inserirEstadoMarcacao(estmarca);
 		estMarcaBDD.inserirEstadoMarcacao(estmarca);
 		
-		findViewById(R.id.bt_responsavel).setOnClickListener(btnCarregado);
-		findViewById(R.id.bt_paciente).setOnClickListener(btnCarregado);
-		findViewById(R.id.bt_recuperacao).setOnClickListener(btnCarregado);
+		findViewById(R.id.bt_configuracao_menu_responsavel).setOnClickListener(btnCarregado);
+		findViewById(R.id.bt_configuracao_menu_paciente).setOnClickListener(btnCarregado);
+		findViewById(R.id.bt_configuracao_menu_recuperacao).setOnClickListener(btnCarregado);
 		
 		//inserirActionBar();
 		
@@ -104,13 +104,13 @@ public class configuracaoMenu extends Activity {
 			int opcao = 0;
 			switch(v.getId())
 			{
-				case R.id.bt_responsavel:
+				case R.id.bt_configuracao_menu_responsavel:
 					opcao = 1;
 					break;
-				case R.id.bt_paciente:
+				case R.id.bt_configuracao_menu_paciente:
 					opcao = 2;
 					break;
-				case R.id.bt_recuperacao:
+				case R.id.bt_configuracao_menu_recuperacao:
 					opcao = 3;
 					break;
 			}

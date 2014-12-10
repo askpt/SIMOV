@@ -20,9 +20,9 @@ public class configuracaoRespDados extends Fragment {
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(R.layout.configuracao_responsavel_dados,container, false);
 		
-		txtNomeResp = (EditText) myView.findViewById(R.id.tb_nome_responsavel);
-		txtApelidoResp = (EditText) myView.findViewById(R.id.tb_apelido_responsavel);
-		txtTelefoneResp = (EditText) myView.findViewById(R.id.tb_telefone_responsavel);
+		txtNomeResp = (EditText) myView.findViewById(R.id.tb_configuracao_respdados_nome);
+		txtApelidoResp = (EditText) myView.findViewById(R.id.tb_configuracao_respdados_apelido);
+		txtTelefoneResp = (EditText) myView.findViewById(R.id.tb_configuracao_respdados_telefone);
 		
 		txtNomeResp.addTextChangedListener(new genericTextWatcherConfiguracao(txtNomeResp));
 		txtApelidoResp.addTextChangedListener(new genericTextWatcherConfiguracao(txtApelidoResp));

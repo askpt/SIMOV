@@ -20,8 +20,8 @@ public class configuracaoRespAlerta extends Fragment {
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(
 				R.layout.configuracao_responsavel_alertas, container, false);
-		chboxMail = (CheckBox) myView.findViewById(R.id.cb_mail_responsavel);
-		chboxSMS = (CheckBox) myView.findViewById(R.id.cb_sms_responsavel);
+		chboxMail = (CheckBox) myView.findViewById(R.id.cb_configuracao_respalertas_mail);
+		chboxSMS = (CheckBox) myView.findViewById(R.id.cb_configuracao_respalertas_sms);
 		/*
 		 * ImageButton flechaEsquerda = (ImageButton) myFragment
 		 * .findViewById(R.id.actionBar_btnFelchaEsquerda);

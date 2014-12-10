@@ -17,8 +17,8 @@ public class configuracaoRespPeriodicidade  extends Fragment {
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(R.layout.configuracao_responsavel_periodicidade,container, false);
 		
-		txtPeriodicidadeDiurna = (EditText) myView.findViewById(R.id.tb_diurno_responsavel);
-		txtPeriodicidadeNoturna = (EditText) myView.findViewById(R.id.tb_noturno_responsavel);
+		txtPeriodicidadeDiurna = (EditText) myView.findViewById(R.id.tb_configuracao_respperiodicidade_diurno);
+		txtPeriodicidadeNoturna = (EditText) myView.findViewById(R.id.tb_configuracao_respperiodicidade_noturno);
 		
 		txtPeriodicidadeDiurna.addTextChangedListener(new genericTextWatcherConfiguracao(txtPeriodicidadeDiurna));
 		txtPeriodicidadeNoturna.addTextChangedListener(new genericTextWatcherConfiguracao(txtPeriodicidadeNoturna));

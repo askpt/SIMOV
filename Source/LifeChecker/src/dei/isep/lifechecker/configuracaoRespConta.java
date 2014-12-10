@@ -32,20 +32,20 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 		View myView = inflater.inflate(R.layout.configuracao_responsavel_conta,
 				container, false);
 		btnValidarMail = (Button) myView
-				.findViewById(R.id.bt_validar_mail_resp);
+				.findViewById(R.id.bt_configuracao_respconta_validar);
 		btnValidarMail.setOnClickListener(this);
 		btnValidarMail.setText(R.string.validar);
-		txtMail = (EditText) myView.findViewById(R.id.tb_email_resp);
+		txtMail = (EditText) myView.findViewById(R.id.tb_configuracao_respconta_email);
 		// txtMail.addTextChangedListener(tWMail);
-		txtPass = (EditText) myView.findViewById(R.id.tb_password_resp);
+		txtPass = (EditText) myView.findViewById(R.id.tb_configuracao_respconta_password);
 		txtPassConfirm = (EditText) myView
-				.findViewById(R.id.tb_password_confirm_resp);
+				.findViewById(R.id.tb_configuracao_respconta_confirmarpass);
 
 		pbLoadingMail = (ProgressBar) myView
-				.findViewById(R.id.CircleLoadingMailVerify);
+				.findViewById(R.id.loading_configuracao_respconta_loading);
 
 		tvConfirmarMail = (TextView) myView
-				.findViewById(R.id.tv_estado_vrificacao_mail);
+				.findViewById(R.id.text_configuracao_respconta_estado);
 
 		// btnValidarMail.setOnClickListener(this);
 
