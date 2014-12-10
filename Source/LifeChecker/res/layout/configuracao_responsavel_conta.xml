@@ -91,16 +91,17 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="TextView" />
-
-            <ProgressBar
-                android:id="@+id/loading_configuracao_respconta_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/text_configuracao_respconta_estado"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:visibility="visible" />
         </RelativeLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/loading_configuracao_respconta_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" 
+        android:visibility="visible" />
 
 </RelativeLayout>
