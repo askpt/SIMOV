@@ -23,19 +23,20 @@
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
+
     <EditText
         android:id="@+id/tb_configuracao_resppaciente_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1_paciente_resp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="@string/nome"
-        android:inputType="textPersonName" >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView1_paciente_resp" >
 
-        <requestFocus />
-    </EditText>
+        <RelativeLayout
+            android:id="@+id/relativLayoutConteudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
     <EditText
         android:id="@+id/tb_configuracao_resppaciente_apelido"

@@ -65,6 +65,23 @@ public class responsavel {
 		this.horaSincroResponsavel = horaSincroResponsavel;
 		this.dataSincroResponsavel = dataSincroResponsavel;
 	}
+	
+	public responsavel(String nomeResposnavel, String apelidoResposnavel,
+			String contactoResponsavel, boolean notificacaoMail,
+			boolean notificacaoSMS, int periodicidadeDiurna,
+			int periodicidadeNoturna, String mailResponsavel,
+			String passResponsavel) {
+		super();
+		this.nomeResposnavel = nomeResposnavel;
+		this.apelidoResposnavel = apelidoResposnavel;
+		this.contactoResponsavel = contactoResponsavel;
+		this.notificacaoMail = notificacaoMail;
+		this.notificacaoSMS = notificacaoSMS;
+		this.periodicidadeDiurna = periodicidadeDiurna;
+		this.periodicidadeNoturna = periodicidadeNoturna;
+		this.mailResponsavel = mailResponsavel;
+		this.passResponsavel = passResponsavel;
+	}
 
 
 	public int getIdResponsavel() {
@@ -185,8 +202,5 @@ public class responsavel {
 	public void setDataSincroResponsavel(String dataSincroResponsavel) {
 		this.dataSincroResponsavel = dataSincroResponsavel;
 	}
-	
-	
-	
 
 }
