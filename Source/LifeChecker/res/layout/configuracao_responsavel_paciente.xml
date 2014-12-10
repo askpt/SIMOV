@@ -73,7 +73,7 @@
         android:layout_below="@+id/bt_configuracao_resppaciente_validar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
-        android:text="Small Text"
+        android:text="@string/est_informacao"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText

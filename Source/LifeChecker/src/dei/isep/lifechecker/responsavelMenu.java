@@ -32,7 +32,7 @@ public class responsavelMenu extends Activity {
 			switch(v.getId())
 			{
 				case R.id.bt_responsavel_menu_agendar:
-					intent = new Intent(responsavelMenu.this, paraOndeVais.class);
+					//intent = new Intent(responsavelMenu.this, paraOndeVais.class);
 					break;
 				case R.id.bt_configuracao_menu_paciente:
 					break;
