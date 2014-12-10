@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_dados_paciente_responsavel"
+        android:id="@+id/text_configuracao_resppaciente_dadospaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,12 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_dados_paciente_responsavel"
+        android:layout_below="@+id/text_configuracao_resppaciente_dadospaciente"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
     <EditText
-        android:id="@+id/tb_responsavel_editarpaciente_nome"
+        android:id="@+id/tb_configuracao_resppaciente_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1_paciente_resp"
@@ -38,10 +38,10 @@
     </EditText>
 
     <EditText
-        android:id="@+id/tb_responsavel_editarpaciente_apelido"
+        android:id="@+id/tb_configuracao_resppaciente_apelido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_responsavel_editarpaciente_nome"
+        android:layout_below="@+id/tb_configuracao_resppaciente_nome"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
@@ -49,21 +49,21 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/tb_responsavel_editarpaciente_telefone"
+        android:id="@+id/tb_configuracao_resppaciente_telefone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_responsavel_editarpaciente_apelido"
-        android:layout_below="@+id/tb_responsavel_editarpaciente_email"
+        android:layout_alignLeft="@+id/tb_configuracao_resppaciente_apelido"
+        android:layout_below="@+id/tb_configuracao_resppaciente_email"
         android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="@string/telefone"
         android:inputType="phone" />
 
     <EditText
-        android:id="@+id/tb_responsavel_editarpaciente_email"
+        android:id="@+id/tb_configuracao_resppaciente_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_responsavel_editarpaciente_apelido"
+        android:layout_below="@+id/tb_configuracao_resppaciente_apelido"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
@@ -71,12 +71,12 @@
         android:inputType="textEmailAddress" />
 
     <Button
-        android:id="@+id/bt_responsavel_editarpaciente_validar"
+        android:id="@+id/bt_configuracao_resppaciente_validar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_responsavel_editarpaciente_telefone"
-        android:layout_alignRight="@+id/tb_responsavel_editarpaciente_telefone"
-        android:layout_below="@+id/tb_responsavel_editarpaciente_telefone"
+        android:layout_alignLeft="@+id/tb_configuracao_resppaciente_telefone"
+        android:layout_alignRight="@+id/tb_configuracao_resppaciente_telefone"
+        android:layout_below="@+id/tb_configuracao_resppaciente_telefone"
         android:layout_marginTop="20dp"
         android:text="@string/validar" />
 

@@ -36,6 +36,7 @@
     <string name="textoLocalizacao">Ultima actualização às:</string>
     <string name="alerta">Alerta</string>
     <string name="novo">Novo</string>
+    <string name="proximasConsultas">Próximas Consultas</string>
     
     <!-- Configuração -->
     <string name="verificar_mail_verificando">A verificar o mail</string>

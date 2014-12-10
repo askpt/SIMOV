@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_loginResponsavel"
+        android:id="@+id/text_configuracao_contapaciente_loginResponsavel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,12 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_loginResponsavel"
+        android:layout_below="@+id/text_configuracao_contapaciente_loginResponsavel"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
     <EditText
-        android:id="@+id/tb_email"
+        android:id="@+id/tb_configuracao_contapaciente_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
@@ -38,10 +38,10 @@
     </EditText>
 
     <EditText
-        android:id="@+id/tb_password"
+        android:id="@+id/tb_configuracao_contapaciente_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tb_email"
+        android:layout_below="@+id/tb_configuracao_contapaciente_email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
@@ -49,12 +49,12 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/bt_validar"
+        android:id="@+id/bt_configuracao_contapaciente_validar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_password"
-        android:layout_alignRight="@+id/tb_password"
-        android:layout_below="@+id/tb_password"
+        android:layout_alignLeft="@+id/tb_configuracao_contapaciente_password"
+        android:layout_alignRight="@+id/tb_configuracao_contapaciente_password"
+        android:layout_below="@+id/tb_configuracao_contapaciente_password"
         android:layout_marginTop="20dp"
         android:text="@string/validar" />
 

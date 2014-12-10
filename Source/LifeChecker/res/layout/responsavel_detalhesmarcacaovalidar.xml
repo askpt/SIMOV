@@ -11,7 +11,7 @@
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/tb_detalhesmarcacaovalidar_paciente"
+            android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_paciente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -21,21 +21,21 @@
             android:text="@string/paciente" />
 
         <EditText
-            android:id="@+id/tb_detalhesmarcacaovalidar_marcacao"
+            android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_marcacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_detalhesmarcacaovalidar_paciente"
+            android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_paciente"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/marcacao" />
 
         <EditText
-            android:id="@+id/tb_detalhesmarcacaovalidar_hora"
+            android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_hora"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tb_detalhesmarcacaovalidar_marcacao"
-            android:layout_below="@+id/tb_detalhesmarcacaovalidar_marcacao"
+            android:layout_alignLeft="@+id/tb_responsavel_detalhesmarcacaovalidar_marcacao"
+            android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_marcacao"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/hora"
@@ -43,11 +43,11 @@
         </EditText>
 
         <EditText
-            android:id="@+id/tb_detalhesmarcacaovalidar_data"
+            android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_data"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/tb_detalhesmarcacaovalidar_marcacao"
-            android:layout_below="@+id/tb_detalhesmarcacaovalidar_marcacao"
+            android:layout_alignRight="@+id/tb_responsavel_detalhesmarcacaovalidar_marcacao"
+            android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_marcacao"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/data"
@@ -55,31 +55,31 @@
         </EditText>
 
         <EditText
-            android:id="@+id/tb_detalhesmarcacaovalidar_local"
+            android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tb_detalhesmarcacaovalidar_hora"
-            android:layout_below="@+id/tb_detalhesmarcacaovalidar_hora"
+            android:layout_alignLeft="@+id/tb_responsavel_detalhesmarcacaovalidar_hora"
+            android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_hora"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/local" />
 
         <ImageButton
-            android:id="@+id/bt_detalhesmarcacaovalidar_not"
+            android:id="@+id/bt_responsavel_detalhesmarcacaovalidar_not"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignRight="@+id/tb_detalhesmarcacaovalidar_local"
-            android:layout_below="@+id/tb_detalhesmarcacaovalidar_local"
+            android:layout_alignRight="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
+            android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/errado" />
 
         <ImageButton
-            android:id="@+id/bt_detalhesmarcacaovalidar_yes"
+            android:id="@+id/bt_responsavel_detalhesmarcacaovalidar_yes"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignLeft="@+id/tb_detalhesmarcacaovalidar_local"
+            android:layout_alignLeft="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
             android:layout_alignParentBottom="true"
             android:background="@null"
             android:scaleType="fitCenter"

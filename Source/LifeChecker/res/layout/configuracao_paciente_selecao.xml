@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_selecionarPaciente"
+        android:id="@+id/text_configuracao_selecaopaciente_selecionarPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,12 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_selecionarPaciente"
+        android:layout_below="@+id/text_configuracao_selecaopaciente_selecionarPaciente"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
     <ListView
-        android:id="@+id/list_pacientes"
+        android:id="@+id/list_configuracao_selecaopaciente_pacientes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"

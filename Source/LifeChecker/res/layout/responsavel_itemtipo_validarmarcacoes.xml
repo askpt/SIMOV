@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:id="@+id/text_responsavel_itemtipovalidar_paciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,36 +15,36 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/text_itemtipovalidar_local"
+        android:id="@+id/text_responsavel_itemtipovalidar_local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_paciente"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_paciente"
+        android:layout_below="@+id/text_responsavel_itemtipovalidar_paciente"
         android:text="@string/local"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:id="@+id/text_responsavel_itemtipovalidar_hora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_itemtipolocalizacao_cidade"
-        android:layout_below="@+id/text_itemtipolocalizacao_cidade"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_data"
+        android:layout_below="@+id/text_responsavel_itemtipovalidar_data"
         android:text="@string/hora"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_email"
+        android:id="@+id/text_responsavel_itemtipovalidar_marcacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_hora"
+        android:layout_below="@+id/text_responsavel_itemtipovalidar_hora"
         android:text="@string/marcacao"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_itemtipolocalizacao_cidade"
+        android:id="@+id/text_responsavel_itemtipovalidar_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -55,20 +55,20 @@
         android:textColor="@color/cinzento" />
 
     <ImageButton
-        android:id="@+id/bt_detalhesmarcacaovalidar_not"
+        android:id="@+id/bt_responsavel_itemtipovalidar_not"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/text_itemtipovalidar_local"
-        android:layout_toLeftOf="@+id/bt_detalhesmarcacaovalidar_yes"
+        android:layout_alignBottom="@+id/text_responsavel_itemtipovalidar_local"
+        android:layout_toLeftOf="@+id/bt_responsavel_itemtipovalidar_yes"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/errado" />
 
     <ImageButton
-        android:id="@+id/bt_detalhesmarcacaovalidar_yes"
+        android:id="@+id/bt_responsavel_itemtipovalidar_yes"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/text_itemtipovalidar_local"
+        android:layout_alignBottom="@+id/text_responsavel_itemtipovalidar_local"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
         android:background="@null"

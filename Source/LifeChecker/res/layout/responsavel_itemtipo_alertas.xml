@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:id="@+id/text_responsavel_itemtipoalertas_paciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,21 +15,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_email"
+        android:id="@+id/text_responsavel_itemtipoalertas_alerta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_paciente"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoalertas_paciente"
+        android:layout_below="@+id/text_responsavel_itemtipoalertas_paciente"
         android:text="@string/alerta"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:id="@+id/text_responsavel_itemtipoalertas_rua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_email"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_email"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoalertas_alerta"
+        android:layout_below="@+id/text_responsavel_itemtipoalertas_alerta"
         android:text="@string/rua"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
@@ -38,8 +38,8 @@
         android:id="@+id/text_responsavel_itemtipoalertas_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoalertas_rua"
+        android:layout_below="@+id/text_responsavel_itemtipoalertas_rua"
         android:text="@string/data"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />

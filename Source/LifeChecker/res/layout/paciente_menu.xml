@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/text_paciente_menu_proximasconsultas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/proximasConsultas"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ListView
+        android:id="@+id/list_paciente_menu_proximasconsultas"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/bt_paciente_menu_agendarmarcacao"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_paciente_menu_proximasconsultas"
+        android:layout_marginTop="10dp" 
+        android:layout_marginBottom="10dp">
+
+    </ListView>
+
+    <ImageButton
+        android:id="@+id/bt_paciente_menu_agendarmarcacao"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_above="@+id/text_paciente_menu_agendarmarcacao"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="5dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/addmarca" />
+
+    <TextView
+        android:id="@+id/text_paciente_menu_agendarmarcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bt_paciente_menu_agendarmarcacao"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/agendarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_paciente_menu_consultarmarcacoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_paciente_menu_agendarmarcacao"
+        android:layout_alignLeft="@+id/bt_paciente_menu_consultar"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/consultarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_paciente_menu_consultar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/bt_paciente_menu_agendarmarcacao"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/consultar" />
+
+</RelativeLayout>

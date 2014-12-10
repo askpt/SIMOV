@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_periodicidade"
+        android:id="@+id/text_configuracao_respalertas_alertas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -19,12 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_periodicidade"
+        android:layout_below="@+id/text_configuracao_respalertas_alertas"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
     <CheckBox
-        android:id="@+id/cb_mail_responsavel"
+        android:id="@+id/cb_configuracao_respalertas_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
@@ -33,10 +33,10 @@
         android:text="@string/enviarMail" />
 
     <CheckBox
-        android:id="@+id/cb_sms_responsavel"
+        android:id="@+id/cb_configuracao_respalertas_sms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cb_mail_responsavel"
+        android:layout_below="@+id/cb_configuracao_respalertas_mail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="@string/enviarSMS" />

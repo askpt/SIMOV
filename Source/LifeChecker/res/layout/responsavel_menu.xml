@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_hoje"
+        android:id="@+id/text_responsavel_menu_hoje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,21 +15,21 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/bt_resp_adicionarMarcacao"
+        android:id="@+id/bt_responsavel_menu_agendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_hoje"
-        android:layout_below="@+id/text_hoje"
+        android:layout_alignLeft="@+id/text_responsavel_menu_hoje"
+        android:layout_below="@+id/text_responsavel_menu_hoje"
         android:layout_marginTop="250dp"
         android:background="@null"
         android:src="@drawable/addmarca" />
 
     <TextView
-        android:id="@+id/text_resp_adicionarMarcacao"
+        android:id="@+id/text_responsavel_menu_agendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_resp_adicionarMarcacao"
-        android:layout_below="@+id/bt_resp_adicionarMarcacao"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_agendar"
+        android:layout_below="@+id/bt_responsavel_menu_agendar"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:maxLines="2"
@@ -37,65 +37,65 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/bt_resp_consultar"
+        android:id="@+id/bt_responsavel_menu_consultar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/bt_resp_adicionarMarcacao"
+        android:layout_alignTop="@+id/bt_responsavel_menu_agendar"
         android:layout_centerHorizontal="true"
         android:src="@drawable/consultar"
         android:background="@null"/>
 
     <TextView
-        android:id="@+id/text_resp_consultar"
+        android:id="@+id/text_responsavel_menu_consultar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_resp_adicionarMarcacao"
-        android:layout_alignBottom="@+id/text_resp_adicionarMarcacao"
-        android:layout_alignLeft="@+id/bt_resp_consultar"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_agendar"
+        android:layout_alignBottom="@+id/text_responsavel_menu_agendar"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_consultar"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/consultarMarcacao"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/bt_resp_validar"
+        android:id="@+id/bt_responsavel_menu_validar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/text_resp_adicionarMarcacao"
+        android:layout_above="@+id/text_responsavel_menu_agendar"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
         android:background="@null"
         android:src="@drawable/validar_ico" />
 
     <TextView
-        android:id="@+id/text_resp_validar"
+        android:id="@+id/text_responsavel_menu_validar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_resp_consultar"
-        android:layout_alignBottom="@+id/text_resp_consultar"
-        android:layout_alignLeft="@+id/bt_resp_validar"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_consultar"
+        android:layout_alignBottom="@+id/text_responsavel_menu_consultar"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_validar"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/validarMarcacao"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/bt_resp_local"
+        android:id="@+id/bt_responsavel_menu_localizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_resp_adicionarMarcacao"
-        android:layout_below="@+id/text_resp_adicionarMarcacao"
+        android:layout_alignLeft="@+id/text_responsavel_menu_agendar"
+        android:layout_below="@+id/text_responsavel_menu_agendar"
         android:layout_marginTop="15dp"
         android:background="@null"
         android:src="@drawable/localiza" />
 
     <TextView
-        android:id="@+id/text_resp_local"
+        android:id="@+id/text_responsavel_menu_localizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/bt_resp_local"
-        android:layout_alignRight="@+id/text_resp_adicionarMarcacao"
-        android:layout_below="@+id/bt_resp_local"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_localizar"
+        android:layout_alignRight="@+id/text_responsavel_menu_agendar"
+        android:layout_below="@+id/bt_responsavel_menu_localizar"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:maxLines="2"
@@ -103,56 +103,56 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/bt_resp_alertas"
+        android:id="@+id/bt_responsavel_menu_alertas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_resp_consultar"
-        android:layout_alignTop="@+id/bt_resp_local"
+        android:layout_alignLeft="@+id/text_responsavel_menu_consultar"
+        android:layout_alignTop="@+id/bt_responsavel_menu_localizar"
         android:background="@null"
         android:src="@drawable/alerta" />
 
     <TextView
-        android:id="@+id/text_resp_alertas"
+        android:id="@+id/text_responsavel_menu_alertas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_resp_local"
-        android:layout_alignBottom="@+id/text_resp_local"
-        android:layout_alignLeft="@+id/bt_resp_alertas"
-        android:layout_alignRight="@+id/bt_resp_alertas"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_localizar"
+        android:layout_alignBottom="@+id/text_responsavel_menu_localizar"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_alertas"
+        android:layout_alignRight="@+id/bt_responsavel_menu_alertas"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/alertas"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
-        android:id="@+id/bt_resp_pacientes"
+        android:id="@+id/bt_responsavel_menu_pacientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_resp_validar"
-        android:layout_alignTop="@+id/bt_resp_alertas"
+        android:layout_alignLeft="@+id/text_responsavel_menu_validar"
+        android:layout_alignTop="@+id/bt_responsavel_menu_alertas"
         android:background="@null"
         android:src="@drawable/pacientes" />
 
     <TextView
-        android:id="@+id/text_resp_pacientes"
+        android:id="@+id/text_responsavel_menu_pacientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_resp_alertas"
-        android:layout_alignBottom="@+id/text_resp_alertas"
-        android:layout_alignLeft="@+id/bt_resp_pacientes"
-        android:layout_alignRight="@+id/bt_resp_pacientes"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_alertas"
+        android:layout_alignBottom="@+id/text_responsavel_menu_alertas"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_pacientes"
+        android:layout_alignRight="@+id/bt_responsavel_menu_pacientes"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/pacientes"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
-        android:id="@+id/listview_resp_hoje"
+        android:id="@+id/listview_responsavel_menu_listahoje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bt_resp_consultar"
+        android:layout_above="@+id/bt_responsavel_menu_consultar"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/text_hoje" 
+        android:layout_below="@+id/text_responsavel_menu_hoje" 
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" >
 

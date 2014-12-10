@@ -35,7 +35,7 @@
         android:textColor="@color/cinzento" />
 
     <ImageButton
-        android:id="@+id/bt_detalhesmarcacaovalidar_not"
+        android:id="@+id/bt_responsavel_itemtipopacientes_delete"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"

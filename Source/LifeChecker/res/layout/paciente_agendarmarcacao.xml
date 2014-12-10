@@ -9,31 +9,32 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <Spinner
-            android:id="@+id/spinner_responsavel_addmarcacao_pacientes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            tools:listitem="@android:layout/simple_spinner_dropdown_item" />
-
         <EditText
-            android:id="@+id/tb_responsavel_addmarcacao_marcacao"
+            android:id="@+id/tb_paciente_agendarmarcacao_paciente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/spinner_responsavel_addmarcacao_pacientes"
+			android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:enabled="false"
+            android:text="@string/paciente" />
+                
+        <EditText
+            android:id="@+id/tb_paciente_agendarmarcacao_marcacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tb_paciente_agendarmarcacao_paciente"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/marcacao" />
 
         <EditText
-            android:id="@+id/tb_responsavel_addmarcacao_hora"
+            android:id="@+id/tb_paciente_agendarmarcacao_hora"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tb_responsavel_addmarcacao_marcacao"
-            android:layout_below="@+id/tb_responsavel_addmarcacao_marcacao"
+            android:layout_alignLeft="@+id/tb_paciente_agendarmarcacao_marcacao"
+            android:layout_below="@+id/tb_paciente_agendarmarcacao_marcacao"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/hora"
@@ -43,11 +44,11 @@
         </EditText>
 
         <EditText
-            android:id="@+id/tb_responsavel_addmarcacao_data"
+            android:id="@+id/tb_paciente_agendarmarcacao_data"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/tb_responsavel_addmarcacao_marcacao"
-            android:layout_below="@+id/tb_responsavel_addmarcacao_marcacao"
+            android:layout_alignRight="@+id/tb_paciente_agendarmarcacao_marcacao"
+            android:layout_below="@+id/tb_paciente_agendarmarcacao_marcacao"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/data"
@@ -55,24 +56,26 @@
         </EditText>
         
         <EditText
-            android:id="@+id/tb_responsavel_addmarcacao_local"
+            android:id="@+id/tb_paciente_agendarmarcacao_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_responsavel_addmarcacao_hora"
-            android:layout_alignLeft="@+id/tb_responsavel_addmarcacao_hora"
+            android:layout_below="@+id/tb_paciente_agendarmarcacao_hora"
+            android:layout_alignLeft="@+id/tb_paciente_agendarmarcacao_hora"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/local" />
 
         <Button
-            android:id="@+id/bt_responsavel_addmarcacao_agendar"
+            android:id="@+id/bt_paciente_agendarmarcacao_agendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_responsavel_addmarcacao_local"
+            android:layout_below="@+id/tb_paciente_agendarmarcacao_local"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="@string/agendar" />
+
+
 
     </RelativeLayout>
 

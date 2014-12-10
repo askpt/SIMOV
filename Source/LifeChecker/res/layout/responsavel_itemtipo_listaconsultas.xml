@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:id="@+id/text_responsavel_itemtipoconsultas_paciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,53 +15,53 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_email"
+        android:id="@+id/text_responsavel_itemtipoconsultas_marcacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_paciente"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoconsultas_paciente"
+        android:layout_below="@+id/text_responsavel_itemtipoconsultas_paciente"
         android:text="@string/marcacao"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:id="@+id/text_responsavel_itemtipoconsultas_hora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_email"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_email"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoconsultas_marcacao"
+        android:layout_below="@+id/text_responsavel_itemtipoconsultas_marcacao"
         android:text="@string/hora"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_itemtipolocalizacao_cidade"
+        android:id="@+id/text_responsavel_itemtipoconsultas_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_alignBottom="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_toRightOf="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:layout_alignBaseline="@+id/text_responsavel_itemtipoconsultas_hora"
+        android:layout_alignBottom="@+id/text_responsavel_itemtipoconsultas_hora"
+        android:layout_toRightOf="@+id/text_responsavel_itemtipoconsultas_hora"
         android:layout_marginLeft="5dp"
         android:text="@string/data"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipoalertas_data"
+        android:id="@+id/text_responsavel_itemtipoconsultas_local"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_telefone"
-        android:layout_below="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoconsultas_hora"
+        android:layout_below="@+id/text_responsavel_itemtipoconsultas_hora"
         android:text="@string/local"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
 
     <TextView
-        android:id="@+id/text_responsavel_itemtipoalertas_hora"
+        android:id="@+id/text_responsavel_itemtipoconsultas_informacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_itemtipoalertas_data"
-        android:layout_below="@+id/text_responsavel_itemtipoalertas_data"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipoconsultas_local"
+        android:layout_below="@+id/text_responsavel_itemtipoconsultas_local"
         android:text="@string/informacao"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/cinzento" />
