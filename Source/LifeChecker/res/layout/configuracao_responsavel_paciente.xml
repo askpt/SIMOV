@@ -31,12 +31,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageView1_paciente_resp" >
+        android:layout_below="@+id/imageView1_paciente_resp" />
 
-        <RelativeLayout
-            android:id="@+id/relativLayoutConteudo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
 
     <EditText
         android:id="@+id/tb_configuracao_resppaciente_apelido"
