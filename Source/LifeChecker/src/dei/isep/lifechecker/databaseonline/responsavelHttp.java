@@ -73,6 +73,13 @@ public class responsavelHttp {
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		executarTask(url, postParameters, interfaceListener);
 	}
+	
+	public void enviarMailRecuperacao(String mail, interfaceResultadoAsyncPost interfaceListener)
+	{
+		String url = "http://simovws.azurewebsites.net/api/Responsaveis/ResetPassword?email=" + mail;
+		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+		executarTask(url, postParameters, interfaceListener);
+	}
 
 	private void executarTask(String url, List<NameValuePair> postParameters,
 			interfaceResultadoAsyncPost interfaceListener) {

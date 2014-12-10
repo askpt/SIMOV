@@ -47,20 +47,23 @@
         android:layout_marginTop="20dp"
         android:text="@string/validar" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <TextView
+        android:id="@+id/text_configuracao_recuperacao_comentarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_configuracao_recuperacao_validar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Medium Text"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ProgressBar
+        android:id="@+id/loading_configuracao_recuperacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/flecha_dir" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/imageView2"
-        android:src="@drawable/flecha_esq" />
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

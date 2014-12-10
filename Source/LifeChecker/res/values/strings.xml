@@ -77,5 +77,7 @@
     <string name="est_inserir_responsavel">A inserir Responsével</string>
     <string name="est_verificar_mail_resp">A verificar mail Responsável</string>
     <string name="est_verificar_mail_paci">A verificar mail Paciente</string>
+    <string name="est_mail_enviado">Mail enviado com sucesso para: %1s</string>
+    <string name="est_mail_inexistente">Mail inexistente</string>
 
 </resources>

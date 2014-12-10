@@ -1,3 +1,7 @@
+
+
+
+
 package dei.isep.lifechecker;
 
 import dei.isep.lifechecker.database.alertaBDD;

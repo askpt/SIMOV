@@ -93,8 +93,8 @@
         android:id="@+id/loading_configuracao_resppaciente_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_configuracao_resppaciente_informacao"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>
