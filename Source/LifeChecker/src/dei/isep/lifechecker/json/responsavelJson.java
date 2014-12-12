@@ -56,7 +56,4 @@ public class responsavelJson {
 		}
 		return resp;
 	}
-	
-	
-
 }

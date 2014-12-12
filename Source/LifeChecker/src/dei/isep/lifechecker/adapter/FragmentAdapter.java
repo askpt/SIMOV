@@ -2,6 +2,8 @@ package dei.isep.lifechecker.adapter;
 
 import java.util.List;
 
+import dei.isep.lifechecker.configuracaoPacSelecao;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,6 +21,7 @@ public class fragmentAdapter  extends FragmentPagerAdapter{
 
 	@Override
 	public Fragment getItem(int position) {
+		Fragment fragmento = null;
 		switch(position)
 		{
 		case 1:
@@ -30,6 +33,8 @@ public class fragmentAdapter  extends FragmentPagerAdapter{
 		case 3:
 			Log.i("FRAGMENT", "33333333333333333333333333333333");
 			break;
+		case 5:
+			fragmento = new configuracaoPacSelecao();
 		}
 		return this.fragments.get(position);
 	}

@@ -13,4 +13,6 @@ public class configuracaoPacSelecao extends Fragment{
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.configuracao_paciente_selecao,container, false);
 	}
+	
+	
 }

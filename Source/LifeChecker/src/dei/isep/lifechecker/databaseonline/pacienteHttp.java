@@ -18,7 +18,7 @@ public class pacienteHttp {
 		String url = "http://simovws.azurewebsites.net/api/Responsaveis/VerificarSeExisteEmail?email="
 				+ mail;
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-		executarTask(url, postParameters, interfaceListener);
+		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 	
 	public void addPaciente(paciente paciente, 
@@ -39,15 +39,30 @@ public class pacienteHttp {
 		postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtual));
 		
 
-		executarTask(url, postParameters, interfaceListener);
+		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 	
-	private void executarTask(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
+	public void retornarPacientesIdResposnavel(int id, interfaceResultadoAsyncPost interfaceListener)
+	{
+		String url = "http://simovws.azurewebsites.net/api/Pacientes/GetPacientes/" + id;
+		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+		executarTaskGet(url, postParameters, interfaceListener);
+	}
+	
+	private void executarTaskPOST(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
 	{
 		httpPost httpP;
 		httpP = new httpPost(url, postParameters);
 		httpP.setOnResultListener(interfaceListener);
 		httpP.execute();
+	}
+	
+	private void executarTaskGet(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
+	{
+		httpGet httpG;
+		httpG = new httpGet(url,postParameters);
+		httpG.setOnResultListener(interfaceListener);
+		httpG.execute();
 	}
 
 }

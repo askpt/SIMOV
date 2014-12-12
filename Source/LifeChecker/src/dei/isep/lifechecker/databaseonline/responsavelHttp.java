@@ -4,12 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 import dei.isep.lifechecker.model.responsavel;
@@ -52,18 +49,17 @@ public class responsavelHttp {
 				.getPassResponsavel()));
 		postParameters.add(new BasicNameValuePair("HoraSincronizacao",
 				dataAtual));
-		executarTask(url, postParameters, interfaceListener);
+		executarTaskPOST(url, postParameters, interfaceListener);
 
 	}
 
 	public void getIdResposnavel(String mail, String pass, interfaceResultadoAsyncPost interfaceListener) {
-		int id = -1;
-		String conteudo = "";
+
 		String url = "http://simovws.azurewebsites.net/api/Responsaveis/Login?email="
 				+ mail + "&pass=" + pass;
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 
-		executarTask(url, postParameters, interfaceListener);
+		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 
 	public void verificarMail(String mail,
@@ -71,21 +67,30 @@ public class responsavelHttp {
 		String url = "http://simovws.azurewebsites.net/api/Responsaveis/VerificarSeExisteEmail?email="
 				+ mail;
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-		executarTask(url, postParameters, interfaceListener);
+		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 	
 	public void enviarMailRecuperacao(String mail, interfaceResultadoAsyncPost interfaceListener)
 	{
 		String url = "http://simovws.azurewebsites.net/api/Responsaveis/ResetPassword?email=" + mail;
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-		executarTask(url, postParameters, interfaceListener);
+		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 
-	private void executarTask(String url, List<NameValuePair> postParameters,
+	
+	public void loginVerificar(String mail, String pass, interfaceResultadoAsyncPost interfaceListener)
+	{
+		String url = "http://simovws.azurewebsites.net/api/Responsaveis/Login?email=" + mail +"&pass=" + pass;
+		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+		executarTaskPOST(url, postParameters, interfaceListener);
+	}
+	
+	private void executarTaskPOST(String url, List<NameValuePair> postParameters,
 			interfaceResultadoAsyncPost interfaceListener) {
 		httpPost httpP;
 		httpP = new httpPost(url, postParameters);
 		httpP.setOnResultListener(interfaceListener);
 		httpP.execute();
 	}
+
 }

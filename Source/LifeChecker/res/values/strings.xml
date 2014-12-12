@@ -79,5 +79,9 @@
     <string name="est_verificar_mail_paci">A verificar mail Paciente</string>
     <string name="est_mail_enviado">Mail enviado com sucesso para: %1s</string>
     <string name="est_mail_inexistente">Mail inexistente</string>
-
+    <string name="est_verificar_dados_login">Verificação dos dados</string>
+    <string name="est_recuperacao_pacientes">Recuperação dos pacientes</string>
+    
+    <!-- Erros -->
+	<string name="err_login_errado">Dados login errados</string>
 </resources>

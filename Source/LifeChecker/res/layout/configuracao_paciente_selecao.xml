@@ -23,12 +23,22 @@
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
 
+    <Button
+        android:id="@+id/bt_configuracao_selecaopaciente_novo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="@string/novo" />
+
     <ListView
         android:id="@+id/list_configuracao_selecaopaciente_pacientes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_centerHorizontal="true" >
+        android:layout_above="@+id/bt_configuracao_selecaopaciente_novo"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1" >
 
     </ListView>
 

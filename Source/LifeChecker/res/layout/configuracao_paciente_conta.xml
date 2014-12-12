@@ -58,4 +58,21 @@
         android:layout_marginTop="20dp"
         android:text="@string/validar" />
 
+    <ProgressBar
+        android:id="@+id/loading_configuracao_paciente_conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/text_configuracao_paciente_informacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_configuracao_contapaciente_validar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/est_informacao" />
+
 </RelativeLayout>
