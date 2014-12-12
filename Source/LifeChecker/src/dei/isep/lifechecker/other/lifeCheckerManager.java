@@ -1,6 +1,10 @@
 package dei.isep.lifechecker.other;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.util.Log;
+import dei.isep.lifechecker.model.*;
 
 public class lifeCheckerManager {
 	private static lifeCheckerManager _instance;
@@ -27,6 +31,9 @@ public class lifeCheckerManager {
 	private String mailPacienteResposnavel;
 	private String contactoPacienteResposnavel;
 	
+	//Pacientes
+	private ArrayList<paciente> listaPaciente;
+
 	public synchronized static lifeCheckerManager getInstance()
 	{
 		if(_instance == null)
@@ -155,6 +162,14 @@ public class lifeCheckerManager {
 
 	public void setPassConfirmResponsavel(String passConfirmResponsavel) {
 		this.passConfirmResponsavel = passConfirmResponsavel;
+	}
+	
+	public ArrayList<paciente> getListaPaciente() {
+		return listaPaciente;
+	}
+
+	public void setListaPaciente(ArrayList<paciente> listaPaciente) {
+		this.listaPaciente = listaPaciente;
 	}
 	
 	

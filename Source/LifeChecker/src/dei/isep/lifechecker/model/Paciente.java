@@ -1,5 +1,8 @@
 package dei.isep.lifechecker.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class paciente {
 	
 	int idPaciente;
@@ -215,7 +218,6 @@ public class paciente {
 	public void setDataSincroPaciente(String dataSincroPaciente) {
 		this.dataSincroPaciente = dataSincroPaciente;
 	}
-	
 	
 	
 	

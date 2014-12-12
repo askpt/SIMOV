@@ -9,12 +9,14 @@ import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.json.responsavelJson;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
+import dei.isep.lifechecker.other.lifeCheckerManager;
 import dei.isep.lifechecker.other.validarDados;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,7 +51,6 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 		txtInformacao = (TextView) myView
 				.findViewById(R.id.text_configuracao_paciente_informacao);
 
-		txtInformacao.setVisibility(View.INVISIBLE);
 		btValidar.setOnClickListener(this);
 		pbLoading.setVisibility(View.INVISIBLE);
 		txtInformacao.setVisibility(View.INVISIBLE);
@@ -120,14 +121,15 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 			getActivity().runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					List<paciente> listaPacientes = new ArrayList<paciente>();
+					ArrayList<paciente> listaPacientes = new ArrayList<paciente>();
 					if(codigo == 1 && conteudo.length() > 10)
 					{
 						pacienteJson paciJson = new pacienteJson(conteudo);
 						listaPacientes = paciJson.transformJsonPaciente();
-						txtInformacao.setText(String.valueOf(listaPacientes.size()));
+						int idResp = listaPacientes.get(0).getIdResponsavelPaciente();
+						lifeCheckerManager.getInstance().setIdResponsavel(idResp);
 						//Chama nova activity para selecionar paciente
-						trocarFragment();
+						trocarFragment(listaPacientes);
 						
 					}
 					else
@@ -142,22 +144,16 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 		}
 	};
 	
-	public void trocarFragment()
+	public void trocarFragment(ArrayList<paciente> listPacientes)
 	{
+		lifeCheckerManager.getInstance().setListaPaciente(listPacientes);
+		configuracaoPacSelecao fragment2 = new configuracaoPacSelecao();
 		FragmentManager fragmentManager = getFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		configuracaoPacSelecao fragment2 = new configuracaoPacSelecao();
 		fragmentTransaction.addToBackStack("abc");
 		fragmentTransaction.hide(configuracaoPacConta.this);
 		fragmentTransaction.add(android.R.id.content, fragment2);
 		fragmentTransaction.commit();
-		
-		/*
-		Fragment configSelecpac = new configuracaoPacSelecao();
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
-		ft.replace(R.id.configuracao_fragmento, configSelecpac);
-		ft.addToBackStack(null);
-		ft.commit();*/
 		
 	}
 

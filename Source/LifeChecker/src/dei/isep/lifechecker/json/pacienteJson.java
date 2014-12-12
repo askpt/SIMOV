@@ -41,9 +41,9 @@ public class pacienteJson {
 	
 	private JSONObject jsonObj;
 	
-	public List<paciente> transformJsonPaciente()
+	public ArrayList<paciente> transformJsonPaciente()
 	{
-		List<paciente> listaPacientes = new ArrayList<paciente>();
+		ArrayList<paciente> listaPacientes = new ArrayList<paciente>();
 		try {
 			JSONArray jsonArray = new JSONArray(conteudo);
 			for(int i = 0; i < jsonArray.length(); i++)

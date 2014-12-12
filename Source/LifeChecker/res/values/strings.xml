@@ -34,7 +34,7 @@
     <string name="alerta">Alerta</string>
     <string name="novo">Novo</string>
     <string name="proximasConsultas">Próximas Consultas</string>
-	
+
     <!-- Configuração -->
     <string name="verificar_mail_verificando">A verificar o mail</string>
     <string name="verificar_mail_disponivel">Mail disponivel</string>
@@ -70,7 +70,8 @@
     <!-- Estado butões -->
     <string name="esperar">Aguarde&#8230;</string>
     <string name="validar">Validar</string>
-    
+    <string name="cancelar">Cancelar</string>
+
     <!-- Estado txtView -->
     <string name="est_informacao">Estado</string>
     <string name="est_inserir_paciente">A inserir Paciente</string>
@@ -81,7 +82,11 @@
     <string name="est_mail_inexistente">Mail inexistente</string>
     <string name="est_verificar_dados_login">Verificação dos dados</string>
     <string name="est_recuperacao_pacientes">Recuperação dos pacientes</string>
-    
+
     <!-- Erros -->
-	<string name="err_login_errado">Dados login errados</string>
+    <string name="err_login_errado">Dados login errados</string>
+
+    <!-- Titulos DialogsBoxs -->
+    <string name="novo_paciente">Novo Paciente</string>
+
 </resources>
