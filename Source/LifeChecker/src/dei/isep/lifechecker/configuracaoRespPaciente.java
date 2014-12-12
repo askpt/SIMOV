@@ -335,6 +335,9 @@ public class configuracaoRespPaciente extends Fragment implements
 				@Override
 				public void run() {
 					if (codigo == 1) {
+						/*
+						 * Lançar Activity menu responsavél
+						 */
 						btnValidarResponsavel.setText(R.string.validar);
 						btnValidarResponsavel.setEnabled(true);
 

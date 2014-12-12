@@ -1,7 +1,6 @@
 package dei.isep.lifechecker;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
@@ -16,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
