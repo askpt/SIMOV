@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_marcacao"
+        android:layout_below="@+id/text_paciente_proximasconsultas_marcacao"
+        android:text="@string/hora"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_hora"
+        android:layout_below="@+id/text_paciente_proximasconsultas_hora"
+        android:text="@string/local"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_local"
+        android:layout_below="@+id/text_paciente_proximasconsultas_local"
+        android:text="@string/data"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_marcacao_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_paciente_proximasconsultas_hora"
+        android:layout_toRightOf="@+id/text_paciente_proximasconsultas_marcacao"
+        android:layout_marginLeft="10dp"
+        android:text="@string/marcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_local_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_paciente_proximasconsultas_data"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_hora_value"
+        android:text="@string/local"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_data_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_paciente_proximasconsultas_data"
+        android:layout_alignBottom="@+id/text_paciente_proximasconsultas_data"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_local_value"
+        android:text="@string/data"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_hora_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_marcacao_value"
+        android:layout_below="@+id/text_paciente_proximasconsultas_marcacao_value"
+        android:text="@string/hora"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_marcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/marcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

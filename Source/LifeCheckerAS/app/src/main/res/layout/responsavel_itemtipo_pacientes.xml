@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/paciente"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipopacientes_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_below="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:text="@string/email"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipopacientes_telefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipopacientes_email"
+        android:layout_below="@+id/text_responsavel_itemtipopacientes_email"
+        android:text="@string/telefone"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/cinzento" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_itemtipopacientes_delete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/text_responsavel_itemtipopacientes_paciente"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/errado" />
+
+</RelativeLayout>

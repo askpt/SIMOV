@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_hoje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/hoje"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ListView
+        android:id="@+id/listview_responsavel_menu_listahoje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_responsavel_menu_validar"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_responsavel_menu_hoje"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" >
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_alertas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_pacientes"
+        android:layout_alignBottom="@+id/text_responsavel_menu_pacientes"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_alertas"
+        android:layout_alignRight="@+id/text_responsavel_menu_consultar"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/alertas"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_localizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_alertas"
+        android:layout_alignBottom="@+id/text_responsavel_menu_alertas"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_localizar"
+        android:layout_alignRight="@+id/bt_responsavel_menu_localizar"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/localizar"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_pacientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_pacientes"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/text_responsavel_menu_validar"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/pacientes"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_menu_alertas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_menu_consultar"
+        android:layout_alignTop="@+id/bt_responsavel_menu_pacientes"
+        android:background="@null"
+        android:src="@drawable/alerta" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_menu_localizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_menu_agendar"
+        android:layout_alignTop="@+id/bt_responsavel_menu_alertas"
+        android:background="@null"
+        android:src="@drawable/localiza" />
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_validar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_responsavel_menu_pacientes"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_validar"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/validarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_menu_validar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_responsavel_menu_validar"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:src="@drawable/validar_ico" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_menu_consultar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bt_responsavel_menu_validar"
+        android:layout_centerHorizontal="true"
+        android:background="@null"
+        android:src="@drawable/consultar" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_menu_agendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_menu_hoje"
+        android:layout_alignTop="@+id/bt_responsavel_menu_consultar"
+        android:background="@null"
+        android:src="@drawable/addmarca" />
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_consultar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_validar"
+        android:layout_alignBottom="@+id/text_responsavel_menu_validar"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_consultar"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/consultarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_responsavel_menu_agendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_responsavel_menu_consultar"
+        android:layout_alignBottom="@+id/text_responsavel_menu_consultar"
+        android:layout_alignLeft="@+id/bt_responsavel_menu_agendar"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/agendarMarcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_menu_pacientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_responsavel_menu_pacientes"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@null"
+        android:src="@drawable/pacientes" />
+
+</RelativeLayout>
