@@ -25,8 +25,7 @@ public class pacienteHttp {
 			interfaceResultadoAsyncPost interfaceListener)
 	{
 		Date dNow = new Date();
-		SimpleDateFormat dataFromatada = new SimpleDateFormat(
-				"yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String dataAtual = dataFromatada.format(dNow);
 		String url = "http://simovws.azurewebsites.net/api/Pacientes";
 

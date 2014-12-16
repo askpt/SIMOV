@@ -4,9 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class baseDeDadosInterna extends SQLiteOpenHelper{
 	
-	private static final int VERSION_BDD = 2;
+	private static final int VERSION_BDD = 1;
 	private static final String nomeDB = "lfDataBase.db";
 	
 	//Objetos para Tabelas
@@ -48,6 +51,23 @@ public class baseDeDadosInterna extends SQLiteOpenHelper{
 		
 		onCreate(db);
 	}
+
+    public String dataAtual()
+    {
+        //4", "13:13:13", "12-12-12");
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        Date dNow = new Date();
+        String dataAtualValor = ft.format(dNow);
+        return dataAtualValor;
+    }
+
+    public String horaAtual()
+    {
+        SimpleDateFormat ft = new SimpleDateFormat("HH:MM:ss");
+        Date dNow = new Date();
+        String horaAtualValor = ft.format(dNow);
+        return horaAtualValor;
+    }
 	
 
 }

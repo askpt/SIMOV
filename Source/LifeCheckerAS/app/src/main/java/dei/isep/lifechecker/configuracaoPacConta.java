@@ -75,8 +75,7 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 			responsavelHttp respHttp = new responsavelHttp();
 			respHttp.loginVerificar(mailContent, passContent, resultadoLogin);
 		} else {
-			txtInformacao.setTextColor(getResources()
-					.getColor(R.color.vermelho));
+			txtInformacao.setTextColor(getResources().getColor(R.color.vermelho));
 			txtInformacao.setText(R.string.verificar_mail_formato_errado);
 		}
 		// TODO Auto-generated method stub
@@ -97,11 +96,9 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 
 						// obtem o ID e vai buscar todos os seus pacientes
 						pacienteHttp paciHttp = new pacienteHttp();
-						paciHttp.retornarPacientesIdResposnavel(
-								resp.getIdResponsavel(), pacientesResponsavel);
+						paciHttp.retornarPacientesIdResposnavel(resp.getIdResponsavel(), pacientesResponsavel);
 					} else {
-						txtInformacao.setTextColor(getResources().getColor(
-								R.color.vermelho));
+						txtInformacao.setTextColor(getResources().getColor(R.color.vermelho));
 						txtInformacao.setText(R.string.err_login_errado);
 						pbLoading.setVisibility(View.INVISIBLE);
 						btValidar.setText(R.string.validar);

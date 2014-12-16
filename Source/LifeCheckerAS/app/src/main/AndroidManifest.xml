@@ -14,19 +14,20 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".configuracaoMenu"
-            android:label="@string/app_name" >
+            android:name=".lifeCheckerMain"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".configuracaoFragmentos" >
-        </activity>
         <activity
-            android:name=".lifeCheckerMain"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:name=".configuracaoMenu"
+            android:label="@string/app_name" >
+
+        </activity>
+        <activity android:name=".configuracaoFragmentos" >
         </activity>
         <activity
             android:name=".responsavelMenu"

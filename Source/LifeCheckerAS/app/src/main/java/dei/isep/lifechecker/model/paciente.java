@@ -51,7 +51,7 @@ public class paciente {
 	}
 	
 	/*
-	 * Ciração de um paciente sem ID dele
+	 * Ciraï¿½ï¿½o de um paciente sem ID dele
 	 */
 
 	public paciente(int idResponsavelPaciente, String nomePaciente,
@@ -77,7 +77,7 @@ public class paciente {
 	}
 	
 	/*
-	 * Criação de um paciente
+	 * Criaï¿½ï¿½o de um paciente
 	 */
 
 	public paciente(int idResponsavelPaciente,

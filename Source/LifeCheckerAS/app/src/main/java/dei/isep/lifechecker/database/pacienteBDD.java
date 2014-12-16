@@ -6,6 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class pacienteBDD {
 	
 	public static final String TABLE_PACIENTE = "paciente";
@@ -106,8 +109,8 @@ public class pacienteBDD {
 			value.put(COL_MAIL_PACI, paciente.getMailPaciente());
 			value.put(COL_CONTACTO_PACI, paciente.getContactoPaciente());
 			value.put(COL_ATIVO_PACI, paciente.getApelidoPaciente());
-			value.put(COL_HORA_SINCRO_RESP, paciente.getHoraSincroPaciente());
-			value.put(COL_DATA_SINCRO_RESP, paciente.getDataSincroPaciente());
+            value.put(COL_HORA_SINCRO_RESP, baseDeDados.horaAtual());
+            value.put(COL_DATA_SINCRO_RESP, baseDeDados.dataAtual());
 			valueResult =  bdd.insert(TABLE_PACIENTE, null, value);
 			close();
 		}
@@ -118,6 +121,35 @@ public class pacienteBDD {
 		return valueResult;
 		
 	}
+
+    public long inserirPacienteComId(paciente paciente)
+    {
+        long valueResult = 0;
+        responsavelBDD responsavel = new responsavelBDD(context);
+
+        if(responsavel.existeResponsavel(paciente.getIdResponsavelPaciente()) == true)
+        {
+            open();
+            ContentValues value = new ContentValues();
+            value.put(COL_ID_PACI, paciente.getIdPaciente());
+            value.put(COL_ID_RESP_PACI, paciente.getIdResponsavelPaciente());
+            value.put(COL_NOME_PACI, paciente.getNomePaciente());
+            value.put(COL_APELIDO_PACI, paciente.getApelidoPaciente());
+            value.put(COL_MAIL_PACI, paciente.getMailPaciente());
+            value.put(COL_CONTACTO_PACI, paciente.getContactoPaciente());
+            value.put(COL_ATIVO_PACI, paciente.getApelidoPaciente());
+            value.put(COL_HORA_SINCRO_RESP, baseDeDados.horaAtual());
+            value.put(COL_DATA_SINCRO_RESP, baseDeDados.dataAtual());
+            valueResult =  bdd.insert(TABLE_PACIENTE, null, value);
+            close();
+        }
+        else
+        {
+            valueResult =  -1;
+        }
+        return valueResult;
+
+    }
 	
 	public boolean existePaciente(int id)
 	{
@@ -133,6 +165,55 @@ public class pacienteBDD {
 			return false;
 		}
 	}
+
+    public ArrayList<paciente> listaPacientes(int id)
+    {
+        ArrayList<paciente> list = new ArrayList<paciente>();
+        int idPaciente;
+        int idResponsavelPaciente;
+        String nomePaciente;
+        String apelidoPaciente;
+        String mailPaciente;
+        String contactoPaciente;
+        double latitudePaciente;
+        double longitudePaciente;
+        String nomeLocalPaciente;
+        String horaLocalPaciente;
+        String dataLocalPaciente;
+
+        boolean ativoPaciente;
+        String actPaci;
+
+        String horaSincroPaciente;
+        String dataSincroPaciente;
+
+        String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE;// + " where " + COL_ID_RESP_PACI + " = " + id;
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery, null);
+        if(cursor.moveToFirst())
+        {
+            idPaciente = cursor.getInt(cursor.getColumnIndex(COL_ID_PACI));
+            idResponsavelPaciente = cursor.getInt(cursor.getColumnIndex(COL_ID_RESP_PACI));
+            nomePaciente = cursor.getString(cursor.getColumnIndex(COL_NOME_PACI));
+            apelidoPaciente = cursor.getString(cursor.getColumnIndex(COL_APELIDO_PACI));
+            mailPaciente = cursor.getString(cursor.getColumnIndex(COL_MAIL_PACI));
+            contactoPaciente = cursor.getString(cursor.getColumnIndex(COL_CONTACTO_PACI));
+            latitudePaciente = cursor.getDouble(cursor.getColumnIndex(COL_LAT_PACI));
+            longitudePaciente = cursor.getDouble(cursor.getColumnIndex(COL_LAT_PACI));
+            nomeLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_NOME_LOCAL_PACI));
+            horaLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_HORA_LOCAL_PACI));
+            dataLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_DATA_LOCAL_PACI));
+
+            actPaci = cursor.getString(cursor.getColumnIndex(COL_ATIVO_PACI));
+
+            horaLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP));
+            dataLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP));
+            //paciente paci = new paciente(idPaciente,nomePaciente,apelidoPaciente);
+            //list.add(paci);
+        }
+        close();
+        return list;
+    }
 	
 	public int getNumPacientes()
 	{

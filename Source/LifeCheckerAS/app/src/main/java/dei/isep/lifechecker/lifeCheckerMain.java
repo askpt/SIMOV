@@ -7,6 +7,7 @@ import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.model.alerta;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
+import dei.isep.lifechecker.other.preferenciasAplicacao;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ public class lifeCheckerMain extends Activity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
-		
+		/*
 		responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
 		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", "13:13:13", "12-12-12");
 		
@@ -33,7 +34,7 @@ public class lifeCheckerMain extends Activity {
 
 		paciBDD.inserirPaciente(paciente);
 		paciBDD.inserirPaciente(paciente);
-		paciente pacienteB = new paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, "13:13:13", "12-12-12");
+		paciente pacienteB = new paciente(2654, "Maria", "Leitï¿½o", "andr@hotmail.com", "912542525", true, "13:13:13", "12-12-12");
 		paciBDD.inserirPaciente(pacienteB);
 		
 		alertaBDD alerBDD = new alertaBDD(getApplicationContext());
@@ -43,32 +44,31 @@ public class lifeCheckerMain extends Activity {
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
 		alerBDD.inserirAlerta(alerta);
-		alerBDD.inserirAlerta(alerta);
+		alerBDD.inserirAlerta(alerta);*/
 		
 		
 		Intent novaActivity = null;
-		pacienteBDD pacienteBDD = new pacienteBDD(getApplicationContext());
-		responsavelBDD responsavelBDD = new responsavelBDD(getApplicationContext());
-		
-		
-		int quantidadePacientes = pacienteBDD.getNumPacientes();
-		int quantidadeResponsavel = responsavelBDD.getNumResponsavel();
-		
-		if(quantidadeResponsavel > 1)
-		{
-			//Configurado para um Resposnavel
-			novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
-		}
-		else if(quantidadeResponsavel == 0 && quantidadePacientes == 1)
-		{
-			//Configurado para um paciente
-			novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
-		}
-		else
-		{
-			//menu configuraçao
-			novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
-		}
+		/*pacienteBDD pacienteBDD = new pacienteBDD(getApplicationContext());
+		responsavelBDD responsavelBDD = new responsavelBDD(getApplicationContext());*/
+
+        preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
+        int configuracao = prefApp.getTipoUser();
+
+        //0 = configuraÃ§Ã£o
+        //1 = vista resposnavel;
+        //2 = vista paciente
+        switch (configuracao)
+        {
+            case 0:
+                novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
+                break;
+            case 1:
+                novaActivity = new Intent(lifeCheckerMain.this, responsavelMenu.class);
+                break;
+            case 2:
+                novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
+                break;
+        }
 		
 		startActivity(novaActivity);
 

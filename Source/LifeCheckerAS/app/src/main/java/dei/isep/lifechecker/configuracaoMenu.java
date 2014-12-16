@@ -31,13 +31,13 @@ public class configuracaoMenu extends Activity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.configuracao_menu);
-		
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setCustomView(R.layout.action_bar);
 		TextView textView = (TextView) actionBar.getCustomView().findViewById(R.id.actionBar_Titulo);
 		textView.setText(getResources().getString(R.string.configuracao));
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_HOME_AS_UP);
-		
+		/*
 		responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
 		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", "10:10:10", "12-12-12");
 		
@@ -50,7 +50,7 @@ public class configuracaoMenu extends Activity {
 
 		paciBDD.inserirPaciente(paciente);
 		paciBDD.inserirPaciente(paciente);
-		paciente pacienteB = new paciente(2654, "Maria", "Leitão", "andr@hotmail.com", "912542525", true, "12:12:12", "15-10-14");
+		paciente pacienteB = new paciente(2654, "Maria", "Leitï¿½o", "andr@hotmail.com", "912542525", true, "12:12:12", "15-10-14");
 		paciBDD.inserirPaciente(pacienteB);
 		
 		alertaBDD alerBDD = new alertaBDD(getApplicationContext());
@@ -83,7 +83,7 @@ public class configuracaoMenu extends Activity {
 		estMarcaBDD.inserirEstadoMarcacao(estmarca);
 		estMarcaBDD.inserirEstadoMarcacao(estmarca);
 		estMarcaBDD.inserirEstadoMarcacao(estmarca);
-		
+		*/
 		findViewById(R.id.bt_configuracao_menu_responsavel).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_configuracao_menu_paciente).setOnClickListener(btnCarregado);
 		findViewById(R.id.bt_configuracao_menu_recuperacao).setOnClickListener(btnCarregado);

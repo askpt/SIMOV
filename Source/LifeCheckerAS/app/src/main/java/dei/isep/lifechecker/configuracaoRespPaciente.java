@@ -3,13 +3,19 @@ package dei.isep.lifechecker;
 import dei.isep.lifechecker.databaseonline.httpPost;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
+import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.json.responsavelJson;
 import dei.isep.lifechecker.model.*;
 import dei.isep.lifechecker.other.genericTextWatcherConfiguracao;
 import dei.isep.lifechecker.other.lifeCheckerManager;
+import dei.isep.lifechecker.other.preferenciasAplicacao;
 import dei.isep.lifechecker.other.validarDados;
+import dei.isep.lifechecker.database.*;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +24,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class configuracaoRespPaciente extends Fragment implements
 		OnClickListener {
@@ -327,6 +335,42 @@ public class configuracaoRespPaciente extends Fragment implements
 				resp.getPassResponsavel(), getIdRespListener);
 	}
 
+
+    interfaceResultadoAsyncPost htPostResultMailResp = new interfaceResultadoAsyncPost() {
+
+        @Override
+        public void obterResultado(int codigo, final String conteudo) {
+            getActivity().runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    String resultado = conteudo.replaceAll("[\r\n]+", "");
+                    boolean resultadobool = Boolean.valueOf(resultado);
+                    if (resultadobool == true) {
+                        listaErros += getResources().getString(
+                                R.string.responsavel)
+                                + ": "
+                                + getResources().getString(
+                                R.string.verificar_mail_indisponivel)
+                                + "\n";
+                        mailExiste = true;
+                    } else {
+
+                        if (validMailPaciente == 0) {
+                            validarmailOnlinePaciente();
+                        }
+                    }
+                    tvComentarios.setText(listaErros);
+                    pbConfiguracao.setVisibility(View.INVISIBLE);
+                    btnValidarResponsavel.setText(R.string.validar);
+                    btnValidarResponsavel.setEnabled(true);
+
+                }
+            });
+
+        }
+    };
+
 	interfaceResultadoAsyncPost addPacienteListener = new interfaceResultadoAsyncPost() {
 
 		@Override
@@ -335,10 +379,22 @@ public class configuracaoRespPaciente extends Fragment implements
 				@Override
 				public void run() {
 					if (codigo == 1) {
+                        preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
+                        prefApp.setTipoUser(1);
+                        /*
+                        ****************************************
+                         */
+
+                        pacienteHttp paciHttp = new pacienteHttp();
+                        paciHttp.retornarPacientesIdResposnavel(rsponsavel.getIdResponsavel(), inserirDBInterna);
+                        /*
+
+                         */
+                        /*
 						btnValidarResponsavel.setText(R.string.validar);
 						btnValidarResponsavel.setEnabled(true);
 
-						tvComentarios.setText("Finiti");
+						tvComentarios.setText("finiti");*/
 					}
 
 				}
@@ -346,6 +402,40 @@ public class configuracaoRespPaciente extends Fragment implements
 
 		}
 	};
+
+    interfaceResultadoAsyncPost inserirDBInterna = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1 && conteudo.length() > 10)
+                    {
+                        ArrayList<paciente> listaPacientes;
+                        pacienteJson paciJson = new pacienteJson(conteudo);
+                        listaPacientes = paciJson.transformJsonPaciente();
+
+                        pacient.setIdResponsavelPaciente(rsponsavel.getIdResponsavel());
+                        pacient.setIdPaciente(listaPacientes.get(0).getIdPaciente());
+
+                        responsavelBDD respBDD = new responsavelBDD(getActivity().getApplicationContext());
+                        pacienteBDD paciBDD = new pacienteBDD(getActivity().getApplicationContext());
+
+                        respBDD.inserirResponsavelComId(rsponsavel);
+                        paciBDD.inserirPacienteComId(pacient);
+
+                        Log.i("Informção Responsavel (ID Do RESP", String.valueOf(rsponsavel.getIdResponsavel()));
+                        Log.i("Informação Paciente (ID Dele)", String.valueOf(pacient.getIdPaciente()));
+                        Log.i("Informação Paciente (ID ~responsavel Dele)", String.valueOf(pacient.getIdResponsavelPaciente()));
+
+                        Intent intent = new Intent(getActivity(), responsavelMenu.class);
+                        getActivity().startActivity(intent);
+                    }
+
+                }
+            });
+        }
+    };
 
 	interfaceResultadoAsyncPost getIdRespListener = new interfaceResultadoAsyncPost() {
 
@@ -356,10 +446,9 @@ public class configuracaoRespPaciente extends Fragment implements
 				@Override
 				public void run() {
 					if (codigo == 1) {
-						responsavel responsavel = new responsavel();
 						responsavelJson respJson = new responsavelJson(conteudo);
-						responsavel = respJson.transformJsonResponsavel();
-						inserirPaciente(responsavel.getIdResponsavel());
+						rsponsavel = respJson.transformJsonResponsavel();
+						inserirPaciente(rsponsavel.getIdResponsavel());
 
 					} else {
 						tvComentarios.setText(listaErros);
@@ -384,6 +473,8 @@ public class configuracaoRespPaciente extends Fragment implements
 					if (codigo == 1) {
 						obterIdResponsavel(rsponsavel);
 					} else {
+
+
 						tvComentarios.setText(listaErros);
 						btnValidarResponsavel.setText(R.string.validar);
 						btnValidarResponsavel.setEnabled(true);
@@ -427,39 +518,6 @@ public class configuracaoRespPaciente extends Fragment implements
 		}
 	};
 
-	interfaceResultadoAsyncPost htPostResultMailResp = new interfaceResultadoAsyncPost() {
 
-		@Override
-		public void obterResultado(int codigo, final String conteudo) {
-			getActivity().runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					String resultado = conteudo.replaceAll("[\r\n]+", "");
-					boolean resultadobool = Boolean.valueOf(resultado);
-					if (resultadobool == true) {
-						listaErros += getResources().getString(
-								R.string.responsavel)
-								+ ": "
-								+ getResources().getString(
-										R.string.verificar_mail_indisponivel)
-								+ "\n";
-						mailExiste = true;
-					} else {
-
-						if (validMailPaciente == 0) {
-							validarmailOnlinePaciente();
-						}
-					}
-					tvComentarios.setText(listaErros);
-					pbConfiguracao.setVisibility(View.INVISIBLE);
-					btnValidarResponsavel.setText(R.string.validar);
-					btnValidarResponsavel.setEnabled(true);
-
-				}
-			});
-
-		}
-	};
 
 }

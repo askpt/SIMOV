@@ -6,6 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class responsavelBDD {
 	public static final String TABLE_RESPONSAVEL = "responsavel";
 	
@@ -91,13 +94,36 @@ public class responsavelBDD {
 		values.put(COL_PERIODICIDADENOTURNA_RESP, resp.getPeriodicidadeNoturna());
 		values.put(COL_MAIL_RESP, resp.getMailResponsavel());
 		values.put(COL_PASS_RESP, resp.getPassResponsavel());
-		values.put(COL_HORA_SINCRO_RESP, resp.getHoraSincroResponsavel());
-		values.put(COL_DATA_SINCRO_RESP, resp.getDataSincroResponsavel());
+		values.put(COL_HORA_SINCRO_RESP, baseDeDados.horaAtual());
+		values.put(COL_DATA_SINCRO_RESP, baseDeDados.dataAtual());
 		valueResult = bdd.insert(TABLE_RESPONSAVEL, null, values);
 		close();
 		return valueResult;
 		
 	}
+
+    public long inserirResponsavelComId(responsavel resp)
+    {
+        long valueResult = 0;
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COL_ID_RESP, resp.getIdResponsavel());
+        values.put(COL_NOME_RESP, resp.getNomeResposnavel());
+        values.put(COL_APELIDO_RESP, resp.getApelidoResposnavel());
+        values.put(COL_CONTACTO_RESP, resp.getContactoResponsavel());
+        values.put(COL_NOTIFICACAOMAIL_RESP, resp.getNotificacaoMail());
+        values.put(COL_NOTIFICACAOSMS_RESP, resp.getNotificacaoSMS());
+        values.put(COL_PERIODICIDADEDIURNA_RESP, resp.getPeriodicidadeDiurna());
+        values.put(COL_PERIODICIDADENOTURNA_RESP, resp.getPeriodicidadeNoturna());
+        values.put(COL_MAIL_RESP, resp.getMailResponsavel());
+        values.put(COL_PASS_RESP, resp.getPassResponsavel());
+        values.put(COL_HORA_SINCRO_RESP, baseDeDados.horaAtual());
+        values.put(COL_DATA_SINCRO_RESP, baseDeDados.dataAtual());
+        valueResult = bdd.insert(TABLE_RESPONSAVEL, null, values);
+        close();
+        return valueResult;
+
+    }
 	
 	public boolean existeResponsavel(int id)
 	{
@@ -114,7 +140,7 @@ public class responsavelBDD {
 		}
 	}
 	
-	public int getNumResponsavel()
+	public int getQtdResponsavel()
 	{
 		int quantidade = 0;
 		String sqlQuery = "SELECT COUNT(*) FROM " + TABLE_RESPONSAVEL;
@@ -125,6 +151,66 @@ public class responsavelBDD {
 		close();
 		return quantidade;
 	}
+
+    /*
+    Não testado
+     */
+    public responsavel getResponsavel()
+    {
+        int qtd = getQtdResponsavel();
+        if(qtd == 1)
+        {
+            int id;
+            String nome;
+            String apelido;
+            String contacto;
+            boolean notifMail;
+            boolean notifSMS;
+            int periodicidadeDiruna;
+            int periodicidadeNoturna;
+            String mail;
+            String pass;
+
+            String dataSincro;
+            String horaSincro;
+
+            String sqlQuery = "SELECT * FROM " + TABLE_RESPONSAVEL;
+            open();
+            Cursor cursor = bdd.rawQuery(sqlQuery, null);
+            if(cursor.moveToFirst())
+            {
+                id = cursor.getInt(cursor.getColumnIndex(COL_ID_RESP));
+                nome = cursor.getString(cursor.getColumnIndex(COL_NOME_RESP));
+                apelido = cursor.getString(cursor.getColumnIndex(COL_APELIDO_RESP));
+                contacto = cursor.getString(cursor.getColumnIndex(COL_CONTACTO_RESP));
+                apelido = cursor.getString(cursor.getColumnIndex(COL_APELIDO_RESP));
+                notifMail = Boolean.valueOf(cursor.getString(cursor.getColumnIndex(COL_NOTIFICACAOMAIL_RESP)));
+                notifSMS = Boolean.valueOf(cursor.getString(cursor.getColumnIndex(COL_NOTIFICACAOSMS_RESP)));
+                periodicidadeDiruna = cursor.getInt(cursor.getColumnIndex(COL_PERIODICIDADEDIURNA_RESP));
+                periodicidadeNoturna = cursor.getInt(cursor.getColumnIndex(COL_PERIODICIDADENOTURNA_RESP));
+                mail = cursor.getString(cursor.getColumnIndex(COL_MAIL_RESP));
+                pass = cursor.getString(cursor.getColumnIndex(COL_PASS_RESP));
+                horaSincro = cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP));
+                dataSincro = cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP));
+
+            }
+        }
+        responsavel resp = new responsavel();
+        return resp;
+    }
+
+    public int getIdResponsavel()
+    {
+        String sqlQuery = "SELECT " + COL_ID_RESP + " FROM " + TABLE_RESPONSAVEL;
+        int idReturn = -1;
+        open();
+        Cursor cursor= bdd.rawQuery(sqlQuery, null);
+        if(cursor.getCount() == 1 && cursor.moveToFirst())
+        {
+            idReturn = cursor.getInt(cursor.getColumnIndex(COL_ID_RESP));
+        }
+        return idReturn;
+    }
 	
 	public String getCreateTable()
 	{
