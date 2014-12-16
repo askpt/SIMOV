@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 
 	Context context;
-	
+
 	public itemResponsavelConsultar(Context context, int layoutResourceId, ArrayList<marcacao> listaMarcacoes) {
 		super(context, layoutResourceId, listaMarcacoes);
 		this.context = context;
@@ -54,12 +54,12 @@ public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
 		
-		holder.paciente.setText(rowItem.getIdPacienteMarc());
+		holder.paciente.setText("Nome do Paciente");
 		holder.marcacao.setText(rowItem.getTipoMarc());
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.local.setText(rowItem.getLocalMarc());
 		holder.data.setText(rowItem.getDataMarc());
-		holder.data.setText("Informação");
+		holder.informacao.setText("InformaÃ§Ã£o");
 		
 		return convertView;
 	}
