@@ -90,7 +90,7 @@ namespace SIMOV_WS.Controllers
             db.Responsaveis.Add(responsavel);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = responsavel.ID }, responsavel);
+            return Ok(responsavel.ID);
         }
 
         // DELETE: api/Responsaveis/5

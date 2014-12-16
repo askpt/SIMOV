@@ -84,7 +84,7 @@ namespace SIMOV_WS.Controllers
             db.HistoricoAlertas.Add(historicoAlertas);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = historicoAlertas.Id }, historicoAlertas);
+            return Ok(historicoAlertas.Id);
         }
 
         // DELETE: api/HistoricoAlertas/5

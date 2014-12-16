@@ -84,7 +84,7 @@ namespace SIMOV_WS.Controllers
             db.Alertas.Add(alerta);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = alerta.Id }, alerta);
+            return Ok(alerta.Id);
         }
 
         // DELETE: api/Alertas/5

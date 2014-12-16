@@ -84,7 +84,7 @@ namespace SIMOV_WS.Controllers
             db.EstadosMarcacao.Add(estadoMarcacao);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = estadoMarcacao.Id }, estadoMarcacao);
+            return Ok(estadoMarcacao.Id);
         }
 
         // DELETE: api/EstadoMarcacoes/5

@@ -90,7 +90,7 @@ namespace SIMOV_WS.Controllers
             db.Pacientes.Add(paciente);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = paciente.ID }, paciente);
+            return Ok(paciente.ID);
         }
 
         // DELETE: api/Pacientes/5
