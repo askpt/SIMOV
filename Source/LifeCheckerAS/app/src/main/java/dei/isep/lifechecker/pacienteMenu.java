@@ -15,6 +15,7 @@ import dei.isep.lifechecker.model.marcacao;
 public class pacienteMenu extends Activity{
 
     Intent intent = null;
+
     ListView listviewProximas = null;
 
     @Override
