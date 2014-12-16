@@ -35,6 +35,9 @@ public class pacienteHttp {
 		postParameters.add(new BasicNameValuePair("Email", paciente.getMailPaciente()));
 		postParameters.add(new BasicNameValuePair("ContactoTlf", paciente.getContactoPaciente()));
 		postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
+        postParameters.add(new BasicNameValuePair("NomeLocal", String.valueOf(paciente.getNomeLocalPaciente())));
+        postParameters.add(new BasicNameValuePair("Data", String.valueOf(paciente.getDataLocalPaciente() + "T" + paciente.getHoraLocalPaciente())));
+        postParameters.add(new BasicNameValuePair("Ativo", String.valueOf(paciente.getAtivoPaciente())));
 		postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtual));
 		
 

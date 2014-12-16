@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/img_foto_paciente"
+        android:id="@+id/img_spinner_foto_paciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/human"
@@ -17,8 +17,8 @@
         android:layout_marginBottom="13dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Nome Paciente"
-        android:layout_alignBottom="@+id/img_foto_paciente"
-        android:layout_toRightOf="@+id/img_foto_paciente" />
+        android:layout_alignBottom="@+id/img_spinner_foto_paciente"
+        android:layout_toRightOf="@+id/img_spinner_foto_paciente" />
 
     <TextView
         android:id="@+id/txt_spiner_apelido_paciente"

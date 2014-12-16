@@ -1,4 +1,4 @@
-package dei.isep.lifechecker.adapter;
+﻿package dei.isep.lifechecker.adapter;
 
 import java.util.ArrayList;
 
