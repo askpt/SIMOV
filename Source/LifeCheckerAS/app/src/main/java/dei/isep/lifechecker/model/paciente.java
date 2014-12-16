@@ -80,6 +80,7 @@ public class paciente {
 	 * Cria��o de um paciente
 	 */
 
+    /*
 	public paciente(int idResponsavelPaciente,
 			String nomePaciente, String apelidoPaciente, String mailPaciente,
 			String contactoPaciente, boolean ativoPaciente,
@@ -93,18 +94,23 @@ public class paciente {
 		this.ativoPaciente = true;
 		this.horaSincroPaciente = horaSincroPaciente;
 		this.dataSincroPaciente = dataSincroPaciente;
-	}
+	}*/
 	
 	public paciente(int idResponsavelPaciente,
 			String nomePaciente, String apelidoPaciente, String mailPaciente,
 			String contactoPaciente, boolean ativoPaciente) {
 		super();
-		this.idResponsavelPaciente = idResponsavelPaciente;
-		this.nomePaciente = nomePaciente;
-		this.apelidoPaciente = apelidoPaciente;
-		this.mailPaciente = mailPaciente;
-		this.contactoPaciente = contactoPaciente;
-		this.ativoPaciente = true;
+        this.idResponsavelPaciente = idResponsavelPaciente;
+        this.nomePaciente = nomePaciente;
+        this.apelidoPaciente = apelidoPaciente;
+        this.mailPaciente = mailPaciente;
+        this.contactoPaciente = contactoPaciente;
+        this.latitudePaciente = 0;
+        this.longitudePaciente = 0;
+        this.nomeLocalPaciente = "Sem Local";
+        this.horaLocalPaciente = "11:11:11";
+        this.dataLocalPaciente = "2000-01-01";
+        this.ativoPaciente = ativoPaciente;
 	}
 
 	public int getIdPaciente() {
@@ -187,7 +193,7 @@ public class paciente {
 		this.horaLocalPaciente = horaLocalPaciente;
 	}
 
-	public boolean GetAtivoPaciente() {
+	public boolean getAtivoPaciente() {
 		return ativoPaciente;
 	}
 
@@ -195,7 +201,7 @@ public class paciente {
 		this.ativoPaciente = ativoPaciente;
 	}
 
-	public boolean GetEstaOnlinePaciente() {
+	public boolean getEstaOnlinePaciente() {
 		return estaOnlinePaciente;
 	}
 
@@ -218,11 +224,8 @@ public class paciente {
 	public void setDataSincroPaciente(String dataSincroPaciente) {
 		this.dataSincroPaciente = dataSincroPaciente;
 	}
-	
-	
-	
-	
-	
-	
 
+    public String getDataLocalPaciente() {
+        return dataLocalPaciente;
+    }
 }

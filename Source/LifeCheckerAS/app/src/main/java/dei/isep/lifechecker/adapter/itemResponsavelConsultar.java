@@ -59,7 +59,7 @@ public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.local.setText(rowItem.getLocalMarc());
 		holder.data.setText(rowItem.getDataMarc());
-		holder.data.setText("Informação");
+		holder.data.setText("Info");
 		
 		return convertView;
 	}

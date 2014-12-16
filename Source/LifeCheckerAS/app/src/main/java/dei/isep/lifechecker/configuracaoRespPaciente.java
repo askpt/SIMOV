@@ -326,13 +326,7 @@ public class configuracaoRespPaciente extends Fragment implements
 						.toString(), mailPaciente.getText().toString(),
 				contactoPaciente.getText().toString(), true);
 		pacienteHttp addPaciente = new pacienteHttp();
-		addPaciente.addPaciente(pacient, addPacienteListener);
-	}
-
-	public void obterIdResponsavel(responsavel resp) {
-		responsavelHttp getIdResp = new responsavelHttp();
-		getIdResp.getIdResposnavel(resp.getMailResponsavel(),
-				resp.getPassResponsavel(), getIdRespListener);
+		addPaciente.addPaciente(pacient, inserirDBInterna);
 	}
 
 
@@ -371,52 +365,20 @@ public class configuracaoRespPaciente extends Fragment implements
         }
     };
 
-	interfaceResultadoAsyncPost addPacienteListener = new interfaceResultadoAsyncPost() {
-
-		@Override
-		public void obterResultado(final int codigo, String conteudo) {
-			getActivity().runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					if (codigo == 1) {
-                        preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
-                        prefApp.setTipoUser(1);
-                        /*
-                        ****************************************
-                         */
-
-                        pacienteHttp paciHttp = new pacienteHttp();
-                        paciHttp.retornarPacientesIdResposnavel(rsponsavel.getIdResponsavel(), inserirDBInterna);
-                        /*
-
-                         */
-                        /*
-						btnValidarResponsavel.setText(R.string.validar);
-						btnValidarResponsavel.setEnabled(true);
-
-						tvComentarios.setText("finiti");*/
-					}
-
-				}
-			});
-
-		}
-	};
-
     interfaceResultadoAsyncPost inserirDBInterna = new interfaceResultadoAsyncPost() {
         @Override
         public void obterResultado(final int codigo, final String conteudo) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(codigo == 1 && conteudo.length() > 10)
+                    if(codigo == 1)
                     {
-                        ArrayList<paciente> listaPacientes;
-                        pacienteJson paciJson = new pacienteJson(conteudo);
-                        listaPacientes = paciJson.transformJsonPaciente();
+                        conteudo.replaceAll("[\r\n]+", "");
 
+                        String idValor = conteudo.replaceAll("[\\r\\n]+", "");
+                        int idPaciente = Integer.valueOf(idValor);
                         pacient.setIdResponsavelPaciente(rsponsavel.getIdResponsavel());
-                        pacient.setIdPaciente(listaPacientes.get(0).getIdPaciente());
+                        pacient.setIdPaciente(idPaciente);
 
                         responsavelBDD respBDD = new responsavelBDD(getActivity().getApplicationContext());
                         pacienteBDD paciBDD = new pacienteBDD(getActivity().getApplicationContext());
@@ -427,6 +389,9 @@ public class configuracaoRespPaciente extends Fragment implements
                         Log.i("Informção Responsavel (ID Do RESP", String.valueOf(rsponsavel.getIdResponsavel()));
                         Log.i("Informação Paciente (ID Dele)", String.valueOf(pacient.getIdPaciente()));
                         Log.i("Informação Paciente (ID ~responsavel Dele)", String.valueOf(pacient.getIdResponsavelPaciente()));
+
+                        preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
+                        prefApp.setTipoUser(1);
 
                         Intent intent = new Intent(getActivity(), responsavelMenu.class);
                         getActivity().startActivity(intent);
@@ -465,13 +430,17 @@ public class configuracaoRespPaciente extends Fragment implements
 	interfaceResultadoAsyncPost addResponsavelListener = new interfaceResultadoAsyncPost() {
 
 		@Override
-		public void obterResultado(final int codigo, String conteudo) {
+		public void obterResultado(final int codigo, final String conteudo) {
 			getActivity().runOnUiThread(new Runnable() {
 
 				@Override
 				public void run() {
 					if (codigo == 1) {
-						obterIdResponsavel(rsponsavel);
+                        Log.i("ID responsavel Obtido", conteudo);
+                        String idValor = conteudo.replaceAll("[\\r\\n]+", "");
+                        int idResponsavel = Integer.valueOf(idValor);
+                        rsponsavel.setIdResponsavel(idResponsavel);
+						inserirPaciente(rsponsavel.getIdResponsavel());
 					} else {
 
 

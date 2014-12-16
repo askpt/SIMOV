@@ -1,19 +1,16 @@
 package dei.isep.lifechecker;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import dei.isep.lifechecker.adapter.spinnerPacienteAdapter;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.model.paciente;
@@ -65,15 +62,12 @@ public class responsavelAgendar extends Activity implements OnClickListener {
         listaPac = paciBDD.listaPacientes(idResponsavel);
 
 
-        for(paciente pac : listaPac)
-        {
-            String content = pac.getNomePaciente() + " " + pac.getApelidoPaciente();
-            listaNomePacientes.add(content);
-        }
+        spinnerPacientes.setAdapter(new spinnerPacienteAdapter(this, listaPac));
+        //ArrayAdapter<paciente> arrayAdapter = new ArrayAdapter<paciente>(responsavelAgendar.this,R.layout.spinner_paciente, listaPac);
+       // spinnerPacientes.setAdapter(new spinnerPacienteAdapter(this, R.layout.spinner_paciente, listaPac));
+        //spinnerPacienteAdapter adapter = new spinnerPacienteAdapter(this,R.layout.spinner_paciente, listaPac);
+        ///spinnerPacientes.setAdapter(adapter);
 
-        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listaNomePacientes);
-
-        //resp = respBdd.getResponsavel();
 
     }
 

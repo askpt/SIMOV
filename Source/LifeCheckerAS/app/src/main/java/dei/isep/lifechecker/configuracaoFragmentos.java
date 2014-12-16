@@ -29,7 +29,7 @@ public class configuracaoFragmentos extends FragmentActivity {
 
 		Intent intent = getIntent();
 		int opcao = intent.getIntExtra("opcao", 0);
-		// Création de la liste de Fragments que fera défiler le PagerAdapter
+
 		List<Fragment> fragments = new Vector<Fragment>();
 		Log.i("98888888888","9888888888888888");
 		switch (opcao) {

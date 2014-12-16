@@ -201,15 +201,20 @@ public class pacienteBDD {
             latitudePaciente = cursor.getDouble(cursor.getColumnIndex(COL_LAT_PACI));
             longitudePaciente = cursor.getDouble(cursor.getColumnIndex(COL_LAT_PACI));
             nomeLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_NOME_LOCAL_PACI));
-            horaLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_HORA_LOCAL_PACI));
-            dataLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_DATA_LOCAL_PACI));
 
             actPaci = cursor.getString(cursor.getColumnIndex(COL_ATIVO_PACI));
 
             horaLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP));
             dataLocalPaciente = cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP));
-            //paciente paci = new paciente(idPaciente,nomePaciente,apelidoPaciente);
-            //list.add(paci);
+
+            boolean actBool = Boolean.valueOf(actPaci.replaceAll("[\r\n]+", ""));
+
+            paciente paci = new paciente(idPaciente,
+                    idResponsavelPaciente, nomePaciente,
+                    apelidoPaciente, mailPaciente, contactoPaciente, latitudePaciente,
+                    longitudePaciente, nomeLocalPaciente, horaLocalPaciente, dataLocalPaciente,actBool,
+                    horaLocalPaciente, dataLocalPaciente);
+            list.add(paci);
         }
         close();
         return list;
