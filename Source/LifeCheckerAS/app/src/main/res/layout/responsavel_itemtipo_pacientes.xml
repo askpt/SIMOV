@@ -44,6 +44,7 @@
         android:layout_marginTop="5dp"
         android:background="@null"
         android:scaleType="fitCenter"
+        android:onClick=""
         android:src="@drawable/errado" />
 
 </RelativeLayout>
