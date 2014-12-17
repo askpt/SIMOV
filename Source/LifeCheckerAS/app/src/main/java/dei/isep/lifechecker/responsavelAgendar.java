@@ -2,11 +2,16 @@ package dei.isep.lifechecker;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+
+import com.google.android.gms.maps.*;
 
 import java.util.ArrayList;
 
@@ -24,6 +29,11 @@ public class responsavelAgendar extends Activity implements OnClickListener {
 	EditText hora = null;
 	EditText data = null;
 	EditText local = null;
+
+    GoogleMap googleMap;
+
+
+
 
     ArrayList<paciente> listaPac = new ArrayList<paciente>();
     ArrayList<String> listaNomePacientes = new ArrayList<String>();
@@ -44,6 +54,7 @@ public class responsavelAgendar extends Activity implements OnClickListener {
 
 
         preencherCmbox();
+        preencherMapa();
 	}
 	
 
@@ -70,5 +81,40 @@ public class responsavelAgendar extends Activity implements OnClickListener {
 
 
     }
+
+    public void preencherMapa()
+    {
+        try {
+            // Loading map
+            initilizeMap();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void initilizeMap() {
+        try {
+            if(null == googleMap){
+                googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+                        R.id.map_fragment)).getMap();
+
+                /**
+                 * If the map is still null after attempted initialisation,
+                 * show an error to the user
+                 */
+                if(null == googleMap) {
+                    Toast.makeText(getApplicationContext(),
+                            "Error creating map",Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (NullPointerException exception){
+            Log.e("mapApp", exception.toString());
+        }
+
+
+    }
+
 
 }

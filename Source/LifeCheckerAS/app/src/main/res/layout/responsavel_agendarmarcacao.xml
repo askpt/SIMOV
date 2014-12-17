@@ -75,6 +75,19 @@
             android:layout_marginTop="20dp"
             android:text="@string/agendar" />
 
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_below="@id/bt_responsavel_addmarcacao_agendar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"/>
+
+
+
+
     </RelativeLayout>
 
 </ScrollView>
