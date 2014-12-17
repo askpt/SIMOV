@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
 import dei.isep.lifechecker.model.marcacao;
+import dei.isep.lifechecker.other.lifeCheckerManager;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +28,7 @@ public class responsavelConsultar extends Activity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_consultarmarcacoes);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.consultarMarcacao);
 		Context context = getApplicationContext();
 		
 		listviewMarcacoes = (ListView)findViewById(R.id.list_responsavel_marcacoes);
@@ -38,7 +41,6 @@ public class responsavelConsultar extends Activity {
         listaMarcacoes.add(2, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
         listaMarcacoes.add(3, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
         listaMarcacoes.add(4, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-
 
         itemResponsavelConsultar adapter = new itemResponsavelConsultar(context, R.layout.responsavel_itemtipo_listaconsultas, listaMarcacoes);
 		listviewMarcacoes.setAdapter(adapter);

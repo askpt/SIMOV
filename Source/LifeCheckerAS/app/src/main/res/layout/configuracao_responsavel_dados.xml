@@ -60,7 +60,7 @@
         android:inputType="phone" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_configuracao_responsavel_dados_flecha_dir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -68,7 +68,7 @@
         android:src="@drawable/flecha_dir" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/img_configuracao_responsavel_dados_flecha_esq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

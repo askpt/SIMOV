@@ -27,7 +27,6 @@ public class itemResponsavelHoje extends ArrayAdapter<marcacao>{
 		TextView marcacao;
 		TextView hora;
 		TextView local;
-		TextView data;
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parent)
@@ -44,7 +43,6 @@ public class itemResponsavelHoje extends ArrayAdapter<marcacao>{
 			holder.marcacao = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipohoje_marcacao_value);
 			holder.hora = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipohoje_hora_value);
 			holder.local = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipohoje_local_value);
-			holder.data = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipohoje_data_value);
 			convertView.setTag(holder);
 		}
 		else
@@ -52,11 +50,10 @@ public class itemResponsavelHoje extends ArrayAdapter<marcacao>{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
 		
-		holder.paciente.setText(rowItem.getIdPacienteMarc());
+		holder.paciente.setText("Nome Paciente");
 		holder.marcacao.setText(rowItem.getTipoMarc());
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.local.setText(rowItem.getLocalMarc());
-		holder.data.setText(rowItem.getDataMarc());
 		
 		return convertView;
 	}

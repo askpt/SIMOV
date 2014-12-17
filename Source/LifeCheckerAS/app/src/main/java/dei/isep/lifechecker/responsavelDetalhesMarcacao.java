@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.model.paciente;
+import dei.isep.lifechecker.other.lifeCheckerManager;
 
 public class responsavelDetalhesMarcacao extends Activity implements OnClickListener {
 
@@ -25,6 +26,7 @@ public class responsavelDetalhesMarcacao extends Activity implements OnClickList
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.responsavel_detalhesmarcacao);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.detalhesMarcacao);
 
         validarMarcacao = (Button)findViewById(R.id.bt_responsavel_detalhesmarcacao_validar);
         paciente = (EditText) findViewById(R.id.tb_responsavel_detalhesmarcacao_paciente);

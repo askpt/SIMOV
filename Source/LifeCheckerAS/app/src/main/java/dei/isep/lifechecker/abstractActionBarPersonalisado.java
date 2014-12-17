@@ -14,7 +14,7 @@ public class abstractActionBarPersonalisado extends Activity{
 		actionBar.setCustomView(R.layout.action_bar);
 		TextView textView = (TextView) actionBar.getCustomView().findViewById(R.id.actionBar_Titulo);
 		textView.setText(getResources().getString(R.string.configuracao));
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_HOME_AS_UP);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 	}
 	
 	

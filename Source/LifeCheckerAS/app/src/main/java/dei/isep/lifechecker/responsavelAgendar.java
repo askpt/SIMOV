@@ -20,6 +20,7 @@ import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
+import dei.isep.lifechecker.other.lifeCheckerManager;
 
 public class responsavelAgendar extends Activity implements OnClickListener {
 	
@@ -42,6 +43,7 @@ public class responsavelAgendar extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_agendarmarcacao);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.agendarMarcacao);
 		
 		spinnerPacientes = (Spinner)findViewById(R.id.spinner_responsavel_addmarcacao_pacientes);
 		agendarMarcacao = (Button)findViewById(R.id.bt_responsavel_addmarcacao_agendar);

@@ -81,6 +81,18 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name=".responsavelDetalhesMarcacaoValidar"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".responsavelLocalizacaoPaciente"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".responsavelEditarPaciente"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".pacienteMenu"
             android:label="@string/app_name" >
         </activity>

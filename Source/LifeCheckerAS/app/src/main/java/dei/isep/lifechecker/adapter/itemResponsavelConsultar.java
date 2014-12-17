@@ -53,12 +53,12 @@ public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
 		
-		holder.paciente.setText("Nome do Paciente");
+		holder.paciente.setText("Nome Paciente");
 		holder.marcacao.setText(rowItem.getTipoMarc());
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.local.setText(rowItem.getLocalMarc());
 		holder.data.setText(rowItem.getDataMarc());
-		holder.informacao.setText("Informação");
+		holder.informacao.setText("Info");
 		
 		return convertView;
 	}

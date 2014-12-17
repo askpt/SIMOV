@@ -98,7 +98,7 @@
         android:layout_marginTop="10dp" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/img_configuracao_responsavel_paciente_flecha_esq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
