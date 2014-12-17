@@ -41,16 +41,16 @@
 
     <TextView
         android:id="@+id/text_responsavel_menu_localizar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/text_responsavel_menu_alertas"
         android:layout_alignBottom="@+id/text_responsavel_menu_alertas"
         android:layout_alignLeft="@+id/bt_responsavel_menu_localizar"
-        android:layout_alignRight="@+id/bt_responsavel_menu_localizar"
         android:gravity="center"
         android:maxLines="2"
         android:text="@string/localizar"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignRight="@+id/text_responsavel_menu_agendar" />
 
     <TextView
         android:id="@+id/text_responsavel_menu_pacientes"

@@ -1,7 +1,6 @@
 package dei.isep.lifechecker.adapter;
 
 import java.util.ArrayList;
-
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.R;
 import android.app.Activity;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 
 	Context context;
-	
+
 	public itemResponsavelConsultar(Context context, int layoutResourceId, ArrayList<marcacao> listaMarcacoes) {
 		super(context, layoutResourceId, listaMarcacoes);
 		this.context = context;
@@ -54,12 +53,12 @@ public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
 		
-		holder.paciente.setText(rowItem.getIdPacienteMarc());
+		holder.paciente.setText("Nome do Paciente");
 		holder.marcacao.setText(rowItem.getTipoMarc());
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.local.setText(rowItem.getLocalMarc());
 		holder.data.setText(rowItem.getDataMarc());
-		holder.data.setText("Info");
+		holder.informacao.setText("Informação");
 		
 		return convertView;
 	}
