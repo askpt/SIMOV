@@ -1,7 +1,6 @@
-﻿package dei.isep.lifechecker.adapter;
+package dei.isep.lifechecker.adapter;
 
 import java.util.ArrayList;
-
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.R;
 import android.app.Activity;

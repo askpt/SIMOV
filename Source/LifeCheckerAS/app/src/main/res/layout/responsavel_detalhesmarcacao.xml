@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <EditText
             android:id="@+id/tb_responsavel_detalhesmarcacao_paciente"
@@ -18,7 +20,7 @@
             android:ems="10"
             android:enabled="false"
             android:text="@string/paciente" />
-                
+
         <EditText
             android:id="@+id/tb_responsavel_detalhesmarcacao_marcacao"
             android:layout_width="wrap_content"
@@ -74,9 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="@string/validar" />
+        </RelativeLayout>
+    </ScrollView>
 
-
-
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

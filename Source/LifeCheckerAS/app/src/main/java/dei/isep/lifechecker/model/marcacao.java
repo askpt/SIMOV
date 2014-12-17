@@ -18,7 +18,7 @@ public class marcacao {
 	public marcacao(){}
 
 	/*
-	 * Marcação com todos meno IDAutomatico
+	 * Marcacao com todos meno IDAutomatico
 	 */
 	public marcacao(int idPacienteMarc, int idEstadoMarc, String tipoMarc,
 			String horaMarc, String dataMarc, double latitudeMarc,
