@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+
 
     <RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <Spinner
@@ -61,33 +60,37 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tb_responsavel_addmarcacao_hora"
             android:layout_alignLeft="@+id/tb_responsavel_addmarcacao_hora"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:ems="10"
-            android:hint="@string/local" />
+            android:hint="@string/local"
+            android:layout_alignRight="@+id/bt_responsavel_addmarcacao_agendar" />
+
+    <fragment
+        android:id="@+id/map_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_below="@id/tb_responsavel_addmarcacao_local"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/bt_responsavel_addmarcacao_agendar" />
 
         <Button
             android:id="@+id/bt_responsavel_addmarcacao_agendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_responsavel_addmarcacao_local"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
             android:text="@string/agendar" />
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_below="@id/bt_responsavel_addmarcacao_agendar"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:id="@+id/bt_responsavel_addmarcacao_validar_local"
+        android:layout_alignBottom="@+id/tb_responsavel_addmarcacao_local"
+        android:layout_alignRight="@+id/tb_responsavel_addmarcacao_marcacao"
+        android:layout_toRightOf="@+id/tb_responsavel_addmarcacao_local" />
 
-
-
-
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>
