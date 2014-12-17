@@ -47,6 +47,22 @@ public class marcacao {
 		this.dataSincroMarc = dataUpdateMarc;
 	}
 
+    /*
+    Marcação sem ID e horas de sincronização
+     */
+    public marcacao(int idPacienteMarc, int idEstadoMarc, String tipoMarc, String horaMarc,
+                    String dataMarc, double latitudeMarc, double longitudeMarc, String localMarc)
+    {
+        this.idPacienteMarc = idPacienteMarc;
+        this.idEstadoMarc = idEstadoMarc;
+        this.tipoMarc = tipoMarc;
+        this.horaMarc = horaMarc;
+        this.dataMarc = dataMarc;
+        this.latitudeMarc = latitudeMarc;
+        this.longitudeMarc = longitudeMarc;
+        this.localMarc = localMarc;
+    }
+
 	public int getIdMarcacaoMarc() {
 		return idMarcacaoMarc;
 	}

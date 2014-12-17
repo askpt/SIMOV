@@ -93,4 +93,24 @@
         android:layout_alignRight="@+id/tb_responsavel_addmarcacao_marcacao"
         android:layout_toRightOf="@+id/tb_responsavel_addmarcacao_local" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading_add_marcacao_responsavel"
+        android:indeterminate="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tv_comentario_add_marcacao"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+
 </RelativeLayout>

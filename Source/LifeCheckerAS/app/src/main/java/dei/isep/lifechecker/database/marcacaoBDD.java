@@ -73,7 +73,44 @@ public class marcacaoBDD {
 		return bdd;
 	}
 
-	public long inserirMarcacao(marcacao marcacao)
+    public long inserirMarcacao(marcacao marcacao)
+    {
+        long valueResult = 0;
+        pacienteBDD paciente = new pacienteBDD(context);
+        if(paciente.existePaciente(marcacao.getIdPacienteMarc()) == true)
+        {
+            estadoMarcacaoBDD estado = new estadoMarcacaoBDD(context);
+            if(estado.existeEstadoMarcacao(marcacao.getIdEstadoMarc()) == true)
+            {
+                open();
+                ContentValues value = new ContentValues();
+                value.put(COL_ID_PACIENTE_MARCA, marcacao.getIdPacienteMarc());
+                value.put(COL_ID_ESTADO_MARCA, marcacao.getIdEstadoMarc());
+                value.put(COL_TIPO_MARCA, marcacao.getTipoMarc());
+                value.put(COL_HORA_MARCA, marcacao.getHoraMarc());
+                value.put(COL_DATA_MARCA, marcacao.getDataMarc());
+                value.put(COL_LONG_MARCA, marcacao.getLongitudeMarc());
+                value.put(COL_LAT_MARCA, marcacao.getLatitudeMarc());
+                value.put(COL_NOME_LOCAL_MARCA, marcacao.getLocalMarc());
+                value.put(COL_HORA_SINCRO_MARCA, baseDeDados.horaAtual());
+                value.put(COL_DATA_SINCRO_MARCA, baseDeDados.dataAtual());
+                valueResult = bdd.insert(TABLE_MARCACAO, null, value);
+                close();
+            }
+            else
+            {
+                valueResult = -1;
+            }
+        }
+        else
+        {
+            valueResult = -1;
+        }
+        return valueResult;
+    }
+
+
+	public long inserirMarcacaoComId(marcacao marcacao)
 	{
 		long valueResult = 0;
 		pacienteBDD paciente = new pacienteBDD(context);
@@ -84,6 +121,7 @@ public class marcacaoBDD {
 			{
 				open();
 				ContentValues value = new ContentValues();
+                value.put(COL_ID_MARCACAO_MARCA, marcacao.getIdMarcacaoMarc());
 				value.put(COL_ID_PACIENTE_MARCA, marcacao.getIdPacienteMarc());
 				value.put(COL_ID_ESTADO_MARCA, marcacao.getIdEstadoMarc());
 				value.put(COL_TIPO_MARCA, marcacao.getTipoMarc());
@@ -92,9 +130,10 @@ public class marcacaoBDD {
 				value.put(COL_LONG_MARCA, marcacao.getLongitudeMarc());
 				value.put(COL_LAT_MARCA, marcacao.getLatitudeMarc());
 				value.put(COL_NOME_LOCAL_MARCA, marcacao.getLocalMarc());
-				value.put(COL_HORA_MARCA, marcacao.getHoraSincroMarc());
-				value.put(COL_DATA_MARCA, marcacao.getDataSincroMarc());
-				
+				value.put(COL_HORA_SINCRO_MARCA, baseDeDados.horaAtual());
+				value.put(COL_DATA_SINCRO_MARCA, baseDeDados.dataAtual());
+                valueResult = bdd.insert(TABLE_MARCACAO, null, value);
+                close();
 			}
 			else
 			{

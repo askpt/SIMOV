@@ -1,6 +1,7 @@
 package dei.isep.lifechecker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +9,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -19,13 +22,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dei.isep.lifechecker.adapter.spinnerPacienteAdapter;
+import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
+import dei.isep.lifechecker.other.validarDados;
 
 public class responsavelAgendar extends Activity{
 	
@@ -37,12 +45,16 @@ public class responsavelAgendar extends Activity{
 	EditText ETdata;
 	EditText ETlocal;
 
+    TextView TVcomentariosAddMarca;
+
+    ProgressBar PBloadingMarcacao;
+
     GoogleMap googleMap;
 
     double longitude =0;
     double latitude =0;
 
-
+    private marcacao mar;
 
 
     ArrayList<paciente> listaPac = new ArrayList<paciente>();
@@ -61,10 +73,15 @@ public class responsavelAgendar extends Activity{
 		ETdata = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_data);
 		ETlocal = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_local);
 
+        PBloadingMarcacao = (ProgressBar)findViewById(R.id.loading_add_marcacao_responsavel);
+
+        TVcomentariosAddMarca = (TextView)findViewById(R.id.tv_comentario_add_marcacao);
+
         findViewById(R.id.bt_responsavel_addmarcacao_validar_local).setOnClickListener(btnCarregado);
         findViewById(R.id.bt_responsavel_addmarcacao_agendar).setOnClickListener(btnCarregado);
 
-
+        PBloadingMarcacao.setVisibility(View.INVISIBLE);
+        BTaddMarcacao.setEnabled(false);
         preencherCmbox();
         preencherMapa();
 	}
@@ -79,10 +96,82 @@ public class responsavelAgendar extends Activity{
                     verLocal();
                     break;
                 case R.id.bt_responsavel_addmarcacao_agendar:
+                    adicionarMarcacao();
                     break;
             }
         }
     };
+
+    public void adicionarMarcacao()
+    {
+        int idPaciente = (int)spinnerPacientes.getSelectedItemId();
+        String tipoMarcacao = ETmarcacao.getText().toString();
+        String hora = EThora.getText().toString();
+        String data = ETdata.getText().toString();
+        String local = ETlocal.getText().toString();
+        validarDados validar = new validarDados();
+
+
+        boolean a = validar.validarTipoMarcacao(tipoMarcacao);
+        boolean b = validar.validarTempo24H(hora);
+        boolean c = validar.validarDataAMD(data);
+        boolean d = validar.validarLocalidade(local);
+        boolean e = validar.validarLatitude(latitude);
+        boolean f = validar.validarLongitude(longitude);
+
+        if(validar.validarTipoMarcacao(tipoMarcacao) &&
+                validar.validarTempo24H(hora) &&
+                validar.validarDataAMD(data) &&
+                validar.validarLocalidade(local) &&
+                validar.validarLatitude(latitude) &&
+                validar.validarLongitude(longitude))
+        {
+            hora +=":00";
+            PBloadingMarcacao.setVisibility(View.VISIBLE);
+            BTaddMarcacao.setEnabled(false);
+            mar = new marcacao(idPaciente,1,tipoMarcacao,hora,data,latitude,longitude,local);
+            marcacaoHttp marHttp = new marcacaoHttp();
+            marHttp.addmarcacao(mar, resultadoAddMarcacao);
+        }
+        else
+        {
+            TVcomentariosAddMarca.setText(getResources().getString(R.string.err_dados_formularios));
+        }
+
+    }
+
+    interfaceResultadoAsyncPost resultadoAddMarcacao = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1) {
+                        PBloadingMarcacao.setVisibility(View.INVISIBLE);
+                        String idValor = conteudo.replaceAll("[\\r\\n]+", "");
+                        int idMarcacao  = Integer.valueOf(idValor);
+                        mar.setIdMarcacaoMarc(idMarcacao);
+
+                        marcacaoBDD marcBDD = new marcacaoBDD(getApplicationContext());
+                        marcBDD.inserirMarcacaoComId(mar);
+
+
+                        Intent intent = new Intent(getApplication(), responsavelMenu.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplication().startActivity(intent);
+                    }
+                    else
+                    {
+                        BTaddMarcacao.setEnabled(true);
+                    }
+
+                }
+            });
+
+        }
+    };
+
+
 	
 
 	public void verLocal()
@@ -96,19 +185,20 @@ public class responsavelAgendar extends Activity{
 
     interfaceAgendarMarcacao interfaceListener = new interfaceAgendarMarcacao() {
         @Override
-        public void listaCoordenadas(int codigo, List<Address> enderecos) {
-            if(codigo == 1)
-            {
-                latitude = enderecos.get(0).getLatitude();
-                longitude = enderecos.get(0).getLongitude();
-
-                addMarcador();
-
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
-            }
+        public void listaCoordenadas(final int codigo, final List<Address> enderecos) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (codigo == 1) {
+                        latitude = enderecos.get(0).getLatitude();
+                        longitude = enderecos.get(0).getLongitude();
+                        BTaddMarcacao.setEnabled(true);
+                        addMarcador();
+                    } else {
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
+                    }
+                }
+            });
         }
     };
 
@@ -136,6 +226,8 @@ public class responsavelAgendar extends Activity{
         }
 
     }
+
+
 
     private void initilizeMap() {
         try {
