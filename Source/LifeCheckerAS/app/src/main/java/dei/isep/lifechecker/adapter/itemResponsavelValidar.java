@@ -72,7 +72,7 @@ public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
 		
-		holder.paciente.setText("Nome do Paciente");
+		holder.paciente.setText("Nome P.");
 		holder.local.setText(rowItem.getLocalMarc());
 		holder.data.setText(rowItem.getDataMarc());
 		holder.hora.setText(rowItem.getHoraMarc());

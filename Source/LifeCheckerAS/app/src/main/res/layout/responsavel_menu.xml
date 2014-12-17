@@ -9,20 +9,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/hoje"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:id="@+id/listview_responsavel_menu_listahoje"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/bt_responsavel_menu_validar"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/text_responsavel_menu_hoje"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" >
+        android:dividerHeight="3.0sp"
+        android:layout_marginTop="5dp"
+        android:listSelector="@android:color/transparent">
 
     </ListView>
 
@@ -119,7 +121,8 @@
         android:id="@+id/bt_responsavel_menu_agendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_responsavel_menu_hoje"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
         android:layout_alignTop="@+id/bt_responsavel_menu_consultar"
         android:background="@null"
         android:src="@drawable/addmarca" />

@@ -1,17 +1,24 @@
-package dei.isep.lifechecker.other;
+﻿package dei.isep.lifechecker.other;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.util.Log;
+import android.widget.TextView;
+
+import dei.isep.lifechecker.R;
 import dei.isep.lifechecker.model.*;
 
 public class lifeCheckerManager {
 	private static lifeCheckerManager _instance;
 	
 	private lifeCheckerManager(){};
-	
+
+    private paciente pac;
+
 	private int idResponsavel;
 
 	private String mailResponsavel;
@@ -177,6 +184,22 @@ public class lifeCheckerManager {
 		this.listaPaciente = listaPaciente;
 	}
 
+    public paciente getPac() {
+        return pac;
+    }
+
+    public void setPac(paciente pac) {
+        this.pac = pac;
+    }
+
+    public void inserirActionBar(Activity a, int idTitle) {
+        ActionBar actionBar = a.getActionBar();
+        actionBar.setCustomView(R.layout.action_bar);
+        TextView textView = (TextView) actionBar.getCustomView().findViewById(
+                R.id.actionBar_Titulo);
+        textView.setText(a.getResources().getString(idTitle));
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+    }
     public Locale getLocale() {
         return locale;
     }
@@ -184,10 +207,6 @@ public class lifeCheckerManager {
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
-	
-	
-	
-	
 	
 
 }

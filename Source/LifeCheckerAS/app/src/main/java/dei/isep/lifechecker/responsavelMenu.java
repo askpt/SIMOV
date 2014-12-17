@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
 import dei.isep.lifechecker.model.marcacao;
+import dei.isep.lifechecker.other.lifeCheckerManager;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ public class responsavelMenu extends Activity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_menu);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.lifechecker);
 		Context context = getApplicationContext();
 		
 		listaHoje = (ListView)findViewById(R.id.listview_responsavel_menu_listahoje);
@@ -36,6 +39,13 @@ public class responsavelMenu extends Activity {
 		findViewById(R.id.bt_responsavel_menu_pacientes).setOnClickListener(btnCarregado);
 		
 		ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
+
+        //Dados de Teste
+        listaMarcacoes.add(0, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
+        listaMarcacoes.add(1, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
+        listaMarcacoes.add(2, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
+        listaMarcacoes.add(3, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
+        listaMarcacoes.add(4, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
 		
 		itemResponsavelHoje adapter = new itemResponsavelHoje(context, R.layout.responsavel_itemtipo_hoje, listaMarcacoes);
 		listaHoje.setAdapter(adapter);
@@ -71,5 +81,6 @@ public class responsavelMenu extends Activity {
 			
 		}
 	};
+
 
 }

@@ -106,7 +106,7 @@
         android:indeterminate="false" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_configuracao_responsavel_conta_flecha_dir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

@@ -34,6 +34,7 @@ import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
 import dei.isep.lifechecker.other.validarDados;
+import dei.isep.lifechecker.other.lifeCheckerManager;
 
 public class responsavelAgendar extends Activity{
 	
@@ -64,6 +65,7 @@ public class responsavelAgendar extends Activity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_agendarmarcacao);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.agendarMarcacao);
 		
 		spinnerPacientes = (Spinner)findViewById(R.id.spinner_responsavel_addmarcacao_pacientes);
 		BTvalidarLocal = (Button)findViewById(R.id.bt_responsavel_addmarcacao_validar_local);

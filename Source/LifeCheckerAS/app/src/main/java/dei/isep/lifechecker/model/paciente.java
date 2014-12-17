@@ -1,6 +1,5 @@
 package dei.isep.lifechecker.model;
 
-import android.os.Parcel;
 import android.os.Parcelable;
 
 public class paciente {

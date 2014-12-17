@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
 import dei.isep.lifechecker.adapter.itemResponsavelValidar;
 import dei.isep.lifechecker.model.marcacao;
+import dei.isep.lifechecker.other.lifeCheckerManager;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +26,7 @@ public class responsavelValidar extends Activity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_validarmarcacoes);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.validarMarcacao);
 		Context context = getApplicationContext();
 		
 		listviewMarcacoes = (ListView)findViewById(R.id.list_responsavel_validar_listamarcacoes);
@@ -44,7 +47,7 @@ public class responsavelValidar extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                startActivity(new Intent(responsavelValidar.this, responsavelDetalhesMarcacao.class));
+                startActivity(new Intent(responsavelValidar.this, responsavelDetalhesMarcacaoValidar.class));
 
             }
         });

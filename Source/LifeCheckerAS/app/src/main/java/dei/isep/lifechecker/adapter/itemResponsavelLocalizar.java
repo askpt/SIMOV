@@ -51,7 +51,7 @@ public class itemResponsavelLocalizar extends ArrayAdapter<paciente>{
 			holder = (PacienteHolder) convertView.getTag();
 		}
 		
-		holder.paciente.setText(rowItem.getNomePaciente());
+		holder.paciente.setText(rowItem.getNomePaciente() + " " + rowItem.getApelidoPaciente());
 		holder.rua.setText(rowItem.getNomeLocalPaciente());
 		holder.cidade.setText(rowItem.getNomeLocalPaciente());
 		holder.hora.setText(rowItem.getHoraLocalPaciente());
