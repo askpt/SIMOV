@@ -27,14 +27,15 @@ import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
 
-public class responsavelAgendar extends Activity implements OnClickListener {
+public class responsavelAgendar extends Activity{
 	
-	Spinner spinnerPacientes = null;
-	Button BTagendarMarcacao = null;
-	EditText ETmarcacao = null;
-	EditText EThora = null;
-	EditText ETdata = null;
-	EditText ETlocal = null;
+	Spinner spinnerPacientes;
+	Button BTvalidarLocal;
+    Button BTaddMarcacao;
+	EditText ETmarcacao;
+	EditText EThora;
+	EditText ETdata;
+	EditText ETlocal;
 
     GoogleMap googleMap;
 
@@ -53,21 +54,38 @@ public class responsavelAgendar extends Activity implements OnClickListener {
 		setContentView(R.layout.responsavel_agendarmarcacao);
 		
 		spinnerPacientes = (Spinner)findViewById(R.id.spinner_responsavel_addmarcacao_pacientes);
-		BTagendarMarcacao = (Button)findViewById(R.id.bt_responsavel_addmarcacao_validar_local);
+		BTvalidarLocal = (Button)findViewById(R.id.bt_responsavel_addmarcacao_validar_local);
+        BTaddMarcacao = (Button)findViewById(R.id.bt_responsavel_addmarcacao_agendar);
 		ETmarcacao = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_marcacao);
 		EThora = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_hora);
 		ETdata = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_data);
 		ETlocal = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_local);
-		
-		BTagendarMarcacao.setOnClickListener(this);
+
+        findViewById(R.id.bt_responsavel_addmarcacao_validar_local).setOnClickListener(btnCarregado);
+        findViewById(R.id.bt_responsavel_addmarcacao_agendar).setOnClickListener(btnCarregado);
 
 
         preencherCmbox();
         preencherMapa();
 	}
+
+    final OnClickListener btnCarregado = new OnClickListener()
+    {
+        public void onClick(final View v)
+        {
+            switch(v.getId())
+            {
+                case R.id.bt_responsavel_addmarcacao_validar_local:
+                    verLocal();
+                    break;
+                case R.id.bt_responsavel_addmarcacao_agendar:
+                    break;
+            }
+        }
+    };
 	
 
-	public void onClick(final View v)
+	public void verLocal()
 	{
         marcacao marca  = new marcacao();
         String endereco = ETlocal.getText().toString();
@@ -81,11 +99,15 @@ public class responsavelAgendar extends Activity implements OnClickListener {
         public void listaCoordenadas(int codigo, List<Address> enderecos) {
             if(codigo == 1)
             {
-                int qtd = 0;
-                qtd = enderecos.size();
                 latitude = enderecos.get(0).getLatitude();
                 longitude = enderecos.get(0).getLongitude();
+
                 addMarcador();
+
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
             }
         }
     };
