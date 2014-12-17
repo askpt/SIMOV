@@ -1,5 +1,15 @@
 package dei.isep.lifechecker.model;
 
+import android.content.Context;
+import android.location.Address;
+
+import java.util.List;
+import java.util.Locale;
+
+import dei.isep.lifechecker.interfaceAgendarMarcacao;
+import dei.isep.lifechecker.other.geoCoderToLatLongAsyncTask;
+import dei.isep.lifechecker.other.lifeCheckerManager;
+
 public class marcacao {
 	
 	int idMarcacaoMarc;
@@ -124,6 +134,14 @@ public class marcacao {
 	public void setDataSincroMarc(String dataSincroMarc) {
 		this.dataSincroMarc = dataSincroMarc;
 	}
+
+    public void getLatLong(String endereco, interfaceAgendarMarcacao interfaceAMListener, Context context)
+    {
+        Locale locale = lifeCheckerManager.getInstance().getLocale();
+        geoCoderToLatLongAsyncTask geoCoderToLatLong = new geoCoderToLatLongAsyncTask(endereco, locale, context);
+        geoCoderToLatLong.setOnResultListener(interfaceAMListener);
+        geoCoderToLatLong.execute();
+    }
 
 	
 	

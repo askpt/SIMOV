@@ -1,7 +1,8 @@
-package dei.isep.lifechecker.other;
+﻿package dei.isep.lifechecker.other;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -37,6 +38,10 @@ public class lifeCheckerManager {
 	private String ApelidoPacienteResposnavel;
 	private String mailPacienteResposnavel;
 	private String contactoPacienteResposnavel;
+
+    //****Local da aplicação
+    private Locale locale = new Locale("pt","PT");
+
 	
 	//Pacientes
 	private ArrayList<paciente> listaPaciente;
@@ -195,7 +200,13 @@ public class lifeCheckerManager {
         textView.setText(a.getResources().getString(idTitle));
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
     }
-	
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 	
 
 }
