@@ -2,6 +2,7 @@ package dei.isep.lifechecker.other;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.util.Log;
 import dei.isep.lifechecker.model.*;
@@ -30,6 +31,10 @@ public class lifeCheckerManager {
 	private String ApelidoPacienteResposnavel;
 	private String mailPacienteResposnavel;
 	private String contactoPacienteResposnavel;
+
+    //****Local da aplicação
+    private Locale locale = new Locale("pt","PT");
+
 	
 	//Pacientes
 	private ArrayList<paciente> listaPaciente;
@@ -171,6 +176,14 @@ public class lifeCheckerManager {
 	public void setListaPaciente(ArrayList<paciente> listaPaciente) {
 		this.listaPaciente = listaPaciente;
 	}
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
 	
 	
 	
