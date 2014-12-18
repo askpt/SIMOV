@@ -1,4 +1,4 @@
-ï»¿package dei.isep.lifechecker.other;
+package dei.isep.lifechecker.other;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class lifeCheckerManager {
 	private String mailPacienteResposnavel;
 	private String contactoPacienteResposnavel;
 
-    //****Local da aplicaÃ§Ã£o
+    //****Local da aplicação
     private Locale locale = new Locale("pt","PT");
 
 	

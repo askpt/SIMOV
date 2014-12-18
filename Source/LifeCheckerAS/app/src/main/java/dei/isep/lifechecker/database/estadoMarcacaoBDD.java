@@ -61,6 +61,18 @@ public class estadoMarcacaoBDD {
 		close();
 		return valueResult;
 	}
+
+    public long inserirEstadoMarcacaoComId(estadoMarcacao estadoMarca)
+    {
+        long valueResul = 0;
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COL_ID_ESTMARC, estadoMarca.getIdEstadoMarcacao());
+        values.put(COL_EXPLICACAO_ESTMARC, estadoMarca.getExplicacaoEstMarc());
+        valueResul = bdd.insert(TABLE_ESTMARC,null,values);
+        close();
+        return valueResul;
+    }
 	
 	public boolean existeEstadoMarcacao(int id)
 	{
