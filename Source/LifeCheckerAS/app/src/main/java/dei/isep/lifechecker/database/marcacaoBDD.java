@@ -3,6 +3,7 @@ package dei.isep.lifechecker.database;
 import dei.isep.lifechecker.model.marcacao;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class marcacaoBDD {
@@ -109,6 +110,31 @@ public class marcacaoBDD {
         return valueResult;
     }
 
+    public marcacao getMarcacaoByID(int idMarcacao)
+    {
+        marcacao marc = new marcacao();
+        String sqlQuery = "SELECT * FROM " + TABLE_MARCACAO + " where " + COL_ID_MARCACAO_MARCA + " = " + idMarcacao;
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery,null);
+        if (cursor.moveToFirst())
+        {
+            marc.setIdMarcacaoMarc(cursor.getInt(cursor.getColumnIndex(COL_ID_MARCACAO_MARCA)));
+            marc.setIdPacienteMarc(cursor.getInt(cursor.getColumnIndex(COL_ID_PACIENTE_MARCA)));
+            marc.setIdEstadoMarc(cursor.getInt(cursor.getColumnIndex(COL_ID_ESTADO_MARCA)));
+            marc.setTipoMarc(cursor.getString(cursor.getColumnIndex(COL_TIPO_MARCA)));
+            marc.setHoraMarc(cursor.getString(cursor.getColumnIndex(COL_HORA_MARCA)));
+            marc.setDataMarc(cursor.getString(cursor.getColumnIndex(COL_DATA_MARCA)));
+            marc.setLatitudeMarc(cursor.getDouble(cursor.getColumnIndex(COL_LAT_MARCA)));
+            marc.setLongitudeMarc(cursor.getDouble(cursor.getColumnIndex(COL_LONG_MARCA)));
+            marc.setLocalMarc(cursor.getString(cursor.getColumnIndex(COL_NOME_LOCAL_MARCA)));
+            marc.setHoraSincroMarc(cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_MARCA)));
+            marc.setDataSincroMarc(cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_MARCA)));
+        }
+        close();
+        return marc;
+
+    }
+
 
 	public long inserirMarcacaoComId(marcacao marcacao)
 	{
@@ -146,6 +172,29 @@ public class marcacaoBDD {
 		}
 		return valueResult;
 	}
+
+    public long atualizarMarcacao(marcacao marcacao)
+    {
+        String condicao = COL_ID_MARCACAO_MARCA + "=" + marcacao.getIdMarcacaoMarc();
+        long valueResult = 0;
+        open();
+        ContentValues value = new ContentValues();
+        value.put(COL_ID_MARCACAO_MARCA, marcacao.getIdMarcacaoMarc());
+        value.put(COL_ID_PACIENTE_MARCA, marcacao.getIdPacienteMarc());
+        value.put(COL_ID_ESTADO_MARCA, marcacao.getIdEstadoMarc());
+        value.put(COL_TIPO_MARCA, marcacao.getTipoMarc());
+        value.put(COL_HORA_MARCA, marcacao.getHoraMarc());
+        value.put(COL_DATA_MARCA, marcacao.getDataMarc());
+        value.put(COL_LONG_MARCA, marcacao.getLongitudeMarc());
+        value.put(COL_LAT_MARCA, marcacao.getLatitudeMarc());
+        value.put(COL_NOME_LOCAL_MARCA, marcacao.getLocalMarc());
+        value.put(COL_HORA_SINCRO_MARCA, baseDeDados.horaAtual());
+        value.put(COL_DATA_SINCRO_MARCA, baseDeDados.dataAtual());
+        valueResult = bdd.update(TABLE_MARCACAO, value, condicao, null);
+        close();
+
+        return valueResult;
+    }
 
 	public String getDropTableMarcacao() {
 		return DROP_TABLE_MARCACAO;

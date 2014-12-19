@@ -1,9 +1,8 @@
 package dei.isep.lifechecker;
 
-import dei.isep.lifechecker.databaseonline.httpPost;
+import dei.isep.lifechecker.databaseonline.httpPut;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
-import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.json.responsavelJson;
 import dei.isep.lifechecker.model.*;
 import dei.isep.lifechecker.other.genericTextWatcherConfiguracao;
@@ -25,15 +24,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class configuracaoRespPaciente extends Fragment implements
 		OnClickListener {
 
 	Button btnValidarResponsavel;
 	ProgressBar pbConfiguracao;
-	httpPost htPostMailResp;
-	httpPost htPostMailPaciente;
+	httpPut htPostMailResp;
+	httpPut htPostMailPaciente;
 	TextView tvComentarios;
 
 	EditText nomePaciente;

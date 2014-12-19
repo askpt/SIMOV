@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
+import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.json.marcacaoJson;
@@ -28,6 +29,8 @@ public class responsavelConsultar extends Activity {
 	
 	ListView listviewMarcacoes = null;
     ArrayList<marcacao> listaMarcacoes;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -81,8 +84,16 @@ public class responsavelConsultar extends Activity {
         listviewMarcacoes.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                pacienteBDD paciBdd = new pacienteBDD(getApplicationContext());
+                int idPaciente = listaMarcacoes.get(position).getIdPacienteMarc();
+                String nomePaciente = paciBdd.getNomePacienteById(idPaciente);
 
-                startActivity(new Intent(responsavelConsultar.this, responsavelDetalhesMarcacao.class));
+                int idMarcacao = listaMarcacoes.get(position).getIdMarcacaoMarc();
+
+                Intent intent = new Intent(responsavelConsultar.this, responsavelDetalhesMarcacao.class);
+                intent.putExtra("paciente", nomePaciente);
+                intent.putExtra("idMacarcao",idMarcacao);
+                startActivity(intent);
 
             }
         });

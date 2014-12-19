@@ -42,6 +42,11 @@ public class geoCoderToLatLongAsyncTask extends AsyncTask<Void, Void, Void>{
         try
         {
             enderecosLista = gc.getFromLocationName(endereco, 5);
+            if(enderecosLista.size() == 0)
+            {
+                interfaceAgendarMarcacao.listaCoordenadas(2,enderecosLista);
+            }
+            interfaceAgendarMarcacao.listaCoordenadas(1,enderecosLista);
         }
         catch(IOException e)
         {
@@ -49,7 +54,7 @@ public class geoCoderToLatLongAsyncTask extends AsyncTask<Void, Void, Void>{
             e.printStackTrace();
         }
 
-        interfaceAgendarMarcacao.listaCoordenadas(1,enderecosLista);
+
 
         return null;
     }

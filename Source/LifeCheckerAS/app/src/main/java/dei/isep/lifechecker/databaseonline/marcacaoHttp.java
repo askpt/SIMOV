@@ -40,6 +40,23 @@ public class marcacaoHttp {
         executarTaskPOST(url, postParameters, interfaceListener);
     }
 
+    public void updateMarcacao(marcacao marcacao, interfaceResultadoAsyncPost interfaceListener)
+    {
+        String url = "http://simovws.azurewebsites.net/api/Marcacoes/" + marcacao.getIdMarcacaoMarc();
+        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        postParameters.add(new BasicNameValuePair("Id",String.valueOf(marcacao.getIdMarcacaoMarc())));
+        postParameters.add(new BasicNameValuePair("PacienteID",String.valueOf(marcacao.getIdPacienteMarc())));
+        postParameters.add(new BasicNameValuePair("TipoMarcacao",marcacao.getTipoMarc()));
+        postParameters.add(new BasicNameValuePair("Data",marcacao.getDataMarc() + "T" + marcacao.getHoraMarc()));
+        postParameters.add(new BasicNameValuePair("Longitude",String.valueOf(marcacao.getLongitudeMarc())));
+        postParameters.add(new BasicNameValuePair("Latitude",String.valueOf(marcacao.getLatitudeMarc())));
+        postParameters.add(new BasicNameValuePair("Local",marcacao.getLocalMarc()));
+        postParameters.add(new BasicNameValuePair("EstadoMarcacaoId",String.valueOf(marcacao.getIdEstadoMarc())));
+        postParameters.add(new BasicNameValuePair("HoraSincronizacao",dataAtual()));
+
+        executarTaskPut(url, postParameters, interfaceListener);
+    }
+
     public void retornarMarcacoes(int idResponsavel, interfaceResultadoAsyncPost interfaceListener)
     {
         String url = "http://simovws.azurewebsites.net/api/Marcacoes/GetMarcacaoPacientes/" + idResponsavel + "/1";
@@ -61,5 +78,13 @@ public class marcacaoHttp {
         httpG = new httpGet(url,postParameters);
         httpG.setOnResultListener(interfaceListener);
         httpG.execute();
+    }
+
+    private void executarTaskPut(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
+    {
+        httpPut httpP;
+        httpP = new httpPut(url, postParameters);
+        httpP.setOnResultListener(interfaceListener);
+        httpP.execute();
     }
 }

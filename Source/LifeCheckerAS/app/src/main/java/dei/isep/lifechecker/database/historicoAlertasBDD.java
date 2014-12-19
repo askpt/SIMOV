@@ -76,16 +76,7 @@ public class historicoAlertasBDD {
 	}
 
 	public long inserirHistoricoAlerta(historicoAlertas historicoAlerta) {
-		/*
-		 * public static final String COL_ID_PACIENTE_HISTO = "idPacienteHisto";
-		 * public static final String COL_ID_ALERTA_HISTO = "idAlertaHisto";
-		 * public static final String COL_HORA_HISTO = "horaAlertaHisto"; public
-		 * static final String COL_DATA_HISTO = "dataAlertaHisto"; public static
-		 * final String COL_LONG_HISTO = "longAlertaHisto"; public static final
-		 * String COL_LAT_HISTO = "latAlertaHisto"; public static final String
-		 * COL_NOME_LOCAL_HISTO = "nomeLocalHisto"; public static final String
-		 * COL_ESTAON_HISTO = "estaOnHisto";
-		 */
+
 		long valueResult = 0;
 		pacienteBDD paciente = new pacienteBDD(context);
 		if (paciente.existePaciente(historicoAlerta.getIdPacienteHistAlt()) == true) {

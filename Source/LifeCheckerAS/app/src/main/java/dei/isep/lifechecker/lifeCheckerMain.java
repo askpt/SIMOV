@@ -1,4 +1,4 @@
-﻿package dei.isep.lifechecker;
+package dei.isep.lifechecker;
 
 
 import dei.isep.lifechecker.database.estadoMarcacaoBDD;
@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+
 
 public class lifeCheckerMain extends Activity {
 	

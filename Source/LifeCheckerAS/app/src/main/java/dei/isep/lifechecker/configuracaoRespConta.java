@@ -1,6 +1,6 @@
 package dei.isep.lifechecker;
 
-import dei.isep.lifechecker.databaseonline.httpPost;
+import dei.isep.lifechecker.databaseonline.httpPut;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 	public EditText txtPassConfirm;
 	public TextView tvConfirmarMail;
 	public ProgressBar pbLoadingMail;
-	httpPost htPost;
+	httpPut htPost;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

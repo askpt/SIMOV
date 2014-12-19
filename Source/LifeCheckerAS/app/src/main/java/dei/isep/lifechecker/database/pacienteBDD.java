@@ -204,7 +204,7 @@ public class pacienteBDD {
         String horaSincroPaciente;
         String dataSincroPaciente;
 
-        String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE;// + " where " + COL_ID_RESP_PACI + " = " + id;
+        String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE + " where " + COL_ID_RESP_PACI + " = " + id;
         open();
         Cursor cursor = bdd.rawQuery(sqlQuery, null);
         if(cursor.moveToFirst())
