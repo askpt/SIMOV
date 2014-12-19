@@ -1,4 +1,4 @@
-package dei.isep.lifechecker;
+﻿package dei.isep.lifechecker;
 
 
 import dei.isep.lifechecker.database.estadoMarcacaoBDD;
@@ -58,6 +58,7 @@ public class lifeCheckerMain extends Activity {
         preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
         int configuracao = prefApp.getTipoUser();
 
+
         //0 = configuração (após instalação da aplicação)
         //1 = vista resposnavel;
         //2 = vista paciente
@@ -71,7 +72,7 @@ public class lifeCheckerMain extends Activity {
                 novaActivity = new Intent(lifeCheckerMain.this, responsavelMenu.class);
                 break;
             case 2:
-                novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
+                novaActivity = new Intent(lifeCheckerMain.this, pacienteMenu.class);
                 break;
             case 3:
                 novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);

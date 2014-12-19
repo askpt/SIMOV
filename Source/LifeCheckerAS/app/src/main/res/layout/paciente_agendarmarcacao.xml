@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,8 +28,8 @@
             android:id="@+id/tb_paciente_agendarmarcacao_marcacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/tb_paciente_agendarmarcacao_paciente"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/marcacao" />
@@ -59,8 +64,8 @@
             android:id="@+id/tb_paciente_agendarmarcacao_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_paciente_agendarmarcacao_hora"
             android:layout_alignLeft="@+id/tb_paciente_agendarmarcacao_hora"
+            android:layout_below="@+id/tb_paciente_agendarmarcacao_hora"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:ems="10"
@@ -80,3 +85,4 @@
     </RelativeLayout>
 
 </ScrollView>
+    </RelativeLayout>

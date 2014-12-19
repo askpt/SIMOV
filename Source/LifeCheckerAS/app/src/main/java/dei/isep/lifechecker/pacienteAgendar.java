@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.model.paciente;
+import dei.isep.lifechecker.other.lifeCheckerManager;
 
 import static android.view.View.OnClickListener;
 
@@ -26,6 +27,7 @@ public class pacienteAgendar extends Activity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.paciente_agendarmarcacao);
+        lifeCheckerManager.getInstance().inserirActionBar(this, R.string.agendarMarcacao);
 
         agendarMarcacao = (Button)findViewById(R.id.bt_paciente_agendarmarcacao_agendar);
         paciente = (EditText)findViewById(R.id.tb_paciente_agendarmarcacao_paciente);

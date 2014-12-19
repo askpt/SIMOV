@@ -60,7 +60,18 @@ public class itemPacienteConsultar extends ArrayAdapter<marcacao> {
         holder.hora.setText(rowItem.getHoraMarc());
         holder.local.setText(rowItem.getLocalMarc());
         holder.data.setText(rowItem.getDataMarc());
-        //Falta programar a imagem do estado
+
+        switch (rowItem.getIdEstadoMarc()){
+            case 1:
+                holder.estado.setBackgroundColor(R.color.verde);
+                break;
+            case 2:
+                holder.estado.setBackgroundColor(R.color.laranja);
+                break;
+            case 3:
+                holder.estado.setBackgroundColor(R.color.vermelho);
+                break;
+        }
 
         return convertView;
     }

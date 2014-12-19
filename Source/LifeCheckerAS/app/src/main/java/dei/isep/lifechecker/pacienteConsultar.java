@@ -25,6 +25,13 @@ public class pacienteConsultar extends Activity {
 
         ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
 
+        //Dados de Teste
+        listaMarcacoes.add(0, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(1, new marcacao(1, 1, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(2, new marcacao(1, 1, "Fisioterapia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(3, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(4, new marcacao(1, 1, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+
         itemPacienteConsultar adapter = new itemPacienteConsultar(context, R.layout.paciente_itemtipo_consultarmarcacoes, listaMarcacoes);
         listviewMarcacoes.setAdapter(adapter);
     }

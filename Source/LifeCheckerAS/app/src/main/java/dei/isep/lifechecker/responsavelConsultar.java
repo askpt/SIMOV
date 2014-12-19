@@ -42,7 +42,6 @@ public class responsavelConsultar extends Activity {
         preencherListaMarcacoes();
 	}
 
-
     private void preencherListaMarcacoes()
     {
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());

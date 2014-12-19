@@ -159,6 +159,14 @@ public class marcacao {
         geoCoderToLatLong.execute();
     }
 
+    public paciente getPaciente()
+    {
+        paciente pac = null;
+
+
+
+        return pac;
+    }
 	
 	
 	

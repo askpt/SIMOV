@@ -39,7 +39,7 @@ public class lifeCheckerManager {
 	private String mailPacienteResposnavel;
 	private String contactoPacienteResposnavel;
 
-    //****Local da aplicação
+    //****Local da aplicacao
     private Locale locale = new Locale("pt","PT");
 
 	
