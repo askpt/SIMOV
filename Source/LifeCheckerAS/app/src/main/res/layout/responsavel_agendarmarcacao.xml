@@ -36,7 +36,7 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/hora"
-            android:inputType="time" >
+            android:digits="0123456789:" >
 
 
         </EditText>

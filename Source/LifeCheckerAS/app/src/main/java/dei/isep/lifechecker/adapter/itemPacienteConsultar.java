@@ -63,13 +63,13 @@ public class itemPacienteConsultar extends ArrayAdapter<marcacao> {
 
         switch (rowItem.getIdEstadoMarc()){
             case 1:
-                holder.estado.setBackgroundColor(R.color.verde);
+                holder.estado.setBackgroundColor(context.getResources().getColor(R.color.verde));
                 break;
             case 2:
-                holder.estado.setBackgroundColor(R.color.laranja);
+                holder.estado.setBackgroundColor(context.getResources().getColor(R.color.laranja));
                 break;
             case 3:
-                holder.estado.setBackgroundColor(R.color.vermelho);
+                holder.estado.setBackgroundColor(context.getResources().getColor(R.color.vermelho));
                 break;
         }
 

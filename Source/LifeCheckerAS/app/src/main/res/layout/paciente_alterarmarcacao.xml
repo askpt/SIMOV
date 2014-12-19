@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,6 +42,8 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/hora"
+            android:focusable="false"
+            android:onClick="clickTime"
             android:inputType="time" >
 
 
@@ -52,9 +58,10 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/data"
-            android:inputType="date" >
+            android:onClick="onClick"
+            android:focusable="false" >
         </EditText>
-        
+
         <EditText
             android:id="@+id/tb_paciente_alterarmarcacao_local"
             android:layout_width="wrap_content"
@@ -77,6 +84,8 @@
 
 
 
+
     </RelativeLayout>
 
 </ScrollView>
+    </RelativeLayout>
