@@ -113,14 +113,6 @@ public class responsavelAgendar extends Activity{
         String local = ETlocal.getText().toString();
         validarDados validar = new validarDados();
 
-
-        boolean a = validar.validarTipoMarcacao(tipoMarcacao);
-        boolean b = validar.validarTempo24H(hora);
-        boolean c = validar.validarDataAMD(data);
-        boolean d = validar.validarLocalidade(local);
-        boolean e = validar.validarLatitude(latitude);
-        boolean f = validar.validarLongitude(longitude);
-
         if(validar.validarTipoMarcacao(tipoMarcacao) &&
                 validar.validarTempo24H(hora) &&
                 validar.validarDataAMD(data) &&

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="configuracao_inicial">Estamos a configurar a sua saude</string>
     <string name="app_name">LifeChecker</string>
     <string name="hello_world">Hello world!</string>
     <string name="configuracao">Configuração</string>
