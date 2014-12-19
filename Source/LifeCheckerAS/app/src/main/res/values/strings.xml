@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="configuracao_inicial">Estamos a configurar a sua saude</string>
+    <string name="app_name">LifeChecker</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="configuracao">Configuração</string>
+    <string name="responsavel">Responsável</string>
+    <string name="paciente">Paciente</string>
+    <string name="recuperacao">Recuperação</string>
+    <string name="dadosPessoais">Dados Pessoais</string>
+    <string name="nome">Nome</string>
+    <string name="apelido">Apelido</string>
+    <string name="telefone">Telefone</string>
+    <string name="criarConta">Criar Conta</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="confirmarPassword">Confirmar Password</string>
+    <string name="alertas">Alertas</string>
+    <string name="enviarMail">Enviar Mail</string>
+    <string name="enviarSMS">Enviar SMS</string>
+    <string name="periodicidade">Periodicidade</string>
+    <string name="noturno">Noturno</string>
+    <string name="minutos">Minutos</string>
+    <string name="diurno">Diurno</string>
+    <string name="avisoPeriodicidade">\'0\' (zero) é considerado desativado</string>
+    <string name="title_activity_zzzzzzz">Zzzzzzz</string>
+    <string name="dadosPaciente">Dados Paciente</string>
+    <string name="loginResponsavel">Login Responsável</string>
+    <string name="selecionarPaciente">Selecionar Paciente</string>
+    <string name="inserirMail">Inserir Mail</string>
+    <string name="rua">Rua</string>
+    <string name="cidade">Cidade</string>
+    <string name="textoLocalizacao">Ultima actualização às:</string>
+    <string name="alerta">Alerta</string>
+    <string name="novo">Novo</string>
+    <string name="proximasConsultas">Próximas Consultas</string>
+    <string name="lifechecker">LifeChecker</string>
+    <string name="detalhesMarcacao">Detalhes da Marcação</string>
+    <string name="localizarPacientes">Localizar Pacientes</string>
+    <string name="localizacaoDoPaciente">Localização do Paciente</string>
+    <string name="historicoDeAlertas">Histórico de Alertas</string>
+    <string name="editarPaciente">Editar Paciente</string>
+
+    <!-- Configuração -->
+    <string name="verificar_mail_verificando">A verificar o mail</string>
+    <string name="verificar_mail_disponivel">Mail disponivel</string>
+    <string name="verificar_mail_indisponivel">Mail já usado</string>
+    <string name="verificar_mail_formato_errado">Mail inválido</string>
+    <string name="verificar_password_formato_errado">Pass inválida, tem de conter: \n 1 &#8211; 0&#8211;9 \n 2 &#8211; a&#8211;z \n 3 &#8211; A&#8211;Z \n 4 &#8211; @; #; $; % \n 5 &#8211; 6&#8211;30 caracteres</string>
+    <string name="verificar_password_diferentes">Confirmação de password diferente</string>
+    <string name="hoje">Hoje</string>
+    <string name="agendarMarcacao">Agendar\nMarcação</string>
+    <string name="consultarMarcacao">Consultar\nMarcação</string>
+    <string name="validarMarcacao">Validar\nMarcação</string>
+    <string name="erro_conta">Erros na conta</string>
+    <string name="erro_dados_responsa">Erros nos dados pessoais</string>
+    <string name="erro_periodicidade">Erros nas periodicidades</string>
+    <string name="erro_paciente">Erros nos dados do paciente</string>
+    <string name="erro_nome">Erro nome</string>
+    <string name="erro_apelido">Erro apelido</string>
+    <string name="erro_contacto">Erro contacto</string>
+    <string name="erro_period_dirurn">Erro periodicidade diurna</string>
+    <string name="erro_period_noturn">Erro periodicidade noturna</string>
+    <string name="mail_livre_paciente">Mail paciente válido</string>
+    <string name="mail_usado_paciente">Mail paciente já usado</string>
+    <string name="localizar">Localizar</string>
+    <string name="pacientes">Pacientes</string>
+    <string name="marcacao">Marcação</string>
+    <string name="hora">Hora</string>
+    <string name="local">Local</string>
+    <string name="data">Data</string>
+    <string name="agendar">Agendar</string>
+    <string name="informacao">Informação</string>
+    <string name="sucesso">Sucesso</string>
+
+    <!-- Estado butões -->
+    <string name="esperar">Aguarde&#8230;</string>
+    <string name="validar">Validar</string>
+    <string name="cancelar">Cancelar</string>
+
+    <!-- Estado txtView -->
+    <string name="est_informacao">Estado</string>
+    <string name="est_inserir_paciente">A inserir Paciente</string>
+    <string name="est_inserir_responsavel">A inserir Responsével</string>
+    <string name="est_verificar_mail_resp">A verificar mail Responsável</string>
+    <string name="est_verificar_mail_paci">A verificar mail Paciente</string>
+    <string name="est_mail_enviado">Mail enviado com sucesso para: %1s</string>
+    <string name="est_mail_inexistente">Mail inexistente</string>
+    <string name="est_verificar_dados_login">Verificação dos dados</string>
+    <string name="est_recuperacao_pacientes">Recuperação dos pacientes</string>
+
+    <!-- Erros -->
+    <string name="err_login_errado">Dados login errados</string>
+    <string name="err_dados_formularios">Erros no formulário</string>
+
+    <!-- Titulos DialogsBoxs -->
+    <string name="novo_paciente">Novo Paciente</string>
+
+    <!-- Toast -->
+    <string name="local_invalido">Tem de ser mais preciso</string>
+</resources>

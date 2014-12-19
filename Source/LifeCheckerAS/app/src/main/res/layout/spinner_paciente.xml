@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_spinner_foto_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/human"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/txt_spiner_nome_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nome Paciente"
+        android:layout_alignBottom="@+id/img_spinner_foto_paciente"
+        android:layout_toRightOf="@+id/img_spinner_foto_paciente" />
+
+    <TextView
+        android:id="@+id/txt_spiner_apelido_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="3dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Apelido"
+        android:layout_marginLeft="20dp"
+        android:layout_alignBottom="@+id/txt_spiner_nome_paciente"
+        android:layout_toRightOf="@+id/txt_spiner_nome_paciente" />
+
+</RelativeLayout>

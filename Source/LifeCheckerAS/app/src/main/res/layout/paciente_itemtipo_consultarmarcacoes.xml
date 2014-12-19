@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/text_paciente_itemtipoconsultar_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_paciente_itemtipoconsultar_data"
+        android:layout_below="@+id/text_paciente_itemtipoconsultar_data"
+        android:text="@string/hora"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_paciente_itemtipoconsultar_marcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_paciente_itemtipoconsultar_hora"
+        android:layout_below="@+id/text_paciente_itemtipoconsultar_hora"
+        android:text="@string/marcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_paciente_itemtipoconsultar_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/data"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <ImageView
+        android:id="@+id/image_paciente_itemtipoconsultar_estado"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_paciente_itemtipoconsultar_marcacao"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/text_paciente_itemtipoconsultar_data"
+        android:layout_marginRight="10dp"
+        android:background="@color/verde" />
+
+    <TextView
+        android:id="@+id/text_paciente_itemtipoconsultar_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_paciente_itemtipoconsultar_marcacao"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/preto"
+        android:text="@string/local"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ProgressBar
+        android:id="@+id/loading_configuracao_selecaopaciente_lista_pacientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/text_configuracao_selecaopaciente_selecionarPaciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/selecionarPaciente"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/text_configuracao_selecaopaciente_selecionarPaciente"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/barra_azul" />
+
+    <Button
+        android:id="@+id/bt_configuracao_selecaopaciente_novo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="@string/novo" />
+
+    <ListView
+        android:id="@+id/list_configuracao_selecaopaciente_pacientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_configuracao_selecaopaciente_novo"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1" >
+
+    </ListView>
+
+</RelativeLayout>

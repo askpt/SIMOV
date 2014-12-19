@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipovalidar_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/preto"
+        android:text="@string/paciente"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipovalidar_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/preto"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_paciente"
+        android:layout_below="@+id/text_responsavel_itemtipovalidar_paciente"
+        android:text="@string/local"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipovalidar_hora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_data"
+        android:layout_below="@+id/text_responsavel_itemtipovalidar_data"
+        android:text="@string/hora"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipovalidar_marcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_hora"
+        android:layout_below="@+id/text_responsavel_itemtipovalidar_hora"
+        android:text="@string/marcacao"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <TextView
+        android:id="@+id/text_responsavel_itemtipovalidar_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/data"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_itemtipovalidar_not"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/text_responsavel_itemtipovalidar_local"
+        android:layout_toLeftOf="@+id/bt_responsavel_itemtipovalidar_yes"
+        android:layout_marginRight="5dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/errado" />
+
+    <ImageButton
+        android:id="@+id/bt_responsavel_itemtipovalidar_yes"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/text_responsavel_itemtipovalidar_local"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/certo" />
+
+</RelativeLayout>

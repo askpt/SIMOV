@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_data_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/data"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento"
+        android:layout_below="@+id/text_paciente_proximasconsultas_marcacao_value"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_marcacao_value" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_local_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/local"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/cinzento"
+        android:layout_below="@+id/text_paciente_proximasconsultas_data_value"
+        android:layout_alignLeft="@+id/text_paciente_proximasconsultas_data_value" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_hora_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hora"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/cinzento"
+        android:layout_alignTop="@+id/text_paciente_proximasconsultas_data_value"
+        android:layout_toRightOf="@+id/text_paciente_proximasconsultas_data_value" />
+
+    <TextView
+        android:id="@+id/text_paciente_proximasconsultas_marcacao_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:text="@string/marcacao"
+        android:textColor="@color/preto"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
