@@ -36,11 +36,11 @@ public class responsavelConsultar extends Activity {
 		ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
 
         //Dados de Teste
-        listaMarcacoes.add(0, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(1, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(2, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(3, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(4, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
+        listaMarcacoes.add(0, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(1, new marcacao(1, 1, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(2, new marcacao(1, 1, "Fisioterapia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(3, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        listaMarcacoes.add(4, new marcacao(1, 1, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
 
         itemResponsavelConsultar adapter = new itemResponsavelConsultar(context, R.layout.responsavel_itemtipo_listaconsultas, listaMarcacoes);
 		listviewMarcacoes.setAdapter(adapter);

@@ -53,7 +53,7 @@ public class lifeCheckerMain extends Activity {
 
         preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
         int configuracao = prefApp.getTipoUser();
-        configuracao = 1;
+        configuracao = 2;
 
         //0 = configuração
         //1 = vista resposnavel;
@@ -67,7 +67,7 @@ public class lifeCheckerMain extends Activity {
                 novaActivity = new Intent(lifeCheckerMain.this, responsavelMenu.class);
                 break;
             case 2:
-                novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
+                novaActivity = new Intent(lifeCheckerMain.this, pacienteMenu.class);
                 break;
         }
 		
