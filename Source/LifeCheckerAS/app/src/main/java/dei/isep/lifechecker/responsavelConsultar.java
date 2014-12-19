@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
+import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.databaseonline.marcacaoHttp;
+import dei.isep.lifechecker.json.marcacaoJson;
+import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
@@ -23,27 +27,57 @@ import android.widget.AdapterView.OnItemClickListener;
 public class responsavelConsultar extends Activity {
 	
 	ListView listviewMarcacoes = null;
-	
+    ArrayList<marcacao> listaMarcacoes;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_consultarmarcacoes);
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.consultarMarcacao);
-		Context context = getApplicationContext();
+
 		
 		listviewMarcacoes = (ListView)findViewById(R.id.list_responsavel_marcacoes);
 		
-		ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
+		listaMarcacoes = new ArrayList<marcacao>();
 
-        //Dados de Teste
-        listaMarcacoes.add(0, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(1, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(2, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(3, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(4, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
+        preencherListaMarcacoes();
+	}
 
-        itemResponsavelConsultar adapter = new itemResponsavelConsultar(context, R.layout.responsavel_itemtipo_listaconsultas, listaMarcacoes);
-		listviewMarcacoes.setAdapter(adapter);
+
+    private void preencherListaMarcacoes()
+    {
+        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+        int idResp = respBDD.getIdResponsavel();
+        marcacaoHttp marcaHttp = new marcacaoHttp();
+        marcaHttp.retornarMarcacoes(idResp,marcacaoGetAllValidas);
+    }
+
+    interfaceResultadoAsyncPost marcacaoGetAllValidas = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1 && conteudo.length() > 10)
+                    {
+                        marcacaoJson marcJ = new marcacaoJson(conteudo);
+                        listaMarcacoes = marcJ.transformJsonMarcacao();
+                        preencherListaConsultar();
+                        /*
+                        pacienteJson paciJson = new pacienteJson(conteudo);
+                        listaPacientes = paciJson.transformJsonPaciente();
+                        preencherLista();
+                        pbLoadingList.setVisibility(View.INVISIBLE);*/
+                    }
+
+                }
+            });
+        }
+    };
+
+    private void preencherListaConsultar()
+    {
+        itemResponsavelConsultar adapter = new itemResponsavelConsultar(getApplicationContext(), R.layout.responsavel_itemtipo_listaconsultas, listaMarcacoes);
+        listviewMarcacoes.setAdapter(adapter);
 
         listviewMarcacoes.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -53,6 +87,8 @@ public class responsavelConsultar extends Activity {
 
             }
         });
-	}
+    }
+
+
 
 }

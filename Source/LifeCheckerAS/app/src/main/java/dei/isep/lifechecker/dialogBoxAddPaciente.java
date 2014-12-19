@@ -5,6 +5,8 @@ import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 import dei.isep.lifechecker.other.validarDados;
+
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -54,7 +56,9 @@ public class dialogBoxAddPaciente extends DialogFragment {
 		return dialog;
 	}
 
-	@Override
+
+
+        @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View myView = inflater.inflate(R.layout.dialogbox_add_paciente,

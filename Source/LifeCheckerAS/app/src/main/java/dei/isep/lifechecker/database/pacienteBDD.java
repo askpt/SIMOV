@@ -158,13 +158,30 @@ public class pacienteBDD {
 		Cursor cursor = bdd.rawQuery(sqlQuery, null);
 		if(cursor.getCount() == 1)
 		{
+            close();
 			return true;
 		}
 		else
 		{
+            close();
 			return false;
 		}
+
 	}
+
+    public String getNomePacienteById(int id)
+    {
+        String nomePaciente = "";
+        String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE + " WHERE " + COL_ID_PACI + " = " + id;
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery, null);
+        if(cursor.moveToFirst()) {
+            nomePaciente = cursor.getString(cursor.getColumnIndex(COL_NOME_PACI));
+            nomePaciente += " " + cursor.getString(cursor.getColumnIndex(COL_APELIDO_PACI));
+        }
+        close();
+        return  nomePaciente;
+    }
 
     public ArrayList<paciente> listaPacientes(int id)
     {

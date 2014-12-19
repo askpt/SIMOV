@@ -8,16 +8,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import dei.isep.lifechecker.adapter.itemResponsavelAlertas;
 import dei.isep.lifechecker.adapter.itemResponsavelPacientes;
-import dei.isep.lifechecker.model.historicoAlertas;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
@@ -64,8 +59,30 @@ public class responsavelPacientes extends Activity implements OnClickListener {
 
 	public void onClick(final View v)
 	{
-		
+
+
 	};
+
+
+
+    interfaceResultadoDialogBox dialogBoxResult = new interfaceResultadoDialogBox() {
+
+        @Override
+        public void obterResultado(int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    //pbLoadingList.setVisibility(View.VISIBLE);
+                    //atualisarPacientes();
+
+                }
+            });
+
+        }
+    };
+
+
 
 
 }

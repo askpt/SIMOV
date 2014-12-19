@@ -1,6 +1,8 @@
 package dei.isep.lifechecker.adapter;
 
 import java.util.ArrayList;
+
+import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.R;
 import android.app.Activity;
@@ -52,8 +54,12 @@ public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 		{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
-		
-		holder.paciente.setText("Nome Paciente");
+
+        pacienteBDD paciBDD = new pacienteBDD(getContext());
+        String nomePaciente = paciBDD.getNomePacienteById(rowItem.getIdPacienteMarc());
+
+
+		holder.paciente.setText(String.valueOf(nomePaciente));
 		holder.marcacao.setText(rowItem.getTipoMarc());
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.local.setText(rowItem.getLocalMarc());

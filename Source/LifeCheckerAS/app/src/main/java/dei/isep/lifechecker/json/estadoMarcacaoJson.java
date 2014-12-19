@@ -57,10 +57,11 @@ public class estadoMarcacaoJson {
     {
         estadoMarcacao estMarc = new estadoMarcacao();
         try{
+            JsonGeral jsonGerl = new JsonGeral();
             estMarc.setIdEstadoMarcacao(jsonObj.getInt(ID_JSON_ESTMARC));
             estMarc.setExplicacaoEstMarc(jsonObj.getString(DESIGNACAO_JSON_ESTMARC));
-            estMarc.setDataSincroEstMarc(getDataSincroBDDOnline(jsonObj.getString(DATAHORASINCRO_JSON_ESTMARC)));
-            estMarc.setHoraSincroEstMarc(getHoraSincroBDDOnline(jsonObj.getString(DATAHORASINCRO_JSON_ESTMARC)));
+            estMarc.setDataSincroEstMarc(jsonGerl.getDataSincroBDDOnline(jsonObj.getString(DATAHORASINCRO_JSON_ESTMARC)));
+            estMarc.setHoraSincroEstMarc(jsonGerl.getHoraSincroBDDOnline(jsonObj.getString(DATAHORASINCRO_JSON_ESTMARC)));
         }
         catch (JSONException e)
         {
@@ -69,32 +70,6 @@ public class estadoMarcacaoJson {
         return estMarc;
     }
 
-    public String getDataSincroBDDOnline(String conteudo)
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = null;
-        try {
-            d = sdf.parse(conteudo);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String formattedTime = output.format(d);
-        return formattedTime;
-    }
 
-    public String getHoraSincroBDDOnline(String conteudo)
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat output = new SimpleDateFormat("HH:mm:ss");
-        Date d = null;
-        try {
-            d = sdf.parse(conteudo);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String formattedTime = output.format(d);
-        return formattedTime;
-    }
 
 }
