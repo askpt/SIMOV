@@ -124,6 +124,21 @@ namespace SIMOV_WS.Controllers
             return Ok(marcacao.HoraSincronizacao);
         }
 
+        [HttpGet]
+        [Route("GetMarcacaoPacientes/{responsavel}/{estado}")]
+        [ResponseType(typeof(List<Marcacao>))]
+        public IHttpActionResult GetMarcacaoPacientes(int responsavel, int estado)
+        {
+            var marcacoes = db.Marcacoes.Where(m => m.EstadoMarcacaoId == estado && db.Pacientes.FirstOrDefault(p=>p.ID == m.PacienteID && p.Responsavel_ID == responsavel) != null);
+
+            if (marcacoes == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(marcacoes.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

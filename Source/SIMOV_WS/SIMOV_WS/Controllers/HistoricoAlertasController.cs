@@ -124,6 +124,20 @@ namespace SIMOV_WS.Controllers
             return Ok(historico.HoraSincronizacao);
         }
 
+        [HttpGet]
+        [Route("GetAlertas/{responsavel}")]
+        [ResponseType(typeof(List<HistoricoAlertas>))]
+        public async Task<IHttpActionResult> GetAlertas(int responsavel)
+        {
+            var alertas = db.HistoricoAlertas.Where(a => db.Pacientes.FirstOrDefault(p => a.PacienteID == p.ID && p.Responsavel_ID == responsavel) != null);
+            if (alertas == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(alertas.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
