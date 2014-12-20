@@ -15,7 +15,8 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/preto"
         android:text="@string/paciente"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:maxLength="14"/>
 
     <TextView
         android:id="@+id/text_responsavel_itemtipovalidar_local"
@@ -25,7 +26,8 @@
         android:layout_alignLeft="@+id/text_responsavel_itemtipovalidar_paciente"
         android:layout_below="@+id/text_responsavel_itemtipovalidar_paciente"
         android:text="@string/local"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:maxLength="14"/>
 
     <TextView
         android:id="@+id/text_responsavel_itemtipovalidar_hora"

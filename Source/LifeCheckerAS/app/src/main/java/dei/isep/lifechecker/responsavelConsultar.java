@@ -3,25 +3,20 @@ package dei.isep.lifechecker;
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
-import dei.isep.lifechecker.adapter.itemResponsavelHoje;
+import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.json.marcacaoJson;
-import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -50,7 +45,7 @@ public class responsavelConsultar extends Activity {
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
         int idResp = respBDD.getIdResponsavel();
         marcacaoHttp marcaHttp = new marcacaoHttp();
-        marcaHttp.retornarMarcacoes(idResp,marcacaoGetAllValidas);
+        marcaHttp.retornarMarcacoesEstado(idResp, 1, marcacaoGetAllValidas);
     }
 
     interfaceResultadoAsyncPost marcacaoGetAllValidas = new interfaceResultadoAsyncPost() {
@@ -64,6 +59,13 @@ public class responsavelConsultar extends Activity {
                         marcacaoJson marcJ = new marcacaoJson(conteudo);
                         listaMarcacoes = marcJ.transformJsonMarcacao();
                         preencherListaConsultar();
+
+
+                        marcacaoBDD marcBDD = new marcacaoBDD(getApplicationContext());
+                        marcBDD.deleteMarcacoesByEstado(1);
+                        for (int i = 0; i < listaMarcacoes.size(); i++) {
+                            marcBDD.inserirMarcacaoComId(listaMarcacoes.get(i));
+                        }
                         /*
                         pacienteJson paciJson = new pacienteJson(conteudo);
                         listaPacientes = paciJson.transformJsonPaciente();
@@ -86,7 +88,7 @@ public class responsavelConsultar extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 pacienteBDD paciBdd = new pacienteBDD(getApplicationContext());
                 int idPaciente = listaMarcacoes.get(position).getIdPacienteMarc();
-                String nomePaciente = paciBdd.getNomePacienteById(idPaciente);
+                String nomePaciente = paciBdd.getNomeApelidoPacienteById(idPaciente);
 
                 int idMarcacao = listaMarcacoes.get(position).getIdMarcacaoMarc();
 

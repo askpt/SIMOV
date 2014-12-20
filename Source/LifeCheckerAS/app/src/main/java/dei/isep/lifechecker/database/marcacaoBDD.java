@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class marcacaoBDD {
 
@@ -110,10 +111,28 @@ public class marcacaoBDD {
         return valueResult;
     }
 
+    public void deleteConteudoMarcacoes()
+    {
+        String sqlQuery = "DELTE FROM " + TABLE_MARCACAO;
+        open();
+        bdd.delete(TABLE_MARCACAO, null, null);
+        close();
+    }
+
+    public void deleteMarcacoesByEstado(int idEstado)
+    {
+        String sqlQuery = "DELETE FROM " + TABLE_MARCACAO + " WHERE " + COL_ID_ESTADO_MARCA + " = " + idEstado;
+        Log.i("BDD: ",sqlQuery );
+        open();
+        bdd.delete(TABLE_MARCACAO, COL_ID_ESTADO_MARCA + " = " + idEstado, null);
+        close();
+    }
+
     public marcacao getMarcacaoByID(int idMarcacao)
     {
         marcacao marc = new marcacao();
         String sqlQuery = "SELECT * FROM " + TABLE_MARCACAO + " where " + COL_ID_MARCACAO_MARCA + " = " + idMarcacao;
+
         open();
         Cursor cursor = bdd.rawQuery(sqlQuery,null);
         if (cursor.moveToFirst())

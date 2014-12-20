@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -90,9 +91,10 @@ public class responsavelDetalhesMarcacao extends Activity{
         longitude = mar.getLongitudeMarc();
         latitude = mar.getLatitudeMarc();
 
-        addMarcador();
+
 
         paciente.setText(nomePaciente);
+        addMarcador();
     }
 
 
@@ -241,13 +243,14 @@ public class responsavelDetalhesMarcacao extends Activity{
                     @Override
                     public void run() {
                         googleMap.clear();
-                        MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude,longitude)).title(getResources().getString(R.string.marcacao));
+                        LatLng ltlg = new LatLng(latitude, longitude);
+                        MarkerOptions marker = new MarkerOptions().position(ltlg).title(getResources().getString(R.string.marcacao));
                         marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                         googleMap.addMarker(marker);
-                        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude));
-                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
+
+
+                        CameraUpdate center = CameraUpdateFactory.newCameraPosition(new CameraPosition(ltlg, 15, 0, 0));
                         googleMap.moveCamera(center);
-                        googleMap.animateCamera(zoom);
                     }
                 });
             }

@@ -2,10 +2,17 @@ package dei.isep.lifechecker.adapter;
 
 import java.util.ArrayList;
 
+import dei.isep.lifechecker.database.marcacaoBDD;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.databaseonline.marcacaoHttp;
+import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.R;
+import dei.isep.lifechecker.responsavelMenu;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +24,7 @@ import android.widget.TextView;
 public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
 
 	Context context;
+    marcacao mar;
 	
 	public itemResponsavelValidar(Context context, int layoutResourceId, ArrayList<marcacao> listaMarcacoes) {
 		super(context, layoutResourceId, listaMarcacoes);
@@ -34,10 +42,11 @@ public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
 		ImageButton valid;
 	}
 	
-	public View getView(int position, View convertView, ViewGroup parent)
+	public View getView(final int position, View convertView, ViewGroup parent)
 	{
 		MarcacaoHolder holder = null;
-		marcacao rowItem = getItem(position);
+		final marcacao rowItem = getItem(position);
+        mar = rowItem;
 		
 		LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		if (convertView == null)
@@ -56,14 +65,15 @@ public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
 			holder.invalid.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					
+
+                    alterarEstadoMarcacao(3);
 				}
 			});
 			
 			holder.valid.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					
+                    alterarEstadoMarcacao(1);
 				}
 			});
 		}
@@ -71,16 +81,49 @@ public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
 		{
 			holder = (MarcacaoHolder) convertView.getTag();
 		}
-		
-		holder.paciente.setText("Nome P.");
+
+        pacienteBDD paciBDD = new pacienteBDD(getContext());
+        String nomePaciente = paciBDD.getNomeApelidoPrimeiraLetPacienteById(rowItem.getIdPacienteMarc());
+
+
+        holder.paciente.setText(nomePaciente);
 		holder.local.setText(rowItem.getLocalMarc());
 		holder.data.setText(rowItem.getDataMarc());
 		holder.hora.setText(rowItem.getHoraMarc());
 		holder.marcacao.setText(rowItem.getTipoMarc());
-		
-		
-		
-		
+
 		return convertView;
 	}
+
+    private void alterarEstadoMarcacao(int idEstado)
+    {
+        mar.setIdEstadoMarc(idEstado);
+        marcacaoHttp marHttp = new marcacaoHttp();
+        marHttp.updateMarcacao(mar, resultadoUpdateMarcacao);
+    }
+
+    interfaceResultadoAsyncPost resultadoUpdateMarcacao = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+
+                    if(codigo == 1) {
+                        //String idValor = conteudo.replaceAll("[\\r\\n]+", "");
+                        //int idMarcacao  = Integer.valueOf(idValor);
+                        //mar.setIdMarcacaoMarc(idMarcacao);
+
+                        marcacaoBDD marcBDD = new marcacaoBDD(getContext());
+                        marcBDD.atualizarMarcacao(mar);
+
+
+                        Intent intent = new Intent(getContext(), responsavelMenu.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(intent);
+                    }
+                    else
+                    {
+                        //BTvalidarMarcacao.setEnabled(true);
+                    }
+
+        }
+    };
 }
