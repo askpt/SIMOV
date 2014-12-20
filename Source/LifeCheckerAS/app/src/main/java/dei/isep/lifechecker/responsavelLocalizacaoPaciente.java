@@ -64,17 +64,15 @@ public class responsavelLocalizacaoPaciente extends Activity {
         if (pac.getHoraLocalPaciente()!=null)
         {
             TVhora.setText(pac.getHoraLocalPaciente().substring(0, pac.getHoraLocalPaciente().length() - 3));
+            longitude = pac.getLongitudePaciente();
+            latitude = pac.getLatitudePaciente();
+            addMarcador();
         }
         else
         {
             TVhora.setText("sem dados");
         }
 
-
-        longitude = pac.getLongitudePaciente();
-        latitude = pac.getLatitudePaciente();
-
-        addMarcador();
     }
 
     public void preencherMapa()

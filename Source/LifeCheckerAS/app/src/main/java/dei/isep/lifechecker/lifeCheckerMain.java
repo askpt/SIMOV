@@ -1,4 +1,4 @@
-﻿package dei.isep.lifechecker;
+package dei.isep.lifechecker;
 
 
 import dei.isep.lifechecker.database.estadoMarcacaoBDD;

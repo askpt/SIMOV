@@ -52,7 +52,7 @@ public class itemResponsavelHoje extends ArrayAdapter<marcacao>{
 		}
 
         pacienteBDD paciBDD = new pacienteBDD(getContext());
-        String nomePaciente = paciBDD.getNomePacienteById(rowItem.getIdPacienteMarc());
+        String nomePaciente = paciBDD.getNomeApelidoPacienteById(rowItem.getIdPacienteMarc());
 		
 		holder.paciente.setText(nomePaciente);
 		holder.marcacao.setText(rowItem.getTipoMarc());

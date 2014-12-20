@@ -59,7 +59,7 @@ public class responsavelMenu extends Activity {
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
         int idResp = respBDD.getIdResponsavel();
         marcacaoHttp marcaHttp = new marcacaoHttp();
-        marcaHttp.retornarMarcacoes(idResp, marcacaoGetAllValidasHoje);
+        marcaHttp.retornarMarcacoesEstado(idResp, 1, marcacaoGetAllValidasHoje);
     }
 
     interfaceResultadoAsyncPost marcacaoGetAllValidasHoje = new interfaceResultadoAsyncPost() {
