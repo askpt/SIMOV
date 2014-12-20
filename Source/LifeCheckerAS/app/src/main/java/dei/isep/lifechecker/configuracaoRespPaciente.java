@@ -81,12 +81,13 @@ public class configuracaoRespPaciente extends Fragment implements
 						contactoPaciente));
 
 		pbConfiguracao.setVisibility(View.INVISIBLE);
+        tvComentarios.setVisibility(View.INVISIBLE);
 		return myView;
 	}
 
 	@Override
 	public void onClick(View v) {
-
+        tvComentarios.setVisibility(View.VISIBLE);
 		btnValidarResponsavel.setText(R.string.esperar);
 		btnValidarResponsavel.setEnabled(false);
 
@@ -337,6 +338,7 @@ public class configuracaoRespPaciente extends Fragment implements
                 public void run() {
                     String resultado = conteudo.replaceAll("[\r\n]+", "");
                     boolean resultadobool = Boolean.valueOf(resultado);
+                    boolean mostrarConteudo = false;
                     if (resultadobool == true) {
                         listaErros += getResources().getString(
                                 R.string.responsavel)
@@ -345,16 +347,23 @@ public class configuracaoRespPaciente extends Fragment implements
                                 R.string.verificar_mail_indisponivel)
                                 + "\n";
                         mailExiste = true;
+                        mostrarConteudo = true;
                     } else {
 
                         if (validMailPaciente == 0) {
                             validarmailOnlinePaciente();
                         }
+                        else
+                        {
+                            mostrarConteudo = true;
+                        }
                     }
-                    tvComentarios.setText(listaErros);
-                    pbConfiguracao.setVisibility(View.INVISIBLE);
-                    btnValidarResponsavel.setText(R.string.validar);
-                    btnValidarResponsavel.setEnabled(true);
+                    if (mostrarConteudo == true) {
+                        tvComentarios.setText(listaErros);
+                        pbConfiguracao.setVisibility(View.INVISIBLE);
+                        btnValidarResponsavel.setText(R.string.validar);
+                        btnValidarResponsavel.setEnabled(true);
+                    }
 
                 }
             });

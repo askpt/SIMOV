@@ -17,13 +17,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import dei.isep.lifechecker.adapter.spinnerPacienteAdapter;
 import dei.isep.lifechecker.database.marcacaoBDD;
@@ -75,7 +74,7 @@ public class responsavelAgendar extends Activity{
 		ETdata = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_data);
 		ETlocal = (EditText)findViewById(R.id.tb_responsavel_addmarcacao_local);
 
-        PBloadingMarcacao = (ProgressBar)findViewById(R.id.loading_add_marcacao_responsavel);
+        PBloadingMarcacao = (ProgressBar)findViewById(R.id.progressBar_action_bar);
 
         TVcomentariosAddMarca = (TextView)findViewById(R.id.tv_comentario_add_marcacao);
 
@@ -84,6 +83,7 @@ public class responsavelAgendar extends Activity{
 
         PBloadingMarcacao.setVisibility(View.INVISIBLE);
         BTaddMarcacao.setEnabled(false);
+        TVcomentariosAddMarca.setVisibility(View.INVISIBLE);
         preencherCmbox();
         preencherMapa();
 	}
@@ -170,14 +170,24 @@ public class responsavelAgendar extends Activity{
 
 	public void verLocal()
 	{
-        marcacao marca  = new marcacao();
-        String endereco = ETlocal.getText().toString();
+        validarDados validar = new validarDados();
+        if(validar.validarLocalidade(ETlocal.getText().toString()))
+        {
+            BTaddMarcacao.setEnabled(false);
+            marcacao marca  = new marcacao();
+            String endereco = ETlocal.getText().toString();
 
-        marca.getLatLong(endereco,interfaceListener,getApplicationContext());
+            marca.getLatLong(endereco, interfaceListenerViewLocal,getApplicationContext());
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),getResources().getString(R.string.local_invalido),Toast.LENGTH_LONG);
+        }
+
 	};
 
 
-    interfaceAgendarMarcacao interfaceListener = new interfaceAgendarMarcacao() {
+    interfaceAgendarMarcacao interfaceListenerViewLocal = new interfaceAgendarMarcacao() {
         @Override
         public void listaCoordenadas(final int codigo, final List<Address> enderecos) {
             runOnUiThread(new Runnable() {
@@ -189,6 +199,7 @@ public class responsavelAgendar extends Activity{
                         BTaddMarcacao.setEnabled(true);
                         addMarcador();
                     } else {
+                        BTaddMarcacao.setEnabled(true);
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
                     }
                 }
@@ -252,13 +263,13 @@ public class responsavelAgendar extends Activity{
                             @Override
                             public void run() {
                                 googleMap.clear();
-                                MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude,longitude)).title(getResources().getString(R.string.marcacao));
+                                LatLng ltlg = new LatLng(latitude, longitude);
+                                MarkerOptions marker = new MarkerOptions().position(ltlg).title(getResources().getString(R.string.marcacao));
                                 marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 googleMap.addMarker(marker);
-                                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude));
-                                CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
+                                CameraUpdate center = CameraUpdateFactory.newCameraPosition(new CameraPosition(ltlg, 15, 0, 0));
                                 googleMap.moveCamera(center);
-                                googleMap.animateCamera(zoom);
+
                             }
                         });
             }

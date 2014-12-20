@@ -57,7 +57,7 @@ public class responsavelDetalhesMarcacao extends Activity{
 
         BTvalidarMarcacao = (Button)findViewById(R.id.bt_responsavel_editmarcacao_agendar);
         BTvalidarLocal = (Button)findViewById(R.id.bt_responsavel_editmarcacao_validar_local);
-        PBloadingUpdate = (ProgressBar)findViewById(R.id.loading_edit_marcacao_responsavel);
+        PBloadingUpdate = (ProgressBar)findViewById(R.id.progressBar_action_bar);
         paciente = (EditText) findViewById(R.id.et_responsavel_editmarcacao_pacientes);
         ETmarcacao = (EditText)findViewById(R.id.tb_responsavel_editmarcacao_marcacao);
         EThora = (EditText)findViewById(R.id.tb_responsavel_editmarcacao_hora);
@@ -67,7 +67,6 @@ public class responsavelDetalhesMarcacao extends Activity{
         TVComentarios = (TextView)findViewById(R.id.tv_comentario_edit_marcacao);
 
         paciente.setEnabled(false);
-        PBloadingUpdate.setVisibility(View.INVISIBLE);
 
         findViewById(R.id.bt_responsavel_editmarcacao_agendar).setOnClickListener(btnCarregado);
         findViewById(R.id.bt_responsavel_editmarcacao_validar_local).setOnClickListener(btnCarregado);
@@ -165,7 +164,7 @@ public class responsavelDetalhesMarcacao extends Activity{
                         marcBDD.atualizarMarcacao(mar);
 
 
-                        Intent intent = new Intent(getApplication(), responsavelConsultar.class);
+                        Intent intent = new Intent(getApplication(), responsavelMenu.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getApplication().startActivity(intent);
                     }

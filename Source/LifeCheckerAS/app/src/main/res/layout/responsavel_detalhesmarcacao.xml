@@ -92,16 +92,6 @@
         android:layout_alignRight="@+id/tb_responsavel_editmarcacao_marcacao"
         android:layout_toRightOf="@+id/tb_responsavel_editmarcacao_local" />
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/loading_edit_marcacao_responsavel"
-        android:indeterminate="false"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentRight="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

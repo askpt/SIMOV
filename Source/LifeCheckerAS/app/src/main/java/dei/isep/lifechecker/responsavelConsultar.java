@@ -19,11 +19,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ProgressBar;
 
 public class responsavelConsultar extends Activity {
 	
 	ListView listviewMarcacoes = null;
     ArrayList<marcacao> listaMarcacoes;
+    ProgressBar PBloadingActionBar;
 
 
 	@Override
@@ -31,6 +33,7 @@ public class responsavelConsultar extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.responsavel_consultarmarcacoes);
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.consultarMarcacao);
+        PBloadingActionBar = (ProgressBar)findViewById(R.id.progressBar_action_bar);
 
 		
 		listviewMarcacoes = (ListView)findViewById(R.id.list_responsavel_marcacoes);
@@ -42,6 +45,7 @@ public class responsavelConsultar extends Activity {
 
     private void preencherListaMarcacoes()
     {
+        PBloadingActionBar.setVisibility(View.VISIBLE);
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
         int idResp = respBDD.getIdResponsavel();
         marcacaoHttp marcaHttp = new marcacaoHttp();
@@ -72,6 +76,10 @@ public class responsavelConsultar extends Activity {
                         preencherLista();
                         pbLoadingList.setVisibility(View.INVISIBLE);*/
                     }
+                    else
+                    {
+                        PBloadingActionBar.setVisibility(View.INVISIBLE);
+                    }
 
                 }
             });
@@ -99,6 +107,8 @@ public class responsavelConsultar extends Activity {
 
             }
         });
+
+        PBloadingActionBar.setVisibility(View.INVISIBLE);
     }
 
 
