@@ -58,7 +58,6 @@ public class lifeCheckerMain extends Activity {
 
         preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
         int configuracao = prefApp.getTipoUser();
-        configuracao = 2;
 
         //0 = configuração (após instalação da aplicação)
         //1 = vista resposnavel;
