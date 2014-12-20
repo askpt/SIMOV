@@ -57,9 +57,9 @@ public class marcacaoHttp {
         executarTaskPut(url, postParameters, interfaceListener);
     }
 
-    public void retornarMarcacoes(int idResponsavel, interfaceResultadoAsyncPost interfaceListener)
+    public void retornarMarcacoesEstado(int idResponsavel, int estado, interfaceResultadoAsyncPost interfaceListener)
     {
-        String url = "http://simovws.azurewebsites.net/api/Marcacoes/GetMarcacaoPacientes/" + idResponsavel + "/1";
+        String url = "http://simovws.azurewebsites.net/api/Marcacoes/GetMarcacaoPacientes/" + idResponsavel + "/" + estado;
         List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         executarTaskGet(url, postParameters, interfaceListener);
     }

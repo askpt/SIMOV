@@ -169,7 +169,7 @@ public class pacienteBDD {
 
 	}
 
-    public String getNomePacienteById(int id)
+    public String getNomeApelidoPacienteById(int id)
     {
         String nomePaciente = "";
         String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE + " WHERE " + COL_ID_PACI + " = " + id;
@@ -181,6 +181,23 @@ public class pacienteBDD {
         }
         close();
         return  nomePaciente;
+    }
+
+    public String getNomeApelidoPrimeiraLetPacienteById(int idPaciente)
+    {
+        String nomePaciente = "";
+        String apelidoPaciente = "";
+        String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE + " WHERE " + COL_ID_PACI + " = " + idPaciente;
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery, null);
+        if(cursor.moveToFirst()) {
+            nomePaciente = cursor.getString(cursor.getColumnIndex(COL_NOME_PACI));
+            apelidoPaciente = cursor.getString(cursor.getColumnIndex(COL_APELIDO_PACI));
+        }
+        close();
+
+        String resultado = nomePaciente + " " + apelidoPaciente.substring(0,1) + ".";
+        return  resultado;
     }
 
     public ArrayList<paciente> listaPacientes(int id)

@@ -56,7 +56,7 @@ public class itemResponsavelConsultar extends ArrayAdapter<marcacao>{
 		}
 
         pacienteBDD paciBDD = new pacienteBDD(getContext());
-        String nomePaciente = paciBDD.getNomePacienteById(rowItem.getIdPacienteMarc());
+        String nomePaciente = paciBDD.getNomeApelidoPacienteById(rowItem.getIdPacienteMarc());
 
 
 		holder.paciente.setText(String.valueOf(nomePaciente));

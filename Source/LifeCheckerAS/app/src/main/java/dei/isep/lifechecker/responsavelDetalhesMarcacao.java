@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -56,7 +57,7 @@ public class responsavelDetalhesMarcacao extends Activity{
 
         BTvalidarMarcacao = (Button)findViewById(R.id.bt_responsavel_editmarcacao_agendar);
         BTvalidarLocal = (Button)findViewById(R.id.bt_responsavel_editmarcacao_validar_local);
-        PBloadingUpdate = (ProgressBar)findViewById(R.id.loading_edit_marcacao_responsavel);
+        PBloadingUpdate = (ProgressBar)findViewById(R.id.progressBar_action_bar);
         paciente = (EditText) findViewById(R.id.et_responsavel_editmarcacao_pacientes);
         ETmarcacao = (EditText)findViewById(R.id.tb_responsavel_editmarcacao_marcacao);
         EThora = (EditText)findViewById(R.id.tb_responsavel_editmarcacao_hora);
@@ -66,7 +67,6 @@ public class responsavelDetalhesMarcacao extends Activity{
         TVComentarios = (TextView)findViewById(R.id.tv_comentario_edit_marcacao);
 
         paciente.setEnabled(false);
-        PBloadingUpdate.setVisibility(View.INVISIBLE);
 
         findViewById(R.id.bt_responsavel_editmarcacao_agendar).setOnClickListener(btnCarregado);
         findViewById(R.id.bt_responsavel_editmarcacao_validar_local).setOnClickListener(btnCarregado);
@@ -90,9 +90,10 @@ public class responsavelDetalhesMarcacao extends Activity{
         longitude = mar.getLongitudeMarc();
         latitude = mar.getLatitudeMarc();
 
-        addMarcador();
+
 
         paciente.setText(nomePaciente);
+        addMarcador();
     }
 
 
@@ -163,7 +164,7 @@ public class responsavelDetalhesMarcacao extends Activity{
                         marcBDD.atualizarMarcacao(mar);
 
 
-                        Intent intent = new Intent(getApplication(), responsavelConsultar.class);
+                        Intent intent = new Intent(getApplication(), responsavelMenu.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getApplication().startActivity(intent);
                     }
@@ -241,13 +242,14 @@ public class responsavelDetalhesMarcacao extends Activity{
                     @Override
                     public void run() {
                         googleMap.clear();
-                        MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude,longitude)).title(getResources().getString(R.string.marcacao));
+                        LatLng ltlg = new LatLng(latitude, longitude);
+                        MarkerOptions marker = new MarkerOptions().position(ltlg).title(getResources().getString(R.string.marcacao));
                         marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                         googleMap.addMarker(marker);
-                        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude));
-                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
+
+
+                        CameraUpdate center = CameraUpdateFactory.newCameraPosition(new CameraPosition(ltlg, 15, 0, 0));
                         googleMap.moveCamera(center);
-                        googleMap.animateCamera(zoom);
                     }
                 });
             }

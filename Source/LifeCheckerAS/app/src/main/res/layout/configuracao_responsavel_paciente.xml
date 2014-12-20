@@ -14,6 +14,14 @@
         android:text="@string/dadosPaciente"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <ProgressBar
+        android:id="@+id/loading_configuracao_resppaciente_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp" />
+
     <ImageView
         android:id="@+id/imageView1_paciente_resp"
         android:layout_width="wrap_content"
@@ -22,6 +30,34 @@
         android:layout_below="@+id/text_configuracao_resppaciente_dadospaciente"
         android:layout_marginTop="25dp"
         android:src="@drawable/barra_azul" />
+
+    <ImageView
+        android:id="@+id/img_configuracao_responsavel_paciente_flecha_esq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/flecha_esq" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imageView1_paciente_resp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/tb_configuracao_resppaciente_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:hint="@string/nome"
+        android:inputType="textPersonName" >
+
+    </EditText>
 
     <EditText
         android:id="@+id/tb_configuracao_resppaciente_apelido"
@@ -75,34 +111,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/est_informacao"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <EditText
-        android:id="@+id/tb_configuracao_resppaciente_nome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1_paciente_resp"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:layout_marginTop="15dp"
-        android:hint="@string/nome"
-        android:inputType="textPersonName" >
-
-    </EditText>
-
-    <ProgressBar
-        android:id="@+id/loading_configuracao_resppaciente_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp" />
-
-    <ImageView
-        android:id="@+id/img_configuracao_responsavel_paciente_flecha_esq"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/flecha_esq" />
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

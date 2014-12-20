@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loading_detalhesmarcacaovalidar_marcacao_responsavel"
+        android:indeterminate="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_paciente"
@@ -55,38 +57,64 @@
                 android:hint="@string/data"
                 android:inputType="date"></EditText>
 
+
+
             <EditText
                 android:id="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tb_responsavel_detalhesmarcacaovalidar_hora"
                 android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_hora"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:ems="10"
-                android:hint="@string/local" />
+                android:hint="@string/local"
+                android:layout_toLeftOf="@+id/bt_responsavel_detalhesmarcacaovalidar_validar_local" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:id="@+id/bt_responsavel_detalhesmarcacaovalidar_validar_local"
+        android:layout_alignBottom="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
+        android:layout_alignRight="@+id/tb_responsavel_detalhesmarcacaovalidar_data" />
+
+    <fragment
+        android:id="@+id/map_fragment_validar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/bt_responsavel_detalhesmarcacaovalidar_validar_local"
+        android:layout_above="@+id/bt_responsavel_detalhesmarcacaovalidar_yes" />
 
             <ImageButton
                 android:id="@+id/bt_responsavel_detalhesmarcacaovalidar_yes"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignRight="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
-                android:layout_below="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:src="@drawable/certo" />
+                android:src="@drawable/certo"
+                android:layout_alignTop="@+id/bt_responsavel_detalhesmarcacaovalidar_not"
+                android:layout_alignRight="@+id/bt_responsavel_detalhesmarcacaovalidar_validar_local" />
 
             <ImageButton
                 android:id="@+id/bt_responsavel_detalhesmarcacaovalidar_not"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignLeft="@+id/tb_responsavel_detalhesmarcacaovalidar_local"
-                android:layout_alignParentBottom="true"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:src="@drawable/errado" />
+                android:src="@drawable/errado"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/tb_responsavel_detalhesmarcacaovalidar_local" />
 
-        </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/ET_responsavel_detalhesmarcacaovalidar_comentarios"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 
-    </ScrollView>
 </RelativeLayout>
