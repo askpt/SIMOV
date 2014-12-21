@@ -21,7 +21,7 @@ namespace SIMOV_WS.Controllers
         // GET: api/Pacientes
         public List<Paciente> GetPacientes()
         {
-            return db.Pacientes.ToList();
+            return db.Pacientes.Where(p => p.Ativo).ToList();
         }
 
         // GET: api/Pacientes/5
@@ -29,7 +29,7 @@ namespace SIMOV_WS.Controllers
         public async Task<IHttpActionResult> GetPaciente(int id)
         {
             Paciente paciente = await db.Pacientes.FindAsync(id);
-            if (paciente == null)
+            if (paciente == null || !paciente.Ativo)
             {
                 return NotFound();
             }
@@ -57,6 +57,10 @@ namespace SIMOV_WS.Controllers
             }
 
             Paciente pacTemp = await db.Pacientes.FindAsync(id);
+            if (!pacTemp.Ativo)
+            {
+                return NotFound();
+            }
             paciente.HistoricoAlertas = pacTemp.HistoricoAlertas;
             paciente.Marcacoes = pacTemp.Marcacoes;
 
@@ -115,7 +119,7 @@ namespace SIMOV_WS.Controllers
         public async Task<IHttpActionResult> GetHoraSincronizacao(int id)
         {
             Paciente paciente = await db.Pacientes.FindAsync(id);
-            if (paciente == null)
+            if (paciente == null || !paciente.Ativo)
             {
                 return NotFound();
             }
@@ -128,7 +132,7 @@ namespace SIMOV_WS.Controllers
         [ResponseType(typeof(ICollection<Paciente>))]
         public async Task<IHttpActionResult> GetPacientes(int id)
         {
-            var pacientes = await db.Pacientes.Where(p => p.Responsavel_ID == id).ToArrayAsync();
+            var pacientes = await db.Pacientes.Where(p => p.Responsavel_ID == id && p.Ativo).ToArrayAsync();
 
             return Ok(pacientes);
         }

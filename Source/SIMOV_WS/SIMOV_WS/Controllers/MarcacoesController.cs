@@ -21,7 +21,7 @@ namespace SIMOV_WS.Controllers
         // GET: api/Marcacoes
         public List<Marcacao> GetMarcacoes()
         {
-            return db.Marcacoes.ToList();
+            return db.Marcacoes.Where(m => db.Pacientes.Count(p => (m.PacienteID == p.ID && p.Ativo)) > 0).ToList();
         }
 
         // GET: api/Marcacoes/5
@@ -29,7 +29,7 @@ namespace SIMOV_WS.Controllers
         public async Task<IHttpActionResult> GetMarcacao(int id)
         {
             Marcacao marcacao = await db.Marcacoes.FindAsync(id);
-            if (marcacao == null)
+            if (marcacao == null && db.Pacientes.Count(p => p.ID == marcacao.PacienteID && p.Ativo) > 0)
             {
                 return NotFound();
             }
@@ -49,6 +49,12 @@ namespace SIMOV_WS.Controllers
             if (id != marcacao.Id)
             {
                 return BadRequest();
+            }
+
+            var marc = await db.Marcacoes.FindAsync(id);
+            if (db.Pacientes.Count(p => p.ID == marc.PacienteID && p.Ativo) <= 0)
+            {
+                return NotFound();
             }
 
             db.Entry(marcacao).State = EntityState.Modified;
@@ -105,8 +111,14 @@ namespace SIMOV_WS.Controllers
 
         [HttpGet]
         [Route("ObterMarcacoesPacientes/{id}")]
-        public IQueryable<Marcacao> ObterMarcacoesPacientes(int id)
+        public async Task<IQueryable<Marcacao>> ObterMarcacoesPacientes(int id)
         {
+            var pac = await db.Pacientes.FindAsync(id);
+            if (pac == null || pac.Ativo)
+            {
+                return null;
+            }
+
             return db.Marcacoes.Where(h => h.PacienteID == id);
         }
 
@@ -129,7 +141,7 @@ namespace SIMOV_WS.Controllers
         [ResponseType(typeof(List<Marcacao>))]
         public IHttpActionResult GetMarcacaoPacientes(int responsavel, int estado)
         {
-            var marcacoes = db.Marcacoes.Where(m => m.EstadoMarcacaoId == estado && db.Pacientes.FirstOrDefault(p=>p.ID == m.PacienteID && p.Responsavel_ID == responsavel) != null);
+            var marcacoes = db.Marcacoes.Where(m => m.EstadoMarcacaoId == estado && db.Pacientes.FirstOrDefault(p => p.ID == m.PacienteID && p.Ativo && p.Responsavel_ID == responsavel) != null);
 
             if (marcacoes == null)
             {
