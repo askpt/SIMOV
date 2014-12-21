@@ -21,7 +21,7 @@ namespace SIMOV_WS.Controllers
         // GET: api/HistoricoAlertas
         public List<HistoricoAlertas> GetHistoricoAlertas()
         {
-            return db.HistoricoAlertas.ToList();
+            return db.HistoricoAlertas.Where(h => db.Pacientes.Count(p => (h.PacienteID == p.ID && p.Ativo)) > 0).ToList();
         }
 
         // GET: api/HistoricoAlertas/5
@@ -29,7 +29,7 @@ namespace SIMOV_WS.Controllers
         public async Task<IHttpActionResult> GetHistoricoAlertas(int id)
         {
             HistoricoAlertas historicoAlertas = await db.HistoricoAlertas.FindAsync(id);
-            if (historicoAlertas == null)
+            if (historicoAlertas == null && db.Pacientes.Count(p => p.ID == historicoAlertas.PacienteID && p.Ativo) > 0)
             {
                 return NotFound();
             }
@@ -49,6 +49,12 @@ namespace SIMOV_WS.Controllers
             if (id != historicoAlertas.Id)
             {
                 return BadRequest();
+            }
+
+            var hist = await db.HistoricoAlertas.FindAsync(id);
+            if (db.Pacientes.Count(p => p.ID == hist.PacienteID && p.Ativo) <= 0)
+            {
+                return NotFound();
             }
 
             db.Entry(historicoAlertas).State = EntityState.Modified;
@@ -105,8 +111,14 @@ namespace SIMOV_WS.Controllers
 
         [HttpGet]
         [Route("ObterHistoricoAlertaPacientes/{id}")]
-        public IQueryable<HistoricoAlertas> ObterHistoricoAlertaPacientes(int id)
+        public async Task<IQueryable<HistoricoAlertas>> ObterHistoricoAlertaPacientes(int id)
         {
+            var pac = await db.Pacientes.FindAsync(id);
+            if (pac == null || pac.Ativo)
+            {
+                return null;
+            }
+
             return db.HistoricoAlertas.Where(h => h.PacienteID == id);
         }
 
