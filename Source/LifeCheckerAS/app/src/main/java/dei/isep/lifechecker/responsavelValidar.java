@@ -18,11 +18,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 public class responsavelValidar extends Activity {
 	
 	ListView listviewMarcacoes = null;
     ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
+    ProgressBar PBloadingValidMarcacoesLista;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -32,7 +34,9 @@ public class responsavelValidar extends Activity {
 		Context context = getApplicationContext();
 		
 		listviewMarcacoes = (ListView)findViewById(R.id.list_responsavel_validar_listamarcacoes);
-		
+
+        PBloadingValidMarcacoesLista = (ProgressBar)findViewById(R.id.progressBar_action_bar);
+
 		ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
 
         preencherListaMarcacoesValidas();
@@ -50,6 +54,7 @@ public class responsavelValidar extends Activity {
 
     private void preencherListaMarcacoesValidas()
     {
+        PBloadingValidMarcacoesLista.setVisibility(View.VISIBLE);
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
         int idResp = respBDD.getIdResponsavel();
         marcacaoHttp marcaHttp = new marcacaoHttp();
@@ -78,6 +83,7 @@ public class responsavelValidar extends Activity {
 
             }
         });
+        PBloadingValidMarcacoesLista.setVisibility(View.INVISIBLE);
     }
 
     interfaceResultadoAsyncPost marcacaoGetAllAguarda = new interfaceResultadoAsyncPost() {
@@ -103,6 +109,10 @@ public class responsavelValidar extends Activity {
                     {
                         //preencherListaMarcacoesAguradar();
                         preencherListaConsultar();
+                    }
+                    else
+                    {
+                        PBloadingValidMarcacoesLista.setVisibility(View.INVISIBLE);
                     }
 
                 }
