@@ -1,5 +1,6 @@
 package dei.isep.lifechecker.other;
 
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,6 +73,7 @@ public class validarDados {
 
     public boolean validarLocalidade(String tipoMarcacao)
     {
+        System.out.println(tipoMarcacao.length());
         if(tipoMarcacao != null && tipoMarcacao.length() > 4)
         {
             return true;
@@ -161,4 +163,39 @@ public class validarDados {
         }
     }
 
+    public int[] getDataHoje()
+    {
+        Calendar c = Calendar.getInstance();
+        int[] datahoje = new int[3];
+        datahoje[0] = c.get(Calendar.YEAR);
+        datahoje[1] = c.get(Calendar.MONTH);
+        datahoje[2] = c.get(Calendar.DAY_OF_MONTH);
+        return datahoje;
+    }
+
+    /**
+     * USAR SOMENTE COM DATEPICKER
+     * @param y Ano devolvido pelo datePicker
+     * @param m Mês devolvido pelo datePicker (começa em zero)
+     * @param d Dia devolvido pelo datePicker
+     * @return String com a data formatada para inserção na BD
+     */
+    public String formatDate(int y, int m, int d)
+    {
+        m++; //A contagem dos meses pelo DatePicker começa em 0
+        String data = y+"-";
+        if (m < 10) data+="0"+m; else data+=m;
+        data+="-";
+        if (d < 10) data+="0"+d; else data+=d;
+        return data;
+    }
+
+    public String formatTime(int h, int m)
+    {
+        String hora = "";
+        if (h < 10) hora+="0"+h; else hora+=h;
+        hora+=":";
+        if (m < 10) hora+="0"+m; else hora+=m;
+        return hora;
+    }
 }

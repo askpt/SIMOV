@@ -58,7 +58,7 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="@string/data"
-            android:onClick="onClick"
+            android:onClick="clickDate"
             android:focusable="false" >
         </EditText>
 

@@ -15,8 +15,9 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 import dei.isep.lifechecker.other.lifeCheckerManager;
+import dei.isep.lifechecker.other.validarDados;
 
-public class pacienteAlterarMarcacao extends Activity implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class pacienteAlterarMarcacao extends Activity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
     Button validarAlteracoes = null;
     EditText paciente = null;
@@ -25,6 +26,7 @@ public class pacienteAlterarMarcacao extends Activity implements View.OnClickLis
     EditText data = null;
     EditText local = null;
     private FragmentManager supportFragmentManager;
+    private validarDados vd = new validarDados();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -39,33 +41,31 @@ public class pacienteAlterarMarcacao extends Activity implements View.OnClickLis
         data = (EditText)findViewById(R.id.tb_paciente_alterarmarcacao_data);
         local = (EditText)findViewById(R.id.tb_paciente_alterarmarcacao_local);
 
-        validarAlteracoes.setOnClickListener(this);
+//        validarAlteracoes.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(final View v)
+    public void clickDate(final View v)
     {
-        Calendar c = Calendar.getInstance();
-        DatePickerDialog dialog = new DatePickerDialog(this, this, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        int[] hoje = vd.getDataHoje();
+        DatePickerDialog dialog = new DatePickerDialog(this, this, hoje[0], hoje[1], hoje[2]);
         dialog.show();
     };
 
     public void clickTime (final View v)
     {
-
-        TimePickerDialog tp = new TimePickerDialog(this, this, 1, 1, true );
+        TimePickerDialog tp = new TimePickerDialog(this, this, 0, 0, true );
         tp.show();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        data.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+        data.setText(vd.formatDate(year, monthOfYear, dayOfMonth));
     }
 
 
     @Override
-    public void onTimeSet(TimePicker timePicker, int i, int i2) {
-        hora.setText(i+":"+i2);
+    public void onTimeSet(TimePicker timePicker, int hh, int mm) {
+        hora.setText(vd.formatTime(hh, mm));
     }
 }
 

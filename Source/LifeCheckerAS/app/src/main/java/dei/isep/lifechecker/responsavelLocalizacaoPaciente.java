@@ -47,7 +47,6 @@ public class responsavelLocalizacaoPaciente extends Activity {
         TVhora = (TextView) findViewById(R.id.text_responsavel_localizar_hora);
         PBloadingUpdate = (ProgressBar)findViewById(R.id.loading_responsavel_localizarpaciente);
 
-        TVpaciente.setEnabled(false);
         PBloadingUpdate.setVisibility(View.INVISIBLE);
 
         preencherMapa();
@@ -60,7 +59,7 @@ public class responsavelLocalizacaoPaciente extends Activity {
 
         pac = lifeCheckerManager.getInstance().getPac();
 
-        TVpaciente.setText(pac.getNomePaciente());
+        TVpaciente.setText(pac.getNomePaciente() + " " + pac.getApelidoPaciente());
         if (pac.getHoraLocalPaciente()!=null)
         {
             TVhora.setText(pac.getHoraLocalPaciente().substring(0, pac.getHoraLocalPaciente().length() - 3));

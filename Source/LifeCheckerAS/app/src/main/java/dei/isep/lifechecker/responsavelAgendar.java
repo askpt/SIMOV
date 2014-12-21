@@ -1,6 +1,8 @@
 package dei.isep.lifechecker;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
@@ -8,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 
@@ -36,7 +40,7 @@ import dei.isep.lifechecker.model.responsavel;
 import dei.isep.lifechecker.other.validarDados;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
-public class responsavelAgendar extends Activity{
+public class responsavelAgendar extends Activity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 	
 	Spinner spinnerPacientes;
 	Button BTvalidarLocal;
@@ -56,7 +60,7 @@ public class responsavelAgendar extends Activity{
     double latitude =0;
 
     private marcacao mar;
-
+    private validarDados vd = new validarDados();
 
     ArrayList<paciente> listaPac = new ArrayList<paciente>();
     ArrayList<String> listaNomePacientes = new ArrayList<String>();
@@ -88,6 +92,7 @@ public class responsavelAgendar extends Activity{
         preencherCmbox();
         preencherMapa();
 	}
+
 
     final OnClickListener btnCarregado = new OnClickListener()
     {
@@ -278,5 +283,28 @@ public class responsavelAgendar extends Activity{
         }.start();
     }
 
+    public void clickDate(final View v)
+    {
+        int[] hoje = vd.getDataHoje();
+        DatePickerDialog dialog = new DatePickerDialog(this, this, hoje[0], hoje[1], hoje[2]);
+        dialog.show();
+    };
 
+    public void clickTime (final View v)
+    {
+        TimePickerDialog tp = new TimePickerDialog(this, this, 0, 0, true );
+        tp.show();
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        ETdata.setText(vd.formatDate(year, monthOfYear, dayOfMonth));
+    }
+
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hh, int mm) {
+        EThora.setText(vd.formatTime(hh, mm));
+    }
 }

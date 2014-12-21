@@ -1,16 +1,20 @@
 package dei.isep.lifechecker;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,7 +35,7 @@ import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 import dei.isep.lifechecker.other.validarDados;
 
-public class responsavelDetalhesMarcacaoValidar extends Activity{
+public class responsavelDetalhesMarcacaoValidar extends Activity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
 
     ImageButton IBTvalidarYes = null;
     ImageButton IBTvalidarNo = null;
@@ -52,6 +56,7 @@ public class responsavelDetalhesMarcacaoValidar extends Activity{
     double latitude =0;
 
     private dei.isep.lifechecker.model.marcacao mar;
+    private validarDados vd = new validarDados();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -274,5 +279,30 @@ public class responsavelDetalhesMarcacaoValidar extends Activity{
         }
     };
 
+
+    public void clickDate(final View v)
+    {
+        int[] hoje = vd.getDataHoje();
+        DatePickerDialog dialog = new DatePickerDialog(this, this, hoje[0], hoje[1], hoje[2]);
+        dialog.show();
+    };
+
+    public void clickTime (final View v)
+    {
+        TimePickerDialog tp = new TimePickerDialog(this, this, 0, 0, true );
+        tp.show();
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        ETdata.setText(vd.formatDate(year, monthOfYear, dayOfMonth));
+    }
+
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hh, int mm) {
+        EThora.setText(vd.formatTime(hh, mm));
+    }
 
 }

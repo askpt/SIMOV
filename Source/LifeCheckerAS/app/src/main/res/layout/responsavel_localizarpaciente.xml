@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/preto"
         android:text="@string/paciente"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
