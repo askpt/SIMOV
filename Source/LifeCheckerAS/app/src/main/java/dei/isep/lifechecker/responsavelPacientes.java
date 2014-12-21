@@ -9,80 +9,92 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelPacientes;
+import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
 public class responsavelPacientes extends Activity implements OnClickListener {
-	
-	ListView listviewPacientes = null;
-	Button novoPaciente = null;
-	
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.responsavel_listapacientes);
+
+    ListView listviewPacientes = null;
+    Button novoPaciente = null;
+    ProgressBar PBloadingActionBar;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.responsavel_listapacientes);
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.pacientes);
         Context context = getApplicationContext();
-		
-		listviewPacientes = (ListView)findViewById(R.id.list_responsavel_listapacientes_pacientes);
-		novoPaciente = (Button)findViewById(R.id.bt_responsavel_listapacientes_novo);
-		
-		novoPaciente.setOnClickListener(this);
 
-        ArrayList<paciente> listaPacientes = new ArrayList<paciente>();
+        listviewPacientes = (ListView) findViewById(R.id.list_responsavel_listapacientes_pacientes);
+        novoPaciente = (Button) findViewById(R.id.bt_responsavel_listapacientes_novo);
 
-        //Dados de Teste
-        listaPacientes.add(0, new paciente(1, 1, "Nome", "Paciente", "Mail", "220000000", 0.0, 0.0, "Rua das Couves", "13:14:15", "2014-02-01", true, "HoraUp", "DataUp"));
-        listaPacientes.add(1, new paciente(1, 1, "Nome", "Paciente", "Mail", "220000000", 0.0, 0.0, "Rua das Couves", "13:14:15", "2014-02-01", true, "HoraUp", "DataUp"));
-        listaPacientes.add(2, new paciente(1, 1, "Nome", "Paciente", "Mail", "220000000", 0.0, 0.0, "Rua das Couves", "13:14:15", "2014-02-01", true, "HoraUp", "DataUp"));
-        listaPacientes.add(3, new paciente(1, 1, "Nome", "Paciente", "Mail", "220000000", 0.0, 0.0, "Rua das Couves", "13:14:15", "2014-02-01", true, "HoraUp", "DataUp"));
-        listaPacientes.add(4, new paciente(1, 1, "Nome", "Paciente", "Mail", "220000000", 0.0, 0.0, "Rua das Couves", "13:14:15", "2014-02-01", true, "HoraUp", "DataUp"));
+        novoPaciente.setOnClickListener(this);
 
-        itemResponsavelPacientes adapter = new itemResponsavelPacientes(context, R.layout.responsavel_itemtipo_pacientes, listaPacientes);
-        listviewPacientes.setAdapter(adapter);
+        PBloadingActionBar = (ProgressBar)findViewById(R.id.progressBar_action_bar);
+        preencherListaPacientes();
+    }
 
-        listviewPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+    private void preencherListaPacientes() {
 
-                startActivity(new Intent(responsavelPacientes.this, responsavelEditarPaciente.class));
+        PBloadingActionBar.setVisibility(View.VISIBLE);
+        Intent intent = getIntent();
+        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+        int idResp = intent.getIntExtra("idResponsavel", -1);
 
-            }
-        });
-	}
-	
-
-	public void onClick(final View v)
-	{
+        pacienteHttp paciHttp = new pacienteHttp();
+        paciHttp.retornarPacientesIdResposnavel(idResp, pacientesGetAllMeus);
 
 
-	};
+    }
 
 
+    public void onClick(final View v) {
 
-    interfaceResultadoDialogBox dialogBoxResult = new interfaceResultadoDialogBox() {
+        Intent intentGet = getIntent();
+        intentGet.getIntExtra("idResponsavel", -1);
+        Intent intent = new Intent(responsavelPacientes.this,responsavelNovoPaciente.class);
+        intent.putExtra("idResponsavel", intentGet.getIntExtra("idResponsavel", -1));
+        startActivity(intent);
+    }
 
+    ;
+
+    interfaceResultadoAsyncPost pacientesGetAllMeus = new interfaceResultadoAsyncPost() {
         @Override
-        public void obterResultado(int codigo, final String conteudo) {
+        public void obterResultado(final int codigo, final String conteudo) {
             runOnUiThread(new Runnable() {
-
                 @Override
                 public void run() {
-                    //pbLoadingList.setVisibility(View.VISIBLE);
-                    //atualisarPacientes();
+                    if (codigo == 1 && conteudo.length() > 10) {
+                        ArrayList<paciente> listaPaciente = new ArrayList<paciente>();
+                        pacienteJson paciJson = new pacienteJson(conteudo);
+                        listaPaciente = paciJson.transformJsonPaciente();
 
+                        itemResponsavelPacientes adapter = new itemResponsavelPacientes(getApplicationContext(), R.layout.responsavel_itemtipo_pacientes, listaPaciente);
+                        PBloadingActionBar.setVisibility(View.INVISIBLE);
+
+                        listviewPacientes.setAdapter(adapter);
+
+                        listviewPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                                startActivity(new Intent(responsavelPacientes.this, responsavelEditarPaciente.class));
+
+                            }
+                        });
+                    }
                 }
             });
-
         }
     };
-
-
-
-
 }

@@ -34,6 +34,7 @@ import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
@@ -216,14 +217,38 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
     public void preencherCmbox()
     {
 
-        responsavel resp = new responsavel();
+        PBloadingMarcacao.setVisibility(View.VISIBLE);
         responsavelBDD respBdd = new responsavelBDD(getApplicationContext());
         int idResponsavel = respBdd.getIdResponsavel();
 
-        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
-        listaPac = paciBDD.listaPacientes(idResponsavel);
+        pacienteHttp paciHttp = new pacienteHttp();
+        paciHttp.retornarPacientesIdResposnavel(idResponsavel,pacientesGetAllMeus);
 
 
+    }
+
+    interfaceResultadoAsyncPost pacientesGetAllMeus = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (codigo == 1 && conteudo.length() > 10) {
+                        ArrayList<paciente> listaPaciente = new ArrayList<paciente>();
+                        pacienteJson paciJson = new pacienteJson(conteudo);
+                        listaPac = paciJson.transformJsonPaciente();
+
+                        preencherSpinner();
+                        PBloadingMarcacao.setVisibility(View.INVISIBLE);
+
+                    }
+                }
+            });
+        }
+    };
+
+    public void preencherSpinner()
+    {
         spinnerPacientes.setAdapter(new spinnerPacienteAdapter(this, listaPac));
     }
 

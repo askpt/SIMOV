@@ -32,6 +32,7 @@ public class responsavelMenu extends Activity {
     ListView listaHoje = null;
     ArrayList<marcacao> listaMarcacoes;
     final String EXIT_MESSAGE = "Tem a certeza que pretende sair?";
+    int idResp = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class responsavelMenu extends Activity {
 
     private void preencherListaMarcacoes() {
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
-        int idResp = respBDD.getIdResponsavel();
+        idResp = respBDD.getIdResponsavel();
         marcacaoHttp marcaHttp = new marcacaoHttp();
         marcaHttp.retornarMarcacoesEstado(idResp, 1, marcacaoGetAllValidasHoje);
     }
@@ -116,7 +117,7 @@ public class responsavelMenu extends Activity {
                     intent = new Intent(responsavelMenu.this, responsavelPacientes.class);
                     break;
             }
-
+            intent.putExtra("idResponsavel",idResp);
             startActivity(intent);
 
         }

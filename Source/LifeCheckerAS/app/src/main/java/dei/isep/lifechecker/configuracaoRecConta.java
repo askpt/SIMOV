@@ -12,6 +12,7 @@ import dei.isep.lifechecker.json.responsavelJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
+import dei.isep.lifechecker.other.preferenciasAplicacao;
 import dei.isep.lifechecker.other.validarDados;
 
 import android.content.Intent;
@@ -244,6 +245,9 @@ public class configuracaoRecConta extends Fragment {
 
                         }
 
+                        preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
+                        prefApp.setTipoUser(1);
+
                         Intent intent = new Intent(getActivity(), responsavelMenu.class);
                         getActivity().startActivity(intent);
 
@@ -252,6 +256,9 @@ public class configuracaoRecConta extends Fragment {
                     }
                     else
                     {
+
+                        preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
+                        prefApp.setTipoUser(1);
 
                         Intent intent = new Intent(getActivity(), responsavelMenu.class);
                         getActivity().startActivity(intent);
