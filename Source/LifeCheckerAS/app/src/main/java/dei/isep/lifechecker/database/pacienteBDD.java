@@ -224,8 +224,7 @@ public class pacienteBDD {
         String sqlQuery = "SELECT * FROM " + TABLE_PACIENTE + " where " + COL_ID_RESP_PACI + " = " + id;
         open();
         Cursor cursor = bdd.rawQuery(sqlQuery, null);
-        if(cursor.moveToFirst())
-        {
+        while (cursor.moveToNext()){
             idPaciente = cursor.getInt(cursor.getColumnIndex(COL_ID_PACI));
             idResponsavelPaciente = cursor.getInt(cursor.getColumnIndex(COL_ID_RESP_PACI));
             nomePaciente = cursor.getString(cursor.getColumnIndex(COL_NOME_PACI));

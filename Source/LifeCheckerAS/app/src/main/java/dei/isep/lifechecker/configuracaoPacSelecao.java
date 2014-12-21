@@ -10,6 +10,8 @@ import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 import dei.isep.lifechecker.other.validarDados;
+
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -56,6 +59,14 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
 		Collections.reverse(listaPacientes);
 		itemConfiguracaoPaciente adapter = new itemConfiguracaoPaciente(getActivity().getApplicationContext(), R.layout.configuracao_item_paciente, listaPacientes);
 		lvPacientes.setAdapter(adapter);
+        lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), pacienteMenu.class);
+                intent.putExtra("idPaciente", listaPacientes.get(position).getIdPaciente());
+                startActivity(intent);
+            }
+        });
 	}
 	
 	@Override

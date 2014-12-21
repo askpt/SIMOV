@@ -33,19 +33,29 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress" >
+        </EditText>
 
-        <requestFocus />
+    <EditText
+        android:id="@+id/tb_configuracao_recuperacao_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tb_configuracao_recuperacao_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" >
+
     </EditText>
 
     <Button
         android:id="@+id/bt_configuracao_recuperacao_validar"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tb_configuracao_recuperacao_email"
-        android:layout_alignRight="@+id/tb_configuracao_recuperacao_email"
-        android:layout_below="@+id/tb_configuracao_recuperacao_email"
+        android:layout_below="@+id/tb_configuracao_recuperacao_pass"
         android:layout_marginTop="20dp"
-        android:text="@string/validar" />
+        android:text="@string/password" />
 
     <TextView
         android:id="@+id/text_configuracao_recuperacao_comentarios"
@@ -65,5 +75,13 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/validar"
+        android:id="@+id/bt_configuracao_recuperacao_entrar"
+        android:layout_above="@+id/text_configuracao_recuperacao_comentarios"
+        android:layout_alignRight="@+id/tb_configuracao_recuperacao_pass" />
 
 </RelativeLayout>

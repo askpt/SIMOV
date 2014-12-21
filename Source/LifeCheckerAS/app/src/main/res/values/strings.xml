@@ -78,6 +78,7 @@
     <string name="esperar">Aguarde&#8230;</string>
     <string name="validar">Validar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="recuperar">Recuperar</string>
 
     <!-- Estado txtView -->
     <string name="est_informacao">Estado</string>

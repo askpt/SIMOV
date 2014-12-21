@@ -29,6 +29,7 @@ import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
+import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
@@ -213,6 +214,7 @@ public class responsavelAgendar extends Activity{
         responsavel resp = new responsavel();
         responsavelBDD respBdd = new responsavelBDD(getApplicationContext());
         int idResponsavel = respBdd.getIdResponsavel();
+
         pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
         listaPac = paciBDD.listaPacientes(idResponsavel);
 

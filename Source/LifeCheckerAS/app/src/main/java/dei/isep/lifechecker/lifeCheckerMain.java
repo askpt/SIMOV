@@ -26,33 +26,9 @@ public class lifeCheckerMain extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
         pbLoadingInicial =(ProgressBar) findViewById(R.id.loading_home_aplication_respconta_loading);
-		/*
-		responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
-		responsavel resp = new responsavel("Diogo", "Leite", "912955395", true, true, 10, 10, "diogo@hotmail.com", "1234", "13:13:13", "12-12-12");
-		
-		respBDD.inserirResponsavel(resp);
-		respBDD.inserirResponsavel(resp);
-		respBDD.inserirResponsavel(resp);
-		
-		pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
-		paciente paciente = new paciente(1, "Maria", "tera", "andr@hotmail.com", "912542525", true, "13:13:13", "12-12-12");
 
-		paciBDD.inserirPaciente(paciente);
-		paciBDD.inserirPaciente(paciente);
-		paciente pacienteB = new paciente(2654, "Maria", "Leit�o", "andr@hotmail.com", "912542525", true, "13:13:13", "12-12-12");
-		paciBDD.inserirPaciente(pacienteB);
 		
-		alertaBDD alerBDD = new alertaBDD(getApplicationContext());
-		alerta alerta = new alerta("tetetete","13:13:13", "12-12-12");
-		
-		alerBDD.inserirAlerta(alerta);
-		alerBDD.inserirAlerta(alerta);
-		alerBDD.inserirAlerta(alerta);
-		alerBDD.inserirAlerta(alerta);
-		alerBDD.inserirAlerta(alerta);*/
-		
-		
-		Intent novaActivity = null;
+		Intent novaActivity;
 		/*pacienteBDD pacienteBDD = new pacienteBDD(getApplicationContext());
 		responsavelBDD responsavelBDD = new responsavelBDD(getApplicationContext());*/
 
@@ -70,16 +46,16 @@ public class lifeCheckerMain extends Activity {
                 break;
             case 1:
                 novaActivity = new Intent(lifeCheckerMain.this, responsavelMenu.class);
+                startActivity(novaActivity);
                 break;
             case 2:
                 novaActivity = new Intent(lifeCheckerMain.this, pacienteMenu.class);
+                startActivity(novaActivity);
                 break;
             case 3:
                 novaActivity = new Intent(lifeCheckerMain.this, configuracaoMenu.class);
+                startActivity(novaActivity);
                 break;
-        }
-		if(novaActivity != null) {
-            startActivity(novaActivity);
         }
 
 	}
