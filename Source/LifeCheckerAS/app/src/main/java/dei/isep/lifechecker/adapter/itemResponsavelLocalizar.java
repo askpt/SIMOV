@@ -26,7 +26,6 @@ public class itemResponsavelLocalizar extends ArrayAdapter<paciente>{
 	{
 		TextView paciente;
 		TextView rua;
-		TextView cidade;
 		TextView hora;
 	}
 	
@@ -42,7 +41,6 @@ public class itemResponsavelLocalizar extends ArrayAdapter<paciente>{
 			holder = new PacienteHolder();
 			holder.paciente = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipolocalizacao_paciente);
 			holder.rua = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipolocalizacao_rua);
-			holder.cidade = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipolocalizacao_cidade);
 			holder.hora = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipolocalizacao_hora);
 			convertView.setTag(holder);
 		}
@@ -53,7 +51,6 @@ public class itemResponsavelLocalizar extends ArrayAdapter<paciente>{
 		
 		holder.paciente.setText(rowItem.getNomePaciente() + " " + rowItem.getApelidoPaciente());
 		holder.rua.setText(rowItem.getNomeLocalPaciente());
-		holder.cidade.setText(rowItem.getNomeLocalPaciente());
 		holder.hora.setText(rowItem.getHoraLocalPaciente());
 		
 		return convertView;

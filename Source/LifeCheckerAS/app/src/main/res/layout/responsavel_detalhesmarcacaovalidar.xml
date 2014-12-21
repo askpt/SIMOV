@@ -44,6 +44,8 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:hint="@string/hora"
+                android:focusable="false"
+                android:onClick="clickTime"
                 android:inputType="time"></EditText>
 
             <EditText
@@ -55,6 +57,8 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:hint="@string/data"
+                android:focusable="false"
+                android:onClick="clickDate"
                 android:inputType="date"></EditText>
 
 
