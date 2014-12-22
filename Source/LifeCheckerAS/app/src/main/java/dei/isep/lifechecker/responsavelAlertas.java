@@ -8,17 +8,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelAlertas;
+import dei.isep.lifechecker.database.historicoAlertasBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.databaseonline.historicoAlertasHttp;
+import dei.isep.lifechecker.json.historicoAlertaJson;
 import dei.isep.lifechecker.model.historicoAlertas;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
 public class responsavelAlertas extends Activity {
 	
 	ListView listviewAlertas = null;
+    ArrayList<historicoAlertas> listaHistoricoAlertas;
+    ProgressBar PBloadingActionBarHistAlerConsultar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -28,6 +35,12 @@ public class responsavelAlertas extends Activity {
         Context context = getApplicationContext();
 
 		listviewAlertas = (ListView)findViewById(R.id.list_responsavel_alertas);
+        PBloadingActionBarHistAlerConsultar = (ProgressBar)findViewById(R.id.progressBar_action_bar);
+
+        listaHistoricoAlertas = new ArrayList<historicoAlertas>();
+
+        preencherHistoricoAlertas();
+        /*
 
         ArrayList<historicoAlertas> listaAlertas = new ArrayList<historicoAlertas>();
 
@@ -39,7 +52,47 @@ public class responsavelAlertas extends Activity {
         listaAlertas.add(4, new historicoAlertas(1, 1, 1, "12:13:14", "2014-02-01", 0.0, 0.0, "Rua das Couves", "HoraUp", "DataUp"));
 
         itemResponsavelAlertas adapter = new itemResponsavelAlertas(context, R.layout.responsavel_itemtipo_alertas, listaAlertas);
-        listviewAlertas.setAdapter(adapter);
+        listviewAlertas.setAdapter(adapter);*/
 	}
+
+    private void preencherHistoricoAlertas()
+    {
+        PBloadingActionBarHistAlerConsultar.setVisibility(View.VISIBLE);
+
+        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+        int idResp = respBDD.getIdResponsavel();
+
+        historicoAlertasHttp histAlHttp = new historicoAlertasHttp();
+        histAlHttp.retornarHistoricoAlertasIdResposnavel(idResp,historicoAlertasGetAllValidas);
+    }
+
+    private void preencherListaHistoricoAlertas()
+    {
+        itemResponsavelAlertas adapter = new itemResponsavelAlertas(getApplicationContext(), R.layout.responsavel_itemtipo_alertas, listaHistoricoAlertas);
+        listviewAlertas.setAdapter(adapter);
+        PBloadingActionBarHistAlerConsultar.setVisibility(View.INVISIBLE);
+    }
+
+    interfaceResultadoAsyncPost historicoAlertasGetAllValidas = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1 && conteudo.length() > 10)
+                    {
+                        historicoAlertaJson histoAlerJson = new historicoAlertaJson(conteudo);
+                        listaHistoricoAlertas = histoAlerJson.transformJsonHistoricoAlerta();
+                        preencherListaHistoricoAlertas();
+                    }
+                    else
+                    {
+                        PBloadingActionBarHistAlerConsultar.setVisibility(View.INVISIBLE);
+                    }
+
+                }
+            });
+        }
+    };
 
 }

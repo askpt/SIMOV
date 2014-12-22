@@ -21,7 +21,7 @@ public class pacienteJson {
 	private String LONG_JSON_PACI = "Longitude";
 	private String LAT_JSON_PACI = "Latitude";
 	private String NLOCAL_JSON_PACI = "NomeLocal";
-	private String DATA_JSON_PACI = "NomeLocal";
+	private String DATA_JSON_PACI = "Data";
 	private String ATIVO_JSON_PACI = "Ativo";
 	private String DATAHORASINCRO_JSON_PACI = "HoraSincronizacao";
 	private String ID_RESP_JSON_PACI = "Responsavel_ID";
@@ -64,12 +64,21 @@ public class pacienteJson {
 	{
 		paciente paci = new paciente();
 		try {
+            JsonGeral jsonGerl = new JsonGeral();
 			paci.setIdPaciente(jsonObj.getInt(ID_JSON_PACI));
 			paci.setNomePaciente(jsonObj.getString(NOME_JSON_PACI));
 			paci.setApelidoPaciente(jsonObj.getString(APELIDO_JSON_PACI));
 			paci.setMailPaciente(jsonObj.getString(MAIL_JSON_PACI));
 			paci.setContactoPaciente(jsonObj.getString(CONTACTOTLF_JSON_PACI));
+            paci.setLongitudePaciente(jsonObj.getDouble(LONG_JSON_PACI));
+            paci.setLatitudePaciente(jsonObj.getDouble(LAT_JSON_PACI));
+            paci.setNomeLocalPaciente(jsonObj.getString(NLOCAL_JSON_PACI));
+            paci.setHoraLocalPaciente(jsonGerl.getHoraSincroBDDOnline(jsonObj.getString(DATA_JSON_PACI)));
+            paci.setDataLocalPaciente(jsonGerl.getDataSincroBDDOnline(jsonObj.getString(DATA_JSON_PACI)));
+            paci.setAtivoPaciente(jsonObj.getBoolean(ATIVO_JSON_PACI));
 			paci.setIdResponsavelPaciente(jsonObj.getInt(ID_RESP_JSON_PACI));
+            paci.setHoraSincroPaciente(jsonGerl.getHoraSincroBDDOnline(jsonObj.getString(DATAHORASINCRO_JSON_PACI)));
+            paci.setDataSincroPaciente(jsonGerl.getDataSincroBDDOnline(jsonObj.getString(DATAHORASINCRO_JSON_PACI)));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

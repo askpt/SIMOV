@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.R;
+import dei.isep.lifechecker.database.alertaBDD;
+import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.model.historicoAlertas;
 
 public class itemResponsavelAlertas extends ArrayAdapter<historicoAlertas> {
@@ -52,9 +54,15 @@ public class itemResponsavelAlertas extends ArrayAdapter<historicoAlertas> {
         {
             holder = (AlertaHolder) convertView.getTag();
         }
+        pacienteBDD paciBDD = new pacienteBDD(getContext());
+        String nomePaciente = paciBDD.getNomeApelidoPacienteById(rowItem.getIdPacienteHistAlt());
 
-        holder.paciente.setText("Nome do Paciente");
-        holder.alerta.setText("Tipo de Alerta");
+        alertaBDD alrtBDD = new alertaBDD((getContext()));
+        String designacao = alrtBDD.getDesignacaoById(rowItem.getIdAlertaHistAlt());
+
+
+        holder.paciente.setText(nomePaciente);
+        holder.alerta.setText(designacao);
         holder.rua.setText(rowItem.getLocalHistAlt());
         holder.data.setText(rowItem.getDataHistAlt());
         holder.hora.setText(rowItem.getHoraHistAlt());

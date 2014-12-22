@@ -14,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -34,6 +35,8 @@ public class responsavelLocalizacaoPaciente extends Activity {
 
     double longitude =0;
     double latitude =0;
+
+    LatLng ltlg;
 
     private paciente pac;
 
@@ -57,14 +60,28 @@ public class responsavelLocalizacaoPaciente extends Activity {
     {
         Intent intent = getIntent();
 
-        pac = lifeCheckerManager.getInstance().getPac();
+        //pac = lifeCheckerManager.getInstance().getPac();
+        String nome = intent.getStringExtra("nome");
+        String apelido = intent.getStringExtra("apelido");
+        double longitudeRes = intent.getDoubleExtra("longitude",-1);
+        double latitudeRes = intent.getDoubleExtra("latitude", -1);
+        String dataLocal = intent.getStringExtra("data");
+        String horaLocal = intent.getStringExtra("hora");
 
-        TVpaciente.setText(pac.getNomePaciente() + " " + pac.getApelidoPaciente());
-        if (pac.getHoraLocalPaciente()!=null)
+        /*
+
+                intent.putExtra("hora", listaPacientes.get(position).getHoraLocalPaciente());
+                intent.putExtra("data", listaPacientes.get(position).getDataLocalPaciente());
+         */
+
+        TVpaciente.setText(nome + " " + apelido);
+        if (longitudeRes != -1 && latitudeRes != -1 && dataLocal != null && horaLocal != null)
         {
-            TVhora.setText(pac.getHoraLocalPaciente().substring(0, pac.getHoraLocalPaciente().length() - 3));
-            longitude = pac.getLongitudePaciente();
-            latitude = pac.getLatitudePaciente();
+            TVhora.setText(horaLocal + " " + dataLocal);
+            longitude = longitudeRes;
+            latitude = latitudeRes;
+            LatLng latlng = new LatLng(latitude,longitude);
+            ltlg = latlng;
             addMarcador();
         }
         else
@@ -109,12 +126,11 @@ public class responsavelLocalizacaoPaciente extends Activity {
                     public void run() {
                         googleMap.clear();
                         MarkerOptions marker = new MarkerOptions().position(new LatLng(latitude,longitude)).title(getResources().getString(R.string.marcacao));
-                        marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                         googleMap.addMarker(marker);
-                        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude));
-                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
+
+                        CameraUpdate center = CameraUpdateFactory.newCameraPosition(new CameraPosition(ltlg, 15, 0, 0));
                         googleMap.moveCamera(center);
-                        googleMap.animateCamera(zoom);
                     }
                 });
             }

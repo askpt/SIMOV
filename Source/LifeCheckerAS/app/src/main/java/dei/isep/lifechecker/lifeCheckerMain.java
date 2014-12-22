@@ -1,14 +1,19 @@
 package dei.isep.lifechecker;
 
 
+import dei.isep.lifechecker.database.alertaBDD;
 import dei.isep.lifechecker.database.estadoMarcacaoBDD;
+import dei.isep.lifechecker.databaseonline.alertaHttp;
 import dei.isep.lifechecker.databaseonline.estadoMarcacaoHttp;
+import dei.isep.lifechecker.json.alertaJson;
 import dei.isep.lifechecker.json.estadoMarcacaoJson;
+import dei.isep.lifechecker.model.alerta;
 import dei.isep.lifechecker.model.estadoMarcacao;
 import dei.isep.lifechecker.other.preferenciasAplicacao;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -18,6 +23,7 @@ public class lifeCheckerMain extends Activity {
 	
 	Intent intent = null;
     ArrayList<estadoMarcacao> listaEstMar;
+    ArrayList<alerta> listaAlerta;
     ProgressBar pbLoadingInicial;
 	
 
@@ -66,6 +72,12 @@ public class lifeCheckerMain extends Activity {
         estMarHttp.retornarEstadosMarcacoes(recuperarEstamarcacao);
     }
 
+    public void preencherTiposAlertas()
+    {
+        alertaHttp alertHttp = new alertaHttp();
+        alertHttp.retornarTiposAlertas(recuperarAlerta);
+    }
+
     interfaceResultadoAsyncPost recuperarEstamarcacao = new interfaceResultadoAsyncPost()
     {
         @Override
@@ -80,6 +92,30 @@ public class lifeCheckerMain extends Activity {
                         for (int i = 0; i < listaEstMar.size(); i++) {
                             estMarBDD.inserirEstadoMarcacao(listaEstMar.get(i));
 
+                        }
+                        preencherTiposAlertas();
+                    }
+
+                }
+            });
+        }
+
+    };
+
+    interfaceResultadoAsyncPost recuperarAlerta = new interfaceResultadoAsyncPost()
+    {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (codigo == 1 && conteudo.length() > 10) {
+                        alertaJson alertJson= new alertaJson(conteudo);
+                        listaAlerta = alertJson.transformJsonAlertas();
+                        alertaBDD alrtBdd = new alertaBDD(getApplicationContext());
+
+                        for (int i = 0; i < listaAlerta.size(); i++) {
+                            alrtBdd.inserirAlerta(listaAlerta.get(i));
                         }
                         preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
                         prefApp.setTipoUser(3);

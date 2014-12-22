@@ -9,6 +9,7 @@ import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
+import dei.isep.lifechecker.other.preferenciasAplicacao;
 import dei.isep.lifechecker.other.validarDados;
 
 import android.content.Intent;
@@ -62,6 +63,10 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
         lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
+                prefApp.setTipoUser(2);
+
                 Intent intent = new Intent(getActivity(), pacienteMenu.class);
                 intent.putExtra("idPaciente", listaPacientes.get(position).getIdPaciente());
                 startActivity(intent);

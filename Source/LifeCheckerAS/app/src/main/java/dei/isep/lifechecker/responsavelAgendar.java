@@ -68,7 +68,6 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
     private validarDados vd = new validarDados();
 
     ArrayList<paciente> listaPac = new ArrayList<paciente>();
-    ArrayList<String> listaNomePacientes = new ArrayList<String>();
 
     LatLng ltlg;
 	

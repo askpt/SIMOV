@@ -107,10 +107,6 @@ public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
         public void obterResultado(final int codigo, final String conteudo) {
 
                     if(codigo == 1) {
-                        //String idValor = conteudo.replaceAll("[\\r\\n]+", "");
-                        //int idMarcacao  = Integer.valueOf(idValor);
-                        //mar.setIdMarcacaoMarc(idMarcacao);
-
                         marcacaoBDD marcBDD = new marcacaoBDD(getContext());
                         marcBDD.atualizarMarcacao(mar);
 
@@ -121,6 +117,9 @@ public class itemResponsavelValidar extends ArrayAdapter<marcacao>{
                     }
                     else
                     {
+                        /*Intent intent = new Intent(getContext(), responsavelMenu.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(intent);*/
                         //BTvalidarMarcacao.setEnabled(true);
                     }
 
