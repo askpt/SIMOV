@@ -60,7 +60,7 @@ public class pacienteJson {
 		return listaPacientes;
 	}
 	
-	private paciente transformJsonOneResponsavel()
+	public paciente transformJsonOneResponsavel()
 	{
 		paciente paci = new paciente();
 		try {

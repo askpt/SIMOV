@@ -252,6 +252,52 @@ public class pacienteBDD {
         close();
         return list;
     }
+
+    public long atualizarPaciente(paciente paciente)
+    {
+        String condicao = COL_ID_PACI + " = " + paciente.getIdPaciente();
+        long valueResult = 0;
+        open();
+        ContentValues value = new ContentValues();
+        value.put(COL_ID_PACI, paciente.getIdPaciente());
+        value.put(COL_ID_RESP_PACI, paciente.getIdResponsavelPaciente());
+        value.put(COL_NOME_PACI, paciente.getNomePaciente());
+        value.put(COL_APELIDO_PACI, paciente.getApelidoPaciente());
+        value.put(COL_MAIL_PACI, paciente.getMailPaciente());
+        value.put(COL_CONTACTO_PACI, paciente.getContactoPaciente());
+        value.put(COL_ATIVO_PACI, paciente.getApelidoPaciente());
+        value.put(COL_HORA_SINCRO_RESP, baseDeDados.horaAtual());
+        value.put(COL_DATA_SINCRO_RESP, baseDeDados.dataAtual());
+        valueResult =  bdd.update(TABLE_PACIENTE, value, condicao, null);
+        close();
+        return valueResult;
+    }
+
+    public paciente getPacienteById(int idPaciente)
+    {
+        paciente paci = new paciente();
+        String sqlQury = "SELECT * FROM "+ TABLE_PACIENTE + " WHERE " + COL_ID_PACI + " = " +idPaciente;
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQury,null);
+        if(cursor.moveToFirst())
+        {
+            paci.setIdPaciente(cursor.getInt(cursor.getColumnIndex(COL_ID_PACI)));;
+            paci.setIdResponsavelPaciente(cursor.getInt(cursor.getColumnIndex(COL_ID_RESP_PACI)));;
+            paci.setNomePaciente(cursor.getString(cursor.getColumnIndex(COL_NOME_PACI)));
+            paci.setApelidoPaciente(cursor.getString(cursor.getColumnIndex(COL_APELIDO_PACI)));
+            paci.setMailPaciente(cursor.getString(cursor.getColumnIndex(COL_MAIL_PACI)));
+            paci.setContactoPaciente(cursor.getString(cursor.getColumnIndex(COL_CONTACTO_PACI)));
+            paci.setLatitudePaciente(cursor.getDouble(cursor.getColumnIndex(COL_LAT_PACI)));
+            paci.setLongitudePaciente(cursor.getDouble(cursor.getColumnIndex(COL_LONG_PACI)));
+            paci.setNomeLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_NOME_LOCAL_PACI)));
+            paci.setHoraLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_HORA_LOCAL_PACI)));
+            paci.setDataLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_DATA_LOCAL_PACI)));
+            paci.setHoraSincroPaciente(cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP)));
+            paci.setDataSincroPaciente(cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP)));
+        }
+        close();
+        return  paci;
+    }
 	
 	public int getNumPacientes()
 	{
@@ -264,6 +310,14 @@ public class pacienteBDD {
 		close();
 		return quantidade;
 	}
+
+    public void deleteConteudoPaciente()
+    {
+        String sqlQuery = "DELTE FROM " + TABLE_PACIENTE;
+        open();
+        bdd.delete(TABLE_PACIENTE, null, null);
+        close();
+    }
 	
 	
 	public String getCreateTable()

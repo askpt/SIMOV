@@ -227,4 +227,16 @@ public class paciente {
     public String getDataLocalPaciente() {
         return dataLocalPaciente;
     }
+
+    public void setDataLocalPaciente(String dataLocalPaciente) {
+        this.dataLocalPaciente = dataLocalPaciente;
+    }
+
+    public boolean isAtivoPaciente() {
+        return ativoPaciente;
+    }
+
+    public boolean isEstaOnlinePaciente() {
+        return estaOnlinePaciente;
+    }
 }

@@ -25,6 +25,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +35,7 @@ import dei.isep.lifechecker.adapter.spinnerPacienteAdapter;
 import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
+import dei.isep.lifechecker.databaseonline.locationHTTP;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.json.pacienteJson;
@@ -65,6 +69,8 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
 
     ArrayList<paciente> listaPac = new ArrayList<paciente>();
     ArrayList<String> listaNomePacientes = new ArrayList<String>();
+
+    LatLng ltlg;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -177,6 +183,7 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
 
 	public void verLocal()
 	{
+
         validarDados validar = new validarDados();
         if(validar.validarLocalidade(ETlocal.getText().toString()))
         {
@@ -184,7 +191,10 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
             marcacao marca  = new marcacao();
             String endereco = ETlocal.getText().toString();
 
-            marca.getLatLong(endereco, interfaceListenerViewLocal,getApplicationContext());
+            locationHTTP localti = new locationHTTP();
+            localti.obterCoordenadasPorString(endereco,listenerLocal);
+
+            //marca.getLatLong(endereco, interfaceListenerViewLocal,getApplicationContext());
         }
         else
         {
@@ -192,6 +202,33 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
         }
 
 	};
+
+    interfaceResultadoAsyncPost listenerLocal = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (codigo == 1 && conteudo.length() > 10) {
+                       locationHTTP localH = new locationHTTP();
+                        try {
+                            JSONObject jsonConteudo = new JSONObject(conteudo);
+                            ltlg = localH.getLatLong(jsonConteudo);
+                            BTaddMarcacao.setEnabled(true);
+                            longitude = ltlg.longitude;
+                            latitude = ltlg.latitude;
+                            addMarcador();
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }
+            });
+        }
+    };
 
 
     interfaceAgendarMarcacao interfaceListenerViewLocal = new interfaceAgendarMarcacao() {
@@ -295,7 +332,6 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
                             @Override
                             public void run() {
                                 googleMap.clear();
-                                LatLng ltlg = new LatLng(latitude, longitude);
                                 MarkerOptions marker = new MarkerOptions().position(ltlg).title(getResources().getString(R.string.marcacao));
                                 marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 googleMap.addMarker(marker);

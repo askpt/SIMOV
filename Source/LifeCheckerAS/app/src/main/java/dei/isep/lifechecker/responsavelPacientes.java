@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemResponsavelPacientes;
+import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.json.pacienteJson;
@@ -25,6 +26,8 @@ public class responsavelPacientes extends Activity implements OnClickListener {
     ListView listviewPacientes = null;
     Button novoPaciente = null;
     ProgressBar PBloadingActionBar;
+
+    ArrayList<paciente> listaPaciente = new ArrayList<paciente>();
 
 
     @Override
@@ -75,9 +78,14 @@ public class responsavelPacientes extends Activity implements OnClickListener {
                 @Override
                 public void run() {
                     if (codigo == 1 && conteudo.length() > 10) {
-                        ArrayList<paciente> listaPaciente = new ArrayList<paciente>();
                         pacienteJson paciJson = new pacienteJson(conteudo);
                         listaPaciente = paciJson.transformJsonPaciente();
+                        pacienteBDD paciBdd = new pacienteBDD(getApplication());
+                        paciBdd.deleteConteudoPaciente();
+
+                        for (int i = 0; i <listaPaciente.size(); i++) {
+                            paciBdd.inserirPacienteComId(listaPaciente.get(i));
+                        }
 
                         itemResponsavelPacientes adapter = new itemResponsavelPacientes(getApplicationContext(), R.layout.responsavel_itemtipo_pacientes, listaPaciente);
                         PBloadingActionBar.setVisibility(View.INVISIBLE);
@@ -88,7 +96,11 @@ public class responsavelPacientes extends Activity implements OnClickListener {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                                startActivity(new Intent(responsavelPacientes.this, responsavelEditarPaciente.class));
+                                Intent intent = new Intent(responsavelPacientes.this, responsavelEditarPaciente.class);
+                                int idPaciente = listaPaciente.get(position).getIdPaciente();
+                                intent.putExtra("idPaciente",idPaciente);
+
+                                startActivity(intent);
 
                             }
                         });
@@ -97,4 +109,5 @@ public class responsavelPacientes extends Activity implements OnClickListener {
             });
         }
     };
+
 }

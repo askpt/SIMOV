@@ -43,6 +43,27 @@ public class pacienteHttp {
 
 		executarTaskPOST(url, postParameters, interfaceListener);
 	}
+
+    public void updatePaciente(paciente paciente, interfaceResultadoAsyncPost listenerUpdate)
+    {
+        Date dNow = new Date();
+        SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dataAtual = dataFromatada.format(dNow);
+        String url = "http://simovws.azurewebsites.net/api/Pacientes/" + paciente.getIdPaciente();
+
+        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        postParameters.add(new BasicNameValuePair("Nome", paciente.getNomePaciente()));
+        postParameters.add(new BasicNameValuePair("Apelido", paciente.getApelidoPaciente()));
+        postParameters.add(new BasicNameValuePair("Email", paciente.getMailPaciente()));
+        postParameters.add(new BasicNameValuePair("ContactoTlf", paciente.getContactoPaciente()));
+        postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
+        postParameters.add(new BasicNameValuePair("NomeLocal", String.valueOf(paciente.getNomeLocalPaciente())));
+        postParameters.add(new BasicNameValuePair("Data", String.valueOf(paciente.getDataLocalPaciente() + "T" + paciente.getHoraLocalPaciente())));
+        postParameters.add(new BasicNameValuePair("Ativo", String.valueOf(paciente.getAtivoPaciente())));
+        postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtual));
+
+        executarTaskPut(url, postParameters, listenerUpdate);
+    }
 	
 	public void retornarPacientesIdResposnavel(int id, interfaceResultadoAsyncPost interfaceListener)
 	{
@@ -50,6 +71,13 @@ public class pacienteHttp {
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		executarTaskGet(url, postParameters, interfaceListener);
 	}
+
+    public  void retornarPacienteById(int idPaciente, interfaceResultadoAsyncPost interfaceListener)
+    {
+        String url = "http://simovws.azurewebsites.net/api/Pacientes/" + idPaciente;
+        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        executarTaskGet(url, postParameters, interfaceListener);
+    }
 	
 	private void executarTaskPOST(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
 	{
@@ -66,5 +94,13 @@ public class pacienteHttp {
 		httpG.setOnResultListener(interfaceListener);
 		httpG.execute();
 	}
+
+    private void executarTaskPut(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
+    {
+        httpPut httpP;
+        httpP = new httpPut(url, postParameters);
+        httpP.setOnResultListener(interfaceListener);
+        httpP.execute();
+    }
 
 }
