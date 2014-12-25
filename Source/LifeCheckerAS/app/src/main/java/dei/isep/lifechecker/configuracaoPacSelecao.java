@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import dei.isep.lifechecker.adapter.itemConfiguracaoPaciente;
+import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.json.pacienteJson;
@@ -63,6 +64,9 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
         lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                pacienteBDD paciBDD = new pacienteBDD(getActivity().getApplicationContext());
+                paciBDD.inserirPacienteComId(listaPacientes.get(position));
 
                 preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
                 prefApp.setTipoUser(2);

@@ -30,6 +30,8 @@ public class responsavelPacientes extends Activity implements OnClickListener {
     ArrayList<paciente> listaPaciente = new ArrayList<paciente>();
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,8 @@ public class responsavelPacientes extends Activity implements OnClickListener {
         novoPaciente = (Button) findViewById(R.id.bt_responsavel_listapacientes_novo);
 
         novoPaciente.setOnClickListener(this);
+
+        novoPaciente.setEnabled(false);
 
         PBloadingActionBar = (ProgressBar)findViewById(R.id.progressBar_action_bar);
         preencherListaPacientes();
@@ -77,6 +81,8 @@ public class responsavelPacientes extends Activity implements OnClickListener {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    novoPaciente.setEnabled(true);
+                    PBloadingActionBar.setVisibility(View.INVISIBLE);
                     if (codigo == 1 && conteudo.length() > 10) {
                         pacienteJson paciJson = new pacienteJson(conteudo);
                         listaPaciente = paciJson.transformJsonPaciente();
@@ -88,7 +94,7 @@ public class responsavelPacientes extends Activity implements OnClickListener {
                         }
 
                         itemResponsavelPacientes adapter = new itemResponsavelPacientes(getApplicationContext(), R.layout.responsavel_itemtipo_pacientes, listaPaciente);
-                        PBloadingActionBar.setVisibility(View.INVISIBLE);
+
 
                         listviewPacientes.setAdapter(adapter);
 

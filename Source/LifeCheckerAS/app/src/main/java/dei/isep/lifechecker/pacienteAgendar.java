@@ -1,6 +1,7 @@
 package dei.isep.lifechecker;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import dei.isep.lifechecker.database.marcacaoBDD;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.locationHTTP;
+import dei.isep.lifechecker.databaseonline.marcacaoHttp;
+import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
@@ -84,6 +91,7 @@ public class pacienteAgendar extends Activity{
         agendarMarcacao.setEnabled(false);
         TVcomentariosAddMarca.setVisibility(View.INVISIBLE);
         preencherMapa();
+        preencherNomePaciente();
     }
 
     final OnClickListener btnCarregado = new OnClickListener()
@@ -95,12 +103,85 @@ public class pacienteAgendar extends Activity{
                 case R.id.bt_paciente_validar_local:
                     verLocal();
                     break;
-                case R.id.bt_responsavel_addmarcacao_agendar:
-                    //adicionarMarcacao();
+                case R.id.bt_paciente_agendarmarcacao_agendar:
+                    adicionarMarcacao();
                     break;
             }
         }
     };
+
+    public void adicionarMarcacao()
+    {
+        String tipoMarcacao = marcacao.getText().toString();
+        String horaConteudo = hora.getText().toString();
+        String dataConteudo = data.getText().toString();
+        String localConteudo = local.getText().toString();
+        validarDados validar = new validarDados();
+
+        if(validar.validarTipoMarcacao(tipoMarcacao) &&
+                validar.validarTempo24H(horaConteudo) &&
+                validar.validarDataAMD(dataConteudo) &&
+                validar.validarLocalidade(localConteudo) &&
+                validar.validarLatitude(latitude) &&
+                validar.validarLongitude(longitude))
+        {
+            horaConteudo +=":00";
+            PBloadingMarcacao.setVisibility(View.VISIBLE);
+            agendarMarcacao.setEnabled(false);
+            responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+            int idResponsavel = respBDD.getIdResponsavel();
+            pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+            int idPaciente = paciBDD.getIdPaicente();
+
+            mar = new marcacao(idPaciente,2,tipoMarcacao,horaConteudo,dataConteudo,latitude,longitude,localConteudo);
+            marcacaoHttp marHttp = new marcacaoHttp();
+            marHttp.addmarcacao(mar, resultadoAddMarcacao);
+        }
+        else
+        {
+            TVcomentariosAddMarca.setText(getResources().getString(R.string.err_dados_formularios));
+        }
+    }
+
+    interfaceResultadoAsyncPost resultadoAddMarcacao = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1) {
+                        PBloadingMarcacao.setVisibility(View.INVISIBLE);
+                        String idValor = conteudo.replaceAll("[\\r\\n]+", "");
+                        int idMarcacao  = Integer.valueOf(idValor);
+                        mar.setIdMarcacaoMarc(idMarcacao);
+
+                        marcacaoBDD marcBDD = new marcacaoBDD(getApplicationContext());
+                        marcBDD.inserirMarcacaoComId(mar);
+
+                        Intent intent = new Intent(getApplication(), pacienteMenu.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplication().startActivity(intent);
+                    }
+                    else
+                    {
+                        agendarMarcacao.setEnabled(true);
+                    }
+                }
+            });
+        }
+    };
+
+    public void preencherNomePaciente()
+    {
+        PBloadingMarcacao.setVisibility(View.VISIBLE);
+        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+        int idPaciente = paciBDD.getIdPaicente();
+        pacienteHttp paciHttp = new pacienteHttp();
+        paciHttp.retornarPacienteById(idPaciente, listenerPacienteById);
+
+    }
+
+
 
 
     public void verLocal()
@@ -109,6 +190,7 @@ public class pacienteAgendar extends Activity{
         validarDados validar = new validarDados();
         if(validar.validarLocalidade(local.getText().toString()))
         {
+            PBloadingMarcacao.setVisibility(View.VISIBLE);
             agendarMarcacao.setEnabled(false);
             marcacao marca  = new marcacao();
             String endereco = local.getText().toString();
@@ -143,9 +225,27 @@ public class pacienteAgendar extends Activity{
                         }catch (JSONException e)
                         {
                             e.printStackTrace();
+                            PBloadingMarcacao.setVisibility(View.INVISIBLE);
                         }
+                    }
+                }
+            });
+        }
+    };
 
-
+    interfaceResultadoAsyncPost listenerPacienteById = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (codigo == 1 && conteudo.length() > 10) {
+                        pacienteJson paciJson = new pacienteJson(conteudo);
+                        ArrayList<paciente> paciList = new ArrayList<paciente>();
+                        paciente paci = new paciente();
+                        paci = paciJson.transformOnePaciente();
+                        paciente.setText(paci.getNomePaciente() + " " + paci.getApelidoPaciente());
+                        PBloadingMarcacao.setVisibility(View.INVISIBLE);
                     }
                 }
             });
@@ -177,6 +277,7 @@ public class pacienteAgendar extends Activity{
                         googleMap.addMarker(marker);
                         CameraUpdate center = CameraUpdateFactory.newCameraPosition(new CameraPosition(ltlg, 15, 0, 0));
                         googleMap.moveCamera(center);
+                        PBloadingMarcacao.setVisibility(View.INVISIBLE);
 
                     }
                 });

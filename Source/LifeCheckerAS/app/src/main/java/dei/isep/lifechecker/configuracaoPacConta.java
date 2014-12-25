@@ -3,6 +3,7 @@ package dei.isep.lifechecker;
 import java.util.ArrayList;
 import java.util.List;
 
+import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.json.pacienteJson;
@@ -93,6 +94,9 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 						// conteudo = responsavel e vai converter para objeto
 						responsavelJson respJson = new responsavelJson(conteudo);
 						responsavel resp = respJson.transformJsonResponsavel();
+
+                        responsavelBDD respBDD = new responsavelBDD(getActivity().getApplicationContext());
+                        respBDD.inserirResponsavelComId(resp);
 
 						// obtem o ID e vai buscar todos os seus pacientes
 						pacienteHttp paciHttp = new pacienteHttp();

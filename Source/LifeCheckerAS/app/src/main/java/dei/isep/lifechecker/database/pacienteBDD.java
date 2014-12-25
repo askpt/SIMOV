@@ -311,6 +311,19 @@ public class pacienteBDD {
 		return quantidade;
 	}
 
+    public int getIdPaicente()
+    {
+            String sqlQuery = "SELECT " + COL_ID_PACI + " FROM " + TABLE_PACIENTE;
+            int idReturn = -1;
+            open();
+            Cursor cursor= bdd.rawQuery(sqlQuery, null);
+            if(cursor.getCount() == 1 && cursor.moveToFirst())
+            {
+                idReturn = cursor.getInt(cursor.getColumnIndex(COL_ID_PACI));
+            }
+            return idReturn;
+    }
+
     public void deleteConteudoPaciente()
     {
         String sqlQuery = "DELTE FROM " + TABLE_PACIENTE;

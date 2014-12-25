@@ -51,6 +51,8 @@ public class itemResponsavelPacientes extends ArrayAdapter<paciente>{
             holder.email = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipopacientes_email);
             holder.telefone = (TextView) convertView.findViewById(R.id.text_responsavel_itemtipopacientes_telefone);
             holder.removerPaciente = (ImageButton) convertView.findViewById(R.id.bt_responsavel_itemtipopacientes_delete);
+
+            holder.removerPaciente.setTag(position);
             convertView.setTag(holder);
 
             holder.removerPaciente.setOnClickListener(new OnClickListener() {

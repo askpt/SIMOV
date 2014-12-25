@@ -161,7 +161,6 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
                         marcacaoBDD marcBDD = new marcacaoBDD(getApplicationContext());
                         marcBDD.inserirMarcacaoComId(mar);
 
-
                         Intent intent = new Intent(getApplication(), responsavelMenu.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getApplication().startActivity(intent);
@@ -170,10 +169,8 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
                     {
                         BTaddMarcacao.setEnabled(true);
                     }
-
                 }
             });
-
         }
     };
 

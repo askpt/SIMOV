@@ -59,8 +59,23 @@ public class pacienteJson {
 		}
 		return listaPacientes;
 	}
+
+    public paciente transformOnePaciente()
+    {
+        paciente paci = new paciente();
+        try {
+            jsonObj = new JSONObject(conteudo);
+            paci = transformJsonOneResponsavel();
+            return paci;
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return paci;
+    }
 	
-	public paciente transformJsonOneResponsavel()
+	private paciente transformJsonOneResponsavel()
 	{
 		paciente paci = new paciente();
 		try {
