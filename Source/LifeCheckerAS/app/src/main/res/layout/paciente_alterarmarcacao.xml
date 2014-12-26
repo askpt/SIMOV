@@ -1,91 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <EditText
+        android:id="@+id/et_paciente_editmarcacao_pacientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_marginTop="25dp"
+        android:text="qweqweqwe"
+        ></EditText>
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_paciente_editmarcacao_pacientes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/marcacao" />
+
+    <EditText
+        android:id="@+id/tb_paciente_editmarcacao_hora"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_below="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/hora"
+        android:focusable="false"
+        android:onClick="clickTime"
+        android:inputType="time" >
+
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/tb_paciente_editmarcacao_data"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_below="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/data"
+        android:focusable="false"
+        android:onClick="clickDate"
+        android:inputType="date" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/tb_paciente_editmarcacao_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tb_paciente_editmarcacao_hora"
+        android:layout_alignLeft="@+id/tb_paciente_editmarcacao_hora"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/local"
+        android:layout_alignRight="@+id/bt_paciente_editmarcacao_agendar" />
+
+    <fragment
+        android:id="@+id/map_fragment_paci_marca_detal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_below="@id/tb_paciente_editmarcacao_local"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/bt_paciente_editmarcacao_agendar" />
 
-        <EditText
-            android:id="@+id/tb_paciente_alterarmarcacao_paciente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-			android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:enabled="false"
-            android:text="@string/paciente" />
-                
-        <EditText
-            android:id="@+id/tb_paciente_alterarmarcacao_marcacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tb_paciente_alterarmarcacao_paciente"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="@string/marcacao" />
+    <Button
+        android:id="@+id/bt_paciente_editmarcacao_agendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/validar" />
 
-        <EditText
-            android:id="@+id/tb_paciente_alterarmarcacao_hora"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tb_paciente_alterarmarcacao_marcacao"
-            android:layout_below="@+id/tb_paciente_alterarmarcacao_marcacao"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="@string/hora"
-            android:focusable="false"
-            android:onClick="clickTime"
-            android:inputType="time" >
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:id="@+id/bt_paciente_editmarcacao_validar_local"
+        android:layout_alignBottom="@+id/tb_paciente_editmarcacao_local"
+        android:layout_alignRight="@+id/tb_paciente_editmarcacao_marcacao"
+        android:layout_toRightOf="@+id/tb_paciente_editmarcacao_local" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tv_comentario_edit_marcacao_paci"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 
 
-        </EditText>
-
-        <EditText
-            android:id="@+id/tb_paciente_alterarmarcacao_data"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/tb_paciente_alterarmarcacao_marcacao"
-            android:layout_below="@+id/tb_paciente_alterarmarcacao_marcacao"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="@string/data"
-            android:onClick="clickDate"
-            android:focusable="false" >
-        </EditText>
-
-        <EditText
-            android:id="@+id/tb_paciente_alterarmarcacao_local"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_paciente_alterarmarcacao_hora"
-            android:layout_alignLeft="@+id/tb_paciente_alterarmarcacao_hora"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="@string/local" />
-
-        <Button
-            android:id="@+id/bt_paciente_alterarmarcacao_validar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_paciente_alterarmarcacao_local"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text="@string/validar" />
-
-
-
-
-    </RelativeLayout>
-
-</ScrollView>
-    </RelativeLayout>
+</RelativeLayout>

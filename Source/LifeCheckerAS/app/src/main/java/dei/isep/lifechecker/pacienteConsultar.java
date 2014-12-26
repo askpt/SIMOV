@@ -8,12 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import dei.isep.lifechecker.adapter.itemPacienteConsultar;
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
+import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.json.marcacaoJson;
 import dei.isep.lifechecker.json.pacienteJson;
@@ -24,6 +28,7 @@ public class pacienteConsultar extends Activity {
 
     ListView listviewMarcacoes = null;
     ProgressBar PBloadingActionBar = null;
+    ArrayList<marcacao> listMarca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,11 +51,11 @@ public class pacienteConsultar extends Activity {
         PBloadingActionBar.setVisibility(View.VISIBLE);
         pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
         int idPaciente = paciBDD.getIdPaicente();
-        pacienteHttp paciHTTP = new pacienteHttp();
-        paciHTTP.retornarPacienteById(idPaciente, pacienteGetPaciente);
+        marcacaoHttp marcaHttp = new marcacaoHttp();
+        marcaHttp.retornarMarcacoesByPaciente(idPaciente,marcacoesByPaciente);
     }
 
-    interfaceResultadoAsyncPost pacienteGetPaciente = new interfaceResultadoAsyncPost() {
+    interfaceResultadoAsyncPost marcacoesByPaciente = new interfaceResultadoAsyncPost() {
         @Override
         public void obterResultado(final int codigo, final String conteudo) {
             runOnUiThread(new Runnable() {
@@ -58,21 +63,34 @@ public class pacienteConsultar extends Activity {
                 public void run() {
                     if(codigo == 1 && conteudo.length() > 10)
                     {
-                        ArrayList<marcacao> listMarca = new ArrayList<marcacao>();
-                       pacienteJson paciJson = new pacienteJson(conteudo);
+                        listMarca = new ArrayList<marcacao>();
                         marcacaoJson marcaJson = new marcacaoJson(conteudo);
-                        listMarca = marcaJson.transformarPacientToMarcacoesDele();
-                        
+                        listMarca = marcaJson.transformJsonMarcacao();
+                        Collections.reverse(listMarca);
+                        marcacaoBDD marcaBDD = new marcacaoBDD(getApplicationContext());
+                        marcaBDD.deleteConteudoMarcacoes();
+                        for (int i = 0; i < listMarca.size(); i++) {
+                            marcaBDD.inserirMarcacaoSemVerificacao(listMarca.get(i));
+                        }
+                        listMarca = marcaBDD.listaMarcacoesOrdenada();
                        String ccc = conteudo + " ";
-
                         itemPacienteConsultar adapter = new itemPacienteConsultar(getApplicationContext(), R.layout.paciente_itemtipo_consultarmarcacoes, listMarca);
                         listviewMarcacoes.setAdapter(adapter);
 
                         listviewMarcacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-                                startActivity(new Intent(pacienteConsultar.this, pacienteAlterarMarcacao.class));
+                                int estadoMarca = listMarca.get(position).getIdEstadoMarc();
+                                if(estadoMarca != 1) {
+                                    int idMarcacao = listMarca.get(position).getIdMarcacaoMarc();
+                                    Intent intent = new Intent(pacienteConsultar.this, pacienteAlterarMarcacao.class);
+                                    intent.putExtra("idMarcacaoPaci", idMarcacao);
+                                    startActivity(intent);
+                                }
+                                else
+                                {
+                                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.erro_alterar_marcacao_paciente),Toast.LENGTH_LONG).show();
+                                }
 
                             }
                         });

@@ -95,8 +95,6 @@ public class responsavelDetalhesMarcacao extends  Activity implements DatePicker
         longitude = mar.getLongitudeMarc();
         latitude = mar.getLatitudeMarc();
 
-
-
         paciente.setText(nomePaciente);
         addMarcador();
     }

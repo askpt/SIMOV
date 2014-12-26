@@ -6,10 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
 
 import dei.isep.lifechecker.adapter.itemPacienteProximas;
+import dei.isep.lifechecker.adapter.itemResponsavelHoje;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.databaseonline.marcacaoHttp;
+import dei.isep.lifechecker.json.marcacaoJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
@@ -17,6 +24,9 @@ public class pacienteMenu extends Activity{
 
     Intent intent = null;
     ListView listviewProximas = null;
+
+    ArrayList<marcacao> listaMarcacoes;
+    ProgressBar PBLoadMarcacoesHoje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -32,15 +42,52 @@ public class pacienteMenu extends Activity{
 
         ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
 
-        //Dados de Teste
-        listaMarcacoes.add(0, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(1, new marcacao(1, 2, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(2, new marcacao(1, 3, "Fisioterapia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(3, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(4, new marcacao(1, 2, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
+        PBLoadMarcacoesHoje = (ProgressBar)findViewById(R.id.progressBar_action_bar);
 
-        itemPacienteProximas adapter = new itemPacienteProximas(context, R.layout.paciente_itemtipo_proximasconsultas, listaMarcacoes);
+        PBLoadMarcacoesHoje.setVisibility(View.VISIBLE);
+        preencherListaMarcacoes();
+    }
+
+    private void preencherListaMarcacoes() {
+        marcacaoHttp marcaHttp = new marcacaoHttp();
+        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+        int idPaciente = paciBDD.getIdPaicente();
+        marcaHttp.retornarMarcacoesByPaciente(idPaciente, marcacaoGetAllValidasHoje);
+    }
+
+    interfaceResultadoAsyncPost marcacaoGetAllValidasHoje = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1 && conteudo.length() > 10)
+                    {
+                        marcacaoJson marcJ = new marcacaoJson(conteudo);
+                        listaMarcacoes = marcJ.transformJsonMarcacao();
+                        ArrayList<marcacao> listaMarcacoesHoje = new ArrayList<marcacao>();
+                        Calendar c = Calendar.getInstance();
+                        String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
+                        for(Iterator<marcacao> i = listaMarcacoes.iterator(); i.hasNext(); ) {
+                            marcacao tmp = i.next();
+                            if (tmp.getDataMarc().compareTo(dataHoje) > 0 && tmp.getIdEstadoMarc() == 1) {
+                                listaMarcacoesHoje.add(tmp);
+                            }
+                        }
+                        listaMarcacoes = listaMarcacoesHoje;
+                        preencherListaHoje();
+                    }
+                }
+            });
+        }
+    };
+
+    private void preencherListaHoje()
+    {
+
+        itemPacienteProximas adapter = new itemPacienteProximas(getApplicationContext(), R.layout.paciente_itemtipo_proximasconsultas, listaMarcacoes);
         listviewProximas.setAdapter(adapter);
+        PBLoadMarcacoesHoje.setVisibility(View.INVISIBLE);
     }
 
     final View.OnClickListener btnClick = new View.OnClickListener()

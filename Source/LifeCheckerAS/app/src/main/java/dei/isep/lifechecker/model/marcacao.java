@@ -3,6 +3,7 @@ package dei.isep.lifechecker.model;
 import android.content.Context;
 import android.location.Address;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -62,6 +63,7 @@ public class marcacao {
         this.longitudeMarc = longitudeMarc;
         this.localMarc = localMarc;
     }
+
 
 	public int getIdMarcacaoMarc() {
 		return idMarcacaoMarc;

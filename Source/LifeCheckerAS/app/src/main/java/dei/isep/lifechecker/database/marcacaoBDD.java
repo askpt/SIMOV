@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class marcacaoBDD {
 
 	public static String TABLE_MARCACAO = "marcacao";
@@ -75,6 +77,27 @@ public class marcacaoBDD {
 		return bdd;
 	}
 
+
+    public long inserirMarcacaoSemVerificacao(marcacao marcacao)
+    {
+        long valueResult = -1;
+        open();
+        ContentValues value = new ContentValues();
+        value.put(COL_ID_MARCACAO_MARCA, marcacao.getIdMarcacaoMarc());
+        value.put(COL_ID_PACIENTE_MARCA, marcacao.getIdPacienteMarc());
+        value.put(COL_ID_ESTADO_MARCA, marcacao.getIdEstadoMarc());
+        value.put(COL_TIPO_MARCA, marcacao.getTipoMarc());
+        value.put(COL_HORA_MARCA, marcacao.getHoraMarc());
+        value.put(COL_DATA_MARCA, marcacao.getDataMarc());
+        value.put(COL_LONG_MARCA, marcacao.getLongitudeMarc());
+        value.put(COL_LAT_MARCA, marcacao.getLatitudeMarc());
+        value.put(COL_NOME_LOCAL_MARCA, marcacao.getLocalMarc());
+        value.put(COL_HORA_SINCRO_MARCA, baseDeDados.horaAtual());
+        value.put(COL_DATA_SINCRO_MARCA, baseDeDados.dataAtual());
+        valueResult = bdd.insert(TABLE_MARCACAO, null, value);
+        close();
+        return  valueResult;
+    }
     public long inserirMarcacao(marcacao marcacao)
     {
         long valueResult = 0;
@@ -109,6 +132,34 @@ public class marcacaoBDD {
             valueResult = -1;
         }
         return valueResult;
+    }
+
+    public ArrayList<marcacao> listaMarcacoesOrdenada()
+    {
+        ArrayList<marcacao> listMarca = new ArrayList<marcacao>();
+        String sqlQuery = "SELECT * FROM " + TABLE_MARCACAO + " ORDER BY " + COL_DATA_MARCA+ " , " + COL_HORA_MARCA + " ASC";
+
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery,null);
+        while (cursor.moveToNext())
+        {
+            marcacao marc = new marcacao();
+            marc.setIdMarcacaoMarc(cursor.getInt(cursor.getColumnIndex(COL_ID_MARCACAO_MARCA)));
+            marc.setIdPacienteMarc(cursor.getInt(cursor.getColumnIndex(COL_ID_PACIENTE_MARCA)));
+            marc.setIdEstadoMarc(cursor.getInt(cursor.getColumnIndex(COL_ID_ESTADO_MARCA)));
+            marc.setTipoMarc(cursor.getString(cursor.getColumnIndex(COL_TIPO_MARCA)));
+            marc.setHoraMarc(cursor.getString(cursor.getColumnIndex(COL_HORA_MARCA)));
+            marc.setDataMarc(cursor.getString(cursor.getColumnIndex(COL_DATA_MARCA)));
+            marc.setLatitudeMarc(cursor.getDouble(cursor.getColumnIndex(COL_LAT_MARCA)));
+            marc.setLongitudeMarc(cursor.getDouble(cursor.getColumnIndex(COL_LONG_MARCA)));
+            marc.setLocalMarc(cursor.getString(cursor.getColumnIndex(COL_NOME_LOCAL_MARCA)));
+            marc.setHoraSincroMarc(cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_MARCA)));
+            marc.setDataSincroMarc(cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_MARCA)));
+            listMarca.add(marc);
+        }
+        close();
+
+        return  listMarca;
     }
 
     public void deleteConteudoMarcacoes()

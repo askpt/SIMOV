@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -34,12 +35,18 @@ public class responsavelMenu extends Activity {
     final String EXIT_MESSAGE = "Tem a certeza que pretende sair?";
     int idResp = -1;
 
+    ProgressBar PBLoadMarcaHojeResp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.responsavel_menu);
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.lifechecker);
         Context context = getApplicationContext();
+
+        PBLoadMarcaHojeResp = (ProgressBar)findViewById(R.id.progressBar_action_bar);
+
+        PBLoadMarcaHojeResp.setVisibility(View.VISIBLE);
 
         listaHoje = (ListView) findViewById(R.id.listview_responsavel_menu_listahoje);
 
@@ -93,6 +100,7 @@ public class responsavelMenu extends Activity {
     {
         itemResponsavelHoje adapter = new itemResponsavelHoje(getApplicationContext(), R.layout.responsavel_itemtipo_hoje, listaMarcacoes);
         listaHoje.setAdapter(adapter);
+        PBLoadMarcaHojeResp.setVisibility(View.INVISIBLE);
     }
 
     final OnClickListener btnCarregado = new OnClickListener() {

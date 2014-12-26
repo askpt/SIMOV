@@ -95,6 +95,7 @@
     <string name="err_login_errado">Dados login errados</string>
     <string name="err_dados_formularios">Erros no formulário</string>
     <string name="sem_local">O paciente %1s, não dispõe de localização</string>
+    <string name="erro_alterar_marcacao_paciente">Não pode alterar marcações validadas pelo Responsavel</string>
 
     <!-- Titulos DialogsBoxs -->
     <string name="novo_paciente">Novo Paciente</string>
