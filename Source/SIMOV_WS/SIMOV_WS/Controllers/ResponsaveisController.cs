@@ -62,8 +62,6 @@ namespace SIMOV_WS.Controllers
                 return NotFound();
             }
 
-            var respTemp = await db.Responsaveis.FindAsync(id);
-            responsavel.Pacientes = respTemp.Pacientes;
             db.Entry(responsavel).State = EntityState.Modified;
 
             try

@@ -51,13 +51,13 @@ namespace SIMOV_WS.Controllers
                 return BadRequest();
             }
 
+            db.Entry(historicoAlertas).State = EntityState.Modified;
+
             var hist = await db.HistoricoAlertas.FindAsync(id);
             if (db.Pacientes.Count(p => p.ID == hist.PacienteID && p.Ativo) <= 0)
             {
                 return NotFound();
             }
-
-            db.Entry(historicoAlertas).State = EntityState.Modified;
 
             try
             {
