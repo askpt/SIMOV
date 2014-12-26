@@ -83,4 +83,26 @@ public class marcacaoJson {
         }
         return marc;
     }
+
+    public ArrayList<marcacao> transformarPacientToMarcacoesDele()
+    {
+        ArrayList<marcacao> listaEstadoMarcacao = new ArrayList<marcacao>();
+        try
+        {
+            jsonObj = new JSONObject(conteudo);
+            JSONArray marcacoesArray = (JSONArray) jsonObj.get("Marcacoes");
+            for (int i = 0; i < marcacoesArray.length(); i++) {
+                jsonObj = (JSONObject) marcacoesArray.getJSONObject(i);
+                marcacao estM = new marcacao();
+                estM = transformJsonOneMarcacao();
+                listaEstadoMarcacao.add(estM);
+            }
+
+            int numero = marcacoesArray.length();
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return listaEstadoMarcacao;
+    }
 }

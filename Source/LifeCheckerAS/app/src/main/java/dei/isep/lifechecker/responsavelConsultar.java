@@ -70,11 +70,6 @@ public class responsavelConsultar extends Activity {
                         for (int i = 0; i < listaMarcacoes.size(); i++) {
                             marcBDD.inserirMarcacaoComId(listaMarcacoes.get(i));
                         }
-                        /*
-                        pacienteJson paciJson = new pacienteJson(conteudo);
-                        listaPacientes = paciJson.transformJsonPaciente();
-                        preencherLista();
-                        pbLoadingList.setVisibility(View.INVISIBLE);*/
                     }
                     else
                     {
