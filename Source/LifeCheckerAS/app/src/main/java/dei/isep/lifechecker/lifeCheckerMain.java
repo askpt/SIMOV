@@ -38,7 +38,7 @@ public class lifeCheckerMain extends Activity {
         //0 = configuração (após instalação da aplicação)
         //1 = vista resposnavel;
         //2 = vista paciente
-        //3= Depois de carregar em "sair" ou ter inserido estados de marcações
+        //3 = Depois de carregar em "sair" ou ter inserido estados de marcações
         switch (configuracao)
         {
             case 0:
