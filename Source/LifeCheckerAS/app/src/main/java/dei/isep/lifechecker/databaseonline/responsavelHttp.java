@@ -50,7 +50,6 @@ public class responsavelHttp {
 		postParameters.add(new BasicNameValuePair("HoraSincronizacao",
 				dataAtual));
 		executarTaskPOST(url, postParameters, interfaceListener);
-
 	}
 
 	public void getIdResposnavel(String mail, String pass, interfaceResultadoAsyncPost interfaceListener) {

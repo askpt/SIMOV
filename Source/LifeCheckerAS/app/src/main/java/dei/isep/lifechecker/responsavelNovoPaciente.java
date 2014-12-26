@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
@@ -165,6 +166,9 @@ public class responsavelNovoPaciente extends Activity {
 						btnValidarResponsavel.setEnabled(true);
 						 */
                         pbLoadigNovoPaciente.setVisibility(View.INVISIBLE);
+                        pacienteBDD paciBDD = new pacienteBDD(getApplication());
+                        paciBDD.atualizarPaciente(pacient);
+
 
                         Intent intent = new Intent(responsavelNovoPaciente.this, responsavelMenu.class);
                         startActivity(intent);

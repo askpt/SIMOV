@@ -51,13 +51,13 @@ namespace SIMOV_WS.Controllers
                 return BadRequest();
             }
 
+            db.Entry(marcacao).State = EntityState.Modified;
+
             var marc = await db.Marcacoes.FindAsync(id);
             if (db.Pacientes.Count(p => p.ID == marc.PacienteID && p.Ativo) <= 0)
             {
                 return NotFound();
             }
-
-            db.Entry(marcacao).State = EntityState.Modified;
 
             try
             {
@@ -114,7 +114,7 @@ namespace SIMOV_WS.Controllers
         public async Task<IQueryable<Marcacao>> ObterMarcacoesPacientes(int id)
         {
             var pac = await db.Pacientes.FindAsync(id);
-            if (pac == null || pac.Ativo)
+            if (pac == null || !pac.Ativo)
             {
                 return null;
             }

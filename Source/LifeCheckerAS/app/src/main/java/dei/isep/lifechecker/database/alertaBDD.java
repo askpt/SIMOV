@@ -84,6 +84,18 @@ public class alertaBDD {
 		}
 	}
 
+    public String getDesignacaoById(int idAlerta) {
+        String sqlQuery = "SELECT * FROM " + TABLE_ALERTA + " WHERE " + COL_ID_ALERT + " = " + idAlerta;
+        String designacao = "";
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery, null);
+        if (cursor.moveToFirst()) {
+            designacao = cursor.getString(cursor.getColumnIndex(COL_EXPLICACAO_ALERT));
+        }
+        close();
+        return designacao;
+    }
+
 	public String getCreateTableAlert() {
 		return CREATE_TABLE_ALERT;
 	}
