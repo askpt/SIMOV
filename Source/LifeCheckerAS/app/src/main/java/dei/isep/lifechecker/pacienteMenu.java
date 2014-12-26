@@ -56,7 +56,6 @@ public class pacienteMenu extends Activity{
                     intent = new Intent(pacienteMenu.this, pacienteConsultar.class);
                     break;
             }
-
             startActivity(intent);
 
         }

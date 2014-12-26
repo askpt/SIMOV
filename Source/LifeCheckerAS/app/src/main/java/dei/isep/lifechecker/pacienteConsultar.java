@@ -7,17 +7,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
 import dei.isep.lifechecker.adapter.itemPacienteConsultar;
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.json.marcacaoJson;
+import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
 public class pacienteConsultar extends Activity {
 
     ListView listviewMarcacoes = null;
+    ProgressBar PBloadingActionBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -28,26 +34,59 @@ public class pacienteConsultar extends Activity {
 
         listviewMarcacoes = (ListView)findViewById(R.id.list_paciente_consultarmarcacoes);
 
-        ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
+        PBloadingActionBar = (ProgressBar)findViewById(R.id.progressBar_action_bar);
 
-        //Dados de Teste
-        listaMarcacoes.add(0, new marcacao(1, 1, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(1, new marcacao(1, 2, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(2, new marcacao(1, 3, "Fisioterapia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(3, new marcacao(1, 2, "Oftalmologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
-        listaMarcacoes.add(4, new marcacao(1, 3, "Psicologia", "12:13:14", "2014-04-01", 0, 0, "Hospital S.Joao", "HoraUp", "DataUp"));
 
-        itemPacienteConsultar adapter = new itemPacienteConsultar(context, R.layout.paciente_itemtipo_consultarmarcacoes, listaMarcacoes);
-        listviewMarcacoes.setAdapter(adapter);
-
-        listviewMarcacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-                startActivity(new Intent(pacienteConsultar.this, pacienteAlterarMarcacao.class));
-
-            }
-        });
+        preencherLista();
     }
+
+    private void preencherLista()
+    {
+
+        PBloadingActionBar.setVisibility(View.VISIBLE);
+        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+        int idPaciente = paciBDD.getIdPaicente();
+        pacienteHttp paciHTTP = new pacienteHttp();
+        paciHTTP.retornarPacienteById(idPaciente, pacienteGetPaciente);
+    }
+
+    interfaceResultadoAsyncPost pacienteGetPaciente = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1 && conteudo.length() > 10)
+                    {
+                        ArrayList<marcacao> listMarca = new ArrayList<marcacao>();
+                       pacienteJson paciJson = new pacienteJson(conteudo);
+                        marcacaoJson marcaJson = new marcacaoJson(conteudo);
+                        listMarca = marcaJson.transformarPacientToMarcacoesDele();
+                        
+                       String ccc = conteudo + " ";
+
+                        itemPacienteConsultar adapter = new itemPacienteConsultar(getApplicationContext(), R.layout.paciente_itemtipo_consultarmarcacoes, listMarca);
+                        listviewMarcacoes.setAdapter(adapter);
+
+                        listviewMarcacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                                startActivity(new Intent(pacienteConsultar.this, pacienteAlterarMarcacao.class));
+
+                            }
+                        });
+                    }
+                    else
+                    {
+
+                    }
+
+                    PBloadingActionBar.setVisibility(View.INVISIBLE);
+
+                }
+            });
+        }
+    };
 
 }

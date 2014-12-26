@@ -27,6 +27,8 @@ public class responsavelEditarPaciente extends Activity implements View.OnClickL
     ProgressBar PBLoadingPacienteDados;
     paciente paciDados;
 
+    int idPaciente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -54,21 +56,37 @@ public class responsavelEditarPaciente extends Activity implements View.OnClickL
     private void preencherInformacoes()
     {
         Intent intent = getIntent();
-        int idPaciente = intent.getIntExtra("idPaciente", -1);
+        idPaciente = intent.getIntExtra("idPaciente", -1);
         if(idPaciente != -1)
         {
-            pacienteBDD pacibdd = new pacienteBDD(getApplicationContext());
-            paciDados = pacibdd.getPacienteById(idPaciente);
-            nome.setText(paciDados.getNomePaciente());
-            apelido.setText(paciDados.getApelidoPaciente());
-            email.setText(paciDados.getMailPaciente());
-            telefone.setText(paciDados.getContactoPaciente());
+            pacienteHttp paciHttp = new pacienteHttp();
+            paciHttp.retornarPacienteById(idPaciente,pacienteSearchListener);
 
-            PBLoadingPacienteDados.setVisibility(View.INVISIBLE);
-            validarAlteracoes.setEnabled(true);
             //paciDados = pacibdd.g
         }
     }
+
+    interfaceResultadoAsyncPost pacienteSearchListener = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (codigo == 1 && conteudo.length() > 10) {
+                        pacienteJson paciJson = new pacienteJson(conteudo);
+                        paciDados = paciJson.transformOnePaciente();
+                        nome.setText(paciDados.getNomePaciente());
+                        apelido.setText(paciDados.getApelidoPaciente());
+                        email.setText(paciDados.getMailPaciente());
+                        telefone.setText(paciDados.getContactoPaciente());
+
+                        PBLoadingPacienteDados.setVisibility(View.INVISIBLE);
+                        validarAlteracoes.setEnabled(true);
+                    }
+                }
+            });
+        }
+    };
 
 
 
@@ -102,7 +120,7 @@ public class responsavelEditarPaciente extends Activity implements View.OnClickL
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (codigo == 1 && conteudo.length() > 10) {
+                    if (codigo == 1) {
                         PBLoadingPacienteDados.setVisibility(View.INVISIBLE);
 
                         pacienteBDD paci = new pacienteBDD(getApplication());
@@ -111,6 +129,7 @@ public class responsavelEditarPaciente extends Activity implements View.OnClickL
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getApplication().startActivity(intent);
                     }
+
                 }
             });
         }

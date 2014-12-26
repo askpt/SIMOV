@@ -34,6 +34,7 @@ public class pacienteHttp {
 		postParameters.add(new BasicNameValuePair("Apelido", paciente.getApelidoPaciente()));
 		postParameters.add(new BasicNameValuePair("Email", paciente.getMailPaciente()));
 		postParameters.add(new BasicNameValuePair("ContactoTlf", paciente.getContactoPaciente()));
+
 		postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
         postParameters.add(new BasicNameValuePair("NomeLocal", String.valueOf(paciente.getNomeLocalPaciente())));
         postParameters.add(new BasicNameValuePair("Data", String.valueOf(paciente.getDataLocalPaciente() + "T" + paciente.getHoraLocalPaciente())));
@@ -52,16 +53,21 @@ public class pacienteHttp {
         String url = "http://simovws.azurewebsites.net/api/Pacientes/" + paciente.getIdPaciente();
 
         List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        postParameters.add(new BasicNameValuePair("ID", String.valueOf(paciente.getIdPaciente())));
         postParameters.add(new BasicNameValuePair("Nome", paciente.getNomePaciente()));
         postParameters.add(new BasicNameValuePair("Apelido", paciente.getApelidoPaciente()));
         postParameters.add(new BasicNameValuePair("Email", paciente.getMailPaciente()));
         postParameters.add(new BasicNameValuePair("ContactoTlf", paciente.getContactoPaciente()));
-        postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
+
+        postParameters.add(new BasicNameValuePair("Longitude", String.valueOf(paciente.getLongitudePaciente())));
+        postParameters.add(new BasicNameValuePair("Latitude", String.valueOf(paciente.getLatitudePaciente())));
+
+
         postParameters.add(new BasicNameValuePair("NomeLocal", String.valueOf(paciente.getNomeLocalPaciente())));
         postParameters.add(new BasicNameValuePair("Data", String.valueOf(paciente.getDataLocalPaciente() + "T" + paciente.getHoraLocalPaciente())));
         postParameters.add(new BasicNameValuePair("Ativo", String.valueOf(paciente.getAtivoPaciente())));
         postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtual));
-
+        postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
         executarTaskPut(url, postParameters, listenerUpdate);
     }
 	

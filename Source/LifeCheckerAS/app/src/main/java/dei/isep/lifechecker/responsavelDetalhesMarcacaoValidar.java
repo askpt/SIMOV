@@ -26,9 +26,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import dei.isep.lifechecker.database.marcacaoBDD;
+import dei.isep.lifechecker.databaseonline.locationHTTP;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
@@ -57,6 +61,7 @@ public class responsavelDetalhesMarcacaoValidar extends Activity implements Date
 
     private dei.isep.lifechecker.model.marcacao mar;
     private validarDados vd = new validarDados();
+    LatLng ltlg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -213,6 +218,10 @@ public class responsavelDetalhesMarcacaoValidar extends Activity implements Date
 
                         CameraUpdate center = CameraUpdateFactory.newCameraPosition(new CameraPosition(ltlg, 15, 0, 0));
                         googleMap.moveCamera(center);
+                        PBloadingUpdate.setVisibility(View.INVISIBLE);
+                        BTvalidarLocal.setEnabled(true);
+                        IBTvalidarYes.setEnabled(true);
+                        IBTvalidarNo.setEnabled(true);
                     }
                 });
             }
@@ -221,27 +230,49 @@ public class responsavelDetalhesMarcacaoValidar extends Activity implements Date
 
     public void verLocal()
     {
+        BTvalidarLocal.setEnabled(false);
+        IBTvalidarYes.setEnabled(false);
+        IBTvalidarNo.setEnabled(false);
+
+        PBloadingUpdate.setVisibility(View.VISIBLE);
+
         marcacao marca  = new marcacao();
         String endereco = ETlocal.getText().toString();
         Log.i("locali", endereco);
 
-        marca.getLatLong(endereco,interfaceListenerLocal,getApplicationContext());
+        locationHTTP localti = new locationHTTP();
+        localti.obterCoordenadasPorString(endereco,listenerLocal);
+
+        //marca.getLatLong(endereco,interfaceListenerLocal,getApplicationContext());
     };
 
-    interfaceAgendarMarcacao interfaceListenerLocal = new interfaceAgendarMarcacao() {
+
+    interfaceResultadoAsyncPost listenerLocal = new interfaceResultadoAsyncPost() {
         @Override
-        public void listaCoordenadas(final int codigo, final List<Address> enderecos) {
+        public void obterResultado(final int codigo, final String conteudo) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (codigo == 1) {
-                        latitude = enderecos.get(0).getLatitude();
-                        longitude = enderecos.get(0).getLongitude();
-                        //BTvalidarMarcacao.setEnabled(true);
-                        addMarcador();
-                    } else {
-                        //BTvalidarMarcacao.setEnabled(true);
+                    if (codigo == 1 && conteudo.length() > 10) {
+                        locationHTTP localH = new locationHTTP();
+                        try {
+                            JSONObject jsonConteudo = new JSONObject(conteudo);
+                            ltlg = localH.getLatLong(jsonConteudo);
+                            longitude = ltlg.longitude;
+                            latitude = ltlg.latitude;
+                            addMarcador();
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
+                        PBloadingUpdate.setVisibility(View.INVISIBLE);
+                        BTvalidarLocal.setEnabled(true);
+                        IBTvalidarYes.setEnabled(true);
+                        IBTvalidarNo.setEnabled(true);
                     }
                 }
             });

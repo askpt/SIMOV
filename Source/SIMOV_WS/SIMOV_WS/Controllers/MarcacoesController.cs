@@ -114,7 +114,7 @@ namespace SIMOV_WS.Controllers
         public async Task<IQueryable<Marcacao>> ObterMarcacoesPacientes(int id)
         {
             var pac = await db.Pacientes.FindAsync(id);
-            if (pac == null || pac.Ativo)
+            if (pac == null || !pac.Ativo)
             {
                 return null;
             }

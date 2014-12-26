@@ -166,7 +166,7 @@ public class responsavelNovoPaciente extends Activity {
 						btnValidarResponsavel.setEnabled(true);
 						 */
                         pbLoadigNovoPaciente.setVisibility(View.INVISIBLE);
-                        pacienteBDD paciBDD = new pacienteBDD();
+                        pacienteBDD paciBDD = new pacienteBDD(getApplication());
                         paciBDD.atualizarPaciente(pacient);
 
 
