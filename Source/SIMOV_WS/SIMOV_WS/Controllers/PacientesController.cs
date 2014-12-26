@@ -56,14 +56,6 @@ namespace SIMOV_WS.Controllers
                 return NotFound();
             }
 
-            Paciente pacTemp = await db.Pacientes.FindAsync(id);
-            if (!pacTemp.Ativo)
-            {
-                return NotFound();
-            }
-            paciente.HistoricoAlertas = pacTemp.HistoricoAlertas;
-            paciente.Marcacoes = pacTemp.Marcacoes;
-
             db.Entry(paciente).State = EntityState.Modified;
 
             try
