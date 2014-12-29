@@ -9,14 +9,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import dei.isep.lifechecker.interfaceAgendarMarcacao;
+import dei.isep.lifechecker.interfaceAdressList;
 
 /**
  * Created by Diogo on 17-12-2014.
  */
 public class geoCoderToLatLongAsyncTask extends AsyncTask<Void, Void, Void>{
 
-    interfaceAgendarMarcacao interfaceAgendarMarcacao;
+    interfaceAdressList interfaceAdressList;
     String endereco;
     Locale locale;
     Context context;
@@ -28,10 +28,10 @@ public class geoCoderToLatLongAsyncTask extends AsyncTask<Void, Void, Void>{
         this.context = context;
     }
 
-    public void setOnResultListener(interfaceAgendarMarcacao interfaceAgendarMarcacao){
-        if(interfaceAgendarMarcacao != null)
+    public void setOnResultListener(interfaceAdressList interfaceAdressList){
+        if(interfaceAdressList != null)
         {
-            this.interfaceAgendarMarcacao = interfaceAgendarMarcacao;
+            this.interfaceAdressList = interfaceAdressList;
         }
     }
 
@@ -44,18 +44,15 @@ public class geoCoderToLatLongAsyncTask extends AsyncTask<Void, Void, Void>{
             enderecosLista = gc.getFromLocationName(endereco, 1);
             if(enderecosLista.size() == 0)
             {
-                interfaceAgendarMarcacao.listaCoordenadas(2,enderecosLista);
+                interfaceAdressList.listaCoordenadas(2,enderecosLista);
             }
-            interfaceAgendarMarcacao.listaCoordenadas(1,enderecosLista);
+            interfaceAdressList.listaCoordenadas(1,enderecosLista);
         }
         catch(IOException e)
         {
-            interfaceAgendarMarcacao.listaCoordenadas(2,enderecosLista);
+            interfaceAdressList.listaCoordenadas(2,enderecosLista);
             e.printStackTrace();
         }
-
-
-
         return null;
     }
 }

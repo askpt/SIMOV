@@ -34,6 +34,7 @@ import java.util.List;
 import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.databaseonline.locationHTTP;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
+import dei.isep.lifechecker.json.locationJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.other.lifeCheckerManager;
@@ -254,14 +255,13 @@ public class responsavelDetalhesMarcacaoValidar extends Activity implements Date
                 @Override
                 public void run() {
                     if (codigo == 1 && conteudo.length() > 10) {
-                        locationHTTP localH = new locationHTTP();
+                        locationJson locaJson = new locationJson(conteudo);
                         try {
-                            JSONObject jsonConteudo = new JSONObject(conteudo);
-                            ltlg = localH.getLatLong(jsonConteudo);
+                            ltlg = locaJson.getLatLong();
                             longitude = ltlg.longitude;
                             latitude = ltlg.latitude;
                             addMarcador();
-                        }catch (JSONException e)
+                        }catch (Exception e)
                         {
                             e.printStackTrace();
                         }

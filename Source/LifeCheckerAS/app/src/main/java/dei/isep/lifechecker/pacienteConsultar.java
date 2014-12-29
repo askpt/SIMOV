@@ -81,11 +81,15 @@ public class pacienteConsultar extends Activity {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                                 int estadoMarca = listMarca.get(position).getIdEstadoMarc();
-                                if(estadoMarca != 1) {
+                                if(estadoMarca == 3) {
                                     int idMarcacao = listMarca.get(position).getIdMarcacaoMarc();
                                     Intent intent = new Intent(pacienteConsultar.this, pacienteAlterarMarcacao.class);
                                     intent.putExtra("idMarcacaoPaci", idMarcacao);
                                     startActivity(intent);
+                                }
+                                else if (estadoMarca == 2)
+                                {
+                                    Toast.makeText(getApplication(), getResources().getString(R.string.erro_alterar_por_validar_marcacao_paciente), Toast.LENGTH_LONG).show();
                                 }
                                 else
                                 {

@@ -33,15 +33,14 @@ import java.util.List;
 
 import dei.isep.lifechecker.adapter.spinnerPacienteAdapter;
 import dei.isep.lifechecker.database.marcacaoBDD;
-import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.locationHTTP;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.json.locationJson;
 import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
-import dei.isep.lifechecker.model.responsavel;
 import dei.isep.lifechecker.other.validarDados;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
@@ -189,8 +188,6 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
 
             locationHTTP localti = new locationHTTP();
             localti.obterCoordenadasPorString(endereco,listenerLocal);
-
-            //marca.getLatLong(endereco, interfaceListenerViewLocal,getApplicationContext());
         }
         else
         {
@@ -206,15 +203,14 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
                 @Override
                 public void run() {
                     if (codigo == 1 && conteudo.length() > 10) {
-                       locationHTTP localH = new locationHTTP();
+                        locationJson localJson = new locationJson(conteudo);
                         try {
-                            JSONObject jsonConteudo = new JSONObject(conteudo);
-                            ltlg = localH.getLatLong(jsonConteudo);
+                            ltlg = localJson.getLatLong();
                             BTaddMarcacao.setEnabled(true);
                             longitude = ltlg.longitude;
                             latitude = ltlg.latitude;
                             addMarcador();
-                        }catch (JSONException e)
+                        }catch (Exception e)
                         {
                             e.printStackTrace();
                         }
@@ -227,25 +223,6 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
     };
 
 
-    interfaceAgendarMarcacao interfaceListenerViewLocal = new interfaceAgendarMarcacao() {
-        @Override
-        public void listaCoordenadas(final int codigo, final List<Address> enderecos) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (codigo == 1) {
-                        latitude = enderecos.get(0).getLatitude();
-                        longitude = enderecos.get(0).getLongitude();
-                        BTaddMarcacao.setEnabled(true);
-                        addMarcador();
-                    } else {
-                        BTaddMarcacao.setEnabled(true);
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
-                    }
-                }
-            });
-        }
-    };
 
     public void preencherCmbox()
     {

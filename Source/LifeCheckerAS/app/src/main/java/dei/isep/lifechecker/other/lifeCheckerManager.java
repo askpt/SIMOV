@@ -39,6 +39,28 @@ public class lifeCheckerManager {
 	private String mailPacienteResposnavel;
 	private String contactoPacienteResposnavel;
 
+    //Marcações
+    private int idMarcacao;
+    private boolean aVerificar;
+
+    public boolean getaVerificar() {
+        return aVerificar;
+    }
+
+    public void setaVerificar(boolean aVerificar) {
+        this.aVerificar = aVerificar;
+    }
+
+
+
+    public int getIdMarcacao() {
+        return idMarcacao;
+    }
+
+    public void setIdMarcacao(int idMarcacao) {
+        this.idMarcacao = idMarcacao;
+    }
+
     //****Local da aplicacao
     private Locale locale = new Locale("pt","PT");
 

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -35,6 +36,7 @@ import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.locationHTTP;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.json.locationJson;
 import dei.isep.lifechecker.json.pacienteJson;
 import dei.isep.lifechecker.model.marcacao;
 import dei.isep.lifechecker.model.paciente;
@@ -52,7 +54,7 @@ public class pacienteAgendar extends Activity implements DatePickerDialog.OnDate
     EditText data = null;
     EditText local = null;
 
-    private validarDados vd = new validarDados();
+    //private validarDados vasd = new validarDados();
 
     TextView TVcomentariosAddMarca;
 
@@ -244,15 +246,14 @@ public class pacienteAgendar extends Activity implements DatePickerDialog.OnDate
                 @Override
                 public void run() {
                     if (codigo == 1 && conteudo.length() > 10) {
-                        locationHTTP localH = new locationHTTP();
+                        locationJson locJson = new locationJson(conteudo);
                         try {
-                            JSONObject jsonConteudo = new JSONObject(conteudo);
-                            ltlg = localH.getLatLong(jsonConteudo);
+                            ltlg = locJson.getLatLong();
                             agendarMarcacao.setEnabled(true);
                             longitude = ltlg.longitude;
                             latitude = ltlg.latitude;
                             addMarcador();
-                        }catch (JSONException e)
+                        }catch (Exception e)
                         {
                             e.printStackTrace();
                             PBloadingMarcacao.setVisibility(View.INVISIBLE);

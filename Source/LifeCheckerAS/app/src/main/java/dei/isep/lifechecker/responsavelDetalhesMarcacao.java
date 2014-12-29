@@ -191,7 +191,7 @@ public class responsavelDetalhesMarcacao extends  Activity implements DatePicker
         marca.getLatLong(endereco,interfaceListenerLocal,getApplicationContext());
     };
 
-    interfaceAgendarMarcacao interfaceListenerLocal = new interfaceAgendarMarcacao() {
+    interfaceAdressList interfaceListenerLocal = new interfaceAdressList() {
         @Override
         public void listaCoordenadas(final int codigo, final List<Address> enderecos) {
             runOnUiThread(new Runnable() {

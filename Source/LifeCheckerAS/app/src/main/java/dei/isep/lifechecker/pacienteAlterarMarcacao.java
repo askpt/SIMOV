@@ -2,12 +2,10 @@ package dei.isep.lifechecker;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +25,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Calendar;
 import java.util.List;
 
 import dei.isep.lifechecker.database.marcacaoBDD;
@@ -200,7 +197,7 @@ public class pacienteAlterarMarcacao extends Activity implements DatePickerDialo
         marca.getLatLong(endereco,interfaceListenerLocal,getApplicationContext());
     };
 
-    interfaceAgendarMarcacao interfaceListenerLocal = new interfaceAgendarMarcacao() {
+    interfaceAdressList interfaceListenerLocal = new interfaceAdressList() {
         @Override
         public void listaCoordenadas(final int codigo, final List<Address> enderecos) {
             runOnUiThread(new Runnable() {

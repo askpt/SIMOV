@@ -1,13 +1,17 @@
 package dei.isep.lifechecker.databaseonline;
 
+import android.location.Location;
+
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 
@@ -24,31 +28,12 @@ public class locationHTTP {
         executarTaskPOST(url,postParameters,listener);
     }
 
-    public LatLng getLatLong(JSONObject jsonObject)
+    public void obterLocalPorCoordenadas(Location local, interfaceResultadoAsyncPost listener)
     {
-        Double lon = new Double(0);
-        Double lat = new Double(0);
-
-        try {
-
-            lon = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-                    .getJSONObject("geometry").getJSONObject("location")
-                    .getDouble("lng");
-
-            lat = ((JSONArray)jsonObject.get("results")).getJSONObject(0)
-                    .getJSONObject("geometry").getJSONObject("location")
-                    .getDouble("lat");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-
-        LatLng gp = new LatLng(lat,lon);
-
-        return gp;
+        String url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + local.getLatitude() + "," + local.getLongitude();
+        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        executarTaskPOST(url,postParameters,listener);
     }
-
 
     private void executarTaskPOST(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
     {

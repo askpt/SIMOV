@@ -8,12 +8,20 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 
 import dei.isep.lifechecker.adapter.itemPacienteProximas;
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
+import dei.isep.lifechecker.alarme.alarmesLancar;
+import dei.isep.lifechecker.alarme.marcacaoAlarme;
+import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
 import dei.isep.lifechecker.json.marcacaoJson;
@@ -27,6 +35,9 @@ public class pacienteMenu extends Activity{
 
     ArrayList<marcacao> listaMarcacoes;
     ProgressBar PBLoadMarcacoesHoje;
+
+    int idProximaMarca = -1;
+    boolean boolLancou = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -63,14 +74,27 @@ public class pacienteMenu extends Activity{
                 public void run() {
                     if(codigo == 1 && conteudo.length() > 10)
                     {
+                        marcacaoBDD marcaBDD = new marcacaoBDD(getApplicationContext());
+
                         marcacaoJson marcJ = new marcacaoJson(conteudo);
                         listaMarcacoes = marcJ.transformJsonMarcacao();
                         ArrayList<marcacao> listaMarcacoesHoje = new ArrayList<marcacao>();
                         Calendar c = Calendar.getInstance();
                         String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
+                        String horaAgora = String.valueOf(c.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(c.get(Calendar.MINUTE)) + ":" + String.valueOf(c.get(Calendar.SECOND));
+                        marcaBDD.deleteConteudoMarcacoes();
+                        for (int i = 0; i < listaMarcacoes.size(); i++) {
+                            marcaBDD.inserirMarcacaoSemVerificacao(listaMarcacoes.get(i));
+                        }
+                        listaMarcacoes = marcaBDD.listaMarcacoesOrdenada();
+
                         for(Iterator<marcacao> i = listaMarcacoes.iterator(); i.hasNext(); ) {
                             marcacao tmp = i.next();
-                            if (tmp.getDataMarc().compareTo(dataHoje) > 0 && tmp.getIdEstadoMarc() == 1) {
+
+                            //marcaBDD.inserirMarcacaoSemVerificacao(tmp);
+                            if ((tmp.getDataMarc().compareTo(dataHoje) > 0 && tmp.getIdEstadoMarc() == 1) ||
+                                    (tmp.getDataMarc().compareTo(dataHoje) == 0 && tmp.getHoraMarc().compareTo(horaAgora) >=0 && tmp.getIdEstadoMarc() == 1)) {
+
                                 listaMarcacoesHoje.add(tmp);
                             }
                         }
@@ -84,7 +108,13 @@ public class pacienteMenu extends Activity{
 
     private void preencherListaHoje()
     {
-
+        //Collections.reverse(listaMarcacoes);
+        if(idProximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() && lifeCheckerManager.getInstance().getaVerificar() == false) {
+            idProximaMarca = listaMarcacoes.get(0).getIdMarcacaoMarc();
+                Intent intent = new Intent(pacienteMenu.this, marcacaoAlarme.class);
+                intent.putExtra("idMarcacao", listaMarcacoes.get(0).getIdMarcacaoMarc());
+            startService(intent);
+        }
         itemPacienteProximas adapter = new itemPacienteProximas(getApplicationContext(), R.layout.paciente_itemtipo_proximasconsultas, listaMarcacoes);
         listviewProximas.setAdapter(adapter);
         PBLoadMarcacoesHoje.setVisibility(View.INVISIBLE);

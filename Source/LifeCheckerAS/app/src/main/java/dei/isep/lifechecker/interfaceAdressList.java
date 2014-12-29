@@ -7,6 +7,6 @@ import java.util.List;
 /**
  * Created by Diogo on 17-12-2014.
  */
-public interface interfaceAgendarMarcacao {
+public interface interfaceAdressList {
     public abstract void listaCoordenadas(int codigo, List<Address> conteudo);
 }
