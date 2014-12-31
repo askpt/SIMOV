@@ -21,6 +21,8 @@ public class lifeCheckerManager {
 
 	private int idResponsavel;
 
+    private int idPaciente;
+
 	private String mailResponsavel;
 	private String passResposnavel;
 	private String passConfirmResponsavel;
@@ -43,6 +45,26 @@ public class lifeCheckerManager {
     private int idMarcacao;
     private boolean aVerificar;
 
+    //Alertas
+    private boolean enviarLocalizacao = false;
+
+
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
+
+    public boolean getEnviarLocalizacao() {
+        return enviarLocalizacao;
+    }
+
+    public void setEnviarLocalizacao(boolean enviarLocalizacao) {
+        this.enviarLocalizacao = enviarLocalizacao;
+    }
+
     public boolean getaVerificar() {
         return aVerificar;
     }
@@ -60,6 +82,8 @@ public class lifeCheckerManager {
     public void setIdMarcacao(int idMarcacao) {
         this.idMarcacao = idMarcacao;
     }
+
+
 
     //****Local da aplicacao
     private Locale locale = new Locale("pt","PT");

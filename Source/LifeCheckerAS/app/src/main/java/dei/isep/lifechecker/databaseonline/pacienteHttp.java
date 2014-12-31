@@ -12,6 +12,30 @@ import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 import dei.isep.lifechecker.model.paciente;
 
 public class pacienteHttp {
+
+    public String dataAtualCompleta()
+    {
+        Date dNow = new Date();
+        SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dataAtual = dataFromatada.format(dNow);
+        return dataAtual;
+    }
+
+    public String dataAtual()
+    {
+        Date dNow = new Date();
+        SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd");
+        String dataAtual = dataFromatada.format(dNow);
+        return dataAtual;
+    }
+
+    public String horaAtual()
+    {
+        Date dNow = new Date();
+        SimpleDateFormat dataFromatada = new SimpleDateFormat("HH:mm:ss");
+        String dataAtual = dataFromatada.format(dNow);
+        return dataAtual;
+    }
 	
 	public void verificarMail(String mail, interfaceResultadoAsyncPost interfaceListener)
 	{
@@ -20,14 +44,13 @@ public class pacienteHttp {
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		executarTaskPOST(url, postParameters, interfaceListener);
 	}
+
+
 	
 	public void addPaciente(paciente paciente, 
 			interfaceResultadoAsyncPost interfaceListener)
 	{
-		Date dNow = new Date();
-		SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String dataAtual = dataFromatada.format(dNow);
-		String url = "http://simovws.azurewebsites.net/api/Pacientes";
+        String url = "http://simovws.azurewebsites.net/api/Pacientes/";
 
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		postParameters.add(new BasicNameValuePair("Nome", paciente.getNomePaciente()));
@@ -38,8 +61,8 @@ public class pacienteHttp {
 		postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
         postParameters.add(new BasicNameValuePair("NomeLocal", String.valueOf(paciente.getNomeLocalPaciente())));
         postParameters.add(new BasicNameValuePair("Data", String.valueOf(paciente.getDataLocalPaciente() + "T" + paciente.getHoraLocalPaciente())));
-        postParameters.add(new BasicNameValuePair("Ativo", String.valueOf(paciente.getAtivoPaciente())));
-		postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtual));
+        postParameters.add(new BasicNameValuePair("Ativo", Boolean.toString(paciente.getAtivoPaciente())));
+		postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtualCompleta()));
 		
 
 		executarTaskPOST(url, postParameters, interfaceListener);
@@ -47,9 +70,7 @@ public class pacienteHttp {
 
     public void updatePaciente(paciente paciente, interfaceResultadoAsyncPost listenerUpdate)
     {
-        Date dNow = new Date();
-        SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dataAtual = dataFromatada.format(dNow);
+
         String url = "http://simovws.azurewebsites.net/api/Pacientes/" + paciente.getIdPaciente();
 
         List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
@@ -59,14 +80,14 @@ public class pacienteHttp {
         postParameters.add(new BasicNameValuePair("Email", paciente.getMailPaciente()));
         postParameters.add(new BasicNameValuePair("ContactoTlf", paciente.getContactoPaciente()));
 
-        postParameters.add(new BasicNameValuePair("Longitude", String.valueOf(paciente.getLongitudePaciente())));
-        postParameters.add(new BasicNameValuePair("Latitude", String.valueOf(paciente.getLatitudePaciente())));
+        postParameters.add(new BasicNameValuePair("Longitude", Double.toString(paciente.getLongitudePaciente())));
+        postParameters.add(new BasicNameValuePair("Latitude", Double.toString(paciente.getLatitudePaciente())));
 
 
         postParameters.add(new BasicNameValuePair("NomeLocal", String.valueOf(paciente.getNomeLocalPaciente())));
-        postParameters.add(new BasicNameValuePair("Data", String.valueOf(paciente.getDataLocalPaciente() + "T" + paciente.getHoraLocalPaciente())));
-        postParameters.add(new BasicNameValuePair("Ativo", String.valueOf(paciente.getAtivoPaciente())));
-        postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtual));
+        postParameters.add(new BasicNameValuePair("Data", String.valueOf(dataAtual() + "T" + horaAtual())));
+        postParameters.add(new BasicNameValuePair("Ativo", Boolean.toString(paciente.getAtivoPaciente())));
+        postParameters.add(new BasicNameValuePair("HoraSincronizacao", dataAtualCompleta()));
         postParameters.add(new BasicNameValuePair("Responsavel_ID", String.valueOf(paciente.getIdResponsavelPaciente())));
         executarTaskPut(url, postParameters, listenerUpdate);
     }

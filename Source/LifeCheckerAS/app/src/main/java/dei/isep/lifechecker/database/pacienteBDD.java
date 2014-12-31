@@ -294,6 +294,7 @@ public class pacienteBDD {
             paci.setDataLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_DATA_LOCAL_PACI)));
             paci.setHoraSincroPaciente(cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP)));
             paci.setDataSincroPaciente(cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP)));
+            paci.setAtivoPaciente(true);
         }
         close();
         return  paci;

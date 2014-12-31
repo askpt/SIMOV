@@ -12,11 +12,19 @@ import dei.isep.lifechecker.model.estadoMarcacao;
 import dei.isep.lifechecker.other.preferenciasAplicacao;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class lifeCheckerMain extends Activity {
@@ -25,18 +33,67 @@ public class lifeCheckerMain extends Activity {
     ArrayList<estadoMarcacao> listaEstMar;
     ArrayList<alerta> listaAlerta;
     ProgressBar pbLoadingInicial;
-	
+    TextView txtView;
 
-	@Override
+    TimerTask mTimerTask;
+    Timer t = new Timer();
+    final Handler handler = new Handler();
+
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
         pbLoadingInicial =(ProgressBar) findViewById(R.id.loading_home_aplication_respconta_loading);
+        txtView = (TextView) findViewById(R.id.home_txt_bem_vindo);
 
-		
-		Intent novaActivity;
-		/*pacienteBDD pacienteBDD = new pacienteBDD(getApplicationContext());
-		responsavelBDD responsavelBDD = new responsavelBDD(getApplicationContext());*/
+        inicialisar();
+	}
+
+    private void inicialisar()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null)
+        {
+            if(mTimerTask!=null){
+                mTimerTask.cancel();
+            }
+            txtView.setText(getResources().getString(R.string.configuracao_inicial));
+            configuracaoPrimeiro();
+        }
+        else
+        {
+            txtView.setText(getResources().getString(R.string.erro_sem_net));
+            Toast toast  = Toast.makeText(this,getResources().getString(R.string.toat_des_sec_reverific),Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 250);
+            toast.show();
+            timerNoNet();
+        }
+    }
+
+    protected void timerNoNet()
+    {
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        inicialisar();
+
+                    }
+                });
+
+            }
+        };
+        t.schedule(mTimerTask,50000);
+
+    }
+
+    private void configuracaoPrimeiro()
+    {
+        Intent novaActivity;
 
         preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
         int configuracao = prefApp.getTipoUser();
@@ -63,8 +120,7 @@ public class lifeCheckerMain extends Activity {
                 startActivity(novaActivity);
                 break;
         }
-
-	}
+    }
 
     public void preencherEstadosmarcacoes()
     {

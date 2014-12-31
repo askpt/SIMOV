@@ -54,6 +54,30 @@ public class locationJson {
         return gp;
     }
 
+    public boolean getStatus()
+    {
+        boolean resultado;
+        try
+        {
+            jsonObj = new JSONObject(conteudo);
+            String status = jsonObj.getString("status");
+            if(status.compareTo("OK") == 0)
+            {
+                resultado = true;
+            }
+            else
+            {
+                resultado = false;
+            }
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+            resultado = false;
+        }
+        return resultado;
+
+    }
+
     public ArrayList<String> getAdress()
     {
 

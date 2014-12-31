@@ -133,8 +133,6 @@ public class marcacaoAlarme extends IntentService {
             GPSTracker gps = new GPSTracker(this);
             if(gps.canGetLocation())
             {
-
-
                 localAtual = gps.getLocation();
                 Location coordenadasMarcacao = new Location("");
                 coordenadasMarcacao.setLatitude(marca.getLatitudeMarc());

@@ -19,7 +19,7 @@ public class marcacaoHttp {
     public String dataAtual()
     {
         Date dNow = new Date();
-        SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dataFromatada = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dataAtual = dataFromatada.format(dNow);
         return dataAtual;
     }

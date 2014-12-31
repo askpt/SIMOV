@@ -8,18 +8,12 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.Iterator;
 
 import dei.isep.lifechecker.adapter.itemPacienteProximas;
-import dei.isep.lifechecker.adapter.itemResponsavelHoje;
-import dei.isep.lifechecker.alarme.alarmesLancar;
+import dei.isep.lifechecker.alarme.localizacaoAlarm;
 import dei.isep.lifechecker.alarme.marcacaoAlarme;
 import dei.isep.lifechecker.database.marcacaoBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
@@ -63,6 +57,8 @@ public class pacienteMenu extends Activity{
         marcacaoHttp marcaHttp = new marcacaoHttp();
         pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
         int idPaciente = paciBDD.getIdPaicente();
+        //lifeCheckerManager.getInstance().setPac(paciBDD.getPacienteById(idPaciente));
+        lancarAlarmes();
         marcaHttp.retornarMarcacoesByPaciente(idPaciente, marcacaoGetAllValidasHoje);
     }
 
@@ -88,6 +84,7 @@ public class pacienteMenu extends Activity{
                         }
                         listaMarcacoes = marcaBDD.listaMarcacoesOrdenada();
 
+
                         for(Iterator<marcacao> i = listaMarcacoes.iterator(); i.hasNext(); ) {
                             marcacao tmp = i.next();
 
@@ -101,6 +98,12 @@ public class pacienteMenu extends Activity{
                         listaMarcacoes = listaMarcacoesHoje;
                         preencherListaHoje();
                     }
+                    else
+                    {
+                        listaMarcacoes = new ArrayList<marcacao>();
+                        PBLoadMarcacoesHoje.setVisibility(View.INVISIBLE);
+
+                    }
                 }
             });
         }
@@ -108,16 +111,31 @@ public class pacienteMenu extends Activity{
 
     private void preencherListaHoje()
     {
-        //Collections.reverse(listaMarcacoes);
-        if(idProximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() && lifeCheckerManager.getInstance().getaVerificar() == false) {
-            idProximaMarca = listaMarcacoes.get(0).getIdMarcacaoMarc();
-                Intent intent = new Intent(pacienteMenu.this, marcacaoAlarme.class);
-                intent.putExtra("idMarcacao", listaMarcacoes.get(0).getIdMarcacaoMarc());
-            startService(intent);
-        }
         itemPacienteProximas adapter = new itemPacienteProximas(getApplicationContext(), R.layout.paciente_itemtipo_proximasconsultas, listaMarcacoes);
         listviewProximas.setAdapter(adapter);
         PBLoadMarcacoesHoje.setVisibility(View.INVISIBLE);
+    }
+
+    private void lancarAlarmes()
+    {
+        //Enviar localização
+        boolean localizacao = lifeCheckerManager.getInstance().getEnviarLocalizacao();
+        if(lifeCheckerManager.getInstance().getEnviarLocalizacao() == false)
+        {
+            lifeCheckerManager.getInstance().setEnviarLocalizacao(true);
+            Intent intentLocalization = new Intent(pacienteMenu.this, localizacaoAlarm.class);
+            startService(intentLocalization);
+        }
+
+        //Alerta Marcações proximas
+       /* if(listaMarcacoes.size() != 0) {
+            if (idProximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() && lifeCheckerManager.getInstance().getaVerificar() == false) {
+                idProximaMarca = listaMarcacoes.get(0).getIdMarcacaoMarc();
+                Intent intent = new Intent(pacienteMenu.this, marcacaoAlarme.class);
+                intent.putExtra("idMarcacao", listaMarcacoes.get(0).getIdMarcacaoMarc());
+                startService(intent);
+            }
+        }*/
     }
 
     final View.OnClickListener btnClick = new View.OnClickListener()

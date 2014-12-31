@@ -5,10 +5,13 @@ import java.util.Collections;
 
 import dei.isep.lifechecker.adapter.itemConfiguracaoPaciente;
 import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.json.pacienteJson;
+import dei.isep.lifechecker.json.responsavelJson;
 import dei.isep.lifechecker.model.paciente;
+import dei.isep.lifechecker.model.responsavel;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 import dei.isep.lifechecker.other.preferenciasAplicacao;
 import dei.isep.lifechecker.other.validarDados;
@@ -38,6 +41,7 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
 	ProgressBar pbLoadingList;
 	
 	ArrayList<paciente> listaPacientes;
+    int positionSelect = -1;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,16 +68,12 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
         lvPacientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                positionSelect = position;
+                pbLoadingList.setVisibility(View.VISIBLE);
+                responsavelHttp respHttp = new responsavelHttp();
+                respHttp.getIdResponsavelByIdPaciente(listaPacientes.get(position).getIdResponsavelPaciente(), getPacienteListener);
 
-                pacienteBDD paciBDD = new pacienteBDD(getActivity().getApplicationContext());
-                paciBDD.inserirPacienteComId(listaPacientes.get(position));
 
-                preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
-                prefApp.setTipoUser(2);
-
-                Intent intent = new Intent(getActivity(), pacienteMenu.class);
-                intent.putExtra("idPaciente", listaPacientes.get(position).getIdPaciente());
-                startActivity(intent);
             }
         });
 	}
@@ -132,4 +132,37 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
 			});
 		}
 	};
+
+    interfaceResultadoAsyncPost getPacienteListener = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(codigo == 1 && conteudo.length() > 10)
+                    {
+                        pacienteBDD paciBDD = new pacienteBDD(getActivity().getApplicationContext());
+                        paciBDD.deleteConteudoPaciente();
+                        paciBDD.inserirPacienteComId(listaPacientes.get(positionSelect));
+
+                        lifeCheckerManager.getInstance().setPac(listaPacientes.get(positionSelect));
+
+                        responsavelJson respJson = new responsavelJson(conteudo);
+                        responsavel resp = new responsavel();
+                        responsavelBDD respBDD = new responsavelBDD(getActivity().getApplicationContext());
+                        resp = respJson.transformJsonResponsavel();
+                        respBDD.inserirResponsavelComId(resp);
+
+                        preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
+                        prefApp.setTipoUser(2);
+
+                        Intent intent = new Intent(getActivity(), pacienteMenu.class);
+                        intent.putExtra("idPaciente", listaPacientes.get(positionSelect).getIdPaciente());
+                        startActivity(intent);
+                    }
+
+                }
+            });
+        }
+    };
 }

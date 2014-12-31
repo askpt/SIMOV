@@ -44,7 +44,7 @@ public class paciente {
 		this.nomeLocalPaciente = nomeLocalPaciente;
 		this.horaLocalPaciente = horaLocalPaciente;
 		this.dataLocalPaciente = dataLocalPaciente;
-		this.ativoPaciente = ativoPaciente;
+		this.ativoPaciente = true;
 		this.horaSincroPaciente = horaSincroPaciente;
 		this.dataSincroPaciente = dataSincroPaciente;
 	}
@@ -70,7 +70,7 @@ public class paciente {
 		this.nomeLocalPaciente = nomeLocalPaciente;
 		this.horaLocalPaciente = horaLocalPaciente;
 		this.dataLocalPaciente = dataLocalPaciente;
-		this.ativoPaciente = ativoPaciente;
+		this.ativoPaciente = true;
 		this.horaSincroPaciente = horaSincroPaciente;
 		this.dataSincroPaciente = dataSincroPaciente;
 	}
@@ -109,7 +109,7 @@ public class paciente {
         this.nomeLocalPaciente = "Sem Local";
         this.horaLocalPaciente = "11:11:11";
         this.dataLocalPaciente = "2000-01-01";
-        this.ativoPaciente = ativoPaciente;
+        this.ativoPaciente = true;
 	}
 
 	public int getIdPaciente() {

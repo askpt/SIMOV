@@ -61,6 +61,14 @@ public class responsavelHttp {
 		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 
+    public void getIdResponsavelByIdPaciente(int idResponsavel, interfaceResultadoAsyncPost interfaceListener)
+    {
+        String url = "http://simovws.azurewebsites.net/api/Responsaveis/" + idResponsavel;
+        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+
+        executarTaskGet(url, postParameters, interfaceListener);
+    }
+
 	public void verificarMail(String mail,
 			interfaceResultadoAsyncPost interfaceListener) {
 		String url = "http://simovws.azurewebsites.net/api/Responsaveis/VerificarSeExisteEmail?email="
@@ -92,4 +100,11 @@ public class responsavelHttp {
 		httpP.execute();
 	}
 
+    private void executarTaskGet(String url, List<NameValuePair> postParameters, interfaceResultadoAsyncPost interfaceListener)
+    {
+        httpGet httpG;
+        httpG = new httpGet(url,postParameters);
+        httpG.setOnResultListener(interfaceListener);
+        httpG.execute();
+    }
 }

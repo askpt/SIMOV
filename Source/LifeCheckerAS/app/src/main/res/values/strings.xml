@@ -97,10 +97,18 @@
     <string name="sem_local">O paciente %1s, não dispõe de localização</string>
     <string name="erro_alterar_marcacao_paciente">Não pode alterar marcações validadas pelo Responsavel</string>
     <string name="erro_alterar_por_validar_marcacao_paciente">Não pode alterar marcações a espera de validação</string>
+    <string name="erro_sem_net">Tem de ter acesso a dados para poder prosseguir</string>
 
     <!-- Titulos DialogsBoxs -->
     <string name="novo_paciente">Novo Paciente</string>
 
     <!-- Toast -->
     <string name="local_invalido">Tem de ser mais preciso</string>
+
+    <!-- SMS -->
+    <string name="sms_no_internet">O paciente %1s deixou de poder enviar alertas</string>
+
+    <!-- Toast -->
+    <string name="toat_des_sec_reverific">Nova verificação dentro de 10 segundos</string>
+
 </resources>
