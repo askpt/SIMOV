@@ -13,6 +13,8 @@ import dei.isep.lifechecker.other.lifeCheckerManager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +22,7 @@ import android.widget.ListView;
 
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class responsavelConsultar extends Activity {
 	
@@ -40,8 +43,21 @@ public class responsavelConsultar extends Activity {
 		
 		listaMarcacoes = new ArrayList<marcacao>();
 
-        preencherListaMarcacoes();
+        validarNet();
 	}
+
+    private void validarNet()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            preencherListaMarcacoes();
+        }
+        else
+        {
+            Toast.makeText(this, getResources().getString(R.string.erro_sem_net_info), Toast.LENGTH_LONG).show();
+        }
+    }
 
     private void preencherListaMarcacoes()
     {

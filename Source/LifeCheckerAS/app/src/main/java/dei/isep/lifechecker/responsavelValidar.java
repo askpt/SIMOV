@@ -14,11 +14,14 @@ import dei.isep.lifechecker.other.lifeCheckerManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class responsavelValidar extends Activity {
 	
@@ -39,18 +42,22 @@ public class responsavelValidar extends Activity {
 
 		ArrayList<marcacao> listaMarcacoes = new ArrayList<marcacao>();
 
-        preencherListaMarcacoesValidas();
-
-
-        //Dados de Teste
-        /*listaMarcacoes.add(0, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(1, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(2, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(3, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-        listaMarcacoes.add(4, new marcacao(1, 1, "Teste", "Hora", "Data", 0, 0, "Local", "HoraUp", "DataUp"));
-*/
+        validarNet();
 
 	}
+
+    private void validarNet()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            preencherListaMarcacoesValidas();
+        }
+        else
+        {
+            Toast.makeText(this, getResources().getString(R.string.erro_sem_net_info), Toast.LENGTH_LONG).show();
+        }
+    }
 
     private void preencherListaMarcacoesValidas()
     {

@@ -3,6 +3,8 @@ package dei.isep.lifechecker.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,8 +61,8 @@ public class itemResponsavelPacientes extends ArrayAdapter<paciente>{
             holder.removerPaciente.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    alterarEstadoPaciente();
+                    validarNet();
+                    //alterarEstadoPaciente();
                 }
             });
 
@@ -77,6 +80,19 @@ public class itemResponsavelPacientes extends ArrayAdapter<paciente>{
         return convertView;
     }
 
+    private void validarNet()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getContext().getSystemService(getContext().CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            alterarEstadoPaciente();
+        }
+        else
+        {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.erro_sem_net_info), Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void alterarEstadoPaciente()
     {
         pacienteHttp paciHttp = new pacienteHttp();
@@ -89,9 +105,6 @@ public class itemResponsavelPacientes extends ArrayAdapter<paciente>{
         public void obterResultado(final int codigo, final String conteudo) {
 
             if(codigo == 1) {
-                //String idValor = conteudo.replaceAll("[\\r\\n]+", "");
-                //int idMarcacao  = Integer.valueOf(idValor);
-                //mar.setIdMarcacaoMarc(idMarcacao);
                 
                 pacienteBDD pacienBDD = new pacienteBDD(getContext());
                 pacienBDD.atualizarPaciente(rowItem);

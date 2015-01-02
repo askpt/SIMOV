@@ -6,12 +6,15 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -64,10 +67,19 @@ public class responsavelMenu extends Activity {
     }
 
     private void preencherListaMarcacoes() {
-        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
-        idResp = respBDD.getIdResponsavel();
-        marcacaoHttp marcaHttp = new marcacaoHttp();
-        marcaHttp.retornarMarcacoesEstado(idResp, 1, marcacaoGetAllValidasHoje);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+            idResp = respBDD.getIdResponsavel();
+            marcacaoHttp marcaHttp = new marcacaoHttp();
+            marcaHttp.retornarMarcacoesEstado(idResp, 1, marcacaoGetAllValidasHoje);
+        }
+        else
+        {
+            Toast.makeText(this,getResources().getString(R.string.erro_sem_net_info),Toast.LENGTH_LONG).show();
+            PBLoadMarcaHojeResp.setVisibility(View.INVISIBLE);
+        }
     }
 
     interfaceResultadoAsyncPost marcacaoGetAllValidasHoje = new interfaceResultadoAsyncPost() {
@@ -90,6 +102,9 @@ public class responsavelMenu extends Activity {
                         }
                         listaMarcacoes = listaMarcacoesHoje;
                         preencherListaHoje();
+                    }
+                    else {
+                        PBLoadMarcaHojeResp.setVisibility(View.INVISIBLE);
                     }
                 }
             });
@@ -125,8 +140,18 @@ public class responsavelMenu extends Activity {
                     intent = new Intent(responsavelMenu.this, responsavelPacientes.class);
                     break;
             }
-            intent.putExtra("idResponsavel",idResp);
-            startActivity(intent);
+                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                if(networkInfo != null) {
+                    intent.putExtra("idResponsavel",idResp);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.erro_sem_net), Toast.LENGTH_LONG).show();
+                }
+
+
 
         }
     };

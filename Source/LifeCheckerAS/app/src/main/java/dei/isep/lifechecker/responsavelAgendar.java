@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.location.Address;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -94,9 +96,23 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
         PBloadingMarcacao.setVisibility(View.INVISIBLE);
         BTaddMarcacao.setEnabled(false);
         TVcomentariosAddMarca.setVisibility(View.INVISIBLE);
-        preencherCmbox();
-        preencherMapa();
+        validarNet();
 	}
+
+    private void validarNet()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            preencherCmbox();
+            preencherMapa();
+
+        }
+        else
+        {
+            Toast.makeText(this,getResources().getString(R.string.erro_sem_net_info),Toast.LENGTH_LONG).show();
+        }
+    }
 
 
     final OnClickListener btnCarregado = new OnClickListener()
@@ -117,30 +133,40 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
 
     public void adicionarMarcacao()
     {
-        int idPaciente = (int)spinnerPacientes.getSelectedItemId();
-        String tipoMarcacao = ETmarcacao.getText().toString();
-        String hora = EThora.getText().toString();
-        String data = ETdata.getText().toString();
-        String local = ETlocal.getText().toString();
-        validarDados validar = new validarDados();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
 
-        if(validar.validarTipoMarcacao(tipoMarcacao) &&
-                validar.validarTempo24H(hora) &&
-                validar.validarDataAMD(data) &&
-                validar.validarLocalidade(local) &&
-                validar.validarLatitude(latitude) &&
-                validar.validarLongitude(longitude))
-        {
-            hora +=":00";
-            PBloadingMarcacao.setVisibility(View.VISIBLE);
-            BTaddMarcacao.setEnabled(false);
-            mar = new marcacao(idPaciente,1,tipoMarcacao,hora,data,latitude,longitude,local);
-            marcacaoHttp marHttp = new marcacaoHttp();
-            marHttp.addmarcacao(mar, resultadoAddMarcacao);
+            int idPaciente = (int)spinnerPacientes.getSelectedItemId();
+            String tipoMarcacao = ETmarcacao.getText().toString();
+            String hora = EThora.getText().toString();
+            String data = ETdata.getText().toString();
+            String local = ETlocal.getText().toString();
+            validarDados validar = new validarDados();
+
+            if(validar.validarTipoMarcacao(tipoMarcacao) &&
+                    validar.validarTempo24H(hora) &&
+                    validar.validarDataAMD(data) &&
+                    validar.validarLocalidade(local) &&
+                    validar.validarLatitude(latitude) &&
+                    validar.validarLongitude(longitude))
+            {
+                hora +=":00";
+                PBloadingMarcacao.setVisibility(View.VISIBLE);
+                BTaddMarcacao.setEnabled(false);
+                mar = new marcacao(idPaciente,1,tipoMarcacao,hora,data,latitude,longitude,local);
+                marcacaoHttp marHttp = new marcacaoHttp();
+                marHttp.addmarcacao(mar, resultadoAddMarcacao);
+            }
+            else
+            {
+                TVcomentariosAddMarca.setText(getResources().getString(R.string.err_dados_formularios));
+            }
+
         }
         else
         {
-            TVcomentariosAddMarca.setText(getResources().getString(R.string.err_dados_formularios));
+            Toast.makeText(this,getResources().getString(R.string.erro_sem_net_info),Toast.LENGTH_LONG).show();
         }
 
     }
@@ -179,19 +205,26 @@ public class responsavelAgendar extends Activity implements DatePickerDialog.OnD
 	public void verLocal()
 	{
 
-        validarDados validar = new validarDados();
-        if(validar.validarLocalidade(ETlocal.getText().toString()))
-        {
-            BTaddMarcacao.setEnabled(false);
-            marcacao marca  = new marcacao();
-            String endereco = ETlocal.getText().toString();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
 
-            locationHTTP localti = new locationHTTP();
-            localti.obterCoordenadasPorString(endereco,listenerLocal);
+
+            validarDados validar = new validarDados();
+            if (validar.validarLocalidade(ETlocal.getText().toString())) {
+                BTaddMarcacao.setEnabled(false);
+                marcacao marca = new marcacao();
+                String endereco = ETlocal.getText().toString();
+
+                locationHTTP localti = new locationHTTP();
+                localti.obterCoordenadasPorString(endereco, listenerLocal);
+            } else {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
+            }
         }
         else
         {
-            Toast.makeText(getApplicationContext(),getResources().getString(R.string.local_invalido),Toast.LENGTH_LONG);
+            Toast.makeText(this,getResources().getString(R.string.erro_sem_net_info),Toast.LENGTH_LONG).show();
         }
 
 	};

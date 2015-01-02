@@ -98,6 +98,7 @@
     <string name="erro_alterar_marcacao_paciente">Não pode alterar marcações validadas pelo Responsavel</string>
     <string name="erro_alterar_por_validar_marcacao_paciente">Não pode alterar marcações a espera de validação</string>
     <string name="erro_sem_net">Tem de ter acesso a dados para poder prosseguir</string>
+    <string name="erro_sem_net_info">Tem de ter acesso a dados para obter informação</string>
 
     <!-- Titulos DialogsBoxs -->
     <string name="novo_paciente">Novo Paciente</string>

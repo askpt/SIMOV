@@ -2,7 +2,11 @@ package dei.isep.lifechecker;
 
 import dei.isep.lifechecker.databaseonline.httpPut;
 import dei.isep.lifechecker.databaseonline.responsavelHttp;
+
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -67,47 +71,55 @@ public class configuracaoRespConta extends Fragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		tvConfirmarMail.setVisibility(View.VISIBLE);
+            ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            tvConfirmarMail.setVisibility(View.VISIBLE);
 
-		// Validar Mail
-		validarDados validar = new validarDados();
+            // Validar Mail
+            validarDados validar = new validarDados();
 
-		if (validar.mailValidacaoFormato(txtMail.getText().toString()) == true) {
+            if (validar.mailValidacaoFormato(txtMail.getText().toString()) == true) {
 
-			if (txtPass.getText().toString()
-					.compareTo(txtPassConfirm.getText().toString()) == 0) {
-				if (validar.passValidarFormato(txtPass.getText().toString()) == true) {
-					btnValidarMail.setText(R.string.esperar);
-					btnValidarMail.setEnabled(false);
-					
-					pbLoadingMail.setVisibility(View.VISIBLE);
-					tvConfirmarMail.setTextColor(Color.BLACK);
-					tvConfirmarMail
-							.setText(R.string.verificar_mail_verificando);
-					String mail = txtMail.getText().toString();
+                if (txtPass.getText().toString()
+                        .compareTo(txtPassConfirm.getText().toString()) == 0) {
+                    if (validar.passValidarFormato(txtPass.getText().toString()) == true) {
+                        btnValidarMail.setText(R.string.esperar);
+                        btnValidarMail.setEnabled(false);
 
-					responsavelHttp respHTTP = new responsavelHttp();
-					respHTTP.verificarMail(mail, htPostResult);
-					
-					
-				} else {
-					tvConfirmarMail.setTextColor(getResources().getColor(
-							R.color.vermelho));
-					tvConfirmarMail
-							.setText(R.string.verificar_password_formato_errado);
-				}
-			} else {
-				tvConfirmarMail.setTextColor(getResources().getColor(
-						R.color.vermelho));
-				tvConfirmarMail.setText(R.string.verificar_password_diferentes);
+                        pbLoadingMail.setVisibility(View.VISIBLE);
+                        tvConfirmarMail.setTextColor(Color.BLACK);
+                        tvConfirmarMail
+                                .setText(R.string.verificar_mail_verificando);
+                        String mail = txtMail.getText().toString();
 
-			}
+                        responsavelHttp respHTTP = new responsavelHttp();
+                        respHTTP.verificarMail(mail, htPostResult);
 
-		} else {
-			tvConfirmarMail.setTextColor(getResources().getColor(
-					R.color.vermelho));
-			tvConfirmarMail.setText(R.string.verificar_mail_formato_errado);
-		}
+
+                    } else {
+                        tvConfirmarMail.setTextColor(getResources().getColor(
+                                R.color.vermelho));
+                        tvConfirmarMail
+                                .setText(R.string.verificar_password_formato_errado);
+                    }
+                } else {
+                    tvConfirmarMail.setTextColor(getResources().getColor(
+                            R.color.vermelho));
+                    tvConfirmarMail.setText(R.string.verificar_password_diferentes);
+
+                }
+
+            } else {
+                tvConfirmarMail.setTextColor(getResources().getColor(
+                        R.color.vermelho));
+                tvConfirmarMail.setText(R.string.verificar_mail_formato_errado);
+            }
+        }
+        else
+        {
+            tvConfirmarMail.setText(R.string.erro_sem_net);
+        }
 	}
 
 	interfaceResultadoAsyncPost htPostResult = new interfaceResultadoAsyncPost() {

@@ -253,6 +253,8 @@ public class lifeCheckerManager {
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
+
+
 	
 
 }

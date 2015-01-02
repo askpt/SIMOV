@@ -3,6 +3,8 @@ package dei.isep.lifechecker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,7 +50,20 @@ public class responsavelPacientes extends Activity implements OnClickListener {
         novoPaciente.setEnabled(false);
 
         PBloadingActionBar = (ProgressBar)findViewById(R.id.progressBar_action_bar);
-        preencherListaPacientes();
+        validarNet();
+    }
+
+    private void validarNet()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            preencherListaPacientes();
+        }
+        else
+        {
+            Toast.makeText(this, getResources().getString(R.string.erro_sem_net_info), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void preencherListaPacientes() {

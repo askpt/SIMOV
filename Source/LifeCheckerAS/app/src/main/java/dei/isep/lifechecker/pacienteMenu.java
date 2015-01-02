@@ -128,14 +128,14 @@ public class pacienteMenu extends Activity{
         }
 
         //Alerta Marcações proximas
-       /* if(listaMarcacoes.size() != 0) {
+        if(listaMarcacoes.size() != 0) {
             if (idProximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() && lifeCheckerManager.getInstance().getaVerificar() == false) {
                 idProximaMarca = listaMarcacoes.get(0).getIdMarcacaoMarc();
                 Intent intent = new Intent(pacienteMenu.this, marcacaoAlarme.class);
                 intent.putExtra("idMarcacao", listaMarcacoes.get(0).getIdMarcacaoMarc());
                 startService(intent);
             }
-        }*/
+        }
     }
 
     final View.OnClickListener btnClick = new View.OnClickListener()

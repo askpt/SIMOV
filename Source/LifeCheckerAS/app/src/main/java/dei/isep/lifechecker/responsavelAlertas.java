@@ -3,6 +3,8 @@ package dei.isep.lifechecker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -39,21 +42,22 @@ public class responsavelAlertas extends Activity {
 
         listaHistoricoAlertas = new ArrayList<historicoAlertas>();
 
-        preencherHistoricoAlertas();
-        /*
+        validarNet();
 
-        ArrayList<historicoAlertas> listaAlertas = new ArrayList<historicoAlertas>();
-
-        //Dados de Teste
-        listaAlertas.add(0, new historicoAlertas(1, 1, 1, "12:13:14", "2014-02-01", 0.0, 0.0, "Rua das Couves", "HoraUp", "DataUp"));
-        listaAlertas.add(1, new historicoAlertas(1, 1, 1, "12:13:14", "2014-02-01", 0.0, 0.0, "Rua das Couves", "HoraUp", "DataUp"));
-        listaAlertas.add(2, new historicoAlertas(1, 1, 1, "12:13:14", "2014-02-01", 0.0, 0.0, "Rua das Couves", "HoraUp", "DataUp"));
-        listaAlertas.add(3, new historicoAlertas(1, 1, 1, "12:13:14", "2014-02-01", 0.0, 0.0, "Rua das Couves", "HoraUp", "DataUp"));
-        listaAlertas.add(4, new historicoAlertas(1, 1, 1, "12:13:14", "2014-02-01", 0.0, 0.0, "Rua das Couves", "HoraUp", "DataUp"));
-
-        itemResponsavelAlertas adapter = new itemResponsavelAlertas(context, R.layout.responsavel_itemtipo_alertas, listaAlertas);
-        listviewAlertas.setAdapter(adapter);*/
 	}
+
+    private void validarNet()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            preencherHistoricoAlertas();
+        }
+        else
+        {
+            Toast.makeText(this, getResources().getString(R.string.erro_sem_net_info), Toast.LENGTH_LONG).show();
+        }
+    }
 
     private void preencherHistoricoAlertas()
     {

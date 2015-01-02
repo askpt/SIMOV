@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
@@ -77,12 +80,32 @@ public class responsavelNovoPaciente extends Activity {
                     addPaciente();
                     break;
                 case R.id.bt_responsavel_novo_paciente_Cancelar:
+                    cancelar();
                     break;
 
 
             }
         }
     };
+
+    private void validarNetAddPaciente()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
+            addPaciente();
+        }
+        else
+        {
+            Toast.makeText(this, getResources().getString(R.string.erro_sem_net_info), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void cancelar()
+    {
+        Intent intent = new Intent(this, responsavelMenu.class);
+        startActivity(intent);
+    }
 
     private void addPaciente()
     {

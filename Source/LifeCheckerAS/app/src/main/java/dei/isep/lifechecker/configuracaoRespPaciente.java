@@ -12,6 +12,8 @@ import dei.isep.lifechecker.other.validarDados;
 import dei.isep.lifechecker.database.*;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -87,31 +89,41 @@ public class configuracaoRespPaciente extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
-        tvComentarios.setVisibility(View.VISIBLE);
-		btnValidarResponsavel.setText(R.string.esperar);
-		btnValidarResponsavel.setEnabled(false);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null) {
 
-		mailExiste = false;
 
-		listaErros = "";
-		validMailPaciente = 0;
-		int valiConta = validarConta();
-		int valiDados = validarDadosNovoResposnavel();
-		int valiPeriodicidade = valirdarPeriodicidades();
-		validMailPaciente = validarPacienteResposnavel();
+            tvComentarios.setVisibility(View.VISIBLE);
+            btnValidarResponsavel.setText(R.string.esperar);
+            btnValidarResponsavel.setEnabled(false);
 
-		// Verificar mail
-		if (valiConta == 0 && validMailPaciente == 0 && valiDados == 0
-				&& valiPeriodicidade == 0) {
-			pbConfiguracao.setVisibility(View.VISIBLE);
-			validarmailOnlineResponsavel(lifeCheckerManager.getInstance()
-					.getMailResponsavel());
+            mailExiste = false;
 
-		} else {
-			tvComentarios.setText(listaErros);
-			btnValidarResponsavel.setText(R.string.validar);
-			btnValidarResponsavel.setEnabled(true);
-		}
+            listaErros = "";
+            validMailPaciente = 0;
+            int valiConta = validarConta();
+            int valiDados = validarDadosNovoResposnavel();
+            int valiPeriodicidade = valirdarPeriodicidades();
+            validMailPaciente = validarPacienteResposnavel();
+
+            // Verificar mail
+            if (valiConta == 0 && validMailPaciente == 0 && valiDados == 0
+                    && valiPeriodicidade == 0) {
+                pbConfiguracao.setVisibility(View.VISIBLE);
+                validarmailOnlineResponsavel(lifeCheckerManager.getInstance()
+                        .getMailResponsavel());
+
+            } else {
+                tvComentarios.setText(listaErros);
+                btnValidarResponsavel.setText(R.string.validar);
+                btnValidarResponsavel.setEnabled(true);
+            }
+        }
+        else
+        {
+            tvComentarios.setText(R.string.erro_sem_net);
+        }
 
 	}
 
