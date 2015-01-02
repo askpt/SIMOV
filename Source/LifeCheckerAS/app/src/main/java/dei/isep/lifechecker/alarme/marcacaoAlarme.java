@@ -100,6 +100,7 @@ public class marcacaoAlarme extends IntentService {
         boolean enviarNotificacao;
         if(minutosDiferentes <= 65 && minutosDiferentes > 0)
         {
+
             minutosAlarm = 5;
             enviarNotificacao = true;
         }

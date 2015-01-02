@@ -54,12 +54,12 @@ public class pacienteMenu extends Activity{
         preencherListaMarcacoes();
     }
 
-    private void preencherListaMarcacoes() {
+    public void preencherListaMarcacoes() {
         marcacaoHttp marcaHttp = new marcacaoHttp();
         pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
         int idPaciente = paciBDD.getIdPaicente();
         //lifeCheckerManager.getInstance().setPac(paciBDD.getPacienteById(idPaciente));
-        lancarAlarmes();
+
         marcaHttp.retornarMarcacoesByPaciente(idPaciente, marcacaoGetAllValidasHoje);
     }
 
@@ -75,6 +75,8 @@ public class pacienteMenu extends Activity{
                         SimpleDateFormat dformate = new SimpleDateFormat("yyyy-MM-dd");
                         String dataFormatada = dformate.format(c.getTime());
                         marcacaoBDD marcaBDD = new marcacaoBDD(getApplicationContext());
+                        SimpleDateFormat horaFormatada = new SimpleDateFormat("HH:mm:ss");
+                        String hora = horaFormatada.format(c.getTime());
 
 
 
@@ -95,7 +97,8 @@ public class pacienteMenu extends Activity{
                             marcacao tmp = i.next();
 
                             //marcaBDD.inserirMarcacaoSemVerificacao(tmp);
-                            if (tmp.getDataMarc().compareTo(dataFormatada) >= 0 && tmp.getIdEstadoMarc() == 1) {
+                            if ((tmp.getDataMarc().compareTo(dataFormatada) >= 0 && tmp.getHoraMarc().compareTo(hora) > 0&& tmp.getIdEstadoMarc() == 1)
+                                    || tmp.getDataMarc().compareTo(dataFormatada) > 0) {
                                 listaMarcacoesHoje.add(tmp);
                             }
                         }
@@ -106,7 +109,7 @@ public class pacienteMenu extends Activity{
                     {
                         listaMarcacoes = new ArrayList<marcacao>();
                         PBLoadMarcacoesHoje.setVisibility(View.INVISIBLE);
-
+                        lancarAlarmes();
                     }
                 }
             });
@@ -118,6 +121,7 @@ public class pacienteMenu extends Activity{
         itemPacienteProximas adapter = new itemPacienteProximas(getApplicationContext(), R.layout.paciente_itemtipo_proximasconsultas, listaMarcacoes);
         listviewProximas.setAdapter(adapter);
         PBLoadMarcacoesHoje.setVisibility(View.INVISIBLE);
+        lancarAlarmes();
     }
 
     private void lancarAlarmes()
@@ -159,4 +163,10 @@ public class pacienteMenu extends Activity{
 
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        preencherListaMarcacoes();
+    }
 }

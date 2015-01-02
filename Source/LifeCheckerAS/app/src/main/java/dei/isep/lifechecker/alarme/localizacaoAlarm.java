@@ -56,9 +56,6 @@ public class localizacaoAlarm extends IntentService {
             enviarSMS();
         }
             //lifeCheckerManager.getInstance().setEnviarLocalizacao(true);
-
-
-
     }
 
 
@@ -151,7 +148,7 @@ public class localizacaoAlarm extends IntentService {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, proximaAtualizacaoMili, pendingIntent);
-        Log.i("alarm", " proximo alarm daqui a " + proximaAtualizacaoMili/1000 + " sec");
+        Log.i("alarm", " proximo alarm daqui a " + (currentTimeMillis-proximaAtualizacaoMili)/1000 + " sec");
 
     }
 
