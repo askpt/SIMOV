@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -70,14 +71,19 @@ public class pacienteMenu extends Activity{
                 public void run() {
                     if(codigo == 1 && conteudo.length() > 10)
                     {
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat dformate = new SimpleDateFormat("yyyy-MM-dd");
+                        String dataFormatada = dformate.format(c.getTime());
                         marcacaoBDD marcaBDD = new marcacaoBDD(getApplicationContext());
+
+
 
                         marcacaoJson marcJ = new marcacaoJson(conteudo);
                         listaMarcacoes = marcJ.transformJsonMarcacao();
                         ArrayList<marcacao> listaMarcacoesHoje = new ArrayList<marcacao>();
-                        Calendar c = Calendar.getInstance();
-                        String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
-                        String horaAgora = String.valueOf(c.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(c.get(Calendar.MINUTE)) + ":" + String.valueOf(c.get(Calendar.SECOND));
+                        //Calendar c = Calendar.getInstance();
+                        //String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
+                        //String horaAgora = String.valueOf(c.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(c.get(Calendar.MINUTE)) + ":" + String.valueOf(c.get(Calendar.SECOND));
                         marcaBDD.deleteConteudoMarcacoes();
                         for (int i = 0; i < listaMarcacoes.size(); i++) {
                             marcaBDD.inserirMarcacaoSemVerificacao(listaMarcacoes.get(i));
@@ -89,9 +95,7 @@ public class pacienteMenu extends Activity{
                             marcacao tmp = i.next();
 
                             //marcaBDD.inserirMarcacaoSemVerificacao(tmp);
-                            if ((tmp.getDataMarc().compareTo(dataHoje) > 0 && tmp.getIdEstadoMarc() == 1) ||
-                                    (tmp.getDataMarc().compareTo(dataHoje) == 0 && tmp.getHoraMarc().compareTo(horaAgora) >=0 && tmp.getIdEstadoMarc() == 1)) {
-
+                            if (tmp.getDataMarc().compareTo(dataFormatada) >= 0 && tmp.getIdEstadoMarc() == 1) {
                                 listaMarcacoesHoje.add(tmp);
                             }
                         }

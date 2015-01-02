@@ -17,6 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.nio.charset.Charset;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -90,14 +93,18 @@ public class responsavelMenu extends Activity {
                 public void run() {
                     if(codigo == 1 && conteudo.length() > 10)
                     {
+                        Calendar c = Calendar.getInstance();
+                        SimpleDateFormat dformate = new SimpleDateFormat("yyyy-MM-dd");
+                        String dataFormatada = dformate.format(c.getTime());
+                        //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
                         marcacaoJson marcJ = new marcacaoJson(conteudo);
                         listaMarcacoes = marcJ.transformJsonMarcacao();
                         ArrayList<marcacao> listaMarcacoesHoje = new ArrayList<marcacao>();
-                        Calendar c = Calendar.getInstance();
-                        String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
+                        //Calendar c = Calendar.getInstance();
+                        //String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
                         for(Iterator<marcacao> i = listaMarcacoes.iterator(); i.hasNext(); ) {
                             marcacao tmp = i.next();
-                            if (tmp.getDataMarc().contentEquals(dataHoje))
+                            if (tmp.getDataMarc().contentEquals(dataFormatada))
                                 listaMarcacoesHoje.add(tmp);
                         }
                         listaMarcacoes = listaMarcacoesHoje;
