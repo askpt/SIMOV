@@ -68,6 +68,21 @@ public class alertaBDD {
 		close();
 		return valueResult;
 	}
+
+
+    public long inserirAlertaId(alerta alerta)
+    {
+        long valueResult = 0;
+        open();
+        ContentValues values = new ContentValues();
+        values.put(COL_ID_ALERT, alerta.getIdAlerta());
+        values.put(COL_EXPLICACAO_ALERT, alerta.getExplicacaoAlerta());
+        values.put(COL_HORA_SINCRO_ALERT, alerta.getHoraSincroAlerta());
+        values.put(COL_DATA_SINCRO_ALERT, alerta.getDataSincroAlerta());
+        valueResult = bdd.insert(TABLE_ALERTA, null, values);
+        close();
+        return valueResult;
+    }
 	
 	public boolean existeAlerta(int id)
 	{

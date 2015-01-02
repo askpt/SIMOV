@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class baseDeDadosInterna extends SQLiteOpenHelper{
 	
-	private static final int VERSION_BDD = 3;
+	private static final int VERSION_BDD = 4;
 	private static final String nomeDB = "lfDataBase.db";
 	
 	//Objetos para Tabelas

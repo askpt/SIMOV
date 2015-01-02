@@ -69,6 +69,8 @@ public class estadoMarcacaoBDD {
         ContentValues values = new ContentValues();
         values.put(COL_ID_ESTMARC, estadoMarca.getIdEstadoMarcacao());
         values.put(COL_EXPLICACAO_ESTMARC, estadoMarca.getExplicacaoEstMarc());
+        values.put(COL_HORA_SINCRO_ESTMARC, estadoMarca.getHoraSincroEstMarc());
+        values.put(COL_DATA_SINCRO_ESTMARC, estadoMarca.getDataSincroEstMarc());
         valueResul = bdd.insert(TABLE_ESTMARC,null,values);
         close();
         return valueResul;

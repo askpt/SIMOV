@@ -146,7 +146,7 @@ public class lifeCheckerMain extends Activity {
                         listaEstMar = estMarcJson.transformJsonEstadoMarcacao();
                         estadoMarcacaoBDD estMarBDD = new estadoMarcacaoBDD(getApplicationContext());
                         for (int i = 0; i < listaEstMar.size(); i++) {
-                            estMarBDD.inserirEstadoMarcacao(listaEstMar.get(i));
+                            estMarBDD.inserirEstadoMarcacaoComId(listaEstMar.get(i));
 
                         }
                         preencherTiposAlertas();
@@ -171,7 +171,7 @@ public class lifeCheckerMain extends Activity {
                         alertaBDD alrtBdd = new alertaBDD(getApplicationContext());
 
                         for (int i = 0; i < listaAlerta.size(); i++) {
-                            alrtBdd.inserirAlerta(listaAlerta.get(i));
+                            alrtBdd.inserirAlertaId(listaAlerta.get(i));
                         }
                         preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
                         prefApp.setTipoUser(3);
