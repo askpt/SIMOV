@@ -158,6 +158,7 @@ public class responsavelBDD {
     public responsavel getResponsavel()
     {
         int qtd = getQtdResponsavel();
+        responsavel resp = new responsavel();
         if(qtd == 1)
         {
             int id;
@@ -184,18 +185,19 @@ public class responsavelBDD {
                 apelido = cursor.getString(cursor.getColumnIndex(COL_APELIDO_RESP));
                 contacto = cursor.getString(cursor.getColumnIndex(COL_CONTACTO_RESP));
                 apelido = cursor.getString(cursor.getColumnIndex(COL_APELIDO_RESP));
-                notifMail = Boolean.valueOf(cursor.getString(cursor.getColumnIndex(COL_NOTIFICACAOMAIL_RESP)));
-                notifSMS = Boolean.valueOf(cursor.getString(cursor.getColumnIndex(COL_NOTIFICACAOSMS_RESP)));
+                notifMail = converterBoolean(Integer.valueOf(cursor.getString(cursor.getColumnIndex(COL_NOTIFICACAOMAIL_RESP))));
+                notifSMS = converterBoolean(Integer.valueOf(cursor.getString(cursor.getColumnIndex(COL_NOTIFICACAOSMS_RESP))));
                 periodicidadeDiruna = cursor.getInt(cursor.getColumnIndex(COL_PERIODICIDADEDIURNA_RESP));
                 periodicidadeNoturna = cursor.getInt(cursor.getColumnIndex(COL_PERIODICIDADENOTURNA_RESP));
                 mail = cursor.getString(cursor.getColumnIndex(COL_MAIL_RESP));
                 pass = cursor.getString(cursor.getColumnIndex(COL_PASS_RESP));
                 horaSincro = cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP));
                 dataSincro = cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP));
-
+                resp = new responsavel(id, nome, apelido, contacto, notifMail, notifSMS, periodicidadeDiruna, periodicidadeNoturna
+                , mail, pass, horaSincro, dataSincro);
             }
+            close();
         }
-        responsavel resp = new responsavel();
         return resp;
     }
 
@@ -222,5 +224,15 @@ public class responsavelBDD {
 		return DROP_TABLE_RESPONSAVEL;
 	}
 	
-
+    private boolean converterBoolean(int valor)
+    {
+        if(valor == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import dei.isep.lifechecker.adapter.itemResponsavelAlertas;
 import dei.isep.lifechecker.database.historicoAlertasBDD;
@@ -87,6 +88,7 @@ public class responsavelAlertas extends Activity {
                     {
                         historicoAlertaJson histoAlerJson = new historicoAlertaJson(conteudo);
                         listaHistoricoAlertas = histoAlerJson.transformJsonHistoricoAlerta();
+                        Collections.reverse(listaHistoricoAlertas);
                         preencherListaHistoricoAlertas();
                     }
                     else

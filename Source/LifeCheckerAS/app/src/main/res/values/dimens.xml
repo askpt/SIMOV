@@ -5,5 +5,7 @@
     <dimen name="texto_pequeno">14sp</dimen>
     <dimen name="texto_medio">18sp</dimen>
     <dimen name="texto_grande">22sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 
 </resources>

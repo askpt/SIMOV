@@ -148,10 +148,15 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
                         lifeCheckerManager.getInstance().setPac(listaPacientes.get(positionSelect));
 
                         responsavelJson respJson = new responsavelJson(conteudo);
-                        responsavel resp = new responsavel();
                         responsavelBDD respBDD = new responsavelBDD(getActivity().getApplicationContext());
-                        resp = respJson.transformJsonResponsavel();
+                        responsavel resp = respJson.transformJsonResponsavel();
                         respBDD.inserirResponsavelComId(resp);
+
+
+                        lifeCheckerManager.getInstance().setPeriodicidadeDiurna(resp.getPeriodicidadeDiurna());
+                        lifeCheckerManager.getInstance().setPeriodicidadeNoturna(resp.getPeriodicidadeNoturna());
+                        lifeCheckerManager.getInstance().setEnviarMail(resp.getNotificacaoMail());
+                        lifeCheckerManager.getInstance().setEnviarSMS(resp.getNotificacaoSMS());
 
                         preferenciasAplicacao prefApp = new preferenciasAplicacao(getActivity().getApplicationContext());
                         prefApp.setTipoUser(2);

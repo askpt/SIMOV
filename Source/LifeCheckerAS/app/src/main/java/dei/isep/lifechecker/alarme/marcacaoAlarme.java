@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.Log;
@@ -46,6 +48,7 @@ public class marcacaoAlarme extends IntentService {
     long proximaAtualizacaoMili;
     PendingIntent pendingIntent;
     Time proximaAtualizacao;
+    private NetworkInfo networkInfo;
 
     public marcacaoAlarme(){
         super(marcacaoAlarme.class.getSimpleName());
@@ -128,13 +131,16 @@ public class marcacaoAlarme extends IntentService {
 
     private void enviarAlerta(boolean enviar)
     {
-        if(enviar == true)
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(enviar == true && networkInfo != null)
         {
             Log.i("alarme", "passou alarme COM notificar");
             GPSTracker gps = new GPSTracker(this);
             if(gps.canGetLocation())
             {
                 localAtual = gps.getLocation();
+                gps.stopUsingGPS();
                 Location coordenadasMarcacao = new Location("");
                 coordenadasMarcacao.setLatitude(marca.getLatitudeMarc());
                 coordenadasMarcacao.setLongitude(marca.getLongitudeMarc());
@@ -155,7 +161,8 @@ public class marcacaoAlarme extends IntentService {
         {
             Log.i("alarme", "passou alarme Sem notificar");
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC, proximaAtualizacaoMili, pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
+
         }
     }
 

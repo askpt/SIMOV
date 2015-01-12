@@ -23,7 +23,7 @@ public class locationHTTP {
     public void obterCoordenadasPorString(String localidade, interfaceResultadoAsyncPost listener)
     {
         String address = localidade.replaceAll(" ", "%20");
-        String url = "http://maps.google.com/maps/api/geocode/json?address=" + address + "&sensor=false";
+        String url = "http://maps.google.com/maps/api/geocode/json?address=" + address + "&sensor=true";
         List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         executarTaskPOST(url,postParameters,listener);
     }

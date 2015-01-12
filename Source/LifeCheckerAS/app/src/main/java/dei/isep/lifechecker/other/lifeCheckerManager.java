@@ -44,10 +44,128 @@ public class lifeCheckerManager {
     //Marcações
     private int idMarcacao;
     private boolean aVerificar;
+    private boolean registouAcelaromtro = false;
 
     //Alertas
     private boolean enviarLocalizacao = false;
+    private boolean alarmesDiurna = false;
 
+    private float acelaromtroX = -100;
+    private float acelaromtroY = -100;
+    private float acelaromtroZ = -100;
+    private float acelaromtroXACT = -100;
+    private float acelaromtroYACT = -100;
+    private float acelaromtroZACT = -100;
+    private long tempAlteracao = 0;
+    private int periodicidadeDiurna = -1;
+    private int periodicidadeNoturna = -1;
+
+    private boolean enviarSMS;
+    private boolean enviarMail;
+
+    public boolean getEnviarMail() {
+        return enviarMail;
+    }
+
+    public void setEnviarMail(boolean enviarMail) {
+        this.enviarMail = enviarMail;
+    }
+
+    public int getPeriodicidadeDiurna() {
+        return periodicidadeDiurna;
+    }
+
+    public void setPeriodicidadeDiurna(int periodicidadeDiurna) {
+        this.periodicidadeDiurna = periodicidadeDiurna;
+    }
+
+    public int getPeriodicidadeNoturna() {
+        return periodicidadeNoturna;
+    }
+
+    public void setPeriodicidadeNoturna(int periodicidadeNoturna) {
+        this.periodicidadeNoturna = periodicidadeNoturna;
+    }
+
+    public boolean getEnviarSMS() {
+        return enviarSMS;
+    }
+
+    public void setEnviarSMS(boolean enviarSMS) {
+        this.enviarSMS = enviarSMS;
+    }
+
+    public float getAcelaromtroXACT() {
+        return acelaromtroXACT;
+    }
+
+    public void setAcelaromtroXACT(float acelaromtroXACT) {
+        this.acelaromtroXACT = acelaromtroXACT;
+    }
+
+    public float getAcelaromtroYACT() {
+        return acelaromtroYACT;
+    }
+
+    public void setAcelaromtroYACT(float acelaromtroYACT) {
+        this.acelaromtroYACT = acelaromtroYACT;
+    }
+
+    public float getAcelaromtroZACT() {
+        return acelaromtroZACT;
+    }
+
+    public void setAcelaromtroZACT(float acelaromtroZACT) {
+        this.acelaromtroZACT = acelaromtroZACT;
+    }
+
+    public long getTempAlteracao() {
+        return tempAlteracao;
+    }
+
+    public void setTempAlteracao(long tempAlteracao) {
+        this.tempAlteracao = tempAlteracao;
+    }
+
+    public float getAcelaromtroX() {
+        return acelaromtroX;
+    }
+
+    public void setAcelaromtroX(float acelaromtroX) {
+        this.acelaromtroX = acelaromtroX;
+    }
+
+    public float getAcelaromtroY() {
+        return acelaromtroY;
+    }
+
+    public void setAcelaromtroY(float acelaromtroY) {
+        this.acelaromtroY = acelaromtroY;
+    }
+
+    public float getAcelaromtroZ() {
+        return acelaromtroZ;
+    }
+
+    public void setAcelaromtroZ(float acelaromtroZ) {
+        this.acelaromtroZ = acelaromtroZ;
+    }
+
+    public boolean getRegistouAcelaromtro() {
+        return registouAcelaromtro;
+    }
+
+    public void setRegistouAcelaromtro(boolean registouAcelaromtro) {
+        this.registouAcelaromtro = registouAcelaromtro;
+    }
+
+    public boolean getAlarmesDiurna() {
+        return alarmesDiurna;
+    }
+
+    public void setAlarmesDiurna(boolean alarmesDiurna) {
+        this.alarmesDiurna = alarmesDiurna;
+    }
 
     public int getIdPaciente() {
         return idPaciente;
