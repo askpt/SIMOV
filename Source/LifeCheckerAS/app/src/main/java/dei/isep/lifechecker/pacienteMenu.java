@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import dei.isep.lifechecker.adapter.itemPacienteProximas;
+import dei.isep.lifechecker.alarme.periodicoAlarme;
 import dei.isep.lifechecker.alarme.localizacaoAlarm;
 import dei.isep.lifechecker.alarme.marcacaoAlarme;
 import dei.isep.lifechecker.database.marcacaoBDD;
@@ -136,6 +137,7 @@ public class pacienteMenu extends Activity{
         }
 
         //Alerta Marcações proximas
+
         if(listaMarcacoes.size() != 0) {
             if (idProximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() && lifeCheckerManager.getInstance().getaVerificar() == false) {
                 idProximaMarca = listaMarcacoes.get(0).getIdMarcacaoMarc();
@@ -144,6 +146,13 @@ public class pacienteMenu extends Activity{
                 startService(intent);
             }
         }
+        //Periodicidade
+        if(lifeCheckerManager.getInstance().getAlarmesDiurna() == false)
+        {
+            Intent intentDirunoAlarme = new Intent(pacienteMenu.this, periodicoAlarme.class);
+            startService(intentDirunoAlarme);
+        }
+
     }
 
     final View.OnClickListener btnClick = new View.OnClickListener()

@@ -16,7 +16,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -54,7 +53,11 @@ public class lifeCheckerMain extends Activity {
     {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if(networkInfo != null)
+
+        preferenciasAplicacao prefApp = new preferenciasAplicacao(getApplicationContext());
+        int configuracao = prefApp.getTipoUser();
+
+        if(configuracao == 1 || configuracao == 2 || networkInfo != null)
         {
             if(mTimerTask!=null){
                 mTimerTask.cancel();
@@ -105,7 +108,7 @@ public class lifeCheckerMain extends Activity {
         switch (configuracao)
         {
             case 0:
-                preencherEstadosmarcacoes();
+                preencherEstadosMarcacoes();
                 break;
             case 1:
                 novaActivity = new Intent(lifeCheckerMain.this, responsavelMenu.class);
@@ -122,7 +125,7 @@ public class lifeCheckerMain extends Activity {
         }
     }
 
-    public void preencherEstadosmarcacoes()
+    public void preencherEstadosMarcacoes()
     {
         estadoMarcacaoHttp estMarHttp = new estadoMarcacaoHttp();
         estMarHttp.retornarEstadosMarcacoes(recuperarEstamarcacao);

@@ -63,22 +63,7 @@ public class GPSTracker extends Service implements LocationListener {
                 // no network provider is enabled
             } else {
                 this.canGetLocation = true;
-                // First get location from Network Provider
-                if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    Log.d("Network", "Network");
-                    if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        if (location != null) {
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                        }
-                    }
-                }
+                //localização GPS (Preciso)
                 // if GPS Enabled get lat/long using GPS Services
                 if (isGPSEnabled) {
                     if (location == null) {
@@ -97,6 +82,24 @@ public class GPSTracker extends Service implements LocationListener {
                         }
                     }
                 }
+
+                // Caso nada tenta pela net
+                if (isNetworkEnabled && location == null) {
+                    locationManager.requestLocationUpdates(
+                            LocationManager.NETWORK_PROVIDER,
+                            MIN_TIME_BW_UPDATES,
+                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    Log.d("Network", "Network");
+                    if (locationManager != null) {
+                        location = locationManager
+                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+                        }
+                    }
+                }
+
             }
 
         } catch (Exception e) {
@@ -107,8 +110,7 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     /**
-     * Stop using GPS listener
-     * Calling this function will stop using GPS in your app
+     * Para o Listener do GPS
      * */
     public void stopUsingGPS(){
         if(locationManager != null){
@@ -117,14 +119,12 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     /**
-     * Function to get latitude
+     * Função get latitude
      * */
     public double getLatitude(){
         if(location != null){
             latitude = location.getLatitude();
         }
-
-        // return latitude
         return latitude;
     }
 
@@ -141,27 +141,25 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     /**
-     * Function to check GPS/wifi enabled
-     * @return boolean
+     * Verificar se pode fazer traking
      * */
     public boolean canGetLocation() {
         return this.canGetLocation;
     }
 
     /**
-     * Function to show settings alert dialog
-     * On pressing Settings button will lauch Settings Options
+     * Function mostrar tipo de alertas
      * */
     public void showSettingsAlert(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-        // Setting Dialog Title
+        // Titulo
         alertDialog.setTitle("GPS is settings");
 
-        // Setting Dialog Message
+        // Mensagem
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
-        // On pressing Settings button
+        // ao carregar no botão de definições
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -169,14 +167,14 @@ public class GPSTracker extends Service implements LocationListener {
             }
         });
 
-        // on pressing cancel button
+        // ao carregar no butão cancelar
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
 
-        // Showing Alert Message
+        // Mostrar mensagem
         alertDialog.show();
     }
 

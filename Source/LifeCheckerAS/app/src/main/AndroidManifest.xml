@@ -8,24 +8,28 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- Required to show current location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
-
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-feature
+        android:name="android.hardware.sensor.gyroscope"
+        android:required="true" />
 
     <!-- Required OpenGL ES 2.0. for Maps V2 -->
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
+
 
     <application
         android:allowBackup="true"
@@ -44,7 +48,6 @@
         <activity
             android:name=".configuracaoMenu"
             android:label="@string/app_name" >
-
         </activity>
         <activity android:name=".configuracaoFragmentos" >
         </activity>
@@ -80,16 +83,19 @@
             android:name=".responsavelNovoPaciente"
             android:label="@string/app_name" >
         </activity>
-        <!--<meta-data
+        <!--
+            <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAPDBz-wTQeJra5MQydgSmBG64caOWY6QM" />-->
+            android:value="AIzaSyAPDBz-wTQeJra5MQydgSmBG64caOWY6QM" />
+        -->
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCh1-jSU2-5rojH4PcIpvNr-y7sJ4jimqc" />
-
-        <meta-data android:name="com.google.android.gms.version"
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".responsavelDetalhesMarcacao"
             android:label="@string/app_name" >
@@ -123,14 +129,14 @@
             android:label="@string/app_name" >
         </activity>
 
+        <service android:name=".alarme.marcacaoAlarme" />
+        <service android:name=".alarme.localizacaoAlarm" />
+        <service android:name=".alarme.periodicoAlarme"/>
 
-        <service android:name=".alarme.marcacaoAlarme"
-            />
-        <service android:name=".alarme.localizacaoAlarm"
-            />
+        <activity
+            android:name=".pacienteAlarme"
+            android:label="@string/title_activity_paciente_alarme" >
+        </activity>
     </application>
-
-
-
 
 </manifest>

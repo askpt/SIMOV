@@ -180,7 +180,7 @@ public class responsavelNovoPaciente extends Activity {
     interfaceResultadoAsyncPost addPacienteListener = new interfaceResultadoAsyncPost() {
 
         @Override
-        public void obterResultado(final int codigo, String conteudo) {
+        public void obterResultado(final int codigo, final String conteudo) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -188,9 +188,12 @@ public class responsavelNovoPaciente extends Activity {
 						/*btnValidarResponsavel.setText(R.string.validar);
 						btnValidarResponsavel.setEnabled(true);
 						 */
+                        String idPacienteStr = conteudo.replace("\n","");
+                        int idNewPaciente = Integer.valueOf(idPacienteStr);
+                        pacient.setIdPaciente(idNewPaciente);
                         pbLoadigNovoPaciente.setVisibility(View.INVISIBLE);
                         pacienteBDD paciBDD = new pacienteBDD(getApplication());
-                        paciBDD.atualizarPaciente(pacient);
+                        paciBDD.inserirPaciente(pacient);
 
 
                         Intent intent = new Intent(responsavelNovoPaciente.this, responsavelMenu.class);

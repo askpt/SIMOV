@@ -89,7 +89,7 @@ public class configuracaoPacConta extends Fragment implements OnClickListener {
 				@Override
 				public void run() {
 
-					if (codigo == 1 && conteudo.length() > 10) {
+					if (codigo == 1 && conteudo.length() > 10 && conteudo.contains("PeriodDiurna")) {
 						txtInformacao.setText(R.string.est_recuperacao_pacientes);
 						// conteudo = responsavel e vai converter para objeto
 						responsavelJson respJson = new responsavelJson(conteudo);

@@ -61,9 +61,6 @@ public class localizacaoAlarm extends IntentService {
 
     private void obterPosicao()
     {
-
-
-
         Log.i("alarme", "passou alarme COM notificar");
         GPSTracker gps = new GPSTracker(this);
         if(gps.canGetLocation())
@@ -147,7 +144,7 @@ public class localizacaoAlarm extends IntentService {
         Intent intent = new Intent(this, this.getClass());
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, proximaAtualizacaoMili, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
         Log.i("alarm", " proximo alarm daqui a " + (currentTimeMillis-proximaAtualizacaoMili)/1000 + " sec");
 
     }
