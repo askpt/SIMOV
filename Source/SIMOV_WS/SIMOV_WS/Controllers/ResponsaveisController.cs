@@ -186,13 +186,13 @@ namespace SIMOV_WS.Controllers
                 return NotFound();
             }
 
-            MailMessage mail = new MailMessage("lifechecker@sapo.pt", responsavel.Email);
+            MailMessage mail = new MailMessage("noreply.lifechecker@gmail.com", responsavel.Email);
             SmtpClient client = new SmtpClient();
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.EnableSsl = true;
             client.Port = 587;
-            client.Host = "smtp.sapo.pt";
-            client.Credentials = new NetworkCredential("lifechecker@sapo.pt", "1234.abcd");
+            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("noreply.lifechecker@gmail.com", "1234!abcd");
             mail.Subject = "Alerta";
             mail.Body = text;
             try
