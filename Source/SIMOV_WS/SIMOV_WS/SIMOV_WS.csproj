@@ -199,6 +199,7 @@
     <Compile Include="Controllers\EstadoMarcacoesController.cs" />
     <Compile Include="Controllers\HistoricoAlertasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MailRequest.cs" />
     <Compile Include="Controllers\MarcacoesController.cs" />
     <Compile Include="Controllers\PacientesController.cs" />
     <Compile Include="Controllers\ResponsaveisController.cs" />

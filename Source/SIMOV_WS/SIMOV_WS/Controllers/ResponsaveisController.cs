@@ -174,12 +174,9 @@ namespace SIMOV_WS.Controllers
         [HttpPost]
         [Route("EnviaEmail")]
         [ResponseType(typeof(bool))]
-        public async Task<IHttpActionResult> EnviaEmail(dynamic data)
+        public async Task<IHttpActionResult> EnviaEmail(MailRequest data)
         {
-            var x = int.Parse(data.id.ToString());
-            var text = data.text.ToString();
-
-            var responsavel = await db.Responsaveis.FindAsync(x);
+            var responsavel = await db.Responsaveis.FindAsync(data.id);
 
             if (responsavel == null)
             {
@@ -194,7 +191,7 @@ namespace SIMOV_WS.Controllers
             client.Host = "smtp.gmail.com";
             client.Credentials = new NetworkCredential("noreply.lifechecker@gmail.com", "1234!abcd");
             mail.Subject = "Alerta";
-            mail.Body = text;
+            mail.Body = data.text;
             try
             {
                 await client.SendMailAsync(mail);
