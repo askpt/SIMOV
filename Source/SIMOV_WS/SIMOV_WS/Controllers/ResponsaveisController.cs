@@ -172,6 +172,39 @@ namespace SIMOV_WS.Controllers
         }
 
         [HttpPost]
+        [Route("EnviaEmail")]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> EnviaEmail(MailRequest data)
+        {
+            var responsavel = await db.Responsaveis.FindAsync(data.id);
+
+            if (responsavel == null)
+            {
+                return NotFound();
+            }
+
+            MailMessage mail = new MailMessage("noreply.lifechecker@gmail.com", responsavel.Email);
+            SmtpClient client = new SmtpClient();
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("noreply.lifechecker@gmail.com", "1234!abcd");
+            mail.Subject = "Alerta";
+            mail.Body = data.text;
+            try
+            {
+                await client.SendMailAsync(mail);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+
+            return Ok(true);
+        }
+
+        [HttpPost]
         [Route("Login")]
         [ResponseType(typeof(Responsavel))]
         public async Task<IHttpActionResult> Login(string email, string pass)
