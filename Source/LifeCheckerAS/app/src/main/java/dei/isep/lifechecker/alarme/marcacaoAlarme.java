@@ -118,7 +118,7 @@ public class marcacaoAlarme extends IntentService {
         boolean enviarNotificacao;
         if(minutosDiferentes <= 65 && minutosDiferentes > 0)
         {
-            minutosAlarm = 5;
+            minutosAlarm = 10;
             enviarNotificacao = true;
         }
         else
@@ -249,14 +249,8 @@ public class marcacaoAlarme extends IntentService {
 
     private void enviarSMS(String conteudo)
     {
-        try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(resp.getContactoResponsavel(), null, conteudo, null, null);
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
     }
 
     interfaceResultadoAsyncPost enviarMailListener = new interfaceResultadoAsyncPost() {

@@ -53,8 +53,12 @@ public class responsavelMenu extends Activity {
 
         //lifeCheckerManager.getInstance().setEnviarLocalizacao(true);95
         Log.i("notificacao", "antes");
-        Intent intentLocalization = new Intent(responsavelMenu.this, notificacaoResp.class);
-        startService(intentLocalization);
+        if (lifeCheckerManager.getInstance().getaVerificarNotificacao() == false)
+        {
+            lifeCheckerManager.getInstance().setaVerificarNotificacao(true);
+            Intent intentLocalization = new Intent(responsavelMenu.this, notificacaoResp.class);
+            startService(intentLocalization);
+        }
         Log.i("notificacao", " passou");
 
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.lifechecker);
@@ -107,6 +111,9 @@ public class responsavelMenu extends Activity {
                         Calendar c = Calendar.getInstance();
                         SimpleDateFormat dformate = new SimpleDateFormat("yyyy-MM-dd");
                         String dataFormatada = dformate.format(c.getTime());
+
+                        SimpleDateFormat dformateTime = new SimpleDateFormat("HH:mm");
+                        String dataFormatadaTime = dformateTime.format(c.getTime());
                         //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
                         marcacaoJson marcJ = new marcacaoJson(conteudo);
                         listaMarcacoes = marcJ.transformJsonMarcacao();
@@ -115,7 +122,7 @@ public class responsavelMenu extends Activity {
                         //String dataHoje = c.get(Calendar.YEAR) + "-" + String.valueOf(c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH);
                         for(Iterator<marcacao> i = listaMarcacoes.iterator(); i.hasNext(); ) {
                             marcacao tmp = i.next();
-                            if (tmp.getDataMarc().contentEquals(dataFormatada))
+                            if (tmp.getDataMarc().contentEquals(dataFormatada) && tmp.getHoraMarc().compareTo(dataFormatadaTime) > 0)
                                 listaMarcacoesHoje.add(tmp);
                         }
                         listaMarcacoes = listaMarcacoesHoje;

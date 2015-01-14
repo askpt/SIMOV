@@ -43,7 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/passwordA"
         android:inputType="textPassword" >
 
     </EditText>
@@ -52,10 +52,10 @@
         android:id="@+id/bt_configuracao_recuperacao_validar"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_configuracao_recuperacao_email"
-        android:layout_below="@+id/tb_configuracao_recuperacao_pass"
-        android:layout_marginTop="20dp"
-        android:text="@string/password" />
+        android:text="@string/password"
+        android:layout_below="@+id/bt_configuracao_recuperacao_entrar"
+        android:layout_alignRight="@+id/bt_configuracao_recuperacao_entrar"
+        android:layout_alignLeft="@+id/bt_configuracao_recuperacao_entrar" />
 
     <TextView
         android:id="@+id/text_configuracao_recuperacao_comentarios"
@@ -81,7 +81,9 @@
         android:layout_height="wrap_content"
         android:text="@string/validar"
         android:id="@+id/bt_configuracao_recuperacao_entrar"
-        android:layout_above="@+id/text_configuracao_recuperacao_comentarios"
-        android:layout_alignRight="@+id/tb_configuracao_recuperacao_pass" />
+        android:layout_below="@+id/tb_configuracao_recuperacao_pass"
+        android:layout_alignRight="@+id/tb_configuracao_recuperacao_pass"
+        android:layout_alignLeft="@+id/tb_configuracao_recuperacao_pass"
+        android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

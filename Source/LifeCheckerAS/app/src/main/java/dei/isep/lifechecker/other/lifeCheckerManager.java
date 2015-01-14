@@ -64,9 +64,16 @@ public class lifeCheckerManager {
     private boolean enviarMail;
 
     private int ultimaNotificacao = 0;
+    private boolean aVerificarNotificacao = false;
 
 
+    public boolean getaVerificarNotificacao() {
+        return aVerificarNotificacao;
+    }
 
+    public void setaVerificarNotificacao(boolean aVerificarNotificacao) {
+        this.aVerificarNotificacao = aVerificarNotificacao;
+    }
 
     public int getUltimaNotificacao() {
         return ultimaNotificacao;

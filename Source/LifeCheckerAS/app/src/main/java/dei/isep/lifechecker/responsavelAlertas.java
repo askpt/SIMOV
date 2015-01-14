@@ -95,6 +95,13 @@ public class responsavelAlertas extends Activity {
                         historicoAlertaJson histoAlerJson = new historicoAlertaJson(conteudo);
                         listaHistoricoAlertas = histoAlerJson.transformJsonHistoricoAlerta();
                         Collections.reverse(listaHistoricoAlertas);
+                        if(listaHistoricoAlertas.size() > 50)
+                        {
+                            int qtdApagar = listaHistoricoAlertas.size() - 50;
+                            for (int i = 0; i < qtdApagar; i++) {
+                                listaHistoricoAlertas.remove(listaHistoricoAlertas.size()-1);
+                            }
+                        }
                         preencherListaHistoricoAlertas();
                     }
                     else

@@ -170,12 +170,6 @@ public class periodicoAlarme extends IntentService {
         return tempoProxima;
     }
 
-
-
-
-
-
-
     private void proximaAtualizacao()
     {
         int minutos = tempoProximaActualizacao();

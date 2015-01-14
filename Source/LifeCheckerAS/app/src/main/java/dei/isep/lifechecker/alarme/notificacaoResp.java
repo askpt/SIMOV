@@ -19,6 +19,7 @@ import java.util.Collections;
 import dei.isep.lifechecker.R;
 import dei.isep.lifechecker.database.alertaBDD;
 import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.historicoAlertasHttp;
 import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 import dei.isep.lifechecker.json.historicoAlertaJson;
@@ -45,10 +46,12 @@ public class notificacaoResp extends IntentService{
     {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Log.i("Pas", "passssous");
 
         if(networkInfo != null) {
-            proximaAtualizacao(10);
-            int idResponsavel = lifeCheckerManager.getInstance().getIdResponsavel();
+            proximaAtualizacao(15);
+            responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+            int idResponsavel = respBDD.getResponsavel().getIdResponsavel();
             historicoAlertasHttp histAlHttp = new historicoAlertasHttp();
             histAlHttp.retornarHistoricoAlertasIdResposnavel(idResponsavel, historicoAlertasGetAllValidas);
         }
@@ -87,26 +90,39 @@ public class notificacaoResp extends IntentService{
         alertaBDD alrtBDD = new alertaBDD((getApplicationContext()));
 
         int idUltimaAlerta = lifeCheckerManager.getInstance().getUltimaNotificacao();
-        for (int i = idUltimaAlerta; i < listaHistoricoAlertas.size(); i++) {
-            hitAlt = listaHistoricoAlertas.get(i);
-            String nomePaciente = paciBDD.getNomeApelidoPacienteById(hitAlt.getIdPacienteHistAlt());
-            String tituloA = getString(R.string.paciente_alarme_notificacao, (nomePaciente));
-            String tituloB = nomePaciente;
-            String tituloC = alrtBDD.getDesignacaoById(hitAlt.getIdAlertaHistAlt());
-            Log.i("idPaciente",String.valueOf(hitAlt.getIdPacienteHistAlt() ));
-            Log.i("nomePaciente", nomePaciente);
-            Notification.Builder builder = new Notification.Builder(this)
-                    .setWhen(System.currentTimeMillis())
-                    .setTicker(tituloA)
-                    .setSmallIcon(R.drawable.alerta_ativo)
-                    .setContentTitle(tituloB)
-                    .setContentText(tituloC)
-                    .setDefaults(Notification.DEFAULT_SOUND)
-                    .setContentIntent(pendingIntent);
-
-            mNotification.notify(i, builder.build());
+        int qtd = 0;
+        if(listaHistoricoAlertas.size() < 5)
+        {
+            qtd = listaHistoricoAlertas.size();
         }
-        lifeCheckerManager.getInstance().setUltimaNotificacao(listaHistoricoAlertas.size());
+        else
+        {
+            qtd = 5;
+        }
+        for (int i = 0; i < qtd; i++) {
+            hitAlt = listaHistoricoAlertas.get(i);
+            if(hitAlt.getIdHistAlt() > idUltimaAlerta) {
+                String nomePaciente = paciBDD.getNomeApelidoPacienteById(hitAlt.getIdPacienteHistAlt());
+                String tituloA = getString(R.string.paciente_alarme_notificacao, (nomePaciente));
+                String tituloB = nomePaciente;
+                String tituloC = alrtBDD.getDesignacaoById(hitAlt.getIdAlertaHistAlt());
+                Log.i("idPaciente", String.valueOf(hitAlt.getIdPacienteHistAlt()));
+                Log.i("nomePaciente", nomePaciente);
+                Notification.Builder builder = new Notification.Builder(this)
+                        .setWhen(System.currentTimeMillis())
+                        .setTicker(tituloA)
+                        .setSmallIcon(R.drawable.alerta_ativo)
+                        .setContentTitle(tituloB)
+                        .setContentText(tituloC)
+                        .setDefaults(Notification.DEFAULT_SOUND)
+                        .setContentIntent(pendingIntent);
+
+                mNotification.notify(i, builder.build());
+            }
+        }
+        if(listaHistoricoAlertas.size() != 0) {
+            lifeCheckerManager.getInstance().setUltimaNotificacao(listaHistoricoAlertas.get(0).getIdHistAlt());
+        }
     }
 
     private void proximaAtualizacao(int minutos)

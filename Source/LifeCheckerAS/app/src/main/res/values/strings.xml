@@ -14,7 +14,8 @@
     <string name="telefone">Telefone</string>
     <string name="criarConta">Criar Conta</string>
     <string name="email">E-mail</string>
-    <string name="password">Password</string>
+    <string name="passwordA">Password</string>
+    <string name="password">Recuperar Pass</string>
     <string name="confirmarPassword">Confirmar Password</string>
     <string name="alertas">Alertas</string>
     <string name="enviarMail">Enviar Mail</string>
@@ -76,7 +77,7 @@
 
     <!-- Estado butões -->
     <string name="esperar">Aguarde…</string>
-    <string name="validar">Validar</string>
+    <string name="validar">Validar Dados</string>
     <string name="cancelar">Cancelar</string>
     <string name="recuperar">Recuperar</string>
 

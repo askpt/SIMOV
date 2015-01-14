@@ -45,7 +45,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/passwordA"
         android:inputType="textPassword" />
 
     <Button

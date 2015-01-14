@@ -58,7 +58,7 @@
                 android:layout_below="@+id/tb_configuracao_respconta_email"
                 android:layout_marginTop="15dp"
                 android:ems="10"
-                android:hint="@string/password"
+                android:hint="@string/passwordA"
                 android:inputType="textPassword" />
 
             <Button

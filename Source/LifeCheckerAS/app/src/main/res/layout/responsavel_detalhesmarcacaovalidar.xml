@@ -119,6 +119,7 @@
         android:text="Medium Text"
         android:id="@+id/ET_responsavel_detalhesmarcacaovalidar_comentarios"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

@@ -52,28 +52,29 @@
         android:id="@+id/bt_responsavel_novo_paciente_validar"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tb_responsavel_novo_paciente_telefone"
+        android:text="@string/validar"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/tb_responsavel_novo_paciente_telefone"
-        android:layout_marginTop="15dp"
-        android:text="@string/validar" />
+        android:layout_alignRight="@+id/tb_responsavel_novo_paciente_telefone"
+        android:layout_alignLeft="@+id/tb_responsavel_novo_paciente_telefone" />
 
     <Button
         android:id="@+id/bt_responsavel_novo_paciente_Cancelar"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/bt_responsavel_novo_paciente_validar"
-        android:layout_alignRight="@+id/tb_responsavel_novo_paciente_telefone"
-        android:text="@string/cancelar" />
+        android:text="@string/cancelar"
+        android:layout_below="@+id/bt_responsavel_novo_paciente_validar"
+        android:layout_alignRight="@+id/bt_responsavel_novo_paciente_validar"
+        android:layout_alignLeft="@+id/bt_responsavel_novo_paciente_validar" />
 
     <TextView
         android:id="@+id/text_responsavel_novo_paciente_informacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bt_responsavel_novo_paciente_validar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         android:text="@string/est_informacao"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_below="@+id/bt_responsavel_novo_paciente_Cancelar"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
