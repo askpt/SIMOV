@@ -94,6 +94,23 @@ public class paciente {
 		this.horaSincroPaciente = horaSincroPaciente;
 		this.dataSincroPaciente = dataSincroPaciente;
 	}*/
+
+    public paciente(int idPaciente,
+                    String nomePaciente, String apelidoPaciente, String mailPaciente,
+                    String contactoPaciente) {
+        super();
+        this.idPaciente = idPaciente;
+        this.nomePaciente = nomePaciente;
+        this.apelidoPaciente = apelidoPaciente;
+        this.mailPaciente = mailPaciente;
+        this.contactoPaciente = contactoPaciente;
+        this.latitudePaciente = 0;
+        this.longitudePaciente = 0;
+        this.nomeLocalPaciente = "Sem Local";
+        this.horaLocalPaciente = "11:11:11";
+        this.dataLocalPaciente = "2000-01-01";
+        this.ativoPaciente = true;
+    }
 	
 	public paciente(int idResponsavelPaciente,
 			String nomePaciente, String apelidoPaciente, String mailPaciente,

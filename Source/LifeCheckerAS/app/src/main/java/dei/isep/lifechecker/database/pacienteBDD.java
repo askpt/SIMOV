@@ -325,6 +325,61 @@ public class pacienteBDD {
             return idReturn;
     }
 
+    /*
+
+     */
+
+    public paciente getPaciente()
+    {
+        int qtd = getQtdResponsavel();
+        paciente paci = new paciente();
+        if(qtd == 1)
+        {
+            int id;
+            String nome;
+            String apelido;
+            String mail;
+            String contacto;
+
+            String dataSincro;
+            String horaSincro;
+
+            String sqlQury = "SELECT * FROM " + TABLE_PACIENTE;
+            open();
+            Cursor cursor = bdd.rawQuery(sqlQury, null);
+            if(cursor.moveToNext())
+            {
+                paci.setIdPaciente(cursor.getInt(cursor.getColumnIndex(COL_ID_PACI)));;
+                paci.setIdResponsavelPaciente(cursor.getInt(cursor.getColumnIndex(COL_ID_RESP_PACI)));;
+                paci.setNomePaciente(cursor.getString(cursor.getColumnIndex(COL_NOME_PACI)));
+                paci.setApelidoPaciente(cursor.getString(cursor.getColumnIndex(COL_APELIDO_PACI)));
+                paci.setMailPaciente(cursor.getString(cursor.getColumnIndex(COL_MAIL_PACI)));
+                paci.setContactoPaciente(cursor.getString(cursor.getColumnIndex(COL_CONTACTO_PACI)));
+                paci.setLatitudePaciente(cursor.getDouble(cursor.getColumnIndex(COL_LAT_PACI)));
+                paci.setLongitudePaciente(cursor.getDouble(cursor.getColumnIndex(COL_LONG_PACI)));
+                paci.setNomeLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_NOME_LOCAL_PACI)));
+                paci.setHoraLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_HORA_LOCAL_PACI)));
+                paci.setDataLocalPaciente(cursor.getString(cursor.getColumnIndex(COL_DATA_LOCAL_PACI)));
+                paci.setHoraSincroPaciente(cursor.getString(cursor.getColumnIndex(COL_HORA_SINCRO_RESP)));
+                paci.setDataSincroPaciente(cursor.getString(cursor.getColumnIndex(COL_DATA_SINCRO_RESP)));
+                paci.setAtivoPaciente(true);
+            }
+        }
+        return paci;
+    }
+
+    public int getQtdResponsavel()
+    {
+        int quantidade = 0;
+        String sqlQuery = "SELECT COUNT(*) FROM " + TABLE_PACIENTE;
+        open();
+        Cursor cursor = bdd.rawQuery(sqlQuery, null);
+        cursor.moveToNext();
+        quantidade = cursor.getInt(0);
+        close();
+        return quantidade;
+    }
+
     public void deleteConteudoPaciente()
     {
         String sqlQuery = "DELTE FROM " + TABLE_PACIENTE;

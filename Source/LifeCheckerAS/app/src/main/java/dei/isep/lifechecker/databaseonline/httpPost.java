@@ -35,6 +35,10 @@ public class httpPost extends AsyncTask<String, Void, String> {
 		}
 	}
 
+    public void setHeader(String name, String value){
+
+    }
+
 	@Override
 	protected String doInBackground(String... params) {
 		String resultPost = "";
@@ -44,6 +48,7 @@ public class httpPost extends AsyncTask<String, Void, String> {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost request = new HttpPost(url);
 
+            //request.setHeader("Content-Type", "application/json");
 			UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(
 					postParameters);
 			request.setEntity(formEntity);

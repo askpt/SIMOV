@@ -9,6 +9,7 @@ import android.location.Address;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.telephony.SmsManager;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.util.Log;
@@ -25,14 +26,20 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
+import dei.isep.lifechecker.R;
 import dei.isep.lifechecker.database.marcacaoBDD;
+import dei.isep.lifechecker.database.pacienteBDD;
+import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.historicoAlertasHttp;
 import dei.isep.lifechecker.databaseonline.locationHTTP;
+import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.interfaceAdressList;
 import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 import dei.isep.lifechecker.json.locationJson;
 import dei.isep.lifechecker.model.historicoAlertas;
 import dei.isep.lifechecker.model.marcacao;
+import dei.isep.lifechecker.model.paciente;
+import dei.isep.lifechecker.model.responsavel;
 import dei.isep.lifechecker.other.GPSTracker;
 import dei.isep.lifechecker.other.lifeCheckerManager;
 
@@ -49,6 +56,8 @@ public class marcacaoAlarme extends IntentService {
     PendingIntent pendingIntent;
     Time proximaAtualizacao;
     private NetworkInfo networkInfo;
+    paciente paci;
+    responsavel resp;
 
     public marcacaoAlarme(){
         super(marcacaoAlarme.class.getSimpleName());
@@ -57,6 +66,12 @@ public class marcacaoAlarme extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         lifeCheckerManager.getInstance().setaVerificar(true);
+
+        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+        paci = paciBDD.getPaciente();
+        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+        resp = respBDD.getResponsavel();
+
         Log.i("Alarme", "passousssss B");
         idMarcaca = intent.getIntExtra("idMarcacao", -1);
         if(idMarcaca == -1)
@@ -103,7 +118,6 @@ public class marcacaoAlarme extends IntentService {
         boolean enviarNotificacao;
         if(minutosDiferentes <= 65 && minutosDiferentes > 0)
         {
-
             minutosAlarm = 5;
             enviarNotificacao = true;
         }
@@ -121,7 +135,6 @@ public class marcacaoAlarme extends IntentService {
         if(tempoAtualMiliSec < proximaAtualizacao.toMillis(true))
         {
             enviarAlerta(enviarNotificacao);
-
         }
         else
         {
@@ -148,6 +161,22 @@ public class marcacaoAlarme extends IntentService {
                 distancia = localAtual.distanceTo(coordenadasMarcacao);
                 if(distancia > 200)
                 {
+                    if(resp.getNotificacaoSMS() || resp.getNotificacaoMail())
+                    {
+                        String conteudoSMS = getString(R.string.sms_no_marcacao, paci.getNomePaciente());
+                        conteudoSMS += "\n" + getString(R.string.sms_no_marcacao_dist, distancia);
+                        if(resp.getNotificacaoSMS()) {
+                            Log.i("SMS", "marcacao: sem local");
+                            enviarSMS(conteudoSMS);
+                        }
+                        if(resp.getNotificacaoMail())
+                        {
+                            Log.i("MAIL", "marcacao: sem local");
+                            responsavelHttp respHttp = new responsavelHttp();
+                            respHttp.enviarMail(resp.getIdResponsavel(), conteudoSMS,enviarMailListener);
+                        }
+
+                    }
                     enviarHistoAlertaResp();
                 }
 
@@ -159,6 +188,14 @@ public class marcacaoAlarme extends IntentService {
         }
         else
         {
+            if(resp.getNotificacaoSMS())
+            {
+                if(resp.getNotificacaoSMS()) {
+                    Log.i("SMS", "marcacao: sem NET");
+                    String conteudoSMS = getString(R.string.sms_no_internet, paci.getNomePaciente());
+                    enviarSMS(conteudoSMS);
+                }
+            }
             Log.i("alarme", "passou alarme Sem notificar");
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
@@ -204,6 +241,28 @@ public class marcacaoAlarme extends IntentService {
                 Log.i("alarmealarme", "passou alarme");
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC, proximaAtualizacaoMili, pendingIntent);
+            }
+        };
+
+    };
+
+
+    private void enviarSMS(String conteudo)
+    {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(resp.getContactoResponsavel(), null, conteudo, null, null);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    interfaceResultadoAsyncPost enviarMailListener = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            if (codigo == 1) {
             }
         };
 

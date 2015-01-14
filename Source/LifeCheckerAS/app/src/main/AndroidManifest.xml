@@ -132,10 +132,13 @@
         <service android:name=".alarme.marcacaoAlarme" />
         <service android:name=".alarme.localizacaoAlarm" />
         <service android:name=".alarme.periodicoAlarme"/>
+        <service android:name=".alarme.notificacaoResp"/>
 
         <activity
             android:name=".pacienteAlarme"
-            android:label="@string/title_activity_paciente_alarme" >
+            android:label="@string/title_activity_paciente_alarme"
+            android:noHistory="true"
+            >
         </activity>
     </application>
 

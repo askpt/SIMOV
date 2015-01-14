@@ -61,6 +61,16 @@ public class responsavelHttp {
 		executarTaskPOST(url, postParameters, interfaceListener);
 	}
 
+    public void enviarMail(int idResponsavel, String conteudo, interfaceResultadoAsyncPost interfaceListener)
+    {
+        String url = "http://simovws.azurewebsites.net/api/Responsaveis/EnviaEmail/";
+        List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        postParameters.add(new BasicNameValuePair("id", Integer.toString(idResponsavel)));
+        postParameters.add(new BasicNameValuePair("text", conteudo));
+
+        executarTaskPOST(url, postParameters, interfaceListener);
+    }
+
     public void getIdResponsavelByIdPaciente(int idResponsavel, interfaceResultadoAsyncPost interfaceListener)
     {
         String url = "http://simovws.azurewebsites.net/api/Responsaveis/" + idResponsavel;

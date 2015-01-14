@@ -21,6 +21,7 @@ import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.locationHTTP;
 import dei.isep.lifechecker.databaseonline.pacienteHttp;
+import dei.isep.lifechecker.databaseonline.responsavelHttp;
 import dei.isep.lifechecker.interfaceResultadoAsyncPost;
 import dei.isep.lifechecker.json.locationJson;
 import dei.isep.lifechecker.model.paciente;
@@ -35,6 +36,7 @@ public class localizacaoAlarm extends IntentService {
 
     Location localAtual;
     paciente paci;
+    responsavel resp;
     boolean repetir = false;
 
 
@@ -44,6 +46,11 @@ public class localizacaoAlarm extends IntentService {
     }
     @Override
     protected void onHandleIntent(Intent intent) {
+        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+        paci = paciBDD.getPaciente();
+        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+        resp = respBDD.getResponsavel();
+
         Log.i("alarme", "recomocou");
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -51,11 +58,15 @@ public class localizacaoAlarm extends IntentService {
         {
             obterPosicao();
         }
-        else
+        else if(resp.getNotificacaoSMS() == true)
         {
-            enviarSMS();
+            if(resp.getNotificacaoSMS()) {
+                String conteudo = getResources().getString(R.string.sms_no_internet, paci.getNomePaciente() + " " + paci.getApelidoPaciente());
+                enviarSMS(conteudo);
+            }
         }
-            //lifeCheckerManager.getInstance().setEnviarLocalizacao(true);
+        Log.i("Enviar localizacao"," loction");
+        proximaAtualizacao(15);
     }
 
 
@@ -66,13 +77,39 @@ public class localizacaoAlarm extends IntentService {
         if(gps.canGetLocation())
         {
             localAtual = gps.getLocation();
-            locationHTTP locHttp = new locationHTTP();
-            locHttp.obterLocalPorCoordenadas(localAtual, listenerLocal);
+            if(localAtual != null) {
+                locationHTTP locHttp = new locationHTTP();
+                locHttp.obterLocalPorCoordenadas(localAtual, listenerLocal);
+            }
+            else if(resp.getNotificacaoSMS() || resp.getNotificacaoMail())
+            {
+                String conteudoSMS = getString(R.string.sms_no_location, paci.getNomePaciente());
+                if(resp.getNotificacaoSMS()) {
+                    Log.i("SMS", "Loaclização: sem local");
+                    enviarSMS(conteudoSMS);
+                }
+                if(resp.getNotificacaoMail())
+                {
+                    Log.i("MAIL", "Loaclização: sem local");
+                    responsavelHttp respHttp = new responsavelHttp();
+                    respHttp.enviarMail(resp.getIdResponsavel(), conteudoSMS,enviarMailListener);
+                }
+
+            }
         }
-        else
+        else if(resp.getNotificacaoSMS() || resp.getNotificacaoMail())
         {
-            //gps.showSettingsAlert();
-            proximaAtualizacao(5);
+            String conteudoSMS = getString(R.string.sms_no_location, paci.getNomePaciente());
+            if(resp.getNotificacaoSMS()) {
+                Log.i("SMS", "Loaclização: sem local");
+                enviarSMS(conteudoSMS);
+            }
+            if(resp.getNotificacaoMail())
+            {
+                responsavelHttp respHttp = new responsavelHttp();
+                respHttp.enviarMail(resp.getIdResponsavel(), conteudoSMS,enviarMailListener);
+                Log.i("MAIL", "Loaclização: sem local");
+            }
         }
 
     }
@@ -91,18 +128,34 @@ public class localizacaoAlarm extends IntentService {
                 cidades = locaJson.getAdress();
 
                 //*****RecuperarPaciente
-                recuperarPaciente();
+                //recuperarPaciente();
+                if(cidades.size() != 0) {
+                    paci.setLatitudePaciente(localAtual.getLatitude());
+                    paci.setLongitudePaciente(localAtual.getLongitude());
+                    paci.setNomeLocalPaciente(cidades.get(0));
 
-                paci.setLatitudePaciente(localAtual.getLatitude());
-                paci.setLongitudePaciente(localAtual.getLongitude());
-                paci.setNomeLocalPaciente(cidades.get(0));
+                    baseDeDadosInterna bddInt = new baseDeDadosInterna(getApplicationContext());
+                    paci.setHoraLocalPaciente(bddInt.horaAtual());
+                    paci.setDataLocalPaciente(bddInt.dataAtual());
 
-                baseDeDadosInterna bddInt = new baseDeDadosInterna(getApplicationContext());
-                paci.setHoraLocalPaciente(bddInt.horaAtual());
-                paci.setDataLocalPaciente(bddInt.dataAtual());
-
-                pacienteHttp paciHttp = new pacienteHttp();
-                paciHttp.updatePaciente(paci,listenerUpdateLocalPaci);
+                    pacienteHttp paciHttp = new pacienteHttp();
+                    paciHttp.updatePaciente(paci, listenerUpdateLocalPaci);
+                }
+                else if(resp.getNotificacaoSMS() || resp.getNotificacaoMail())
+                {
+                    String conteudoSMS = getString(R.string.sms_no_location, paci.getNomePaciente());
+                    if(resp.getNotificacaoSMS()) {
+                        Log.i("SMS", "Loaclização: sem local");
+                        enviarSMS(conteudoSMS);
+                    }
+                    if(resp.getNotificacaoMail())
+                    {
+                        responsavelHttp respHttp = new responsavelHttp();
+                        respHttp.enviarMail(resp.getIdResponsavel(), conteudoSMS,enviarMailListener);
+                        Log.i("MAIL", "Loaclização: sem local");
+                    }
+                    //proximaAtualizacao(5);
+                }
             }
         };
 
@@ -112,28 +165,23 @@ public class localizacaoAlarm extends IntentService {
         @Override
         public void obterResultado(final int codigo, final String conteudo) {
             if (codigo == 1 && repetir == false) {
-                proximaAtualizacao(20);
+                //proximaAtualizacao(20);
                 repetir = true;
                }
         };
 
     };
 
-    private void enviarSMS()
+    private void enviarSMS(String conteudo)
     {
         try {
-            recuperarPaciente();
-            responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
-            responsavel resp = respBDD.getResponsavel();
-
-
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(resp.getContactoResponsavel(), null, getResources().getString(R.string.sms_no_internet, paci.getNomePaciente() + " " + paci.getApelidoPaciente()), null, null);
+            smsManager.sendTextMessage(resp.getContactoResponsavel(), null, conteudo, null, null);
         }catch (Exception e)
         {
             e.printStackTrace();
         }
-        proximaAtualizacao(10);
+
     }
 
     private void proximaAtualizacao(int minutos)
@@ -145,25 +193,16 @@ public class localizacaoAlarm extends IntentService {
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
-        Log.i("alarm", " proximo alarm daqui a " + (currentTimeMillis-proximaAtualizacaoMili)/1000 + " sec");
+        Log.i("alarm", " proximo alarm daqui a " + (proximaAtualizacaoMili - currentTimeMillis)/1000 + " sec");
 
     }
 
-    private void recuperarPaciente()
-    {
-        Log.i("SaberLocalizacao"," conclusao: "+ lifeCheckerManager.getInstance().getEnviarLocalizacao());
-        paci = lifeCheckerManager.getInstance().getPac();
-        if(paci == null)
-        {
-            pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
-            int idPaciente = paciBDD.getIdPaicente();
-            paci = paciBDD.getPacienteById(idPaciente);
-            Log.i("saberID", "id: " + idPaciente);
-        }
-        else
-        {
-            this.stopSelf();
-            Log.i("saberID", " id resp: " + paci.getIdResponsavelPaciente());
-        }
-    }
+    interfaceResultadoAsyncPost enviarMailListener = new interfaceResultadoAsyncPost() {
+        @Override
+        public void obterResultado(final int codigo, final String conteudo) {
+            if (codigo == 1 && repetir == false) {
+            }
+        };
+
+    };
 }

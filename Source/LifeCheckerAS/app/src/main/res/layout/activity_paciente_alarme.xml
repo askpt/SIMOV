@@ -8,10 +8,10 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
+        android:id="@+id/img_alerta"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:clickable="true"
         android:src="@drawable/alarme" />
 </RelativeLayout>

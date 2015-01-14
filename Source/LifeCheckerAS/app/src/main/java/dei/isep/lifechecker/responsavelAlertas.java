@@ -1,6 +1,7 @@
 package dei.isep.lifechecker;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -34,6 +35,11 @@ public class responsavelAlertas extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+
+        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotification.cancelAll();
+
+
 		setContentView(R.layout.responsavel_alertas);
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.historicoDeAlertas);
         Context context = getApplicationContext();

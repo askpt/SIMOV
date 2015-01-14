@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -26,6 +27,8 @@ import java.util.Iterator;
 
 import dei.isep.lifechecker.adapter.itemResponsavelConsultar;
 import dei.isep.lifechecker.adapter.itemResponsavelHoje;
+import dei.isep.lifechecker.alarme.localizacaoAlarm;
+import dei.isep.lifechecker.alarme.notificacaoResp;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.databaseonline.marcacaoHttp;
@@ -47,6 +50,13 @@ public class responsavelMenu extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.responsavel_menu);
+
+        //lifeCheckerManager.getInstance().setEnviarLocalizacao(true);95
+        Log.i("notificacao", "antes");
+        Intent intentLocalization = new Intent(responsavelMenu.this, notificacaoResp.class);
+        startService(intentLocalization);
+        Log.i("notificacao", " passou");
+
         lifeCheckerManager.getInstance().inserirActionBar(this, R.string.lifechecker);
         Context context = getApplicationContext();
 
@@ -75,6 +85,7 @@ public class responsavelMenu extends Activity {
         if(networkInfo != null) {
             responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
             idResp = respBDD.getIdResponsavel();
+            lifeCheckerManager.getInstance().setIdResponsavel(idResp);
             marcacaoHttp marcaHttp = new marcacaoHttp();
             marcaHttp.retornarMarcacoesEstado(idResp, 1, marcacaoGetAllValidasHoje);
         }

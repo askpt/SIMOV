@@ -9,32 +9,20 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.telephony.SmsManager;
 import android.text.format.DateUtils;
 import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import dei.isep.lifechecker.R;
 import dei.isep.lifechecker.database.pacienteBDD;
 import dei.isep.lifechecker.database.responsavelBDD;
-import dei.isep.lifechecker.databaseonline.historicoAlertasHttp;
-import dei.isep.lifechecker.databaseonline.locationHTTP;
-import dei.isep.lifechecker.interfaceResultadoAsyncPost;
-import dei.isep.lifechecker.json.locationJson;
-import dei.isep.lifechecker.model.historicoAlertas;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
-import dei.isep.lifechecker.other.GPSTracker;
 import dei.isep.lifechecker.other.lifeCheckerManager;
+import dei.isep.lifechecker.pacienteAlarme;
 
 /**
  * Created by Diogo on 02-01-2015.
@@ -43,10 +31,8 @@ public class periodicoAlarme extends IntentService {
 
     private  SensorManager sensorManager;
     private  Sensor sensorAceleromtro;
-    Location localAtual;
     private paciente paci;
     private responsavel resp;
-    private NetworkInfo networkInfo;
 
     SensorEventListener sensorEvtListener = new SensorEventListener() {
         @Override
@@ -57,9 +43,6 @@ public class periodicoAlarme extends IntentService {
                     lifeCheckerManager.getInstance().setAcelaromtroXACT(event.values[0]);
                     lifeCheckerManager.getInstance().setAcelaromtroYACT(event.values[1]);
                     lifeCheckerManager.getInstance().setAcelaromtroZACT(event.values[2]);
-                    /*lifeCheckerManager.getInstance().setAcelaromtroX(event.values[0]);
-                    lifeCheckerManager.getInstance().setAcelaromtroY(event.values[1]);
-                    lifeCheckerManager.getInstance().setAcelaromtroZ(event.values[2]);*/
                     lifeCheckerManager.getInstance().setTempAlteracao(System.currentTimeMillis());
                     break;
             }
@@ -78,6 +61,12 @@ public class periodicoAlarme extends IntentService {
     protected void onHandleIntent(Intent intent) {
         lifeCheckerManager.getInstance().setAlarmesDiurna(true);
 
+        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
+        resp = respBDD.getResponsavel();
+
+        pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
+        paci = paciBDD.getPaciente();
+
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         if(sensorManager != null){
             sensorAceleromtro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -88,48 +77,29 @@ public class periodicoAlarme extends IntentService {
 
         }
 
-        responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
-        resp = respBDD.getResponsavel();
         float variacaoX = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroXACT() - lifeCheckerManager.getInstance().getAcelaromtroX());
         float variacaoY = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroYACT() - lifeCheckerManager.getInstance().getAcelaromtroY());
         float variacaoZ = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroZACT() - lifeCheckerManager.getInstance().getAcelaromtroZ());
-        if(variacaoX < 0.3 && variacaoY < 0.3 && variacaoZ < 0.3)
+        if(variacaoX < 0.3 && variacaoY < 0.3 && variacaoZ < 0.3 && (variacaoX != 0 || variacaoY != 0 || variacaoZ != 0))
         {
+
+            Intent intentAlarme = new Intent(this.getApplicationContext(), pacienteAlarme.class);
+            intentAlarme.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getApplication().startActivity(intentAlarme);
+            /*
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             networkInfo = connectivityManager.getActiveNetworkInfo();
-
-            pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
-            int idPaci = paciBDD.getIdPaicente();
-            paci = paciBDD.getPacienteById(idPaci);
-
-            if(resp.getNotificacaoSMS())
-            {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(resp.getContactoResponsavel(), null, getResources().getString(R.string.sms_no_internet, paci.getNomePaciente() + " " + paci.getApelidoPaciente()), null, null);
-                Log.i("SMS", "EnviouSMS");
-            }
-            if(resp.getNotificacaoMail() && networkInfo != null)
-            {
-
-                Log.i("Mail", " A enviar mail");
-                /*Intent mailIntent = new Intent((Intent.ACTION_SENDTO));
-                mailIntent.setType("text/plain");
-                emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mailIntent.putExtra(Intent.EXTRA_EMAIL, resp.getMailResponsavel());
-                mailIntent.putExtra(Intent.EXTRA_SUBJECT, "LifeChecker");
-                mailIntent.putExtra(Intent.EXTRA_TEXT, "Problem with " + paci.getNomePaciente() + " " + paci.getApelidoPaciente());
-
-                try {
-                    startActivity(Intent.createChooser(mailIntent, "Send mail..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-
-                }*/
-            }
-
             if(networkInfo != null)
             {
                 enviarHistoAlertaResp();
             }
+            if(resp.getNotificacaoSMS())
+            {
+                Log.i("SMS", "enviar sms vida");
+                String Conteudo = getResources().getString(R.string.sms_no_internet, paci.getNomePaciente() + " " + paci.getApelidoPaciente());
+                enviarSMS(Conteudo);
+            }*/
+
 
            /* Intent intentAlarm = new Intent(this, pacienteAlarme.class);
             intentAlarm.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -155,19 +125,7 @@ public class periodicoAlarme extends IntentService {
         proximaAtualizacao();
     }
 
-    private void proximaAtualizacao()
-    {
-        int minutos = tempoProximaActualizacao();
-        //sensorManager.unregisterListener(this, gyroscopio);
-        long currentTimeMillis = System.currentTimeMillis();
-        long proximaAtualizacaoMili = currentTimeMillis + minutos * DateUtils.MINUTE_IN_MILLIS;
-        Log.i("AlarmeVivo", "passou alarme");
-        Intent intent = new Intent(this, this.getClass());
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
-        Log.i("AlarmeVivo", " proximo alarm daqui a " + (currentTimeMillis-proximaAtualizacaoMili)/1000 + " sec");
-    }
+
 
     private int tempoProximaActualizacao()
     {
@@ -213,44 +171,23 @@ public class periodicoAlarme extends IntentService {
     }
 
 
-    private void enviarHistoAlertaResp()
+
+
+
+
+
+    private void proximaAtualizacao()
     {
-        GPSTracker gps = new GPSTracker(this);
-        localAtual = gps.getLocation();
-        locationHTTP locationHttp = new locationHTTP();
-        locationHttp.obterLocalPorCoordenadas(localAtual,listenerLocal);
+        int minutos = tempoProximaActualizacao();
+        //sensorManager.unregisterListener(this, gyroscopio);
+        long currentTimeMillis = System.currentTimeMillis();
+        long proximaAtualizacaoMili = currentTimeMillis + minutos * DateUtils.MINUTE_IN_MILLIS;
+        Log.i("AlarmeVivo", "passou alarme");
+        Intent intent = new Intent(this, this.getClass());
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
+        Log.i("AlarmeVivo", " proximo alarm daqui a " + (currentTimeMillis-proximaAtualizacaoMili)/1000 + " sec");
     }
-
-    interfaceResultadoAsyncPost listenerLocal = new interfaceResultadoAsyncPost() {
-        @Override
-        public void obterResultado(final int codigo, final String conteudo) {
-
-            if (codigo == 1 && conteudo.length() > 10) {
-                String conteudoAlterado = conteudo.replaceAll("(\\r|\\n)", "");
-
-                locationJson locaJson = new locationJson(conteudoAlterado);
-                ArrayList<String> cidades = new ArrayList<String>();
-                cidades = locaJson.getAdress();
-
-                historicoAlertas histoAlt = new historicoAlertas();
-                histoAlt.setLongitudeHistAlt(localAtual.getLongitude());
-                histoAlt.setLatitudeHistAlt(localAtual.getLatitude());
-                histoAlt.setLocalHistAlt(cidades.get(0));
-                histoAlt.setIdAlertaHistAlt(2);
-                histoAlt.setIdPacienteHistAlt(paci.getIdPaciente());
-                historicoAlertasHttp histAltHttp = new historicoAlertasHttp();
-                histAltHttp.addHistoricoAlerta(histoAlt,listenerHistoricoAlerta);
-            }
-        };
-
-    };
-
-    interfaceResultadoAsyncPost listenerHistoricoAlerta = new interfaceResultadoAsyncPost() {
-        @Override
-        public void obterResultado(final int codigo, final String conteudo) {
-            proximaAtualizacao();
-        };
-
-    };
 
 }

@@ -108,6 +108,10 @@
 
     <!-- SMS -->
     <string name="sms_no_internet">O paciente %1s deixou de poder enviar alertas</string>
+    <string name="sms_no_location">O paciente %1s não pode enviar a sua localização</string>
+    <string name="sms_no_marcacao">O paciente %1s não esta presente na marcação.</string>
+    <string name="sms_no_marcacao_dist">Encontra-se a %1f metros.</string>
+    <string name="sms_no_life">O paciente %1s não esta dando sinais de vida</string>
 
     <!-- Toast -->
     <string name="email_subject">Alerta Paciente</string>
@@ -119,5 +123,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="paciente_alarme">ALARME</string>
+
+    <string name="paciente_alarme_notificacao">Alerta %1s</string>
 
 </resources>

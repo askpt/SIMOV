@@ -52,6 +52,7 @@ public class pacienteMenu extends Activity{
         PBLoadMarcacoesHoje = (ProgressBar)findViewById(R.id.progressBar_action_bar);
 
         PBLoadMarcacoesHoje.setVisibility(View.VISIBLE);
+        lancarAlarmesStart();
         preencherListaMarcacoes();
     }
 
@@ -125,7 +126,7 @@ public class pacienteMenu extends Activity{
         lancarAlarmes();
     }
 
-    private void lancarAlarmes()
+    private void lancarAlarmesStart()
     {
         //Enviar localização
         boolean localizacao = lifeCheckerManager.getInstance().getEnviarLocalizacao();
@@ -135,22 +136,28 @@ public class pacienteMenu extends Activity{
             Intent intentLocalization = new Intent(pacienteMenu.this, localizacaoAlarm.class);
             startService(intentLocalization);
         }
+        //Periodicidade
+        if(lifeCheckerManager.getInstance().getAlarmesDiurna() == false)
+        {
+            lifeCheckerManager.getInstance().setAlarmesDiurna(true);
+            Intent intentDirunoAlarme = new Intent(pacienteMenu.this, periodicoAlarme.class);
+            startService(intentDirunoAlarme);
+        }
+    }
 
+    private void lancarAlarmes()
+    {
         //Alerta Marcações proximas
 
         if(listaMarcacoes.size() != 0) {
-            if (idProximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() && lifeCheckerManager.getInstance().getaVerificar() == false) {
-                idProximaMarca = listaMarcacoes.get(0).getIdMarcacaoMarc();
+            int proximaMarca = lifeCheckerManager.getInstance().getIdMarcacao();
+            if (proximaMarca != listaMarcacoes.get(0).getIdMarcacaoMarc() || lifeCheckerManager.getInstance().getaVerificar() == false) {
+                lifeCheckerManager.getInstance().setaVerificar(true);
+                lifeCheckerManager.getInstance().setIdMarcacao(listaMarcacoes.get(0).getIdMarcacaoMarc());
                 Intent intent = new Intent(pacienteMenu.this, marcacaoAlarme.class);
                 intent.putExtra("idMarcacao", listaMarcacoes.get(0).getIdMarcacaoMarc());
                 startService(intent);
             }
-        }
-        //Periodicidade
-        if(lifeCheckerManager.getInstance().getAlarmesDiurna() == false)
-        {
-            Intent intentDirunoAlarme = new Intent(pacienteMenu.this, periodicoAlarme.class);
-            startService(intentDirunoAlarme);
         }
 
     }

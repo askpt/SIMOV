@@ -42,7 +42,7 @@ public class lifeCheckerManager {
 	private String contactoPacienteResposnavel;
 
     //Marcações
-    private int idMarcacao;
+    private int idMarcacao = -1;
     private boolean aVerificar;
     private boolean registouAcelaromtro = false;
 
@@ -62,6 +62,19 @@ public class lifeCheckerManager {
 
     private boolean enviarSMS;
     private boolean enviarMail;
+
+    private int ultimaNotificacao = 0;
+
+
+
+
+    public int getUltimaNotificacao() {
+        return ultimaNotificacao;
+    }
+
+    public void setUltimaNotificacao(int ultimaNotificacao) {
+        this.ultimaNotificacao = ultimaNotificacao;
+    }
 
     public boolean getEnviarMail() {
         return enviarMail;
