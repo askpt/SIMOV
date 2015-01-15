@@ -197,14 +197,15 @@ public class responsavelDetalhesMarcacao extends  Activity implements DatePicker
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (codigo == 1) {
+                    if (codigo == 1 && enderecos.size() != 0) {
+
                         latitude = enderecos.get(0).getLatitude();
                         longitude = enderecos.get(0).getLongitude();
                         BTvalidarMarcacao.setEnabled(true);
                         addMarcador();
                     } else {
-                        BTvalidarMarcacao.setEnabled(true);
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
+                        BTvalidarMarcacao.setEnabled(false);
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG).show();
                     }
                 }
             });

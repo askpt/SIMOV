@@ -77,7 +77,7 @@
 
     <!-- Estado butões -->
     <string name="esperar">Aguarde…</string>
-    <string name="validar">Validar Dados</string>
+    <string name="validar">Validar</string>
     <string name="cancelar">Cancelar</string>
     <string name="recuperar">Recuperar</string>
 

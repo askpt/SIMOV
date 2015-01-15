@@ -268,11 +268,11 @@ public class responsavelDetalhesMarcacaoValidar extends Activity implements Date
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG);
+                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.local_invalido), Toast.LENGTH_LONG).show();
                         PBloadingUpdate.setVisibility(View.INVISIBLE);
                         BTvalidarLocal.setEnabled(true);
-                        IBTvalidarYes.setEnabled(true);
-                        IBTvalidarNo.setEnabled(true);
+                        IBTvalidarYes.setEnabled(false);
+                        IBTvalidarNo.setEnabled(false);
                     }
                 }
             });

@@ -101,7 +101,8 @@
         android:text="Medium Text"
         android:id="@+id/tv_comentario_edit_marcacao_paci"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>
