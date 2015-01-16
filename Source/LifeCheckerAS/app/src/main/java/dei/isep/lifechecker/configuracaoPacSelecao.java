@@ -361,11 +361,6 @@ public class configuracaoPacSelecao extends Fragment implements OnClickListener{
 
     private void callForHelp(double signalEMA) {
 
-        //stop();
-
-        // Show alert when noise thersold crossed
-        Toast.makeText(getActivity().getApplicationContext(), "Noise Thersold Crossed, do here your stuff.",
-                Toast.LENGTH_LONG).show();
         Log.d("SONUND", String.valueOf(signalEMA));
         //tv_noice.setText(signalEMA+"dB");
     }

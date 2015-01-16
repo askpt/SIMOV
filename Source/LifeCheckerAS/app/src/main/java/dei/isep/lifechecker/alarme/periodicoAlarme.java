@@ -115,7 +115,7 @@ public class periodicoAlarme extends IntentService {
         paci = paciBDD.getPaciente();
 
         Log.i("variavel"," valor diurno: " + Boolean.toString(diurno));
-
+        diurno = verificarPeriudo();
         if(diurno == true) {
             sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
             if (sensorManager != null) {
@@ -185,12 +185,50 @@ public class periodicoAlarme extends IntentService {
                 getApplication().startActivity(intentAlarme);
             }
             Log.i("Noturno", "nooooo");
+            prefApp.setDBMaxNoturno(1);
         }
-        prefApp.setDBMaxNoturno(1);
+
         proximaAtualizacao();
     }
 
+    private boolean verificarPeriudo()
+    {
+        boolean periudoAtual = false;
+        try {
+            String tempoA = "07:00:00";
+            Date time1 = new SimpleDateFormat("HH:mm:ss").parse(tempoA);
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.setTime(time1);
 
+            String tempoB = "19:00:00";
+            Date time2 = new SimpleDateFormat("HH:mm:ss").parse(tempoB);
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTime(time2);
+            calendar2.add(Calendar.DATE, 1);
+
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+            String formattedDate = df.format(c.getTime());
+            Date d = new SimpleDateFormat("HH:mm:ss").parse(formattedDate);
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.setTime(d);
+            calendar3.add(Calendar.DATE, 1);
+
+            Date x = calendar3.getTime();
+
+            if (x.after(calendar1.getTime()) && x.before(calendar2.getTime())) {
+                periudoAtual = true;
+            }
+            else
+            {
+                periudoAtual = false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return periudoAtual;
+    }
 
     private int tempoProximaActualizacao()
     {
@@ -291,8 +329,8 @@ public class periodicoAlarme extends IntentService {
         //stop();
 
         // Show alert when noise thersold crossed
-        Toast.makeText(getApplicationContext(), "Noise Thersold Crossed, do here your stuff.",
-                Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "Noise Thersold Crossed, do here your stuff.",
+          //      Toast.LENGTH_LONG).show();
         Log.d("SONUND", String.valueOf(signalEMA));
         //tv_noice.setText(signalEMA+"dB");
     }
