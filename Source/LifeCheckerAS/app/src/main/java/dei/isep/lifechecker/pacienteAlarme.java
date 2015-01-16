@@ -44,7 +44,7 @@ public class pacienteAlarme extends Activity {
     Ringtone rt;
     boolean aEnviarMail = false;
 
-    CountDownTimer minResposta = new CountDownTimer(60000, 500) {
+    CountDownTimer minResposta = new CountDownTimer(45000, 500) {
 
         public void onTick(long millisUntilFinished) {
             //Atualização de algo

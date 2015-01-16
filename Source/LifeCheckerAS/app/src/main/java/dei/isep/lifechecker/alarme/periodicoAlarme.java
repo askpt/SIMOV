@@ -9,8 +9,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +25,7 @@ import dei.isep.lifechecker.database.responsavelBDD;
 import dei.isep.lifechecker.model.paciente;
 import dei.isep.lifechecker.model.responsavel;
 import dei.isep.lifechecker.other.lifeCheckerManager;
+import dei.isep.lifechecker.other.preferenciasAplicacao;
 import dei.isep.lifechecker.pacienteAlarme;
 
 /**
@@ -33,6 +37,23 @@ public class periodicoAlarme extends IntentService {
     private  Sensor sensorAceleromtro;
     private paciente paci;
     private responsavel resp;
+
+    private boolean diurno = false;
+    private boolean barulhoNoturno = false;
+
+    //**********
+    private static final int INTERVALO_MICRO_ALARME = 300;
+    private alarmeMicrofone microAlarme;
+    private double calibragemAlarme;
+
+    private int mThresholdAlarme;
+    private PowerManager.WakeLock mWakeLockAlarme;
+    private Handler mHandlerAlarme = new Handler();
+    //**********
+
+    private preferenciasAplicacao prefApp;
+
+    double DBLimite = 10.0;
 
     SensorEventListener sensorEvtListener = new SensorEventListener() {
         @Override
@@ -58,8 +79,34 @@ public class periodicoAlarme extends IntentService {
         super(periodicoAlarme.class.getSimpleName());
     }
 
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //Micro
+
+        //Micro FIM
+    }
+
     protected void onHandleIntent(Intent intent) {
         lifeCheckerManager.getInstance().setAlarmesDiurna(true);
+        preferenciasAplicacao pref = new preferenciasAplicacao(getApplicationContext());
+
+        //microAtivo
+        boolean ativo = pref.getAlarmeMicroNocturno();
+        Log.i("Ativo", Boolean.toString(ativo));
+        if(!ativo) {
+            prefApp = new preferenciasAplicacao(getApplicationContext());
+            mThresholdAlarme = 8;
+            calibragemAlarme = Math.abs(prefApp.getCalibracao());
+
+            microAlarme = new alarmeMicrofone();
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            mWakeLockAlarme = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "NoiseAlert");
+            pref.setAlarmeMicroNocturno(true);
+            startAlarme();
+        }
+
 
         responsavelBDD respBDD = new responsavelBDD(getApplicationContext());
         resp = respBDD.getResponsavel();
@@ -67,25 +114,27 @@ public class periodicoAlarme extends IntentService {
         pacienteBDD paciBDD = new pacienteBDD(getApplicationContext());
         paci = paciBDD.getPaciente();
 
-        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        if(sensorManager != null){
-            sensorAceleromtro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-            if(sensorAceleromtro!=null && lifeCheckerManager.getInstance().getRegistouAcelaromtro() == false){
-                sensorManager.registerListener(sensorEvtListener,sensorAceleromtro,SensorManager.SENSOR_DELAY_NORMAL);
-                lifeCheckerManager.getInstance().setRegistouAcelaromtro(true);
+        Log.i("variavel"," valor diurno: " + Boolean.toString(diurno));
+
+        if(diurno == true) {
+            sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+            if (sensorManager != null) {
+                sensorAceleromtro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+                if (sensorAceleromtro != null && lifeCheckerManager.getInstance().getRegistouAcelaromtro() == false) {
+                    sensorManager.registerListener(sensorEvtListener, sensorAceleromtro, SensorManager.SENSOR_DELAY_NORMAL);
+                    lifeCheckerManager.getInstance().setRegistouAcelaromtro(true);
+                }
+
             }
 
-        }
+            float variacaoX = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroXACT() - lifeCheckerManager.getInstance().getAcelaromtroX());
+            float variacaoY = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroYACT() - lifeCheckerManager.getInstance().getAcelaromtroY());
+            float variacaoZ = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroZACT() - lifeCheckerManager.getInstance().getAcelaromtroZ());
+            if (variacaoX < 0.3 && variacaoY < 0.3 && variacaoZ < 0.3 && (variacaoX != 0 || variacaoY != 0 || variacaoZ != 0)) {
 
-        float variacaoX = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroXACT() - lifeCheckerManager.getInstance().getAcelaromtroX());
-        float variacaoY = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroYACT() - lifeCheckerManager.getInstance().getAcelaromtroY());
-        float variacaoZ = Math.abs(lifeCheckerManager.getInstance().getAcelaromtroZACT() - lifeCheckerManager.getInstance().getAcelaromtroZ());
-        if(variacaoX < 0.3 && variacaoY < 0.3 && variacaoZ < 0.3 && (variacaoX != 0 || variacaoY != 0 || variacaoZ != 0))
-        {
-
-            Intent intentAlarme = new Intent(this.getApplicationContext(), pacienteAlarme.class);
-            intentAlarme.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getApplication().startActivity(intentAlarme);
+                Intent intentAlarme = new Intent(this.getApplicationContext(), pacienteAlarme.class);
+                intentAlarme.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(intentAlarme);
             /*
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
             networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -104,24 +153,40 @@ public class periodicoAlarme extends IntentService {
            /* Intent intentAlarm = new Intent(this, pacienteAlarme.class);
             intentAlarm.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getApplication().startActivity(intentAlarm);*/
-        }
+            }
 
-        Log.i("Gyro X", Float.toString(lifeCheckerManager.getInstance().getAcelaromtroX()) + " " + lifeCheckerManager.getInstance().getAcelaromtroXACT());
-        Log.i("Gyro Y", Float.toString(lifeCheckerManager.getInstance().getAcelaromtroY()) + " " + lifeCheckerManager.getInstance().getAcelaromtroYACT());
-        Log.i("Gyro Z", Float.toString(lifeCheckerManager.getInstance().getAcelaromtroZ()) + " " + lifeCheckerManager.getInstance().getAcelaromtroZACT());
+            Log.i("Gyro X", Float.toString(lifeCheckerManager.getInstance().getAcelaromtroX()) + " " + lifeCheckerManager.getInstance().getAcelaromtroXACT());
+            Log.i("Gyro Y", Float.toString(lifeCheckerManager.getInstance().getAcelaromtroY()) + " " + lifeCheckerManager.getInstance().getAcelaromtroYACT());
+            Log.i("Gyro Z", Float.toString(lifeCheckerManager.getInstance().getAcelaromtroZ()) + " " + lifeCheckerManager.getInstance().getAcelaromtroZACT());
 
-        lifeCheckerManager.getInstance().setAcelaromtroX(lifeCheckerManager.getInstance().getAcelaromtroXACT());
-        lifeCheckerManager.getInstance().setAcelaromtroY(lifeCheckerManager.getInstance().getAcelaromtroYACT());
-        lifeCheckerManager.getInstance().setAcelaromtroZ(lifeCheckerManager.getInstance().getAcelaromtroZACT());
+            lifeCheckerManager.getInstance().setAcelaromtroX(lifeCheckerManager.getInstance().getAcelaromtroXACT());
+            lifeCheckerManager.getInstance().setAcelaromtroY(lifeCheckerManager.getInstance().getAcelaromtroYACT());
+            lifeCheckerManager.getInstance().setAcelaromtroZ(lifeCheckerManager.getInstance().getAcelaromtroZACT());
 
         /*lifeCheckerManager.getInstance().setAcelaromtroX(lifeCheckerManager.getInstance().getAcelaromtroXACT());
         lifeCheckerManager.getInstance().setAcelaromtroY(lifeCheckerManager.getInstance().getAcelaromtroYACT());
         lifeCheckerManager.getInstance().setAcelaromtroZ(lifeCheckerManager.getInstance().getAcelaromtroZACT());*/
 
-        long tempo = System.currentTimeMillis();
-        lifeCheckerManager.getInstance().setTempAlteracao(tempo);
-        //long tempoDiff = tempo - lifeCheckerManager.getInstance().getTempAlteracao();
-        //.i("Tempo Differente",Long.toString(tempoDiff));
+            long tempo = System.currentTimeMillis();
+            lifeCheckerManager.getInstance().setTempAlteracao(tempo);
+            //long tempoDiff = tempo - lifeCheckerManager.getInstance().getTempAlteracao();
+            //.i("Tempo Differente",Long.toString(tempoDiff));
+        }
+        else
+        {
+            prefApp = new preferenciasAplicacao(getApplicationContext());
+            double valor = prefApp.getDBMaxNoturno();
+            Log.i("Noturno", "verificação noturna: " + Double.toString(valor));
+            if(valor < 10 && valor != 0.0)
+            {
+                Log.i("Noturno", "yeeessss");
+                Intent intentAlarme = new Intent(this.getApplicationContext(), pacienteAlarme.class);
+                intentAlarme.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(intentAlarme);
+            }
+            Log.i("Noturno", "nooooo");
+        }
+        prefApp.setDBMaxNoturno(1);
         proximaAtualizacao();
     }
 
@@ -172,6 +237,7 @@ public class periodicoAlarme extends IntentService {
 
     private void proximaAtualizacao()
     {
+        barulhoNoturno = false;
         int minutos = tempoProximaActualizacao();
         //sensorManager.unregisterListener(this, gyroscopio);
         long currentTimeMillis = System.currentTimeMillis();
@@ -182,6 +248,77 @@ public class periodicoAlarme extends IntentService {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, proximaAtualizacaoMili, pendingIntent);
         Log.i("AlarmeVivo", " proximo alarm daqui a " + (currentTimeMillis-proximaAtualizacaoMili)/1000 + " sec");
+    }
+
+    //MICROFONE
+
+    private Runnable mSleepTaskAlarme = new Runnable() {
+        public void run() {
+            //Log.i("Noise", "runnable mSleepTask");
+            startAlarme();
+        }
+    };
+
+    private Runnable mPollTaskAlarme = new Runnable() {
+        public void run() {
+
+            double amp = microAlarme.getAmplitude();
+            //Log.i("calibra Alarme", Double.toString(amp));
+            //Log.i("calibracao Alarme", "calib A");
+            //Log.i("calibracao Valor Alarme", Double.toString(calibragemAlarme));
+            //Log.i("amp Alarme", Double.toString(amp));
+            Log.i("calibracao total Alarme", Double.toString(amp + calibragemAlarme));
+            if((amp + calibragemAlarme) > DBLimite)
+            {
+                prefApp = new preferenciasAplicacao(getApplicationContext());
+                prefApp.setDBMaxNoturno(amp + calibragemAlarme);
+            }
+
+
+            //Log.i("Noise", "runnable mPollTask");
+
+            if ((amp > mThresholdAlarme)) {
+                callForHelpAlarme(amp);
+                //Log.i("Noise", "==== onCreate ===");
+            }
+            // Runnable(mPollTask) will again execute after POLL_INTERVAL
+            mHandlerAlarme.postDelayed(mPollTaskAlarme, INTERVALO_MICRO_ALARME);
+        }
+    };
+
+    private void callForHelpAlarme(double signalEMA) {
+
+        //stop();
+
+        // Show alert when noise thersold crossed
+        Toast.makeText(getApplicationContext(), "Noise Thersold Crossed, do here your stuff.",
+                Toast.LENGTH_LONG).show();
+        Log.d("SONUND", String.valueOf(signalEMA));
+        //tv_noice.setText(signalEMA+"dB");
+    }
+
+    //MICROFONE METODOS
+    private void startAlarme() {
+        //Log.i("Noise", "==== start ===");
+        microAlarme.start();
+        if (!mWakeLockAlarme.isHeld()) {
+            mWakeLockAlarme.acquire();
+        }
+        //Noise monitoring start
+        // Runnable(mPollTask) will execute after POLL_INTERVAL
+        mHandlerAlarme.postDelayed(mPollTaskAlarme, INTERVALO_MICRO_ALARME);
+    }
+
+    private void stopAlarme() {
+        Log.i("Noise", "==== Stop Noise Monitoring===");
+        if (mWakeLockAlarme.isHeld()) {
+            mWakeLockAlarme.release();
+        }
+        mHandlerAlarme.removeCallbacks(mSleepTaskAlarme);
+        mHandlerAlarme.removeCallbacks(mPollTaskAlarme);
+        microAlarme.stop();
+        //microfoneRunning = false;
+
     }
 
 }

@@ -127,4 +127,11 @@
 
     <string name="paciente_alarme_notificacao">Alerta %1s</string>
 
+    <!-- Micro -->
+    <string name="micro_calibrar">A calibrar o microfone</string>
+    <string name="micro_calmo_info">Local calmo</string>
+    <string name="micro_calibracao_confirmar">Confirmar</string>
+    <string name="micro_calibracao_nao_confirmar">Repetir</string>
+    <string name="micro_calmo_lugar">Coloque o telemovel no local onde o paciente vai dormir e mantenha o silencio</string>
+
 </resources>

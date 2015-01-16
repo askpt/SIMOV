@@ -66,6 +66,15 @@ public class lifeCheckerManager {
     private int ultimaNotificacao = 0;
     private boolean aVerificarNotificacao = false;
 
+    private boolean microAtivo = false;
+
+    public boolean getMicroAtivo() {
+        return microAtivo;
+    }
+
+    public void setMicroAtivo(boolean microAtivo) {
+        this.microAtivo = microAtivo;
+    }
 
     public boolean getaVerificarNotificacao() {
         return aVerificarNotificacao;
